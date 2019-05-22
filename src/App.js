@@ -73,7 +73,8 @@ function App()
         <div className="container has-text-centered">
           <br/>
           <p>
-            Hecho con &#x2764;&#xFE0F; y &#x2615; por <a href="https://github.com/pereyragamboa">Martín Pereyra</a>
+            Hecho con <span role="img" aria-label="Corazón">&#x2764;&#xFE0F;</span>&nbsp;y&nbsp;
+            <span role="img" aria-label="Café">&#x2615;</span> por <a href="https://github.com/pereyragamboa">Martín Pereyra</a>
           </p>
           <br/>
         </div>
