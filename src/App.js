@@ -2,12 +2,23 @@ import React from 'react';
 import FeatherIcon from './FeatherIcon';
 import './App.css';
 
-const MainPanelButton = (props) => (
-  <button className={"button level-item " + (props.className || '')}>
-    <FeatherIcon iconName={props.featherIcon}/>&nbsp;
-    <span>{props.caption}</span>
-  </button>
-);
+const MainPanelButton = (props) => {
+  let className = "button level-item";
+  // checks existence of props.className and appends it
+  if (typeof props.className === 'string') {
+    className = [className, props.className].join(' ');
+  }
+  // checks existence of props.featherIcon and creates tie icon if exists
+  let icon =
+      typeof props.featherIcon === 'string' ?
+      <span><FeatherIcon iconName={props.featherIcon}/>&nbsp;</span> : '';
+
+  return (
+      <button className={className}>
+      {icon}
+      <span>{props.caption}</span>
+  </button>)
+};
 
 // Creates a tool panel button.
 // The <br/> is shown only on desktop.
