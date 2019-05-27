@@ -37,52 +37,31 @@ const ToolPanelButton = (props) => (
 function App()
 {
   return (
-    <div className="App hero is-fullheight">
-      { /* Body */ }
-      <div className="hero-body">
-        <div className="container">
-          <div id="tiledMain" className="tile is-ancestor">
-            { /* Next appointments */ }
-            <div className="tile is-8 is-parent is-vertical">
-              <h1 className="title tile is-child">Próximas citas</h1>
-              <div className="tile is-child box">
-                <ul>
-                  <li>ABC</li>
-                  <li>DEF</li>
-                  <li>KLM</li>
-                  <li>XYZ</li>
-                </ul>
-              </div>
-              <div className="tile level">
-                <MainPanelButton featherIcon="plus" caption="Nueva cita"/>
-                <div className="level-item"/>
-                <MainPanelButton featherIcon="calendar" caption="Todas las citas"/>
-              </div>
-            </div>
-            { /* Tool panel */ }
-            <h1 className="subtitle is-hidden-desktop">Herramientas</h1>
-            <div className="tile is-4 is-parent is-vertical">
-              <ToolPanelButton className="is-primary" featherIcon="users" caption="Clientes"/>
-              <ToolPanelButton className="is-primary" featherIcon="shopping-bag" caption="Servicios"/>
-              <ToolPanelButton className="is-primary" featherIcon="clock" caption="Usuarios"/>
-              <ToolPanelButton className="is-warning" featherIcon="settings" caption="Configurar"/>
-            </div>
-          </div>
+    <div id="tiledMain" className="App tile is-ancestor">
+      { /* Next appointments */ }
+      <div className="tile is-8 is-parent is-vertical">
+        <h1 className="title tile is-child">Próximas citas</h1>
+        <div className="tile is-child box">
+          <ul>
+            <li>ABC</li>
+            <li>DEF</li>
+            <li>KLM</li>
+            <li>XYZ</li>
+          </ul>
+        </div>
+        <div className="tile level">
+          <MainPanelButton featherIcon="plus" caption="Nueva cita"/>
+          <div className="level-item"/>
+          <MainPanelButton featherIcon="calendar" caption="Todas las citas"/>
         </div>
       </div>
-
-      { /* Footer */ }
-      <div className="hero-foot has-background-light">
-        <div className="container has-text-centered">
-          <br/>
-          <p>
-            Hecho con&nbsp;
-            <span role="img" aria-label="Corazón">&#x2764;&#xFE0F;</span> y&nbsp;
-            <span role="img" aria-label="Café">&#x2615;</span> por&nbsp;
-            <a href="https://github.com/pereyragamboa">Martín Pereyra</a>
-          </p>
-          <br/>
-        </div>
+      { /* Tool panel */ }
+      <h1 className="subtitle is-hidden-desktop">Herramientas</h1>
+      <div className="tile is-4 is-parent is-vertical">
+        <ToolPanelButton className="is-primary" featherIcon="users" caption="Clientes"/>
+        <ToolPanelButton className="is-primary" featherIcon="shopping-bag" caption="Servicios"/>
+        <ToolPanelButton className="is-primary" featherIcon="clock" caption="Usuarios"/>
+        <ToolPanelButton className="is-warning" featherIcon="settings" caption="Configurar"/>
       </div>
     </div>
   );
