@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import FeatherIcon from '../FeatherIcon';
 
 const MainPanelButton = (props) => {
@@ -13,10 +14,10 @@ const MainPanelButton = (props) => {
           <span><FeatherIcon iconName={props.featherIcon}/>&nbsp;</span> : '';
 
   return (
-      <button className={className}>
+      <Link className={className} to="/appointments/add">
         {icon}
         <span>{props.caption}</span>
-      </button>)
+      </Link>)
 };
 
 // Creates a tool panel button.
