@@ -1,8 +1,10 @@
 import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
-import Start from './components/start';
+import * as Paths from './paths';
 import AppointmentDetail from './components/appointmentDetail';
+import Start from './components/start';
 import './App.css';
+import {ADD_APPOINTMENT} from "./paths";
 
 
 function App()
@@ -12,7 +14,7 @@ function App()
       <BrowserRouter>
         <div>
           <Route exact path='/' component={Start}/>
-          <Route exact path='/appointments/add' component={AppointmentDetail}/>
+          <Route exact path={Paths.ADD_APPOINTMENT} component={AppointmentDetail}/>
         </div>
       </BrowserRouter>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as Paths from '../paths';
 import FeatherIcon from '../FeatherIcon';
 
 const MainPanelButton = (props) => {
@@ -14,7 +15,7 @@ const MainPanelButton = (props) => {
           <span><FeatherIcon iconName={props.featherIcon}/>&nbsp;</span> : '';
 
   return (
-      <Link className={className} to="/appointments/add">
+      <Link className={className} to={Paths.ADD_APPOINTMENT}>
         {icon}
         <span>{props.caption}</span>
       </Link>)
