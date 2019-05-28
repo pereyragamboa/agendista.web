@@ -7,7 +7,7 @@ const FeatherIcon = (props) => {
 
   // If icon name is not null, set SVG
   // feather.icons[].toSvg() returns a string, not valid HTML/JSX
-  return <span dangerouslySetInnerHTML={
+  return <span className="icon" dangerouslySetInnerHTML={
     (typeof (iconName) === 'string' && iconName.trim() !== '')
         ? { __html: feather.icons[iconName.trim()].toSvg(props) }
         : ''

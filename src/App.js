@@ -4,7 +4,6 @@ import * as Paths from './paths';
 import AppointmentDetail from './components/appointmentDetail';
 import Start from './components/start';
 import './App.css';
-import {ADD_APPOINTMENT} from "./paths";
 
 
 function App()

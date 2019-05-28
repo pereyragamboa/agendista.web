@@ -12,7 +12,7 @@ const MainPanelButton = (props) => {
   // checks existence of props.featherIcon and creates tie icon if exists
   let icon =
       typeof props.featherIcon === 'string' ?
-          <span><FeatherIcon iconName={props.featherIcon}/>&nbsp;</span> : '';
+          <FeatherIcon iconName={props.featherIcon}/> : '';
 
   return (
       <Link className={className} to={Paths.ADD_APPOINTMENT}>
@@ -29,7 +29,6 @@ const ToolPanelButton = (props) => (
       <div>
         <FeatherIcon iconName={ props.featherIcon }/>
         <br className="is-hidden-touch"/>
-        <span className="is-hidden-desktop">&nbsp;</span>
         <span>{ props.caption }</span>
       </div>
     </button>
