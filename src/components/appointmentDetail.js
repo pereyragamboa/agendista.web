@@ -8,7 +8,7 @@ class AppointmentDetail extends Component {
     return (
       <div>
         <h1 className="title">Nueva cita</h1>
-        <div className="box">
+        <div id="clientInfo" className="box">
           <h2 className="subtitle">Cliente</h2>
           <div className="field">
             <label className="label">Cliente</label>
@@ -32,34 +32,48 @@ class AppointmentDetail extends Component {
             </div>
           </div>
         </div>
-        <div className="box">
+        <div id="appointmentInfo" className="box">
           <h2 className="subtitle">Detalle de la cita</h2>
-          <div className="field">
-            <label className="label">Servicio</label>
-            <div className="control has-icons-left">
-              <div className="select">
-                <select>
-                  <option>Servicio 1</option>
-                  <option>Servicio 2</option>
-                  <option>Servicio 3</option>
-                </select>
-                <span className="icon is-left"><FeatherIcon iconName="shopping-bag"/></span>
+          <div className="columns">
+            <div className="column">
+              <fieldset className="field">
+                <label className="label">Servicios disponibles</label>
+                <div className="control">
+                  <div className="checkbox">
+                    <input type="checkbox"/>Servicio 1
+                  </div>
+                </div>
+                <div className="control">
+                  <div className="checkbox">
+                    <input type="checkbox"/><span>Servicio 2</span>
+                  </div>
+                </div>
+                <div className="control">
+                  <div className="checkbox">
+                    <input type="checkbox"/><span>Servicio 3</span>
+                  </div>
+                </div>
+                <p className="help is-danger">Seleccione al menos un servicio.</p>
+              </fieldset>
+            </div>
+            <div className="column">
+              <div className="field">
+                <label className="label">Fecha</label>
+                <div className="control has-icons-left">
+                  <input className="input" type="text" placeholder="Fecha"/>
+                  <span className="icon is-left"><FeatherIcon iconName="calendar"/></span>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="field">
-            <label className="label">Fecha</label>
-            <div className="control has-icons-left">
-              <input className="input" type="text" placeholder="Fecha"/>
-              <span className="icon is-left"><FeatherIcon iconName="calendar"/></span>
+            <div className="column">
+              <div className="field">
+                <label className="label">Hora</label>
+                <div className="control has-icons-left">
+                  <input className="input" type="text" placeholder="Hora"/>
+                  <span className="icon is-left"><FeatherIcon iconName="clock"/></span>
+                </div>
             </div>
           </div>
-          <div className="field">
-            <label className="label">Hora</label>
-            <div className="control has-icons-left">
-              <input className="input" type="text" placeholder="Hora"/>
-              <span className="icon is-left"><FeatherIcon iconName="clock"/></span>
-            </div>
           </div>
         </div>
         <div className="buttons">
