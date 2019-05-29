@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as Paths from '../paths';
 import FeatherIcon from '../FeatherIcon';
 
+// Creates an appointment panel button.
 const MainPanelButton = (props) => {
   let className = "button level-item";
   // checks existence of props.className and appends it
@@ -23,7 +24,7 @@ const MainPanelButton = (props) => {
 
 // Creates a tool panel button.
 // The <br/> is shown only on desktop.
-// The space is shown only on touch devices.
+// In mobile, the icon and the caption appear in the same line.
 const ToolPanelButton = (props) => (
     <button className={"button tile is-child " + (props.className || '')}>
       <div>
