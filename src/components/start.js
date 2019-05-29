@@ -15,7 +15,7 @@ const MainPanelButton = (props) => {
           <FeatherIcon iconName={props.featherIcon}/> : '';
 
   return (
-      <Link className={className} to={Paths.ADD_APPOINTMENT}>
+      <Link className={className} to={props.to}>
         {icon}
         <span>{props.caption}</span>
       </Link>)
@@ -50,7 +50,7 @@ function Start()
             </ul>
           </div>
           <div className="tile level">
-            <MainPanelButton featherIcon="plus" caption="Nueva cita"/>
+            <MainPanelButton to={Paths.ADD_APPOINTMENT} featherIcon="plus" caption="Nueva cita"/>
             <div className="level-item"/>
             <MainPanelButton featherIcon="calendar" caption="Todas las citas"/>
           </div>
