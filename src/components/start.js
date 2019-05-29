@@ -1,22 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Paths from '../paths';
+import getClassName from './commons/getClassName';
 import FeatherIcon from '../FeatherIcon';
 
 // Creates an appointment panel button.
 const MainPanelButton = (props) => {
-  let className = "button level-item";
-  // checks existence of props.className and appends it
-  if (typeof props.className === 'string') {
-    className = [className, props.className].join(' ');
-  }
   // checks existence of props.featherIcon and creates tie icon if exists
   let icon =
       typeof props.featherIcon === 'string' ?
           <FeatherIcon iconName={props.featherIcon}/> : '';
 
   return (
-      <Link className={className} to={props.to}>
+      <Link className={getClassName("button level-item", props)}
+            to={props.to}>
         {icon}
         <span>{props.caption}</span>
       </Link>)
@@ -26,12 +23,10 @@ const MainPanelButton = (props) => {
 // The <br/> is shown only on desktop.
 // In mobile, the icon and the caption appear in the same line.
 const ToolPanelButton = (props) => (
-    <button className={"button tile is-child " + (props.className || '')}>
-      <div>
+    <button className={getClassName("button tile is-child ", props)}>
         <FeatherIcon iconName={ props.featherIcon }/>
         <br className="is-hidden-touch"/>
         <span>{ props.caption }</span>
-      </div>
     </button>
 );
 
