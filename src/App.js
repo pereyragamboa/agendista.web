@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
 import * as Paths from './paths';
-import AppointmentDetail from './components/appointmentDetail';
+import AppointmentDetail from './components/appointments/appointmentDetail';
 import Start from './components/start';
 import './App.css';
 

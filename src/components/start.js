@@ -53,7 +53,7 @@ function Start()
           <div className="tile level">
             <MainPanelButton to={Paths.ADD_APPOINTMENT} featherIcon="plus" caption="Nueva cita"/>
             <div className="level-item"/>
-            <MainPanelButton featherIcon="calendar" caption="Todas las citas"/>
+            <MainPanelButton to={Paths.LIST_APPOINTMENTS} featherIcon="calendar" caption="Todas las citas"/>
           </div>
         </div>
         { /* Tool panel */ }
