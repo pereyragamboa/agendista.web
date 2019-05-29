@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../FeatherIcon';
-import FeatherIcon from "../FeatherIcon";
+import bulmaCalendar from 'bulma-calendar/dist/js/bulma-calendar';
+import FeatherIcon from '../FeatherIcon';
+import './appointmentDetail.css';
 
 class AppointmentDetail extends Component {
   render() {
@@ -60,7 +61,10 @@ class AppointmentDetail extends Component {
               <div className="field">
                 <label className="label">Fecha</label>
                 <div className="control has-icons-left">
-                  <input className="input" type="text" placeholder="Fecha"/>
+                  <input className="input"
+                         data-display-mode="inline"
+                         type="date"
+                  />
                   <span className="icon is-left"><FeatherIcon iconName="calendar"/></span>
                 </div>
               </div>
@@ -69,7 +73,7 @@ class AppointmentDetail extends Component {
               <div className="field">
                 <label className="label">Hora</label>
                 <div className="control has-icons-left">
-                  <input className="input" type="text" placeholder="Hora"/>
+                  <input className="input" type="time" placeholder="Hora"/>
                   <span className="icon is-left"><FeatherIcon iconName="clock"/></span>
                 </div>
             </div>
@@ -89,6 +93,15 @@ class AppointmentDetail extends Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    // Attaches date input to Bulma Calendar and configures it once the
+    // component is mounted
+    bulmaCalendar.attach("input[type='date']", {
+      minDate: new Date(),
+
+    });
   }
 }
 
