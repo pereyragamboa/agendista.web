@@ -5,5 +5,7 @@ export default function getClassName(className, props) {
       (typeof props.className === 'string' ? props.className : '') :
       '');
 
-  return [originalClassName, propsClassName].join(' ');
+  return propsClassName === '' ?
+      originalClassName :
+      [originalClassName, propsClassName].join(' ');
 }

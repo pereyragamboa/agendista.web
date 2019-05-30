@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import bulmaCalendar from 'bulma-calendar/dist/js/bulma-calendar';
-import FeatherIcon from '../../FeatherIcon';
+import FeatherIcon from '../commons/FeatherIcon';
 import './appointmentDetail.css';
 
 class AppointmentDetail extends Component {

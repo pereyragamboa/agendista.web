@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Paths from '../paths';
 import getClassName from './commons/getClassName';
-import FeatherIcon from '../FeatherIcon';
+import FeatherIcon from './commons/FeatherIcon';
 
 // Creates an appointment panel button.
 const MainPanelButton = (props) => {
@@ -23,10 +23,10 @@ const MainPanelButton = (props) => {
 // The <br/> is shown only on desktop.
 // In mobile, the icon and the caption appear in the same line.
 const ToolPanelButton = (props) => (
-    <button className={getClassName("button tile is-child ", props)}>
-        <FeatherIcon iconName={ props.featherIcon }/>
-        <br className="is-hidden-touch"/>
-        <span>{ props.caption }</span>
+    <button className={getClassName("button is-fullwidth", props)}>
+      <FeatherIcon iconName={ props.featherIcon }/>
+      <br/>
+      <span>{ props.caption }</span>
     </button>
 );
 
@@ -52,12 +52,14 @@ function Start()
           </div>
         </div>
         { /* Tool panel */ }
-        <h1 className="subtitle is-hidden-desktop">Herramientas</h1>
         <div className="tile is-4 is-parent is-vertical">
-          <ToolPanelButton className="is-primary" featherIcon="users" caption="Clientes"/>
-          <ToolPanelButton className="is-primary" featherIcon="shopping-bag" caption="Servicios"/>
-          <ToolPanelButton className="is-primary" featherIcon="clock" caption="Usuarios"/>
-          <ToolPanelButton className="is-warning" featherIcon="settings" caption="Configurar"/>
+          <h1 className="subtitle tile is-child is-hidden-tablet">Herramientas</h1>
+          <div className="tile is-child buttons">
+            <ToolPanelButton className="is-primary" featherIcon="users" caption="Clientes"/>
+            <ToolPanelButton className="is-primary" featherIcon="shopping-bag" caption="Servicios"/>
+            <ToolPanelButton className="is-primary" featherIcon="clock" caption="Usuarios"/>
+            <ToolPanelButton className="is-warning" featherIcon="settings" caption="Configurar"/>
+          </div>
         </div>
       </div>
   );
