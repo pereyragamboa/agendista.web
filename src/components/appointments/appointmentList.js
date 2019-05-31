@@ -1,5 +1,5 @@
 import React from 'react';
-import FeatherIcon from '../commons/FeatherIcon';
+import FeatherIcon from '../commons/featherIcon';
 
 // Row of an appointment list.
 const AppointmentListElement = (props) =>

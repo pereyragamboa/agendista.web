@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as Paths from '../paths';
 import AppointmentList from './appointments/appointmentList';
 import getClassName from './commons/getClassName';
-import FeatherIcon from './commons/FeatherIcon';
+import FeatherIcon from './commons/featherIcon';
 
 // Creates an appointment panel button.
 const MainPanelButton = (props) => {
@@ -21,12 +21,9 @@ const MainPanelButton = (props) => {
 };
 
 // Creates a tool panel button.
-// The <br/> is shown only on desktop.
-// In mobile, the icon and the caption appear in the same line.
 const ToolPanelButton = (props) => (
     <button className={getClassName("button is-fullwidth", props)}>
       <FeatherIcon iconName={ props.featherIcon }/>
-      <br/>
       <span>{ props.caption }</span>
     </button>
 );
