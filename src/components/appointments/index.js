@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AppointmentList from './appointmentList';
-import FeatherIcon from '../commons/featherIcon';
+import FeatherButton from '../commons/featherButton';
+import * as Paths from '../../paths';
 
 export default class Appointments extends Component {
   render() {
@@ -10,10 +11,13 @@ export default class Appointments extends Component {
         <AppointmentList showButtons />
       </div>
       <div className="buttons">
-        <button className="button">Nueva cita</button>
-        <button className="button is-static"><strong>Filtrar</strong></button>
-        <button className="button">Por usuario</button>
-        <button className="button">Por fecha</button>
+        <FeatherButton caption="Nueva cita" featherIcon="plus"
+                       to={Paths.ADD_APPOINTMENT}/>
+
+        <FeatherButton className="is-static"
+                       caption="Filtrar" featherIcon="filter" />
+        <FeatherButton caption="Por usuario" featherIcon="user"/>
+        <FeatherButton caption="Por fecha" featherIcon="clock"/>
       </div>
     </div>
   }
