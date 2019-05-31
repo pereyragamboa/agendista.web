@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Paths from '../paths';
+import AppointmentList from './appointments/appointmentList';
 import getClassName from './commons/getClassName';
 import FeatherIcon from './commons/FeatherIcon';
 
@@ -38,12 +39,7 @@ function Start()
         <div className="tile is-8 is-parent is-vertical">
           <h1 className="title tile is-child">Próximas citas</h1>
           <div className="tile is-child box">
-            <ul>
-              <li>ABC</li>
-              <li>DEF</li>
-              <li>KLM</li>
-              <li>XYZ</li>
-            </ul>
+            <AppointmentList showButtons />
           </div>
           <div className="tile level">
             <MainPanelButton to={Paths.ADD_APPOINTMENT} featherIcon="plus" caption="Nueva cita"/>
