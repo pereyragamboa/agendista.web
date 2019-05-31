@@ -31,12 +31,12 @@ const ToolPanelButton = (props) => (
 function Start()
 {
   return (
-      <div id="tiledMain" className="App tile is-ancestor">
+      <div id="tiledMain" className="tile is-ancestor">
         { /* Next appointments */ }
         <div className="tile is-8 is-parent is-vertical">
           <h1 className="title tile is-child">Próximas citas</h1>
           <div className="tile is-child box">
-            <AppointmentList showButtons />
+            <AppointmentList showButtons={false} />
           </div>
           <div className="tile level">
             <MainPanelButton to={Paths.ADD_APPOINTMENT} featherIcon="plus" caption="Nueva cita"/>

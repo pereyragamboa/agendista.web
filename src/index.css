@@ -17,3 +17,7 @@ code {
 input[type="checkbox"] {
   margin-right: 0.5em;
 }
+
+.hero-foot {
+  background-color: papayawhip;
+}
