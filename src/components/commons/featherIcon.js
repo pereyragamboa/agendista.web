@@ -9,8 +9,8 @@ export default function FeatherIcon (props) {
   const iconName = props.iconName;
   if (typeof iconName === 'string') {
     const icon = feather.icons[iconName.trim()];
-    if (icon === null) {
-      // If icon object is null, return empty span
+    if (icon === undefined) {
+      // If icon object is undefined, return empty span
       return EMPTY_SPAN;
     }
     else {
