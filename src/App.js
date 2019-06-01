@@ -13,7 +13,7 @@ function App()
     <div className="App">
       <BrowserRouter>
         <div>
-          <Route exact path='/' component={Start}/>
+          <Route exact path={Paths.HOME} component={Start}/>
           <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
           <Route exact path={Paths.ADD_APPOINTMENT} component={AppointmentDetail}/>
         </div>
