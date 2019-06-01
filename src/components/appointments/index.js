@@ -75,15 +75,6 @@ export default class Appointments extends Component {
           </ul>
         </nav>
       </div>
-      <div className="buttons">
-        <FeatherButton caption="Nueva cita" featherIcon="plus"
-                       to={Paths.ADD_APPOINTMENT}/>
-
-        <FeatherButton className="is-static"
-                       caption="Filtrar" featherIcon="filter" />
-        <FeatherButton caption="Por usuario" featherIcon="user"/>
-        <FeatherButton caption="Por fecha" featherIcon="clock"/>
-      </div>
     </div>
   }
 };
