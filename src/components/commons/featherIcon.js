@@ -14,7 +14,6 @@ export default function FeatherIcon (props) {
       return EMPTY_SPAN;
     }
     else {
-      console.log(icon.toSvg());
       // If icon object is not null, set SVG
       // feather.icons[].toSvg() returns a string that must be converted onto HTML/JSX
       return <span className={getClassName("icon", props)}
