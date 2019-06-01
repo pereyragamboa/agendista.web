@@ -5,6 +5,18 @@ import FeatherButton from '../commons/featherButton';
 import FeatherIcon from '../commons/featherIcon';
 import * as Paths from '../../paths';
 
+// The consts and onBurgerClick() are defined outside the exported class because
+// we don't need to expose them
+
+const NAVBAR_BURGER_ID = "navbarBurgerMenu";
+const NAVBAR_MENU_ID = "navbarMenuId";
+
+function onBurgerClick(e) {
+  const menuElement = document.getElementById(NAVBAR_MENU_ID);
+  e.target.classList.toggle("is-active");
+  menuElement.classList.toggle("is-active");
+}
+
 export default class Appointments extends Component {
   render() {
     return <div id="appointmentMain">
@@ -15,30 +27,31 @@ export default class Appointments extends Component {
           <div className="navbar-item">
             <FeatherIcon iconName="calendar"/>
           </div>
-          <a className="navbar-burger"
-             role="button" aria-label="button" aria-expanded="false"
-             data-target="appointment-navbar">
+          <div id={NAVBAR_BURGER_ID} className="navbar-burger"
+               role="button" aria-label="button" aria-expanded="false"
+               data-target={NAVBAR_MENU_ID}
+               onClick={ onBurgerClick }>
             {
               [1, 2, 3].map(() => <span aria-hidden="true"/>)
-            }</a>
+            }</div>
         </div>
-        <div id="appointment-navbar" className="navbar-menu">
+        <div id={NAVBAR_MENU_ID} className="navbar-menu">
           <div className="navbar-end">
             <Link className="navbar-item" to={Paths.ADD_APPOINTMENT}>
               <FeatherIcon iconName="plus"/>
               <span>Nueva cita</span>
             </Link>
             <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-item">
+              <div className="navbar-item">
                 <FeatherIcon iconName="filter"/>
                 <span>Filtrar</span>
-              </a>
+              </div>
               <div className="navbar-dropdown">
                 <div className="navbar-item">
-                  <FeatherIcon className="is-small" iconName="user"/>
+                  <FeatherIcon className="is-small is-hidden-mobile" iconName="user"/>
                   <span>Por usuario</span></div>
                 <div className="navbar-item">
-                  <FeatherIcon className="is-small" iconName="clock"/>
+                  <FeatherIcon className="is-small is-hidden-mobile" iconName="clock"/>
                   <span>Por fecha y hora</span></div>
               </div>
             </div>
@@ -49,16 +62,16 @@ export default class Appointments extends Component {
       <div className="box">
         <AppointmentList showButtons />
         <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-          <a className="pagination-previous"><FeatherIcon iconName="arrow-left"/>Anterior</a>
-          <a className="pagination-next">Siguiente<FeatherIcon iconName="arrow-right"/></a>
+          <div className="pagination-previous"><FeatherIcon iconName="arrow-left"/>Anterior</div>
+          <div className="pagination-next">Siguiente<FeatherIcon iconName="arrow-right"/></div>
           <ul className="pagination-list">
-            <li><a className="pagination-link" aria-label="Goto page 1">1</a></li>
+            <li><div className="pagination-link" aria-label="Goto page 1">1</div></li>
             <li><span className="pagination-ellipsis">&hellip;</span></li>
-            <li><a className="pagination-link is-hidden-mobile" aria-label="Goto page 5">5</a></li>
-            <li><a className="pagination-link is-current" aria-label="Page 6" aria-current="page">6</a></li>
-            <li><a className="pagination-link is-hidden-mobile" aria-label="Goto page 7">7</a></li>
+            <li><div className="pagination-link is-hidden-mobile" aria-label="Goto page 5">5</div></li>
+            <li><div className="pagination-link is-current" aria-label="Page 6" aria-current="page">6</div></li>
+            <li><div className="pagination-link is-hidden-mobile" aria-label="Goto page 7">7</div></li>
             <li><span className="pagination-ellipsis">&hellip;</span></li>
-            <li><a className="pagination-link" aria-label="Goto page 11">11</a></li>
+            <li><div className="pagination-link" aria-label="Goto page 11">11</div></li>
           </ul>
         </nav>
       </div>
