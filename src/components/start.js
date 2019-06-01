@@ -6,7 +6,7 @@ import FeatherButton from './commons/featherButton';
 function Start()
 {
   return (
-      <div id="tiledMain" className="tile is-ancestor">
+      <div id="ag-start" className="tile is-ancestor">
         { /* Next appointments */ }
         <div className="tile is-8 is-parent is-vertical">
           <h1 className="title tile is-child">Próximas citas</h1>
