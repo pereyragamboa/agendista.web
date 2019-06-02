@@ -22,6 +22,7 @@ function onBurgerClick() {
 //   -endItems: content of navbar-end
 //
 // props:
+//   - featherIcon: Feather icon name
 //   - id: identifier of the HOC
 //   - title: displayed title of the HOC
 export default function getIndex(ContentComponent, NavbarComponents){
@@ -36,7 +37,14 @@ export default function getIndex(ContentComponent, NavbarComponents){
         <div>
           <nav className="navbar" role="navigation">
             <div className="navbar-brand">
-              <h1 className="title is-size-4 navbar-item">{ this.props.brand }</h1>
+              {
+                NavbarComponents.brandItems ? NavbarComponents.brandItems :
+                (<div className="navbar-item">
+                  <FeatherIcon iconName={ this.props.featherIcon }/>
+                  &nbsp;
+                  <h1 className="title is-4">{ this.props.brand }</h1>
+                </div>)
+              }
               <div id={NAVBAR_BURGER_ID} className="navbar-burger"
                    role="button" aria-label="button" aria-expanded="false"
                    data-target={NAVBAR_MENU_ID}

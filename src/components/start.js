@@ -28,8 +28,10 @@ function Start()
           <h1 className="subtitle tile is-child is-hidden-tablet">Herramientas</h1>
           <div className="tile is-child buttons">
             <FeatherButton className="is-fullwidth is-primary" featherIcon="users" caption="Clientes"/>
-            <FeatherButton className="is-fullwidth is-primary" featherIcon="shopping-bag" caption="Servicios"/>
-            <FeatherButton className="is-fullwidth is-primary" featherIcon="clock" caption="Usuarios"/>
+            <FeatherButton className="is-fullwidth is-primary"
+                           featherIcon="shopping-bag" caption="Servicios"
+                           to={Paths.LIST_SERVICES}/>
+            <FeatherButton className="is-fullwidth is-primary" featherIcon="clock" caption="Horarios"/>
             <FeatherButton className="is-fullwidth is-warning" featherIcon="settings" caption="Configurar"/>
           </div>
         </div>
