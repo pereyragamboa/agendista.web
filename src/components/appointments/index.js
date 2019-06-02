@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import AppointmentList from './appointmentList';
-import FeatherButton from '../commons/featherButton';
 import FeatherIcon from '../commons/featherIcon';
 import * as Paths from '../../paths';
 
@@ -17,7 +16,7 @@ function onBurgerClick(e) {
   menuElement.classList.toggle("is-active");
 }
 
-export default class Appointments extends Component {
+export default class Appointments extends React.Component {
   render() {
     return <div id="appointmentMain">
       <h1 className="title">Citas</h1>

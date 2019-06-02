@@ -3,6 +3,7 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import * as Paths from './paths';
 import AppointmentDetail from './components/appointments/appointmentDetail';
 import Appointments from './components/appointments';
+import Services from './components/services';
 import Start from './components/start';
 import './App.css';
 
@@ -16,6 +17,7 @@ function App()
           <Route exact path={Paths.HOME} component={Start}/>
           <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
           <Route exact path={Paths.ADD_APPOINTMENT} component={AppointmentDetail}/>
+          <Route exact path={Paths.LIST_SERVICES} component={Services}/>
         </div>
       </BrowserRouter>
     </div>
