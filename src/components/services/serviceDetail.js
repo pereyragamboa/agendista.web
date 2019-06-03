@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as Paths from '../../paths';
 import FeatherIcon from '../commons/featherIcon';
+import getDetail from '../commons/getDetail';
 
-export default function ServiceDetail () {
-  return <div>
-    <h1 className="title">Nuevo servicio</h1>
-    <div className="box">
+export default function ServiceDetail() {
+  const detailBody = () =>
+    <div>
       <div className="field">
         <label className="label">Servicio</label>
         <div className="control has-icons-left">
@@ -34,17 +33,10 @@ export default function ServiceDetail () {
           <span className="icon is-left"><FeatherIcon iconName="tag"/></span>
         </div>
       </div>
-    </div>
-    <div className="buttons">
-      <button className="button is-primary">
-        <FeatherIcon iconName="plus"/>
-        <span>Agregar</span></button>
-      <button className="button is-primary">
-        <FeatherIcon iconName="edit-2"/>
-        <span>Modificar</span></button>
-      <Link className="button" to={Paths.LIST_SERVICES}>
-        <FeatherIcon iconName="x"/>
-        <span>Cancelar</span></Link>
-    </div>
-  </div>
+    </div>;
+
+  const Services = getDetail(detailBody);
+
+  return <Services cancelPath={Paths.LIST_SERVICES}
+                   title="Nuevo servicio"/>;
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import * as Paths from './paths';
 import AppointmentDetail from './components/appointments/appointmentDetail';
 import Appointments from './components/appointments';

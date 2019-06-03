@@ -14,7 +14,7 @@ function onBurgerClick() {
   menuElement.classList.toggle("is-active");
 }
 
-// Higher order component:
+// Higher order component that creates a main screen.
 //
 // ContentComponent: the component rendering the list of objects
 // NavbarComponents: an object containing the navbar items
@@ -27,11 +27,6 @@ function onBurgerClick() {
 //   - title: displayed title of the HOC
 export default function getIndex(ContentComponent, NavbarComponents){
   return class extends Component {
-    constructor(props){
-      super(props);
-      console.log(props);
-    }
-
     render() {
       return <div id={this.props.id}>
         <div>
