@@ -14,7 +14,11 @@ function onBurgerClick() {
   menuElement.classList.toggle("is-active");
 }
 
-// Higher order component that creates a main screen.
+// Higher order component that creates a main feature screen. A feature screen
+// is composed of the following:
+//   * A navbar with buttons for actions relevant to the feature
+//   * A list of one or more elements, or an empty screen
+//   * A pagination component after the list
 //
 // ContentComponent: the component rendering the list of objects
 // NavbarComponents: an object containing the navbar items
