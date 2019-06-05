@@ -5,6 +5,7 @@ import FeatherIcon from './featherIcon';
 // Higher order component that creates a detail screen.
 //
 // FormComponent: contains a group of form controls (inputs, checkboxes, etc)
+// okClick: callback of click on OK button
 //
 // props:
 // - addCaption: text of the Add button
@@ -12,8 +13,7 @@ import FeatherIcon from './featherIcon';
 // - cancelPath: path of the page to navigate after pressing the Cancel button
 // - id: identifier of the screen
 // - title: displayed title of the screen
-// - updateCaption: text of the Modify button
-export default function getDetail(FormComponent){
+export default function getDetail(FormComponent, okClick){
   return class extends React.Component {
     render() {
       return <div id={this.props.id}>
@@ -22,13 +22,9 @@ export default function getDetail(FormComponent){
           <FormComponent />
         </div>
         <div className="buttons">
-          <button className="button is-primary">
+          <button className="button is-primary" onClick={okClick}>
             <FeatherIcon iconName="plus"/>
-            <span>{ this.props.addCaption || "Agregar" }</span>
-          </button>
-          <button className="button is-primary">
-            <FeatherIcon iconName="edit-2"/>
-            <span>{ this.props.updateCaption || "Modificar" }</span>
+            <span>{ this.props.okCaption || "Aceptar" }</span>
           </button>
           <Link className="button is-danger" to={this.props.cancelPath}>
             <FeatherIcon iconName="x"/>

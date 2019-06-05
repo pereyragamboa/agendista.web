@@ -27,7 +27,7 @@ const NavbarEndItems = [
 ];
 
 export default function Appointments() {
-  const AppointmentIndex = getIndex(<AppointmentList/>, { endItems: NavbarEndItems });
+  const AppointmentIndex = getIndex(<AppointmentList showButtons/>, { endItems: NavbarEndItems });
 
   return <AppointmentIndex brand="Citas" featherIcon="calendar" />;
 }

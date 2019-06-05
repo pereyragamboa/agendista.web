@@ -4,20 +4,17 @@ import FeatherIcon from '../commons/featherIcon';
 // Row of an appointment list.
 const AppointmentListElement = (props) =>
   <tr>
-    <td className="level">
-      <div className="level-left">
-        <span className="has-text-weight-bold">{props.time}:&nbsp;</span>{props.name}
-      </div>
+    <th>{props.time}</th>
+    <td>{props.name}</td>
     {
       props.showButtons ? (
-          <div className="level-right">
+          <td className="level-right">
             <div className="buttons level-item">
-              <button className="button is-info"><FeatherIcon iconName="edit-2"/></button>
+              <button className="button is-primary"><FeatherIcon iconName="edit-2"/></button>
               <button className="button is-danger"><FeatherIcon iconName="trash-2"/></button>
             </div>
-          </div>) : ''
+          </td>) : ''
     }
-    </td>
   </tr>
 ;
 

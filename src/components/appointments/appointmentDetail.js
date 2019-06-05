@@ -92,7 +92,6 @@ export default function AppointmentDetail() {
   const AppointmentDetail = getDetail(detailBody);
 
   return <AppointmentDetail title="Nueva cita"
-                            addCaption="Agendar"
-                            cancelPath={Paths.HOME}
-                            updateCaption="Reagendar" />
+                            okCaption="Agendar"
+                            cancelPath={Paths.HOME} />
 }
