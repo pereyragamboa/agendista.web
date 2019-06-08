@@ -1,6 +1,10 @@
 export const HOME = "/";
 export const ADD_APPOINTMENT = "/appointments/add/";
+export const ADD_HOUR = "/businessHours/add/"
 export const ADD_SERVICE = "/services/add/";
 export const LIST_APPOINTMENTS = "/appointments/";
+export const LIST_HOURS = "/businessHours/";
 export const LIST_SERVICES = "/services/";
 export const UPDATE_APPOINTMENT = "/appointments/";
+export const UPDATE_HOUR = "/businessHours/";
+export const UPDATE_SERVICE = "/services/";
