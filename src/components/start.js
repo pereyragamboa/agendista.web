@@ -14,11 +14,11 @@ function Start()
             <AppointmentList showButtons={false} />
           </div>
           <div className="tile level">
-            <FeatherButton className="level-item"
+            <FeatherButton className="level-item is-primary"
                            caption="Nueva cita" featherIcon="plus"
                            to={Paths.ADD_APPOINTMENT} />
             <div className="level-item"/>
-            <FeatherButton className="level-item"
+            <FeatherButton className="level-item is-primary"
                            caption="Todas las citas" featherIcon="calendar"
                            to={Paths.LIST_APPOINTMENTS} />
           </div>
@@ -31,7 +31,9 @@ function Start()
             <FeatherButton className="is-fullwidth is-primary"
                            featherIcon="shopping-bag" caption="Servicios"
                            to={Paths.LIST_SERVICES}/>
-            <FeatherButton className="is-fullwidth is-primary" featherIcon="clock" caption="Horarios"/>
+            <FeatherButton className="is-fullwidth is-primary"
+                           featherIcon="clock" caption="Horarios"
+                           to={Paths.LIST_HOURS}/>
             <FeatherButton className="is-fullwidth is-warning" featherIcon="settings" caption="Configurar"/>
           </div>
         </div>
