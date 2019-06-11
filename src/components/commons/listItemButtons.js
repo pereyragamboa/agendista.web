@@ -4,6 +4,11 @@ import showModal from './showModal';
 
 /**
  * Action buttons for list items.
+ *
+ * The component assumes that:
+ * - For editing an item, the application will open a detail page
+ * - For deleting an item, the application will show a confirmation modal
+ *
  * @param {object} props List of properties:
  * @param {string} props.editPath Path of edition page
  * @param {string} props.deleteModalId ID of delete confirmation modal
