@@ -4,7 +4,7 @@
  * @param {number} week Week of the month. 1 is the first week. 0 is the last week.
  * @param {number} dayOfWeek Day of the week. 0 is Sunday.
  */
-export default function variableHoliday(month, week, dayOfWeek) {
+export function variableHoliday(month, week, dayOfWeek) {
   const res = { month, week, dayOfWeek };
 
   /**
@@ -31,3 +31,5 @@ export default function variableHoliday(month, week, dayOfWeek) {
 
   return res;
 }
+
+export const LAST_WEEK = 0;
