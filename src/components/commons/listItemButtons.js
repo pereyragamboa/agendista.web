@@ -19,7 +19,7 @@ export default function ListItemButtons(props) {
   return <div className="level-right">
     <div className="buttons level-item">
       <FeatherButton className="is-primary" featherIcon="edit-2" to={props.editPath}/>
-      <FeatherButton className="is-danger" featherIcon="trash-2" onClick={showModal(props.deleteModalId)}/>
+      <FeatherButton className="is-danger" featherIcon="trash-2" onClick={() => showModal(props.deleteModalId)}/>
     </div>
   </div>;
 }
