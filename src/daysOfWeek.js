@@ -9,9 +9,9 @@ const MILLISECONDS_PER_DAY = 1000 * 3600 * 24;
  * @param {string} locale Locale for displaying the day name. If not provided, it uses the client default.
  * @return {string}
  */
-function getDayName(dayIndex, locale) {
+function getDayName(dayIndex, locale = DEFAULT_LOCALE) {
   const day = new Date(MILLISECONDS_PER_DAY * (dayIndex - 3));
-  return Intl.DateTimeFormat(locale || DEFAULT_LOCALE, DEFAULT_OPTIONS).format(day);
+  return Intl.DateTimeFormat(locale, DEFAULT_OPTIONS).format(day);
 }
 
 /**
@@ -19,10 +19,10 @@ function getDayName(dayIndex, locale) {
  * @param {string} locale Locale for displaying the day name. If not provided, it uses the client default.
  * @return {Array}
  */
-function getDayNames(locale) {
+function getDayNames(locale = DEFAULT_LOCALE) {
   const res = [];
   for (let i = 0; i < 7; i++) {
-    res.push(getDayName(i, locale || DEFAULT_LOCALE));
+    res.push(getDayName(i, locale));
   }
   return res;
 }
