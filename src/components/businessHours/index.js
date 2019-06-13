@@ -26,7 +26,7 @@ function BusinessHours() {
           <Link to={Paths.LIST_HOURS}>Horarios de atención</Link>
         </li>
         <li id={HOLIDAY_TAB_ID}>
-          <Link to={Paths.LIST_HOLIDAYS}>Días feriados</Link>
+          <Link to={Paths.LIST_HOLIDAYS}>Días no laborales</Link>
         </li>
       </ul>
     </div>

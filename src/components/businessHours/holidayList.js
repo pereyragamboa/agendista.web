@@ -29,18 +29,19 @@ const variableHolidays = [
 ];
 
 export default function HolidayList() {
+  const currentYear = new Date().getFullYear();
   const allHolidayData = [
     ...fixedHolidays.map(
-        (fixed) => ({ date: fixed.getHolidayDate(), isVariable: false })
+        (fixed) => ({ date: fixed.getHolidayDate(currentYear), isVariable: false })
     ),
     ...variableHolidays.map(
-        (variable) => ({ date: variable.getHolidayDate(), isVariable: true })
+        (variable) => ({ date: variable.getHolidayDate(currentYear), isVariable: true })
     )
   ].sort((holiday1, holiday2) => holiday1.date - holiday2.date);
 
   return (
     <div>
-      <h2 className="subtitle">Días no laborales en 2019</h2>
+      <h2 className="subtitle">Días no laborales en {currentYear}</h2>
       <p className="content">
         Los clientes no podrán agendar citas en estos días.
       </p>
