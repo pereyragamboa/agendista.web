@@ -3,15 +3,7 @@ import { fixedHoliday } from "../../models/fixedHoliday";
 import ListItemButtons from '../commons/listItemButtons';
 import {variableHoliday} from "../../models/variableHoliday";
 
-const FixedHolidayListRow = (props) =>
-  <tr>
-    <th>{props.date.toString()}</th>
-    <td>
-      <ListItemButtons/>
-    </td>
-  </tr>;
-
-const VariableHolidayListRow = (props) =>
+const HolidayListRow = (props) =>
   <tr>
     <th>
       {props.date.toLocaleDateString("default", {month: "long", day: "numeric"})}
@@ -56,7 +48,7 @@ export default function HolidayList() {
         <table className="table is-fullwidth">
           <tbody className="table-container">{
             allHolidayData.map((holiday) =>
-                <VariableHolidayListRow date={holiday.date} isVariable={holiday.isVariable}/>)
+                <HolidayListRow date={holiday.date} isVariable={holiday.isVariable}/>)
           }
           </tbody>
         </table>
