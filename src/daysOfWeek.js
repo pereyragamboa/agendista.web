@@ -1,5 +1,5 @@
 const DEFAULT_OPTIONS = { weekday: 'long' };
-const DEFAULT_LOCALE = 'es-MX';
+const DEFAULT_LOCALE = 'default';
 const MILLISECONDS_PER_DAY = 1000 * 3600 * 24;
 
 /**

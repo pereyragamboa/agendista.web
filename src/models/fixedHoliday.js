@@ -20,6 +20,14 @@ export function fixedHoliday(month, day) {
    * @return {Date} The holiday date.
    */
   res.getHolidayDate = (year = new Date().getFullYear()) => new Date(year, res.month - 1, res.day);
+  res.toString = () => {
+    const d = new Date();
+    d.setMonth(res.month - 1, res.day);
+    return d.toLocaleString("default", {
+      month: "long",
+      day: "numeric"
+    });
+  };
 
   return res;
 }
