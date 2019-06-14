@@ -3,17 +3,22 @@ import { Link } from 'react-router-dom';
 import * as Paths from '../../paths';
 import getIndex from '../commons/getIndex';
 import FeatherIcon from "../commons/featherIcon";
-import showModal from '../commons/showModal';
 
 const NavBarItems = [
   <Link key="ag-navbar-add" className="navbar-item" to={Paths.ADD_CUSTOMER}>
     <FeatherIcon iconName="plus"/>
     <span>Nuevo cliente</span>
   </Link>,
-  <Link key="ag-navbar-search" className="link navbar-item" to="#" onClick={() => showModal("ag-modal-customer-search")}>
-    <FeatherIcon iconName="search"/>
-    <span>Buscar cliente</span>
-  </Link>
+  <div className="navbar-item field has-addons">
+    <div className="control">
+      <input className="input" type="text" placeholder="Buscar"/>
+    </div>
+    <div className="control">
+      <button className="button">
+        <FeatherIcon iconName="search" width="16" height="16"/>
+      </button>
+    </div>
+  </div>
 ];
 
 export default function Customers(){
