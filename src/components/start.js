@@ -27,7 +27,9 @@ function Start()
         <div className="tile is-4 is-parent is-vertical">
           <h1 className="subtitle tile is-child is-hidden-tablet">Herramientas</h1>
           <div className="tile is-child buttons">
-            <FeatherButton className="is-fullwidth is-primary" featherIcon="users" caption="Clientes"/>
+            <FeatherButton className="is-fullwidth is-primary"
+                           featherIcon="users" caption="Clientes"
+                           to={Paths.LIST_CUSTOMERS}/>
             <FeatherButton className="is-fullwidth is-primary"
                            featherIcon="shopping-bag" caption="Servicios"
                            to={Paths.LIST_SERVICES}/>
