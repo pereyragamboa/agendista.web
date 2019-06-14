@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Paths from '../../paths';
-import getIndex from '../commons/getIndex';
+import CustomerList from '../customers/customerList';
 import FeatherIcon from "../commons/featherIcon";
+import getIndex from '../commons/getIndex';
 
 const NavBarItems = [
   <Link key="ag-navbar-add" className="navbar-item" to={Paths.ADD_CUSTOMER}>
@@ -22,7 +23,7 @@ const NavBarItems = [
 ];
 
 export default function Customers(){
-  const CustomerIndex = getIndex(<div/>, { endItems: NavBarItems });
+  const CustomerIndex = getIndex(<CustomerList/>, { endItems: NavBarItems });
 
   return <CustomerIndex brand="Clientes" featherIcon="users"/>
 }
