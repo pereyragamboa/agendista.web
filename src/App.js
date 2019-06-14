@@ -4,6 +4,7 @@ import * as Paths from './paths';
 import AppointmentDetail from './components/appointments/appointmentDetail';
 import Appointments from './components/appointments';
 import BusinessHours from './components/businessHours';
+import Customers from './components/customers';
 import Services from './components/services';
 import ServiceDetail from './components/services/serviceDetail';
 import Start from './components/start';
@@ -20,6 +21,7 @@ function App()
           <Route exact path={Paths.ADD_APPOINTMENT} component={AppointmentDetail}/>
           <Route exact path={Paths.ADD_SERVICE} component={ServiceDetail}/>
           <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
+          <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>
           <Route path={Paths.LIST_HOURS} component={BusinessHours}/>
           <Route exact path={Paths.LIST_SERVICES} component={Services}/>
         </div>

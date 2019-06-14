@@ -30,7 +30,7 @@ function onBurgerClick() {
 //   - id: identifier of the HOC
 //   - title: displayed title of the HOC
 export default function getIndex(ContentComponent, NavbarComponents){
-  return class extends Component {
+  return class Index extends Component {
     render() {
       return <div id={this.props.id}>
         <div>
@@ -49,7 +49,7 @@ export default function getIndex(ContentComponent, NavbarComponents){
                    data-target={NAVBAR_MENU_ID}
                    onClick={ onBurgerClick }>
                 {
-                  [1, 2, 3].map(() => <span aria-hidden="true"/>)
+                  [1, 2, 3].map((i) => <span key={`ag-burger-menu-${i}`} aria-hidden="true"/>)
                 }</div>
             </div>
             <div id={NAVBAR_MENU_ID} className="navbar-menu">
