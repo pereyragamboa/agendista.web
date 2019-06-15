@@ -10,7 +10,7 @@ export default function ServiceDetail() {
         <label className="label">Servicio</label>
         <div className="control has-icons-left">
           <input className="input" type="text" placeholder="Título del servicio"/>
-          <span className="icon is-left"><FeatherIcon iconName="shopping-bag"/></span>
+          <FeatherIcon className="icon is-left" iconName="shopping-bag"/>
         </div>
       </div>
       <div className="field">
@@ -19,18 +19,20 @@ export default function ServiceDetail() {
           <textarea className="textarea" rows="3" placeholder="Descripción del servicio"/>
         </div>
       </div>
-      <div className="field">
-        <label className="label">Duración</label>
-        <div className="control has-icons-left">
-          <input className="input" type="time"/>
-          <span className="icon is-left"><FeatherIcon iconName="clock"/></span>
+      <div className="columns">
+        <div className="field column">
+          <label className="label">Duración</label>
+          <div className="control has-icons-left">
+            <input className="input" type="time"/>
+            <FeatherIcon  className="icon is-left"iconName="clock"/>
+          </div>
         </div>
-      </div>
-      <div className="field">
-        <label className="label">Costo</label>
-        <div className="control has-icons-left">
-          <input className="input" type="number" placeholder="Costo del servicio"/>
-          <span className="icon is-left"><FeatherIcon iconName="tag"/></span>
+        <div className="field column">
+          <label className="label">Costo</label>
+          <div className="control has-icons-left">
+            <input className="input" type="number" placeholder="Costo del servicio"/>
+            <FeatherIcon className="icon is-left" iconName="tag"/>
+          </div>
         </div>
       </div>
     </div>;

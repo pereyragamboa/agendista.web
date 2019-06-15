@@ -14,21 +14,21 @@ export default function AppointmentDetail() {
           <label className="label">Cliente</label>
           <div className="control has-icons-left">
             <input className="input" type="text" placeholder="Nombre completo del cliente"/>
-            <span className="icon is-left"><FeatherIcon iconName="user"/></span>
+            <FeatherIcon className="icon is-left" iconName="user"/>
           </div>
         </div>
         <div className="field">
           <label className="label">Teléfono</label>
           <div className="control has-icons-left">
             <input className="input" type="text" placeholder="Teléfono del cliente"/>
-            <span className="icon is-left"><FeatherIcon iconName="phone"/></span>
+            <FeatherIcon className="icon is-left" iconName="phone"/>
           </div>
         </div>
         <div className="field">
           <label className="label">Correo electrónico</label>
           <div className="control has-icons-left">
             <input className="input" type="text" placeholder="ejemplo@ejemplo.com"/>
-            <span className="icon is-left"><FeatherIcon iconName="at-sign"/></span>
+            <FeatherIcon className="icon is-left" iconName="at-sign"/>
           </div>
         </div>
         <h2 className="subtitle">Detalle de la cita</h2>
@@ -62,7 +62,7 @@ export default function AppointmentDetail() {
                        data-display-mode="inline"
                        type="date"
                 />
-                <span className="icon is-left"><FeatherIcon iconName="calendar"/></span>
+                <FeatherIcon className="icon is-left" iconName="calendar"/>
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@ export default function AppointmentDetail() {
               <label className="label">Hora</label>
               <div className="control has-icons-left">
                 <input className="input" type="time" placeholder="Hora"/>
-                <span className="icon is-left"><FeatherIcon iconName="clock"/></span>
+                <FeatherIcon className="icon is-left" iconName="clock"/>
               </div>
             </div>
           </div>
