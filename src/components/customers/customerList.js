@@ -22,8 +22,8 @@ export default function CustomerList() {
       <th/>
     </thead>
     <tbody>
-      <CustomerListItem firstNames="José Candelario" lastNames="Tres Patines"
-                        telephone="1234-5678" email="3patines@example.com.cu"/>
+      <CustomerListItem firstNames="Rosa Guadalupe" lastNames="Godínez"
+                        telephone="1234-5678" email="lupegodinez@example.io"/>
       <CustomerListItem firstNames="Martín" lastNames="Pereyra Gamboa"
                         telephone="1123-5813" email="mpereyra@example.com"/>
     </tbody>
