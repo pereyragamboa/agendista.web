@@ -16,7 +16,7 @@ const FeatherButton = (props) => {
   // checks existence of props.featherIcon and creates the icon if exists
   let icon =
       typeof props.featherIcon === 'string' ?
-          <FeatherIcon iconName={props.featherIcon}/> : '';
+          <FeatherIcon iconName={props.featherIcon} /> : '';
   // checks existence of props.caption
   let caption =
       typeof props.caption === 'string' && props.caption.trim() !== '' ?
