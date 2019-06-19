@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as Paths from "../paths";
 import BurgerMenu from './commons/burgerMenu';
-import FeatherIcon from "./commons/featherIcon";
 import NavbarMenuItem from './commons/navbarMenuItem';
 
 export default function Header() {
