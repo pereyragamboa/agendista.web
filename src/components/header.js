@@ -3,14 +3,7 @@ import { Link } from 'react-router-dom';
 import * as Paths from "../paths";
 import BurgerMenu from './commons/burgerMenu';
 import FeatherIcon from "./commons/featherIcon";
-
-function NavbarLink(props) {
-  return <Link className="navbar-item" to={props.path}>
-    <FeatherIcon className="is-hidden-touch" iconName={props.featherIcon}/>
-    <span>{props.caption}</span>
-  </Link>
-
-}
+import NavbarMenuItem from './commons/navbarMenuItem';
 
 export default function Header() {
   const MENU_ID = "ag-header-navbar-menu";
@@ -26,15 +19,14 @@ export default function Header() {
         </div>
         <div className="navbar-menu" id={MENU_ID}>
           <div className="navbar-end">
-            <NavbarLink path={Paths.LIST_APPOINTMENTS} featherIcon="calendar" caption="Citas"/>
-            <NavbarLink path={Paths.LIST_CUSTOMERS}
+            <NavbarMenuItem path={Paths.LIST_APPOINTMENTS} featherIcon="calendar" caption="Citas"/>
+            <NavbarMenuItem path={Paths.LIST_CUSTOMERS}
                         featherIcon="users"
                         caption="Clientes"/>
-            <NavbarLink path={Paths.LIST_SERVICES} featherIcon="shopping-bag" caption="Servicios"/>
-            <NavbarLink featherIcon="clock" caption="Horarios"
+            <NavbarMenuItem path={Paths.LIST_SERVICES} featherIcon="shopping-bag" caption="Servicios"/>
+            <NavbarMenuItem featherIcon="clock" caption="Horarios"
                         path={Paths.LIST_HOURS}/>
-            <NavbarLink featherIcon="settings" caption="Configurar"/>
-
+            <NavbarMenuItem featherIcon="settings" caption="Configurar"/>
           </div>
         </div>
       </div>

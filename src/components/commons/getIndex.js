@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BurgerMenu from './burgerMenu';
 import FeatherIcon from './featherIcon';
 
 // The consts and onBurgerClick() are defined outside the exported class because
@@ -7,12 +8,6 @@ import FeatherIcon from './featherIcon';
 const NAVBAR_BURGER_ID = "navbarBurgerMenu";
 const NAVBAR_MENU_ID = "navbarMenuId";
 
-function onBurgerClick() {
-  const burgerElement = document.getElementById(NAVBAR_BURGER_ID);
-  const menuElement = document.getElementById(NAVBAR_MENU_ID);
-  burgerElement.classList.toggle("is-active");
-  menuElement.classList.toggle("is-active");
-}
 
 // Higher order component that creates a main feature screen. A feature screen
 // is composed of the following:
@@ -44,13 +39,7 @@ export default function getIndex(ContentComponent, NavbarComponents){
                   <h1 className="title is-4">{ this.props.brand }</h1>
                 </div>)
               }
-              <div id={NAVBAR_BURGER_ID} className="navbar-burger"
-                   role="button" aria-label="button" aria-expanded="false"
-                   data-target={NAVBAR_MENU_ID}
-                   onClick={ onBurgerClick }>
-                {
-                  [1, 2, 3].map((i) => <span key={`ag-burger-menu-${i}`} aria-hidden="true"/>)
-                }</div>
+              <BurgerMenu id={NAVBAR_BURGER_ID} target={NAVBAR_MENU_ID}/>
             </div>
             <div id={NAVBAR_MENU_ID} className="navbar-menu">
               <div className="navbar-end">
