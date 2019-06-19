@@ -1,16 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import AppointmentList from './serviceList';
-import FeatherIcon from '../commons/featherIcon';
 import getIndex from '../commons/getIndex';
+import NavbarMenuItem from "../commons/navbarMenuItem";
 import * as Paths from "../../paths";
 
-const NavbarEndItems = [
-  (<Link className="navbar-item" to={Paths.ADD_SERVICE}>
-    <FeatherIcon iconName="plus"/>
-    <span>Nuevo servicio</span>
-  </Link>)
-];
+const NavbarEndItems =
+  <NavbarMenuItem path={Paths.ADD_SERVICE} featherIcon="plus" caption="Nuevo servicio"/>;
 
 export default function Services () {
   const ServiceIndex = getIndex(<AppointmentList/>, { endItems: NavbarEndItems });

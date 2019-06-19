@@ -5,10 +5,10 @@ import FeatherIcon from "../commons/featherIcon";
 import getIndex from '../commons/getIndex';
 import NavbarMenuItem from '../commons/navbarMenuItem';
 
-const NavBarItems = [
+const NavBarItems = <React.Fragment>
   <NavbarMenuItem key="ag-navbar-add"
                   path={Paths.ADD_CUSTOMER}
-                  featherIcon="plus" caption="Nuevo cliente"/>,
+                  featherIcon="plus" caption="Nuevo cliente"/>
   <div className="navbar-item field has-addons">
     <div className="control">
       <input className="input" type="text" placeholder="Buscar"/>
@@ -19,7 +19,7 @@ const NavBarItems = [
       </button>
     </div>
   </div>
-];
+</React.Fragment>;
 
 export default function Customers(){
   const CustomerIndex = getIndex(<CustomerList/>, { endItems: NavBarItems });
