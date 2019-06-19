@@ -1,15 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as Paths from '../../paths';
 import CustomerList from '../customers/customerList';
 import FeatherIcon from "../commons/featherIcon";
 import getIndex from '../commons/getIndex';
+import NavbarMenuItem from '../commons/navbarMenuItem';
 
 const NavBarItems = [
-  <Link key="ag-navbar-add" className="navbar-item" to={Paths.ADD_CUSTOMER}>
-    <FeatherIcon iconName="plus"/>
-    <span>Nuevo cliente</span>
-  </Link>,
+  <NavbarMenuItem key="ag-navbar-add"
+                  path={Paths.ADD_CUSTOMER}
+                  featherIcon="plus" caption="Nuevo cliente"/>,
   <div className="navbar-item field has-addons">
     <div className="control">
       <input className="input" type="text" placeholder="Buscar"/>
