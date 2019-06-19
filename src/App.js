@@ -8,9 +8,9 @@ import CustomerDetail from './components/customers/customerDetail';
 import Customers from './components/customers';
 import Footer from './components/footer';
 import Header from './components/header';
+import Home from './components/home';
 import Services from './components/services';
 import ServiceDetail from './components/services/serviceDetail';
-import Start from './components/start';
 import './App.css';
 
 
@@ -22,7 +22,7 @@ function App()
       <Header/>
         <div className="hero-body">
           <div className="container">
-            <Route exact path={Paths.HOME} component={Start}/>
+            <Route exact path={Paths.HOME} component={Home}/>
             <Route exact path={Paths.ADD_APPOINTMENT} component={AppointmentDetail}/>
             <Route exact path={Paths.ADD_CUSTOMER} component={CustomerDetail}/>
             <Route exact path={Paths.ADD_SERVICE} component={ServiceDetail}/>
