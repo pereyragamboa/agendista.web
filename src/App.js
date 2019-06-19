@@ -7,6 +7,7 @@ import BusinessHours from './components/businessHours';
 import CustomerDetail from './components/customers/customerDetail';
 import Customers from './components/customers';
 import Footer from './components/footer';
+import Header from './components/header';
 import Services from './components/services';
 import ServiceDetail from './components/services/serviceDetail';
 import Start from './components/start';
@@ -16,9 +17,9 @@ import './App.css';
 function App()
 {
   return (
-    <div className="App hero is-fullheight">
-      <div className="hero-head"/>
       <BrowserRouter>
+    <div className="App hero is-fullheight">
+      <Header/>
         <div className="hero-body">
           <div className="container">
             <Route exact path={Paths.HOME} component={Start}/>
@@ -31,9 +32,9 @@ function App()
             <Route exact path={Paths.LIST_SERVICES} component={Services}/>
           </div>
         </div>
-      </BrowserRouter>
       <Footer/>
     </div>
+      </BrowserRouter>
   );
 }
 
