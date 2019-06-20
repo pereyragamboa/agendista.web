@@ -24,7 +24,7 @@ export default function Header() {
             <NavbarMenuItem path={Paths.LIST_SERVICES} featherIcon="shopping-bag" caption="Servicios"/>
             <NavbarMenuItem featherIcon="clock" caption="Horarios"
                         path={Paths.LIST_HOURS}/>
-            <NavbarMenuItem featherIcon="settings" caption="Configurar" path={Paths.SETTINGS}/>
+            <NavbarMenuItem featherIcon="settings" caption="Opciones" path={Paths.SETTINGS}/>
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ const NAVBAR_MENU_ID = "navbarMenuId";
 //   - featherIcon: Feather icon name
 //   - id: identifier of the HOC
 //   - title: displayed title of the HOC
-export default function getIndex(ContentComponent, NavbarComponents){
+export default function getIndex(ContentComponent, NavbarComponents = []){
   return class Index extends Component {
     render() {
       return <div id={this.props.id}>

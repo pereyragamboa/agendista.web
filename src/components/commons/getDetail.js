@@ -13,7 +13,7 @@ import FeatherIcon from './featherIcon';
 // - cancelPath: path of the page to navigate after pressing the Cancel button
 // - id: identifier of the screen
 // - title: displayed title of the screen
-export default function getDetail(FormComponent, okClick){
+export default function getDetail(FormComponent, okClick = () => {}){
   return class extends React.Component {
     render() {
       return <div id={this.props.id}>

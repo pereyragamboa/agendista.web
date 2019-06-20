@@ -11,6 +11,7 @@ import Header from './components/header';
 import Home from './components/home';
 import Services from './components/services';
 import ServiceDetail from './components/services/serviceDetail';
+import Settings from './components/settings';
 import './App.css';
 
 
@@ -30,6 +31,7 @@ function App()
             <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
             <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>
             <Route exact path={Paths.LIST_SERVICES} component={Services}/>
+            <Route exact path={Paths.SETTINGS} component={Settings}/>
           </div>
         </div>
       <Footer/>
