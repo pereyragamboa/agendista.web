@@ -8,6 +8,7 @@ export const LIST_CUSTOMERS = "/customers/";
 export const LIST_HOURS = "/businessHours/";
 export const LIST_HOLIDAYS = "/businessHours/holidays";
 export const LIST_SERVICES = "/services/";
+export const SETTINGS = "/settings/";
 export const UPDATE_APPOINTMENT = "/appointments/";
 export const UPDATE_HOUR = "/businessHours/";
 export const UPDATE_SERVICE = "/services/";
