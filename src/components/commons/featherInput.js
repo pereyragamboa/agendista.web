@@ -1,5 +1,6 @@
 import React from 'react';
 import FeatherIcon from './featherIcon';
+import getClassName from './getClassName';
 
 /**
  * Creates a Bulma-styled input, decorated with Feather icons.
@@ -11,11 +12,11 @@ import FeatherIcon from './featherIcon';
  * @constructor
  */
 export default function FeatherInput(props){
-  return <div className="field">
+  return <div className={getClassName("field", props)}>
     <label className="label">{props.caption}</label>
     <div className="control has-icons-left">
       <FeatherIcon iconName={props.iconName}/>
-      <input className="input" placeholder={props.placeholder}/>
+      <input className="input" type={props.type} placeholder={props.placeholder}/>
     </div>
   </div>
 }

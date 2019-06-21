@@ -1,18 +1,13 @@
 import React from 'react';
 import * as Paths from '../../paths';
-import FeatherIcon from '../commons/featherIcon';
+import FeatherInput from '../commons/featherInput';
 import getDetail from '../commons/getDetail';
 
 export default function ServiceDetail() {
   const detailBody = () =>
     <div>
-      <div className="field">
-        <label className="label">Servicio</label>
-        <div className="control has-icons-left">
-          <input className="input" type="text" placeholder="Título del servicio"/>
-          <FeatherIcon className="icon is-left" iconName="shopping-bag"/>
-        </div>
-      </div>
+      <FeatherInput caption="Servicio"  iconName="shopping-bag" placeholder="Título del servicio"/>
+      <FeatherInput caption="Servicio"  iconName="shopping-bag" placeholder="Título del servicio"/>
       <div className="field">
         <label className="label">Descripción</label>
         <div className="control">
@@ -20,20 +15,10 @@ export default function ServiceDetail() {
         </div>
       </div>
       <div className="columns">
-        <div className="field column">
-          <label className="label">Duración</label>
-          <div className="control has-icons-left">
-            <input className="input" type="time"/>
-            <FeatherIcon  className="icon is-left"iconName="clock"/>
-          </div>
-        </div>
-        <div className="field column">
-          <label className="label">Costo</label>
-          <div className="control has-icons-left">
-            <input className="input" type="number" placeholder="Costo del servicio"/>
-            <FeatherIcon className="icon is-left" iconName="tag"/>
-          </div>
-        </div>
+        <FeatherInput className="column" type="time" caption="Duración" iconName="clock" />
+        <FeatherInput className="column" type="number"
+                      caption="Costo" iconName="tag"
+                      placeholder="Costo del servicio"/>
       </div>
     </div>;
 

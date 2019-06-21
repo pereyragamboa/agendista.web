@@ -4,33 +4,14 @@ import FeatherIcon from '../commons/featherIcon';
 import getDetail from '../commons/getDetail';
 import * as Paths from '../../paths';
 import './appointmentDetail.css';
+import FeatherInput from "../commons/featherInput";
 
 export default function AppointmentDetail() {
   const detailBody = class extends React.Component {
     render() {
       return <div>
         <h2 className="subtitle">Cliente</h2>
-        <div className="field">
-          <label className="label">Cliente</label>
-          <div className="control has-icons-left">
-            <input className="input" type="text" placeholder="Nombre completo del cliente"/>
-            <FeatherIcon className="icon is-left" iconName="user"/>
-          </div>
-        </div>
-        <div className="field">
-          <label className="label">Teléfono</label>
-          <div className="control has-icons-left">
-            <input className="input" type="text" placeholder="Teléfono del cliente"/>
-            <FeatherIcon className="icon is-left" iconName="phone"/>
-          </div>
-        </div>
-        <div className="field">
-          <label className="label">Correo electrónico</label>
-          <div className="control has-icons-left">
-            <input className="input" type="text" placeholder="ejemplo@ejemplo.com"/>
-            <FeatherIcon className="icon is-left" iconName="at-sign"/>
-          </div>
-        </div>
+        <FeatherInput caption="Cliente" iconName="user" placeholder="Nombre del cliente"/>
         <h2 className="subtitle">Detalle de la cita</h2>
         <div className="columns">
           <div className="column">
@@ -67,13 +48,7 @@ export default function AppointmentDetail() {
             </div>
           </div>
           <div className="column">
-            <div className="field">
-              <label className="label">Hora</label>
-              <div className="control has-icons-left">
-                <input className="input" type="time" placeholder="Hora"/>
-                <FeatherIcon className="icon is-left" iconName="clock"/>
-              </div>
-            </div>
+            <FeatherInput type="time" caption="Hora" iconName="clock"/>
           </div>
         </div>
       </div>;
