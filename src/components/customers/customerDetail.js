@@ -1,7 +1,6 @@
 import React from 'react';
 import getDetail from '../commons/getDetail';
 import * as Paths from '../../paths';
-import FeatherIcon from "../commons/featherIcon";
 import FeatherInput from '../commons/featherInput';
 
 const detailBody = () =>
