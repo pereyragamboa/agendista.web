@@ -4,7 +4,7 @@ import FeatherIcon from '../commons/featherIcon';
 import getDetail from '../commons/getDetail';
 import * as Paths from '../../paths';
 import './appointmentDetail.css';
-import FeatherInput from "../commons/featherInput";
+import FeatherInput from "../commons/forms/featherInput";
 
 export default function AppointmentDetail() {
   const detailBody = class extends React.Component {

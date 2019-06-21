@@ -1,5 +1,5 @@
 import React from 'react';
-import FeatherInput from '../commons/featherInput';
+import FeatherInput from '../commons/forms/featherInput';
 import getDetail from '../commons/getDetail';
 import * as Paths from '../../paths';
 

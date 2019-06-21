@@ -1,7 +1,7 @@
 import React from 'react';
 import getDetail from '../commons/getDetail';
 import * as Paths from '../../paths';
-import FeatherInput from '../commons/featherInput';
+import FeatherInput from '../commons/forms/featherInput';
 
 const detailBody = () =>
     <div>
@@ -9,7 +9,7 @@ const detailBody = () =>
       <FeatherInput caption="Apellidos" iconName="users" placeholder="Apellidos" />
       <div className="columns">
         <div className="column">
-          <FeatherInput caption="Teléfono" iconName="phone" placeholder="Número de teléfono"/>
+          <FeatherInput caption="Teléfono" iconName="phone" placeholder="123 456 7890"/>
         </div>
         <div className="column">
           <FeatherInput caption="Correo electrónico" iconName="at-sign" placeholder="cliente@ejemplo.com"/>
