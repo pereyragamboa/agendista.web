@@ -13,32 +13,33 @@ import getClassName from "./getClassName";
  * @constructor
  */
 const FeatherButton = (props) => {
-  // checks existence of props.featherIcon and creates the icon if exists
-  let icon =
-      typeof props.featherIcon === 'string' ?
-          <FeatherIcon iconName={props.featherIcon} /> : '';
-  // checks existence of props.caption
-  let caption =
-      typeof props.caption === 'string' && props.caption.trim() !== '' ?
-          <span>{ props.caption }</span> : '';
+  let { featherIcon, caption, to, otherProps } = props;
 
-  if (icon === '' && caption === '') {
+  // checks existence of props.featherIcon and creates the icon if exists
+  const iconElement = typeof featherIcon === 'string' ?
+      <FeatherIcon iconName={featherIcon} /> : '';
+  // checks existence of props.caption
+  const captionElement = typeof caption === 'string' && caption.trim() !== '' ?
+        <span>{ caption.trim() }</span> : '';
+
+  if (featherIcon === '' && caption === '') {
     // if there are no parameters, returns an empty <span>
     return <span/>;
   } else {
     const className = getClassName("button", props);
 
-    if (props.to) {
+    if (to) {
       // if props.to is defined, create a <Link/>
       return (
-          <Link className={className} to={props.to}>
-            {icon}
-            {caption}
+          <Link className={className} to={to} {...otherProps}>
+            {iconElement}
+            {captionElement}
           </Link>);
     }
     else {
       // if not, create a <span>
-      return <span className={className}>{icon}{caption}</span>
+      console.log(props);
+      return <button className={className} {...otherProps} onClick={props.onClick}>{iconElement}{captionElement}</button>
     }
   }
 };
