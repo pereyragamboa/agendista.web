@@ -1,12 +1,15 @@
 import React from 'react';
 import bulmaCalendar from 'bulma-calendar/dist/js/bulma-calendar';
-import FeatherIcon from '../commons/featherIcon';
 import getDetail from '../commons/getDetail';
+import getFormControl from '../commons/forms/getFormControl';
 import * as Paths from '../../paths';
 import './appointmentDetail.css';
 import FeatherInput from "../commons/forms/featherInput";
 
 export default function AppointmentDetail() {
+  const Calendar =
+    getFormControl(<input className="input" data-display-mode="inline" type="date"/>);
+
   const detailBody = class extends React.Component {
     render() {
       return <div>
@@ -36,16 +39,7 @@ export default function AppointmentDetail() {
             </fieldset>
           </div>
           <div className="column">
-            <div className="field">
-              <label className="label">Fecha</label>
-              <div className="control has-icons-left">
-                <input className="input"
-                       data-display-mode="inline"
-                       type="date"
-                />
-                <FeatherIcon className="icon is-left" iconName="calendar"/>
-              </div>
-            </div>
+            <Calendar caption="Fecha" iconName="calendar"/>
           </div>
           <div className="column">
             <FeatherInput type="time" caption="Hora" iconName="clock"/>
