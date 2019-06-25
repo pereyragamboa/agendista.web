@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import FeatherIcon from './featherIcon';
 import getClassName from './getClassName';
 
@@ -12,7 +12,7 @@ import getClassName from './getClassName';
  * @constructor
  */
 export default function NavbarMenuItem(props) {
-  const Content = () => <React.Fragment>
+  const content = <React.Fragment>
     <FeatherIcon className={getClassName("is-hidden-touch", props)} iconName={props.featherIcon}/>
     &nbsp;
     <span>{props.caption}</span>
@@ -21,6 +21,6 @@ export default function NavbarMenuItem(props) {
   const elementClass = getClassName("navbar-item", props);
 
   return (props.path ?
-      <Link className={elementClass} to={props.path}><Content/></Link> :
-      <div className={elementClass}><Content/></div>);
+      <NavLink className={elementClass} activeClassName={"has-background-dark has-text-light"} to={props.path}>{content}</NavLink> :
+      <div className={elementClass}>{content}</div>);
 }
