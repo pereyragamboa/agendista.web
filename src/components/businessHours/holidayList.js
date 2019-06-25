@@ -40,7 +40,7 @@ export default function HolidayList() {
   ].sort((holiday1, holiday2) => holiday1.date - holiday2.date);
 
   return (
-    <div>
+    <React.Fragment>
       <h2 className="subtitle">Días no laborales en {currentYear}</h2>
       <p className="content">
         Los clientes no podrán agendar citas en estos días.
@@ -54,6 +54,6 @@ export default function HolidayList() {
           </tbody>
         </table>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
