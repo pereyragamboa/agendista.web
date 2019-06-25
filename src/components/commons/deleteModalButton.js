@@ -4,9 +4,10 @@ import getClassName from './getClassName';
 import showModal from './showModal';
 
 /**
- * Delete button.
+ * Button showing a delete confirmation modal.
  *
- * @param {string} props.modalId Identifier of the modal delete dialog
+ * @param {string} props.modalId Identifier of the modal delete dialog. The ID should be
+ * assigned to a DeleteModal.
  * @return {*}
  * @constructor
  */
