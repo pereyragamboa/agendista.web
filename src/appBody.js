@@ -11,15 +11,17 @@ import Settings from "./components/settings";
 import Services from "./components/services";
 import ServiceDetail from "./components/services/serviceDetail";
 
-export default () =>
-    <React.Fragment>
-      <Route exact path={Paths.HOME} component={Home}/>
-      <Route exact path={Paths.ADD_APPOINTMENT} component={AppointmentDetail}/>
-      <Route exact path={Paths.ADD_CUSTOMER} component={CustomerDetail}/>
-      <Route exact path={Paths.ADD_SERVICE} component={ServiceDetail}/>
-      <Route path={Paths.LIST_HOURS} component={BusinessHours}/>
-      <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
-      <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>
-      <Route exact path={Paths.LIST_SERVICES} component={Services}/>
-      <Route exact path={Paths.SETTINGS} component={Settings}/>
-    </React.Fragment>;
+export default () => <React.Fragment>
+  <Route exact path={Paths.HOME} component={Home}/>
+  <Route exact path={Paths.ADD_APPOINTMENT} component={AppointmentDetail}/>
+  <Route exact path={Paths.ADD_CUSTOMER} component={CustomerDetail}/>
+  <Route exact path={Paths.ADD_SERVICE} component={ServiceDetail}/>
+  <Route path={Paths.LIST_HOURS} component={BusinessHours}/>
+  <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
+  <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>
+  <Route exact path={Paths.LIST_SERVICES} component={Services}/>
+  <Route exact path={Paths.SETTINGS} component={Settings}/>
+  <Route exact path={Paths.UPDATE_APPOINTMENT} component={AppointmentDetail}/>
+  <Route exact path={Paths.UPDATE_CUSTOMER} component={CustomerDetail}/>
+  <Route exact path={Paths.UPDATE_SERVICE} component={ServiceDetail}/>
+</React.Fragment>;

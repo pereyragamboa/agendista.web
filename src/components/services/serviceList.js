@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Paths from '../../paths';
 import DeleteModal from '../commons/deleteModal';
 import ListItemButtons from '../commons/listItemButtons';
 
@@ -19,7 +20,7 @@ const ServiceListRow = (props) =>
     <td className="is-hidden-touch">{ props.servicePrice }</td>
     <td>
       <div className="level-right">
-        <ListItemButtons deleteModalId={MODAL_ID}/>
+        <ListItemButtons editPath={Paths.UPDATE_SERVICE} deleteModalId={MODAL_ID}/>
       </div>
     </td>
   </tr>;

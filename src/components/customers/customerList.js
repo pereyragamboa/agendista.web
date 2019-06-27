@@ -19,13 +19,13 @@ const MODAL_ID = "ag-deleteCustomerModal";
 function CustomerListItem(props) {
   return <tr>
     <td className="is-hidden-desktop">
-      <EditLink to={Paths.ADD_CUSTOMER}>{`${props.firstNames} ${props.lastNames}`}</EditLink>
+      <EditLink to={Paths.UPDATE_CUSTOMER}>{`${props.firstNames} ${props.lastNames}`}</EditLink>
     </td>
     <td className="is-hidden-touch">
-      <EditLink to={Paths.ADD_CUSTOMER}>{props.firstNames}</EditLink>
+      <EditLink to={Paths.UPDATE_CUSTOMER}>{props.firstNames}</EditLink>
     </td>
     <td className="is-hidden-touch">
-      <EditLink to={Paths.ADD_CUSTOMER}>{props.lastNames}</EditLink>
+      <EditLink to={Paths.UPDATE_CUSTOMER}>{props.lastNames}</EditLink>
     </td>
     <td className="is-hidden-touch">{props.telephone}</td>
     <td className="is-hidden-touch">{props.email}</td>
