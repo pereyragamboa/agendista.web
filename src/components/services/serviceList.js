@@ -26,7 +26,7 @@ const ServiceListRow = (props) =>
 
 export default function ServiceList() {
   return <React.Fragment>
-    <table className="table is-fullwidth">
+    <table className="table is-fullwidth is-hoverable">
       <thead>
         <tr>
           <th>Servicio</th>
@@ -48,6 +48,8 @@ export default function ServiceList() {
       }
       </tbody>
     </table>
-    <DeleteModal id={MODAL_ID}/>
+    <DeleteModal id={MODAL_ID}>
+      ¿Desea eliminar este servicio?
+    </DeleteModal>
   </React.Fragment>
 };

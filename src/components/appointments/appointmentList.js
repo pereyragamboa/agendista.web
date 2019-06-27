@@ -14,7 +14,7 @@ const AppointmentListElement = (props) =>
     {
       props.showButtons ? (
           <td>
-            <ListItemButtons editPath={Paths.ADD_APPOINTMENT} deleteModalId={MODAL_ID}/>
+            <ListItemButtons editPath={Paths.UPDATE_APPOINTMENT} deleteModalId={MODAL_ID}/>
           </td>) : ''
     }
   </tr>
@@ -36,7 +36,9 @@ export default function AppointmentList (props) {
             <AppointmentListElement name="Juan Salvador" time="11:00" showButtons={showButtons} />
           </tbody>
         </table>
-        <DeleteModal id={MODAL_ID}/>
+        <DeleteModal id={MODAL_ID}>
+          ¿Desea eliminar esta cita?
+        </DeleteModal>
       </React.Fragment>
   )
 };

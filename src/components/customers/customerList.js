@@ -35,7 +35,7 @@ function CustomerListItem(props) {
 
 export default function CustomerList() {
   return <React.Fragment>
-    <table className="table is-fullwidth">
+    <table className="table is-fullwidth is-hoverable">
       <thead>
         <tr>
           <th>Nombre</th>
@@ -54,6 +54,9 @@ export default function CustomerList() {
                           telephone="1123-5813" email="mpereyra@example.com"/>
       </tbody>
     </table>
-    <DeleteModal id={MODAL_ID}/>
+    <DeleteModal id={MODAL_ID}>
+      <p>¿Desea eliminar este cliente?</p>
+      <p><strong>Nota:</strong> Las citas previas del cliente no serán eliminadas.</p>
+    </DeleteModal>
   </React.Fragment>;
 }
