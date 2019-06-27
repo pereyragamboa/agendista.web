@@ -17,8 +17,8 @@ const detailBody = () =>
       </div>
     </div>;
 
-export default function CustomerDetail() {
+export default function CustomerDetail(props) {
   const CustomerDetail = getDetail(detailBody);
 
-  return <CustomerDetail title="Nuevo cliente" cancelPath={Paths.LIST_CUSTOMERS}/>;
+  return <CustomerDetail {...props} cancelPath={Paths.LIST_CUSTOMERS}/>;
 }

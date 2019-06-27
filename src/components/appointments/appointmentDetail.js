@@ -6,7 +6,7 @@ import * as Paths from '../../paths';
 import './appointmentDetail.css';
 import FeatherInput from "../commons/forms/featherInput";
 
-export default function AppointmentDetail() {
+export default function AppointmentDetail(props) {
   const Calendar =
     getFormControl(<input className="input" data-display-mode="inline" type="date"/>);
 
@@ -60,7 +60,5 @@ export default function AppointmentDetail() {
 
   const AppointmentDetail = getDetail(detailBody);
 
-  return <AppointmentDetail title="Nueva cita"
-                            okCaption="Agendar"
-                            cancelPath={Paths.HOME} />
+  return <AppointmentDetail {...props} cancelPath={Paths.LIST_APPOINTMENTS} />
 }

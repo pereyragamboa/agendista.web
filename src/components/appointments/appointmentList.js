@@ -9,7 +9,7 @@ const MODAL_ID = "ag-deleteAppointmentModal";
 // Row of an appointment list.
 const AppointmentListElement = (props) =>
   <tr>
-    <th><EditLink to={Paths.ADD_APPOINTMENT}>{props.time}</EditLink></th>
+    <th><EditLink to={Paths.UPDATE_APPOINTMENT}>{props.time}</EditLink></th>
     <td>{props.name}</td>
     {
       props.showButtons ? (

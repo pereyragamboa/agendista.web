@@ -8,7 +8,7 @@ const DescriptionTextArea = getFormControl(
     <textarea className="textarea" rows="3" placeholder="Descripción del servicio"/>
 );
 
-export default function ServiceDetail() {
+export default function ServiceDetail(props) {
   const detailBody = () =>
     <div>
       <FeatherInput caption="Servicio"  iconName="shopping-bag" placeholder="Título del servicio"/>
@@ -23,6 +23,5 @@ export default function ServiceDetail() {
 
   const Services = getDetail(detailBody);
 
-  return <Services cancelPath={Paths.LIST_SERVICES}
-                   title="Nuevo servicio"/>;
+  return <Services {...props} cancelPath={Paths.LIST_SERVICES}/>;
 };
