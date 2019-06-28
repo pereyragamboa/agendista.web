@@ -1,10 +1,9 @@
 import React from 'react';
+import * as Paths from '../../paths';
+import { DELETE_CUSTOMER_MODAL as MODAL_ID } from "../../constants/modalIds";
 import DeleteButton from '../commons/deleteModalButton';
 import DeleteModal from '../commons/deleteModal';
 import EditLink from '../commons/editLink';
-import * as Paths from '../../paths';
-
-const MODAL_ID = "ag-deleteCustomerModal";
 
 /**
  * Renders a list item with customer information.

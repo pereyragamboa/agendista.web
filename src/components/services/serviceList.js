@@ -1,9 +1,8 @@
 import React from 'react';
 import * as Paths from '../../paths';
+import { DELETE_SERVICE_MODAL as MODAL_ID } from "../../constants/modalIds";
 import DeleteModal from '../commons/deleteModal';
 import ListItemButtons from '../commons/listItemButtons';
-
-const MODAL_ID = "ag-deleteServiceModal";
 
 /**
  *
