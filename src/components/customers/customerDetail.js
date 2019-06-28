@@ -1,6 +1,6 @@
 import React from 'react';
 import getDetail from '../commons/getDetail';
-import * as Paths from '../../paths';
+import * as Paths from '../../constants/paths';
 import FeatherInput from '../commons/forms/featherInput';
 
 const detailBody = () =>

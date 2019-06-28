@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Paths from '../paths';
+import * as Paths from '../constants/paths';
 import AppointmentList from './appointments/appointmentList';
 import FeatherButton from './commons/featherButton';
 

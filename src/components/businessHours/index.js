@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
-import * as Paths from '../../paths';
+import * as Paths from '../../constants/paths';
 import HourList from './hoursList';
 import HolidayList from './holidayList';
 

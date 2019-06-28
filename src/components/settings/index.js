@@ -1,7 +1,7 @@
 import React from 'react';
 import FeatherInput from '../commons/forms/featherInput';
 import getDetail from '../commons/getDetail';
-import * as Paths from '../../paths';
+import * as Paths from '../../constants/paths';
 
 export default function Settings() {
   const settingsBody = () => <div>

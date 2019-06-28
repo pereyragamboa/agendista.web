@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Paths from '../../paths';
+import * as Paths from '../../constants/paths';
 import { DELETE_APPOINTMENT_MODAL as MODAL_ID } from "../../constants/modalIds";
 import DeleteModal from '../commons/deleteModal';
 import EditLink from '../commons/editLink';

@@ -2,7 +2,7 @@ import React from 'react';
 import bulmaCalendar from 'bulma-calendar/dist/js/bulma-calendar';
 import getDetail from '../commons/getDetail';
 import getFormControl from '../commons/forms/getFormControl';
-import * as Paths from '../../paths';
+import * as Paths from '../../constants/paths';
 import './appointmentDetail.css';
 import FeatherInput from "../commons/forms/featherInput";
 
