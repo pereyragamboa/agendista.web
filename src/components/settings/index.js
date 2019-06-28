@@ -2,17 +2,22 @@ import React from 'react';
 import FeatherInput from '../commons/forms/featherInput';
 import getDetail from '../commons/getDetail';
 import * as Paths from '../../constants/paths';
+import * as Placeholders from '../../constants/placeholders';
+
+const emailPlaceholder = Placeholders.getEmailPlaceholder();
+const phonePlaceholder = Placeholders.getTelephonePlaceholder();
+const webPlaceholder = Placeholders.getWebsitePlaceholder();
 
 export default function Settings() {
   const settingsBody = () => <div>
-    <FeatherInput caption="Nombre" iconName="dollar-sign" placeholder="Nombre comercial del negocio u organización"/>
-    <FeatherInput caption="Sitio web" iconName="globe" placeholder="https://ejemplo.com"/>
+    <FeatherInput caption="Nombre" iconName="briefcase" placeholder="Nombre comercial del negocio u organización"/>
+    <FeatherInput caption="Sitio web" iconName="globe" placeholder={webPlaceholder}/>
     <div className="columns">
       <div className="column">
-        <FeatherInput caption="Teléfono" iconName="phone" placeholder="Número de teléfono"/>
+        <FeatherInput caption="Teléfono" iconName="phone" placeholder={phonePlaceholder}/>
       </div>
       <div className="column">
-        <FeatherInput caption="Correo electrónico" iconName="at-sign" placeholder="cliente@ejemplo.com"/>
+        <FeatherInput caption="Correo electrónico" iconName="at-sign" placeholder={emailPlaceholder}/>
       </div>
     </div>
 
@@ -20,5 +25,5 @@ export default function Settings() {
 
   const SettingsDetail = getDetail(settingsBody);
 
-  return <SettingsDetail title="Opciones" cancelPath={Paths.HOME}/>;
+  return <SettingsDetail title="Opciones" okCaption="Aceptar" cancelPath={Paths.HOME}/>;
 }

@@ -8,31 +8,33 @@ import FeatherIcon from './featherIcon';
 const NAVBAR_BURGER_ID = "navbarBurgerMenu";
 const NAVBAR_MENU_ID = "navbarMenuId";
 
-
-// Higher order component that creates a main feature screen. A feature screen
-// is composed of the following:
-//   * A navbar with buttons for actions relevant to the feature
-//   * A list of one or more elements, or an empty screen
-//   * A pagination component after the list
-//
-// ContentComponent: the component rendering the list of objects
-// NavbarComponents: an object containing the navbar items
-//   -brand: content of navbar-brand; if present, this will override props.title
-//   -endItems: content of navbar-end
-//
-// props:
-//   - featherIcon: Feather icon name
-//   - id: identifier of the HOC
-//   - title: displayed title of the HOC
+/**
+ *
+ * Higher order component that creates a main feature screen. A feature screen
+ * is composed of the following:
+ *   * A navbar with buttons for actions relevant to the feature
+ *   * A list of one or more elements, or an empty screen
+ *   * A pagination component after the list
+ *
+ * @param ContentComponent the component rendering the list of objects
+ * @param NavbarComponents object containing the navbar items
+ * @param NavbarComponents.brandItems content of navbar-brand
+ * @param NavbarComponents.endItems content of navbar-end
+ * @return {{new(): Index, prototype: Index}}
+ */
 export default function getIndex(ContentComponent, NavbarComponents = []){
+  /**
+   * @param props.brand Basic caption for the brand; overriden by NavbarComponents.brandItems
+   * @param props.featherIcon Name of the Feather icon
+   * @param props.id Identifier of the component
+   */
   return class Index extends Component {
     render() {
-      return <div id={this.props.id}>
-        <div>
-          <nav className="navbar" role="navigation">
+      return <section id={this.props.id}>
+        <nav className="navbar" role="navigation">
             <div className="navbar-brand">
               {
-                NavbarComponents.brandItems ? NavbarComponents.brandItems :
+                NavbarComponents.brandItems ||
                 (<div className="navbar-item">
                   <FeatherIcon iconName={ this.props.featherIcon }/>
                   &nbsp;
@@ -47,7 +49,6 @@ export default function getIndex(ContentComponent, NavbarComponents = []){
               </div>
             </div>
           </nav>
-        </div>
         <div className="box">
           { ContentComponent }
           <nav className="pagination is-centered" role="navigation" aria-label="pagination">
@@ -64,7 +65,7 @@ export default function getIndex(ContentComponent, NavbarComponents = []){
             </ul>
           </nav>
         </div>
-      </div>
+      </section>
     }
   }
 }

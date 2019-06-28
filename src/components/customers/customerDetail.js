@@ -1,7 +1,11 @@
 import React from 'react';
 import getDetail from '../commons/getDetail';
 import * as Paths from '../../constants/paths';
+import * as Placeholders from '../../constants/placeholders';
 import FeatherInput from '../commons/forms/featherInput';
+
+const emailPlaceholder = Placeholders.getEmailPlaceholder();
+const phonePlaceholder = Placeholders.getTelephonePlaceholder();
 
 const detailBody = () =>
     <div>
@@ -9,10 +13,10 @@ const detailBody = () =>
       <FeatherInput caption="Apellidos" iconName="users" placeholder="Apellidos" />
       <div className="columns">
         <div className="column">
-          <FeatherInput caption="Teléfono" iconName="phone" placeholder="123 456 7890"/>
+          <FeatherInput caption="Teléfono" iconName="phone" placeholder={phonePlaceholder}/>
         </div>
         <div className="column">
-          <FeatherInput caption="Correo electrónico" iconName="at-sign" placeholder="cliente@ejemplo.com"/>
+          <FeatherInput caption="Correo electrónico" iconName="at-sign" placeholder={emailPlaceholder}/>
         </div>
       </div>
     </div>;

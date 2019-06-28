@@ -1,10 +1,10 @@
 import React from 'react';
+import './appointmentDetail.css';
+import * as Paths from '../../constants/paths';
 import bulmaCalendar from 'bulma-calendar/dist/js/bulma-calendar';
+import FeatherInput from "../commons/forms/featherInput";
 import getDetail from '../commons/getDetail';
 import getFormControl from '../commons/forms/getFormControl';
-import * as Paths from '../../constants/paths';
-import './appointmentDetail.css';
-import FeatherInput from "../commons/forms/featherInput";
 
 export default function AppointmentDetail(props) {
   const Calendar =
