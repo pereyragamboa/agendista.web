@@ -8,7 +8,7 @@ import FeatherIcon from './featherIcon';
  *
  * @param FormComponent contains a group of form controls (inputs, checkboxes, etc)
  * @param okClick callback of click on OK button
- * @return function(props)
+ * @return function
  */
 export default function getDetail(FormComponent, okClick = () => {}){
   /**
@@ -20,7 +20,7 @@ export default function getDetail(FormComponent, okClick = () => {}){
    @param props.okCaption Text of the OK button
    @param props.title Displayed title of the screen
    */
-  return function (props) {
+  function newDetail (props) {
     return <section id={props.id}>
       <h1 className="title is-4">{props.title}</h1>
       <div className="box">
@@ -37,5 +37,7 @@ export default function getDetail(FormComponent, okClick = () => {}){
         </Link>
       </div>
     </section>;
-  };
+  }
+
+  return newDetail;
 }
