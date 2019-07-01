@@ -25,5 +25,5 @@ export default function Settings() {
 
   const SettingsDetail = getDetail(settingsBody);
 
-  return <SettingsDetail title="Opciones" okCaption="Aceptar" cancelPath={Paths.HOME}/>;
+  return <SettingsDetail title="Opciones" featherIcon="settings" okCaption="Aceptar" cancelPath={Paths.HOME}/>;
 }

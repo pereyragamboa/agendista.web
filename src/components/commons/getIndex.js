@@ -25,7 +25,7 @@ const NAVBAR_MENU_ID = "navbarMenuId";
 export default function getIndex(ContentComponent, NavbarComponents = []){
   /**
    * @param props.brand Basic caption for the brand; overriden by NavbarComponents.brandItems
-   * @param props.featherIcon Name of the Feather icon
+   * @param props.featherIcon Name of the Feather icon; overriden by NavbarComponents.brandItems
    * @param props.id Identifier of the component
    */
   return class Index extends Component {
