@@ -7,6 +7,7 @@ import BusinessHours from "./components/businessHours";
 import Customers from "./components/customers";
 import CustomerDetail from "./components/customers/customerDetail";
 import Home from "./components/home";
+import HourDetail from './components/businessHours/hoursList';
 import Settings from "./components/settings";
 import Services from "./components/services";
 import ServiceDetail from "./components/services/serviceDetail";
@@ -25,7 +26,7 @@ export default () => <React.Fragment>
   <Route exact path={Paths.ADD_APPOINTMENT} render={NewAppointment}/>
   <Route exact path={Paths.ADD_CUSTOMER} render={NewCustomer}/>
   <Route exact path={Paths.ADD_SERVICE} render={NewService}/>
-  <Route path={Paths.LIST_HOURS} component={BusinessHours}/>
+  <Route exact path={Paths.LIST_HOURS} component={HourDetail}/>
   <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
   <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>
   <Route exact path={Paths.LIST_SERVICES} component={Services}/>

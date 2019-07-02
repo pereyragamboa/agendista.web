@@ -1,5 +1,7 @@
 import React from 'react';
+import * as Paths from '../../constants/paths';
 import daysOfWeek from "../../daysOfWeek";
+import getDetail from '../commons/getDetail';
 
 const SATURDAY = 6;
 const SUNDAY = 0;
@@ -49,10 +51,10 @@ function HourListItem(props) {
   </tr>
 }
 
-export default function () {
-  return <div className="box">
-    <table className="table is-fullwidth">
-      <tbody className="table-container">
+export default function HoursList(props) {
+  const detailBody = () =>
+      <table className="table is-fullwidth">
+        <tbody className="table-container">
         <tr>
           <td/>
           <th>Apertura</th>
@@ -61,7 +63,10 @@ export default function () {
         <HourListItem id="ag-workday" tag="Entre semana"/>
         <HourListItem id="ag-saturday" tag={capitalize(daysOfWeek.getDayName(SATURDAY))}/>
         <HourListItem id="ag-sunday" tag={capitalize(daysOfWeek.getDayName(SUNDAY))}/>
-      </tbody>
-    </table>
-  </div>;
-};
+        </tbody>
+      </table>;
+
+  const HoursDetail = getDetail(detailBody);
+
+  return <HoursDetail {...props} title="Horas de servicio" okCaption="Guardar" cancelPath={Paths.HOME} />
+}
