@@ -24,12 +24,10 @@ export default function Header() {
                         caption="Clientes"/>
             <NavbarMenuItem path={Paths.LIST_SERVICES} featherIcon="shopping-bag" caption="Servicios"/>
             <NavbarDropdown featherIcon="clock" caption="Horarios">
-              <NavbarMenuItem caption="Horarios de atención"/>
-              <NavbarMenuItem caption="Días feriados"/>
-              <NavbarMenuItem caption="Vacaciones"/>
+              <NavbarMenuItem caption="Horarios de atención" path={Paths.LIST_HOURS}/>
+              <NavbarMenuItem caption="Días feriados" path={Paths.LIST_HOLIDAYS}/>
+              <NavbarMenuItem caption="Vacaciones" path={Paths.LIST_LEAVES}/>
             </NavbarDropdown>
-            <NavbarMenuItem featherIcon="clock" caption="Horarios"
-                        path={Paths.LIST_HOURS}/>
             <NavbarMenuItem featherIcon="settings" caption="Opciones" path={Paths.SETTINGS}/>
           </div>
         </div>
