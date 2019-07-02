@@ -7,7 +7,7 @@ export default function Header() {
   const MENU_ID = "ag-header-navbar-menu";
 
   return <div className="hero-head">
-    <div className="navbar">
+    <nav className="navbar">
       <div className="container">
         <div className="navbar-brand">
           <div className="navbar-item">
@@ -28,6 +28,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   </div>
 };
