@@ -1,18 +1,16 @@
 import React from 'react';
 import AppointmentList from './appointmentList';
 import getIndex from '../commons/getIndex';
+import NavbarDropdown from '../commons/navbarDropdown';
 import NavbarMenuItem from '../commons/navbarMenuItem';
 import * as Paths from '../../constants/paths';
 
 const NavbarEndItems = [
   <NavbarMenuItem path={Paths.ADD_APPOINTMENT} featherIcon="plus" caption="Nueva cita"/>,
-  <div className="navbar-item has-dropdown is-hoverable">
-    <NavbarMenuItem featherIcon="filter" caption="Filtrar"/>
-    <div className="navbar-dropdown">
-      <NavbarMenuItem className="is-small" featherIcon="user" caption="Por usuario"/>
-      <NavbarMenuItem className="is-small" featherIcon="clock" caption="Por fecha y hora"/>
-    </div>
-  </div>
+  <NavbarDropdown featherIcon="filter" caption="Filtrar">
+    <NavbarMenuItem className="is-small" featherIcon="user" caption="Por usuario"/>
+    <NavbarMenuItem className="is-small" featherIcon="clock" caption="Por fecha y hora"/>
+  </NavbarDropdown>
 ];
 
 export default function Appointments() {
