@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Paths from "../constants/paths";
 import BurgerMenu from './commons/burgerMenu';
+import NavbarDropdown from './commons/navbarDropdown';
 import NavbarMenuItem from './commons/navbarMenuItem';
 
 export default function Header() {
@@ -22,6 +23,11 @@ export default function Header() {
                         featherIcon="users"
                         caption="Clientes"/>
             <NavbarMenuItem path={Paths.LIST_SERVICES} featherIcon="shopping-bag" caption="Servicios"/>
+            <NavbarDropdown featherIcon="clock" caption="Horarios">
+              <NavbarMenuItem caption="Horarios de atención"/>
+              <NavbarMenuItem caption="Días feriados"/>
+              <NavbarMenuItem caption="Vacaciones"/>
+            </NavbarDropdown>
             <NavbarMenuItem featherIcon="clock" caption="Horarios"
                         path={Paths.LIST_HOURS}/>
             <NavbarMenuItem featherIcon="settings" caption="Opciones" path={Paths.SETTINGS}/>

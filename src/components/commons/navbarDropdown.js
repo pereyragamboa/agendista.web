@@ -10,7 +10,7 @@ import NavbarMenuItem from './navbarMenuItem';
  * @return {*}
  * @constructor
  */
-export default function NavbarDropDown(props) {
+export default function NavbarDropdown(props) {
   const {featherIcon, caption, ...otherProps} = props;
   const className=getClassName("navbar-item has-dropdown is-hoverable", props);
 
