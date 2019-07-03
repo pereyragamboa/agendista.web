@@ -1,8 +1,18 @@
 import React from 'react';
+import * as Paths from '../../constants/paths';
 import { fixedHoliday } from "../../models/fixedHoliday";
+import getIndex from '../commons/getIndex';
 import ListItemButtons from '../commons/listItemButtons';
+import NavbarMenuItem from '../commons/navbarMenuItem';
 import {variableHoliday} from "../../models/variableHoliday";
 
+/**
+ * Holiday list item.
+ * @param props.date Holiday date.
+ * @param props.isVariable The holiday is a variable, non-fixed date
+ * @return {*}
+ * @constructor
+ */
 const HolidayListRow = (props) =>
   <tr>
     <th>
@@ -19,6 +29,7 @@ const HolidayListRow = (props) =>
     </td>
   </tr>;
 
+  //This is only for demo purposes
 const fixedHolidays = [
   fixedHoliday(1, 1), fixedHoliday(5, 1), fixedHoliday(9, 16), fixedHoliday(12, 25)
 ];
@@ -28,8 +39,9 @@ const variableHolidays = [
   variableHoliday(11, 3, 1)
 ];
 
-export default function HolidayList() {
+export default function HolidayList(props) {
   const currentYear = new Date().getFullYear();
+  // Merges fixed and movable holidays
   const allHolidayData = [
     ...fixedHolidays.map(
         (fixed) => ({ date: fixed.getHolidayDate(currentYear), isVariable: false })
@@ -39,21 +51,22 @@ export default function HolidayList() {
     )
   ].sort((holiday1, holiday2) => holiday1.date - holiday2.date);
 
-  return (
-    <React.Fragment>
-      <h2 className="subtitle">Días no laborales en {currentYear}</h2>
+  const indexBody = <React.Fragment>
       <p className="content">
         Los clientes no podrán agendar citas en estos días.
       </p>
-      <div className="box">
-        <table className="table is-fullwidth">
-          <tbody className="table-container">{
-            allHolidayData.map((holiday) =>
-                <HolidayListRow date={holiday.date} isVariable={holiday.isVariable}/>)
-          }
-          </tbody>
-        </table>
-      </div>
-    </React.Fragment>
-  );
+      <table className="table is-fullwidth">
+        <tbody className="table-container">{
+          allHolidayData.map((holiday) =>
+              <HolidayListRow date={holiday.date} isVariable={holiday.isVariable}/>)
+        }
+        </tbody>
+      </table>
+    </React.Fragment>;
+
+  const navbarComponents = <NavbarMenuItem caption="Nuevo día feriado" featherIcon="plus"/>;
+
+  const HolidaysIndex = getIndex(indexBody, {endItems: navbarComponents});
+
+  return <HolidaysIndex {...props} brand={`Días feriados en ${currentYear}`} featherIcon="sun" />
 };

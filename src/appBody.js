@@ -3,10 +3,10 @@ import { Route } from 'react-router';
 import * as Paths from "./constants/paths";
 import Appointments from "./components/appointments";
 import AppointmentDetail from "./components/appointments/appointmentDetail";
-import BusinessHours from "./components/businessHours";
 import Customers from "./components/customers";
 import CustomerDetail from "./components/customers/customerDetail";
 import Home from "./components/home";
+import HolidayDetail from './components/businessHours/holidayList';
 import HourDetail from './components/businessHours/hoursList';
 import Settings from "./components/settings";
 import Services from "./components/services";
@@ -26,6 +26,7 @@ export default () => <React.Fragment>
   <Route exact path={Paths.ADD_APPOINTMENT} render={NewAppointment}/>
   <Route exact path={Paths.ADD_CUSTOMER} render={NewCustomer}/>
   <Route exact path={Paths.ADD_SERVICE} render={NewService}/>
+  <Route exact path={Paths.LIST_HOLIDAYS} component={HolidayDetail}/>
   <Route exact path={Paths.LIST_HOURS} component={HourDetail}/>
   <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
   <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>
