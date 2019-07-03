@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Paths from '../../constants/paths';
 import daysOfWeek from "../../daysOfWeek";
-import getDetail from '../commons/getDetail';
+import getIndex from '../commons/getIndex';
 
 const SATURDAY = 6;
 const SUNDAY = 0;
@@ -52,7 +52,7 @@ function HourListItem(props) {
 }
 
 export default function HoursList(props) {
-  const detailBody = () =>
+  const detailBody =
       <table className="table is-fullwidth">
         <tbody className="table-container">
         <tr>
@@ -66,7 +66,8 @@ export default function HoursList(props) {
         </tbody>
       </table>;
 
-  const HoursDetail = getDetail(detailBody);
+  const HoursList = getIndex(detailBody);
 
-  return <HoursDetail {...props} title="Horas de servicio" okCaption="Guardar" cancelPath={Paths.HOME} />
+  return <HoursList {...props} brand="Horas de servicio" featherIcon="clock"
+                      okCaption="Guardar" cancelPath={Paths.HOME} />
 }

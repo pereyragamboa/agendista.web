@@ -3,7 +3,13 @@ import AppointmentList from './appointmentList';
 import getIndex from '../commons/getIndex';
 import NavbarDropdown from '../commons/navbarDropdown';
 import NavbarMenuItem from '../commons/navbarMenuItem';
+import Pagination from '../commons/pagination';
 import * as Paths from '../../constants/paths';
+
+const indexContent = <React.Fragment>
+  <AppointmentList showButtons />
+  <Pagination page={4} pageCount={7}/>
+</React.Fragment>;
 
 const NavbarEndItems = [
   <NavbarMenuItem path={Paths.ADD_APPOINTMENT} featherIcon="plus" caption="Nueva cita"/>,
@@ -14,7 +20,7 @@ const NavbarEndItems = [
 ];
 
 export default function Appointments() {
-  const AppointmentIndex = getIndex(<AppointmentList showButtons/>, { endItems: NavbarEndItems });
+  const AppointmentIndex = getIndex(indexContent, { endItems: NavbarEndItems });
 
   return <AppointmentIndex brand="Citas" featherIcon="calendar" />;
 }

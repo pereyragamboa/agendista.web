@@ -51,19 +51,6 @@ export default function getIndex(ContentComponent, NavbarComponents = []){
           </nav>
         <div className="box">
           { ContentComponent }
-          <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-            <div className="pagination-previous"><FeatherIcon iconName="arrow-left"/>Anterior</div>
-            <div className="pagination-next">Siguiente<FeatherIcon iconName="arrow-right"/></div>
-            <ul className="pagination-list">
-              <li><div className="pagination-link" aria-label="Goto page 1">1</div></li>
-              <li><span className="pagination-ellipsis">&hellip;</span></li>
-              <li><div className="pagination-link is-hidden-mobile" aria-label="Goto page 5">5</div></li>
-              <li><div className="pagination-link is-current" aria-label="Page 6" aria-current="page">6</div></li>
-              <li><div className="pagination-link is-hidden-mobile" aria-label="Goto page 7">7</div></li>
-              <li><span className="pagination-ellipsis">&hellip;</span></li>
-              <li><div className="pagination-link" aria-label="Goto page 11">11</div></li>
-            </ul>
-          </nav>
         </div>
       </section>
     }
