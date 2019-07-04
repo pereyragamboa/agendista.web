@@ -38,7 +38,6 @@ const FeatherButton = (props) => {
     }
     else {
       // if not, create a <span>
-      console.log(props);
       return <button className={className} {...otherProps} onClick={props.onClick}>{iconElement}{captionElement}</button>
     }
   }

@@ -26,7 +26,8 @@ export default () => <React.Fragment>
   <Route exact path={Paths.ADD_APPOINTMENT} render={NewAppointment}/>
   <Route exact path={Paths.ADD_CUSTOMER} render={NewCustomer}/>
   <Route exact path={Paths.ADD_SERVICE} render={NewService}/>
-  <Route exact path={Paths.LIST_HOLIDAYS} component={HolidayDetail}/>
+  <Route exact path={`${Paths.LIST_HOLIDAYS}`} component={HolidayDetail}/>
+  <Route exact path={`${Paths.LIST_HOLIDAYS}:year`} component={HolidayDetail}/>
   <Route exact path={Paths.LIST_HOURS} component={HourDetail}/>
   <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
   <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>

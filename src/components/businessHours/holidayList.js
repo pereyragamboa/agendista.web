@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as Paths from '../../constants/paths';
 import { fixedHoliday } from "../../models/fixedHoliday";
 import getIndex from '../commons/getIndex';
@@ -40,21 +41,35 @@ const variableHolidays = [
 ];
 
 export default function HolidayList(props) {
+  // Gets current and displayed year
   const currentYear = new Date().getFullYear();
+  const displayYear = Number.parseInt(props.match.params.year) || currentYear;
+
+  function getSelectedYearClass(className, isSelected) {
+    return [className, isSelected ? "is-link" : ''].join(' ');
+  }
+
   // Merges fixed and movable holidays
   const allHolidayData = [
     ...fixedHolidays.map(
-        (fixed) => ({ date: fixed.getHolidayDate(currentYear), isVariable: false })
+        (fixed) => ({ date: fixed.getHolidayDate(displayYear), isVariable: false })
     ),
     ...variableHolidays.map(
-        (variable) => ({ date: variable.getHolidayDate(currentYear), isVariable: true })
+        (variable) => ({ date: variable.getHolidayDate(displayYear), isVariable: true })
     )
   ].sort((holiday1, holiday2) => holiday1.date - holiday2.date);
 
   const indexBody = <React.Fragment>
-      <p className="content">
-        Los clientes no podrán agendar citas en estos días.
-      </p>
+      <div className="content">
+        <p>Los clientes no podrán agendar citas en estos días.</p>
+        <p>Ver días feriados para: {
+          // Links for holidays in current and next year
+          [currentYear, currentYear + 1].map((year) => {
+            const className = getSelectedYearClass("tag is-medium", year === displayYear);
+            return <Link className={className} to={Paths.LIST_HOLIDAYS + year}>{year}</Link>;
+          })
+        }</p>
+      </div>
       <table className="table is-fullwidth">
         <tbody className="table-container">{
           allHolidayData.map((holiday) =>
@@ -68,5 +83,5 @@ export default function HolidayList(props) {
 
   const HolidaysIndex = getIndex(indexBody, {endItems: navbarComponents});
 
-  return <HolidaysIndex {...props} brand={`Días feriados en ${currentYear}`} featherIcon="sun" />
+  return <HolidaysIndex {...props} brand={`Días feriados`} featherIcon="sun" />
 };
