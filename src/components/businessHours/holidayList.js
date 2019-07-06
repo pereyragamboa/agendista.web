@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import * as Paths from '../../constants/paths';
 import { fixedHoliday } from "../../models/fixedHoliday";
 import getIndex from '../commons/getIndex';
+import { HOLIDAYS } from "../../constants/headers";
 import ListItemButtons from '../commons/listItemButtons';
 import NavbarMenuItem from '../commons/navbarMenuItem';
-import {variableHoliday} from "../../models/variableHoliday";
+import { variableHoliday } from "../../models/variableHoliday";
 
 /**
  * Holiday list item.
@@ -83,5 +84,5 @@ export default function HolidayList(props) {
 
   const HolidaysIndex = getIndex(indexBody, {endItems: navbarComponents});
 
-  return <HolidaysIndex {...props} brand={`Días feriados`} featherIcon="sun" />
+  return <HolidaysIndex {...props} brand={HOLIDAYS} featherIcon="flag" />
 };

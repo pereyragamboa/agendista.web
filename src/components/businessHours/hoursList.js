@@ -2,6 +2,7 @@ import React from 'react';
 import * as Paths from '../../constants/paths';
 import daysOfWeek from "../../daysOfWeek";
 import getIndex from '../commons/getIndex';
+import { WORKING_HOURS} from "../../constants/headers";
 
 const SATURDAY = 6;
 const SUNDAY = 0;
@@ -68,6 +69,6 @@ export default function HoursList(props) {
 
   const HoursList = getIndex(detailBody);
 
-  return <HoursList {...props} brand="Horas de servicio" featherIcon="clock"
+  return <HoursList {...props} brand={WORKING_HOURS} featherIcon="clock"
                       okCaption="Guardar" cancelPath={Paths.HOME} />
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { APPOINTMENTS } from "../../constants/headers";
 import AppointmentList from './appointmentList';
 import getIndex from '../commons/getIndex';
 import NavbarDropdown from '../commons/navbarDropdown';
@@ -22,5 +23,5 @@ const NavbarEndItems = [
 export default function Appointments() {
   const AppointmentIndex = getIndex(indexContent, { endItems: NavbarEndItems });
 
-  return <AppointmentIndex brand="Citas" featherIcon="calendar" />;
+  return <AppointmentIndex brand={APPOINTMENTS} featherIcon="calendar" />;
 }

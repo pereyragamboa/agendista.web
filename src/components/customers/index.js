@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Paths from '../../constants/paths';
 import CustomerList from '../customers/customerList';
+import { CUSTOMERS } from "../../constants/headers";
 import FeatherIcon from "../commons/featherIcon";
 import getIndex from '../commons/getIndex';
 import NavbarMenuItem from '../commons/navbarMenuItem';
@@ -30,5 +31,5 @@ const NavBarItems = <React.Fragment>
 export default function Customers(){
   const CustomerIndex = getIndex(indexContent, { endItems: NavBarItems });
 
-  return <CustomerIndex brand="Clientes" featherIcon="users"/>
+  return <CustomerIndex brand={CUSTOMERS} featherIcon="users"/>
 }

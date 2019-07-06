@@ -1,5 +1,6 @@
 import React from 'react';
-import * as Paths from "../constants/paths";
+import * as Headers from '../constants/headers';
+import * as Paths from '../constants/paths';
 import BurgerMenu from './commons/burgerMenu';
 import NavbarDropdown from './commons/navbarDropdown';
 import NavbarMenuItem from './commons/navbarMenuItem';
@@ -18,17 +19,16 @@ export default function Header() {
         </div>
         <div className="navbar-menu" id={MENU_ID}>
           <div className="navbar-end">
-            <NavbarMenuItem path={Paths.LIST_APPOINTMENTS} featherIcon="calendar" caption="Citas"/>
+            <NavbarMenuItem path={Paths.LIST_APPOINTMENTS} featherIcon="calendar" caption={Headers.APPOINTMENTS}/>
             <NavbarMenuItem path={Paths.LIST_CUSTOMERS}
-                        featherIcon="users"
-                        caption="Clientes"/>
-            <NavbarMenuItem path={Paths.LIST_SERVICES} featherIcon="shopping-bag" caption="Servicios"/>
+                        featherIcon="users" caption={Headers.CUSTOMERS}/>
+            <NavbarMenuItem path={Paths.LIST_SERVICES} featherIcon="shopping-bag" caption={Headers.SERVICES}/>
             <NavbarDropdown featherIcon="clock" caption="Horarios">
-              <NavbarMenuItem caption="Horarios de atención" path={Paths.LIST_HOURS}/>
-              <NavbarMenuItem caption="Días feriados" path={Paths.LIST_HOLIDAYS}/>
-              <NavbarMenuItem caption="Vacaciones" path={Paths.LIST_LEAVES}/>
+              <NavbarMenuItem featherIcon="watch" caption={Headers.WORKING_HOURS} path={Paths.LIST_HOURS}/>
+              <NavbarMenuItem featherIcon="flag" caption={Headers.HOLIDAYS} path={Paths.LIST_HOLIDAYS}/>
+              <NavbarMenuItem featherIcon="sun" caption={Headers.LEAVE} path={Paths.LIST_LEAVES}/>
             </NavbarDropdown>
-            <NavbarMenuItem featherIcon="settings" caption="Opciones" path={Paths.SETTINGS}/>
+            <NavbarMenuItem featherIcon="settings" caption={Headers.SETTINGS} path={Paths.SETTINGS}/>
           </div>
         </div>
       </div>

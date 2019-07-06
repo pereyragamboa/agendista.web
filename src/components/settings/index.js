@@ -1,6 +1,7 @@
 import React from 'react';
 import FeatherInput from '../commons/forms/featherInput';
 import getDetail from '../commons/getDetail';
+import { SETTINGS } from "../../constants/headers";
 import * as Paths from '../../constants/paths';
 import * as Placeholders from '../../constants/placeholders';
 
@@ -25,5 +26,5 @@ export default function Settings() {
 
   const SettingsDetail = getDetail(settingsBody);
 
-  return <SettingsDetail title="Opciones" featherIcon="settings" okCaption="Aceptar" cancelPath={Paths.HOME}/>;
+  return <SettingsDetail title={SETTINGS} featherIcon="settings" okCaption="Aceptar" cancelPath={Paths.HOME}/>;
 }

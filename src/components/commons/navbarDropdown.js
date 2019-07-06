@@ -18,7 +18,6 @@ export default function NavbarDropdown(props) {
   const dropdownId = `ag-navbar-dropdown-${id || Date.now()}`;
 
   function onDropdownClick() {
-    console.log(dropdownId);
     document.getElementById(dropdownId).classList.toggle("is-active");
   }
 
