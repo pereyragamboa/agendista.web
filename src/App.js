@@ -7,23 +7,25 @@ import './App.css';
 const AppBody = React.lazy(() => import('./appBody'));
 const Waiting = () => <h1 className="title">Cargando...</h1>;
 
-function App()
+class App extends React.Component
 {
-  return (
-      <BrowserRouter>
-        <div className="App hero is-fullheight">
-          <Header/>
-          <div className="hero-body">
-            <div className="container">
-              <React.Suspense fallback={Waiting()}>
-                <AppBody/>
-              </React.Suspense>
+  render(){
+    return (
+        <BrowserRouter>
+          <div className="App hero is-fullheight">
+            <Header/>
+            <div className="hero-body">
+              <div className="container">
+                <React.Suspense fallback={Waiting()}>
+                  <AppBody/>
+                </React.Suspense>
+              </div>
             </div>
+            <Footer/>
           </div>
-          <Footer/>
-        </div>
-      </BrowserRouter>
-  );
+        </BrowserRouter>
+    );
+  }
 }
 
 export default App;

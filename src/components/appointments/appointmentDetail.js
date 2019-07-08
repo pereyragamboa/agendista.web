@@ -1,18 +1,14 @@
 import React from 'react';
 import './appointmentDetail.css';
 import * as Paths from '../../constants/paths';
-import bulmaCalendar from 'bulma-calendar/dist/js/bulma-calendar';
+import * as CalendarInput from '../commons/forms/calendarInput';
 import FeatherInput from "../commons/forms/featherInput";
 import getDetail from '../commons/getDetail';
-import getFormControl from '../commons/forms/getFormControl';
 
 export default function AppointmentDetail(props) {
-  const Calendar =
-    getFormControl(<input className="input" data-display-mode="inline" type="date"/>);
-
   const detailBody = class extends React.Component {
     render() {
-      return <div>
+      return <form>
         <h2 className="subtitle">Cliente</h2>
         <FeatherInput caption="Cliente" iconName="user" placeholder="Nombre del cliente"/>
         <h2 className="subtitle">Detalle de la cita</h2>
@@ -39,22 +35,17 @@ export default function AppointmentDetail(props) {
             </fieldset>
           </div>
           <div className="column">
-            <Calendar caption="Fecha" iconName="calendar"/>
+            <CalendarInput.CalendarInput caption="Fecha" iconName="calendar"/>
           </div>
           <div className="column">
             <FeatherInput type="time" caption="Hora" iconName="clock"/>
           </div>
         </div>
-      </div>;
+      </form>;
     }
 
     componentDidMount() {
-      // Attaches date input to Bulma Calendar and configures it once the
-      // component is mounted
-      bulmaCalendar.attach("input[type='date']", {
-        minDate: new Date(),
-
-      });
+      CalendarInput.attachCalendars();
     }
   };
 

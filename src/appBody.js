@@ -21,19 +21,21 @@ const EditCustomer = () => <CustomerDetail title="Editar cliente" okCaption="Edi
 const NewService = () => <ServiceDetail title="Nuevo servicio"/>;
 const EditService = () => <ServiceDetail title="Editar servicio" okCaption="Editar"/>;
 
-export default () => <React.Fragment>
-  <Route exact path={Paths.HOME} component={Home}/>
-  <Route exact path={Paths.ADD_APPOINTMENT} render={NewAppointment}/>
-  <Route exact path={Paths.ADD_CUSTOMER} render={NewCustomer}/>
-  <Route exact path={Paths.ADD_SERVICE} render={NewService}/>
-  <Route exact path={`${Paths.LIST_HOLIDAYS}`} component={HolidayDetail}/>
-  <Route exact path={`${Paths.LIST_HOLIDAYS}:year`} component={HolidayDetail}/>
-  <Route exact path={Paths.LIST_HOURS} component={HourDetail}/>
-  <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
-  <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>
-  <Route exact path={Paths.LIST_SERVICES} component={Services}/>
-  <Route exact path={Paths.SETTINGS} component={Settings}/>
-  <Route exact path={Paths.UPDATE_APPOINTMENT} render={EditAppointment}/>
-  <Route exact path={Paths.UPDATE_CUSTOMER} render={EditCustomer}/>
-  <Route exact path={Paths.UPDATE_SERVICE} render={EditService}/>
-</React.Fragment>;
+export default class AppBody extends React.Component {
+  render = () => <React.Fragment>
+      <Route exact path={Paths.HOME} component={Home}/>
+      <Route exact path={Paths.ADD_APPOINTMENT} render={NewAppointment}/>
+      <Route exact path={Paths.ADD_CUSTOMER} render={NewCustomer}/>
+      <Route exact path={Paths.ADD_SERVICE} render={NewService}/>
+      <Route exact path={`${Paths.LIST_HOLIDAYS}`} component={HolidayDetail}/>
+      <Route exact path={`${Paths.LIST_HOLIDAYS}:year`} component={HolidayDetail}/>
+      <Route exact path={Paths.LIST_HOURS} component={HourDetail}/>
+      <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
+      <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>
+      <Route exact path={Paths.LIST_SERVICES} component={Services}/>
+      <Route exact path={Paths.SETTINGS} component={Settings}/>
+      <Route exact path={Paths.UPDATE_APPOINTMENT} render={EditAppointment}/>
+      <Route exact path={Paths.UPDATE_CUSTOMER} render={EditCustomer}/>
+      <Route exact path={Paths.UPDATE_SERVICE} render={EditService}/>
+    </React.Fragment>;
+}
