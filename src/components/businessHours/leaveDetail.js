@@ -5,7 +5,7 @@ import getDetail from '../commons/getDetail';
 
 export default class LeaveDetail extends React.Component{
   render(){
-    const detailBody = <form>
+    const detailBody = () => <form>
       <RangedCalendarInput/>
     </form>;
 

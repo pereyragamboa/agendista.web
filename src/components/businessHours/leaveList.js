@@ -37,11 +37,11 @@ export default class LeaveList extends React.Component {
           <LeaveRow fromDate={new Date(2020, 4, 20)} toDate={new Date(2019, 5, 5)}/>
         </tbody>
       </table>
-      <DeleteModal id={DELETE_LEAVE_MODAL}>¿Desea eliminar este periodo de vacaciones?</DeleteModal>
+      <DeleteModal id={DELETE_LEAVE_MODAL}>¿Desea eliminar este periodo vacacional?</DeleteModal>
     </React.Fragment>;
 
     const navbarItems = {
-      endItems: <NavbarMenuItem caption="Nuevo periodo de vacaciones" featherIcon="plus" path={ADD_LEAVE}/>
+      endItems: <NavbarMenuItem caption="Nuevo periodo vacacional" featherIcon="plus" path={ADD_LEAVE}/>
     };
 
     const LeaveIndex = getIndex(listBody, navbarItems);
