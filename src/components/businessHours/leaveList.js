@@ -34,6 +34,7 @@ function LeaveRow (props) {
 export default class LeaveList extends React.Component {
   render () {
     const listBody = <React.Fragment>
+      <p>Los clientes no podrán agendar citas durante estos periodos.</p>
       <table className="table is-fullwidth">
         <tbody className="table-container">
           <tr>
