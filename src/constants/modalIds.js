@@ -3,3 +3,4 @@ export const DELETE_CUSTOMER_MODAL = "ag_deleteCustomerModal";
 export const DELETE_HOLIDAY_MODAL = "ag_deleteHolidayModal";
 export const DELETE_LEAVE_MODAL = "ag_deleteLeaveModal";
 export const DELETE_SERVICE_MODAL = "ag_deleteServiceModal";
+export const LEAVE_DETAIL = "ag_editLeaveModal";

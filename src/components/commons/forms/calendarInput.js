@@ -4,6 +4,8 @@ import bulmaCalendar from "bulma-calendar";
 
 const CalendarInput = getFormControl(<input className="input" data-display-mode="inline" type="date"/>);
 
+const RangedCalendarInput = getFormControl(<input className="input" data-is-range="true" type="date"/>);
+
 function attachCalendars() {
   // Attaches date input to Bulma Calendar and configures it once the
   // component is mounted
@@ -13,4 +15,4 @@ function attachCalendars() {
   });
 }
 
-export { attachCalendars, CalendarInput };
+export { attachCalendars, CalendarInput, RangedCalendarInput };
