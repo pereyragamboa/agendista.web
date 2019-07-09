@@ -16,9 +16,17 @@ function LeaveRow (props) {
     toDate = temp;
   }
 
+  const dateOptions = {
+    month: 'numeric',
+    day: 'numeric'
+  };
+
   return <tr>
-    <td>{fromDate.toDateString()}</td>
-    <td>{toDate.toDateString()}</td>
+    <td className="is-hidden-desktop">{`
+      ${fromDate.toLocaleDateString('default', dateOptions)} -
+      ${toDate.toLocaleDateString('default', dateOptions)}`}</td>
+    <td className="is-hidden-touch">{fromDate.toDateString()}</td>
+    <td className="is-hidden-touch">{toDate.toDateString()}</td>
     <td><ListItemButtons deleteModalId={DELETE_LEAVE_MODAL} editPath={ UPDATE_LEAVE }/></td>
   </tr>;
 }
@@ -29,12 +37,13 @@ export default class LeaveList extends React.Component {
       <table className="table is-fullwidth">
         <tbody className="table-container">
           <tr>
-            <th>Desde</th>
-            <th>Hasta</th>
+            <th className="is-hidden-desktop">Periodo</th>
+            <th className="is-hidden-touch">Desde</th>
+            <th className="is-hidden-touch">Hasta</th>
             <th/>
           </tr>
           <LeaveRow fromDate={new Date(2019, 11, 1)} toDate={new Date(2019, 11, 10)}/>
-          <LeaveRow fromDate={new Date(2020, 4, 20)} toDate={new Date(2019, 5, 5)}/>
+          <LeaveRow fromDate={new Date(2020, 4, 20)} toDate={new Date(2020, 5, 5)}/>
         </tbody>
       </table>
       <DeleteModal id={DELETE_LEAVE_MODAL}>¿Desea eliminar este periodo vacacional?</DeleteModal>
