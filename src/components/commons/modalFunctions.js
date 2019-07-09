@@ -10,10 +10,26 @@
  *
  * @param {string} modalId ID of the modal element.
  */
-export default (modalId) => {
+const showModal = (modalId) => {
   const modal = document.getElementById(modalId);
   if (modal !== null && modal.classList.contains("modal")) {
     // If the element exists and is a modal, show
-    modal.classList.add("is-active")
+    modal.classList.add("is-active");
   }
 };
+
+/**
+ * Hides a modal element.
+ *
+ * The modal element is defined by the class "modal" of Bulma.
+ *
+ * @param {string} modalId ID of the modal element.
+ */
+const hideModal = (modalId) => {
+  const modal = document.getElementById(modalId);
+  if (modal !== null) {
+    modal.classList.remove("is-active");
+  }
+};
+
+export { showModal, hideModal };

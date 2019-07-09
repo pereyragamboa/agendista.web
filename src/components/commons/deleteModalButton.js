@@ -1,7 +1,7 @@
 import React from 'react';
 import FeatherButton from './featherButton';
 import getClassName from './getClassName';
-import showModal from './showModal';
+import { showModal } from './modalFunctions';
 
 /**
  * Button showing a delete confirmation modal.
