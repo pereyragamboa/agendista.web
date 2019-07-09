@@ -12,15 +12,13 @@ import getClassName from '../getClassName';
 export default function getFormControl(inputElement) {
   return class extends React.Component {
     render() {
+      const {caption, iconName} = this.props;
+
       return <div className={getClassName("field", this.props)}>
-        <label className="label">{this.props.caption}</label>
+        <label className="label">{caption}</label>
         <div className="control has-icons-left">
-          <FeatherIcon iconName={this.props.iconName}/>
-          {
-            // Insert the element as an object; if we want to use JSX we should
-            // declare a function that returns this element and declare the function
-            inputElement
-          }
+          <FeatherIcon iconName={iconName}/>
+          {inputElement}
         </div>
       </div>
     }

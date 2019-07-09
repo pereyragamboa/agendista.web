@@ -4,8 +4,9 @@ import * as Paths from "../../constants/paths";
 import getDetail from '../commons/getDetail';
 
 export default class LeaveDetail extends React.Component{
-  render(){
-    const detailBody = () => <form>
+  render() {
+    const detailBody = () => <form className="field">
+      <p>Seleccione el rango del periodo vacacional:</p>
       <RangedCalendarInput/>
     </form>;
 
