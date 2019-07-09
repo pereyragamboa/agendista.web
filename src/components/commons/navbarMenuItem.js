@@ -2,13 +2,15 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import FeatherIcon from './featherIcon';
 import getClassName from './getClassName';
+import './navbarMenuItem.css';
 
 /**
  * Element of a Bulma navbar menu.
  *
  * @param props.featherIcon name of Feather icon
- * @param props.path Destination path
- * @return {*} A <Link> or a <div> element, depending of path
+ * @param props.onClick Click event manager
+ * @param props.path Destination path; overrides props.onClick
+ * @return {*} A <Link> element, if props.path is provided; else, a <div> element
  * @constructor
  */
 export default function NavbarMenuItem(props) {
@@ -22,5 +24,5 @@ export default function NavbarMenuItem(props) {
 
   return (props.path ?
       <NavLink className={elementClass} activeClassName={"has-background-dark has-text-light"} to={props.path}>{content}</NavLink> :
-      <div className={elementClass}>{content}</div>);
+      <div className={elementClass} onClick={props.onClick}>{content}</div>);
 }
