@@ -38,7 +38,7 @@ export default function ServiceList() {
       <tbody className="table-container">
       {
         [1, 2, 3].map(item =>
-            <ServiceListRow serviceName={`Servicio ${item}`}
+            <ServiceListRow key={item} serviceName={`Servicio ${item}`}
                             serviceTime={ new Date(0, 0, 0, 0, 30 * item, 0).toLocaleTimeString("default", {
                               hour: "numeric",
                               minute: "2-digit"
