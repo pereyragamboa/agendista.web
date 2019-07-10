@@ -14,7 +14,7 @@ const AppointmentListElement = (props) =>
       props.showButtons ? (
           <td>
             <ListItemButtons editPath={Paths.UPDATE_APPOINTMENT} deleteModalId={MODAL_ID}/>
-          </td>) : ''
+          </td>) : null
     }
   </tr>
 ;
@@ -27,7 +27,7 @@ export default function AppointmentList (props) {
           <thead>
           <tr>
             <th>Hora</th><th>Cliente</th>
-            {props.showButtons ? <th/> : ''}
+            {props.showButtons ? <th/> : null}
           </tr>
           </thead>
           <tbody>
