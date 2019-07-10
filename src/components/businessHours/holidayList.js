@@ -27,7 +27,7 @@ const HolidayListRow = (props) =>
           </span>) : ''}
     </th>
     <td>
-      <ListItemButtons/>
+      <ListItemButtons editPath={props.isVariable ? Paths.ADD_VARIABLE_HOLIDAY : Paths.ADD_FIXED_HOLIDAY}/>
     </td>
   </tr>;
 
@@ -67,14 +67,14 @@ export default function HolidayList(props) {
           // Links for holidays in current and next year
           [currentYear, currentYear + 1].map((year) => {
             const className = getSelectedYearClass("tag is-medium", year === displayYear);
-            return <Link className={className} to={Paths.LIST_HOLIDAYS + year}>{year}</Link>;
+            return <Link key={year} className={className} to={Paths.LIST_HOLIDAYS + year}>{year}</Link>;
           })
         }</p>
       </div>
       <table className="table is-fullwidth">
         <tbody className="table-container">{
           allHolidayData.map((holiday) =>
-              <HolidayListRow date={holiday.date} isVariable={holiday.isVariable}/>)
+              <HolidayListRow key={holiday.date} date={holiday.date} isVariable={holiday.isVariable}/>)
         }
         </tbody>
       </table>
