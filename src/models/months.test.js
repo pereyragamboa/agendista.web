@@ -16,7 +16,7 @@ describe('Month tests', () => {
     expect(getMonthName(12)).toBe('');
     expect(getMonthName('qwerty')).toBe('');
     expect(getMonthName(undefined)).toBe('');
-  })
+  });
   test('Get days of months', () => {
     expect(getDaysInMonth(0)).toBe(31); // January
     expect(getDaysInMonth(1)).toBe(29); // February

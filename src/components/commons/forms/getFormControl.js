@@ -13,14 +13,15 @@ export default function getFormControl(inputElement) {
   return class extends React.Component {
     render() {
       const {caption, iconName} = this.props;
+      const controlClassName = ["control", (iconName ? "has-icons-left" : '')].join(' ');
 
       return <div className={getClassName("field", this.props)}>
         <label className="label">{caption}</label>
-        <div className="control has-icons-left">
+        <div className={controlClassName}>
           <FeatherIcon iconName={iconName}/>
           {inputElement}
         </div>
-      </div>
+      </div>;
     }
   }
 }
