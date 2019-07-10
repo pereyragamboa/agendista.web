@@ -1,3 +1,7 @@
+function __validateMonth(monthIndex) {
+  return typeof monthIndex === 'number' && monthIndex >= 0 && monthIndex < 12;
+}
+
 /**
  * Gets the name of a month using the specified format object.
  * @param monthIndex Index of a month. 0 is January, 11 is December.
@@ -6,7 +10,7 @@
  * @private This function is the base of the module. Its main purpose is allowing the reuse of monthFormat.
  */
 function __getMonthName(monthIndex, monthFormat) {
-  const d = new Date().setUTCMonth(monthIndex);
+  const d = new Date().setUTCMonth(Math.floor(monthIndex));
   return monthFormat.format(d);
 }
 
@@ -22,8 +26,8 @@ const DEFAULT_OPTIONS = {
  * @return {string}
  */
 export function getMonthName(monthIndex, locale = 'default') {
+  if (!__validateMonth(monthIndex)) return '';
   const monthFormat = new Intl.DateTimeFormat(locale, DEFAULT_OPTIONS);
-
   return __getMonthName(monthIndex, monthFormat);
 }
 
@@ -41,4 +45,15 @@ export function getMonthNames(locale = 'default') {
   }
 
   return months;
+}
+
+const __daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+/**
+ * Gets the number of days in a month.
+ * @param monthIndex Index of a month. 0 is January, 11 is December.
+ * @return {number} The maximum number of days for the specified month.
+ */
+export function getDaysInMonth(monthIndex) {
+  return __validateMonth(monthIndex) ? __daysInMonth[Math.floor(monthIndex)] : 0;
 }
