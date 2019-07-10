@@ -12,13 +12,13 @@ const indexContent = <React.Fragment>
   <Pagination page={4} pageCount={7}/>
 </React.Fragment>;
 
-const NavbarEndItems = [
+const NavbarEndItems = <React.Fragment>
   <NavbarMenuItem path={Paths.ADD_APPOINTMENT} featherIcon="plus" caption="Nueva cita"/>,
   <NavbarDropdown featherIcon="filter" caption="Filtrar">
     <NavbarMenuItem className="is-small" featherIcon="user" caption="Por usuario"/>
     <NavbarMenuItem className="is-small" featherIcon="clock" caption="Por fecha y hora"/>
   </NavbarDropdown>
-];
+</React.Fragment>;
 
 export default function Appointments() {
   const AppointmentIndex = getIndex(indexContent, { endItems: NavbarEndItems });
