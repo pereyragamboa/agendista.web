@@ -12,7 +12,7 @@ function MonthInput(props) {
     <select>
       {
         getMonthNames().map(month => {
-          return <option value={m++}>{capitalize(month)}</option>;
+          return <option key={m} value={m++}>{capitalize(month)}</option>;
         })
       })}
     </select>
@@ -26,7 +26,7 @@ function WeekdayInput(props) {
     <select>
       {
         getDayNames().map(day => {
-          return <option value={d++}>{capitalize(day)}</option>;
+          return <option key={d} value={d++}>{capitalize(day)}</option>;
         })
       })}
     </select>
@@ -35,14 +35,14 @@ function WeekdayInput(props) {
 }
 
 function NumberInput(props) {
-  const { max, ...otherProps } = props;
-  const Input = getFormControl(<input type="number" className="input" min="1" max={max} value={1}/>);
+  const { maxValue, ...otherProps } = props;
+  const Input = getFormControl(<input type="number" className="input" min="1" max={maxValue}/>);
   return <Input {...otherProps}/>
 }
 
 export function FixedHolidayDetail(props) {
   const detail = () => <form className="columns">
-    <NumberInput className="column is-4" caption="Día" max={31}/>
+    <NumberInput className="column is-4" caption="Día" maxValue="31"/>
     <MonthInput className="column is-4" caption="Mes"/>
   </form>;
 
@@ -52,8 +52,8 @@ export function FixedHolidayDetail(props) {
 
 export function VariableHolidayDetail(props) {
   const detail = () => <form className="columns">
-    <NumberInput className="column is-4" caption="#"/>
-    <WeekdayInput className="column is-4" caption="Día" max={4}/>
+    <NumberInput className="column is-4" caption="#" maxValue="4"/>
+    <WeekdayInput className="column is-4" caption="Día"/>
     <MonthInput className="column is-4" caption="Mes"/>
   </form>;
 

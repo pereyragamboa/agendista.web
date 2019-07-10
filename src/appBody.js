@@ -6,7 +6,7 @@ import AppointmentDetail from "./components/appointments/appointmentDetail";
 import Customers from "./components/customers";
 import CustomerDetail from "./components/customers/customerDetail";
 import Home from "./components/home";
-import { FixedHolidayDetail } from './components/businessHours/holidayDetail';
+import {FixedHolidayDetail, VariableHolidayDetail} from './components/businessHours/holidayDetail';
 import HolidayList from './components/businessHours/holidayList';
 import HourList from './components/businessHours/hoursList';
 import LeaveDetail from './components/businessHours/leaveDetail';
@@ -22,6 +22,7 @@ const EditAppointment = () =>
 const NewCustomer = () => <CustomerDetail title="Nuevo cliente"/>;
 const EditCustomer = () => <CustomerDetail title="Editar cliente" okCaption="Editar"/>;
 const NewFixedHoliday = () => <FixedHolidayDetail title="Nuevo día feriado"/>;
+const NewVariableHoliday = () => <VariableHolidayDetail title="Nuevo día feriado"/>;
 const EditFixedHoliday = () => <FixedHolidayDetail title="Editar día feriado"/>;
 const NewLeave = () => <LeaveDetail title="Nuevo periodo vacacional"/>;
 const EditLeave = () => <LeaveDetail title="Editar periodo vacacional" okCaption="Editar"/>;
@@ -36,6 +37,7 @@ export default class AppBody extends React.Component {
     <Route exact path={Paths.ADD_FIXED_HOLIDAY} render={NewFixedHoliday}/>
     <Route exact path={Paths.ADD_LEAVE} render={NewLeave}/>
     <Route exact path={Paths.ADD_SERVICE} render={NewService}/>
+    <Route exact path={Paths.ADD_VARIABLE_HOLIDAY} render={NewVariableHoliday}/>
     <Route exact path={`${Paths.LIST_HOLIDAYS}`} component={HolidayList}/>
     <Route exact path={`${Paths.LIST_HOLIDAYS}:year`} component={HolidayList}/>
     <Route exact path={Paths.LIST_LEAVES} component={LeaveList}/>

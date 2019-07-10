@@ -4,6 +4,7 @@ export const ADD_CUSTOMER = "/customers/add";
 export const ADD_FIXED_HOLIDAY = "/businessHours/fixed/add/";
 export const ADD_LEAVE = "/leave/add/";
 export const ADD_SERVICE = "/services/add/";
+export const ADD_VARIABLE_HOLIDAY = "/businessHours/variable/add/";
 export const LIST_APPOINTMENTS = "/appointments/";
 export const LIST_CUSTOMERS = "/customers/";
 export const LIST_HOURS = "/businessHours/";

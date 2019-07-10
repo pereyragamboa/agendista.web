@@ -83,7 +83,7 @@ export default function HolidayList(props) {
   const navbarComponents = <React.Fragment>
     <NavbarMenuItem featherIcon="plus"/>
     <NavbarMenuItem caption="Nuevo día fijo" path={Paths.ADD_FIXED_HOLIDAY}/>
-    <NavbarMenuItem caption="Nuevo día variable"/>
+    <NavbarMenuItem caption="Nuevo día variable" path={Paths.ADD_VARIABLE_HOLIDAY}/>
   </React.Fragment>;
 
   const HolidaysIndex = getIndex(indexBody, {endItems: navbarComponents});
