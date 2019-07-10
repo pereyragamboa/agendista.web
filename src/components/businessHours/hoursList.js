@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Paths from '../../constants/paths';
-import daysOfWeek from "../../daysOfWeek";
+import * as daysOfWeek from "../../models/daysOfWeek";
 import getIndex from '../commons/getIndex';
 import { WORKING_HOURS} from "../../constants/headers";
 

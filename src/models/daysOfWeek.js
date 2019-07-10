@@ -27,4 +27,4 @@ function getDayNames(locale = DEFAULT_LOCALE) {
   return res;
 }
 
-export default { getDayName, getDayNames };
+export { getDayName, getDayNames };
