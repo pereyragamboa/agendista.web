@@ -8,6 +8,13 @@ const DescriptionTextArea = getFormControl(
     <textarea className="textarea" rows="3" placeholder="Descripción del servicio"/>
 );
 
+/**
+ * Detail form for creating and editing services.
+ *
+ * @param props
+ * @return {*}
+ * @constructor
+ */
 export default function ServiceDetail(props) {
   const detailBody = () =>
     <div>

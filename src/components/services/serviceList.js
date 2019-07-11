@@ -5,6 +5,7 @@ import DeleteModal from '../commons/deleteModal';
 import ListItemButtons from '../commons/listItemButtons';
 
 /**
+ * Row element showing service information.
  *
  * @param props.serviceName Name of the service.
  * @param props.servicePrice Cost that the provider charges to the service.
@@ -24,6 +25,12 @@ const ServiceListRow = (props) =>
     </td>
   </tr>;
 
+/**
+ * List of available services.
+ *
+ * @return {*}
+ * @constructor
+ */
 export default function ServiceList() {
   return <React.Fragment>
     <table className="table is-fullwidth is-hoverable">
