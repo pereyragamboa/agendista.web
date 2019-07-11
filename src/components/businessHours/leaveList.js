@@ -16,17 +16,23 @@ function LeaveRow (props) {
     toDate = temp;
   }
 
-  const dateOptions = {
+  const mobileDateOptions = {
     month: 'numeric',
+    day: 'numeric'
+  };
+
+  const desktopDateOptions = {
+    year: 'numeric',
+    month: 'long',
     day: 'numeric'
   };
 
   return <tr>
     <td className="is-hidden-desktop">{`
-      ${fromDate.toLocaleDateString('default', dateOptions)} -
-      ${toDate.toLocaleDateString('default', dateOptions)}`}</td>
-    <td className="is-hidden-touch">{fromDate.toDateString()}</td>
-    <td className="is-hidden-touch">{toDate.toDateString()}</td>
+      ${fromDate.toLocaleDateString('default', mobileDateOptions)} -
+      ${toDate.toLocaleDateString('default', mobileDateOptions)}`}</td>
+    <td className="is-hidden-touch">{fromDate.toLocaleDateString('default', desktopDateOptions)}</td>
+    <td className="is-hidden-touch">{toDate.toLocaleDateString('default', desktopDateOptions)}</td>
     <td><ListItemButtons deleteModalId={DELETE_LEAVE_MODAL} editPath={ UPDATE_LEAVE }/></td>
   </tr>;
 }
