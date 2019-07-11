@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Paths from '../../constants/paths';
+import { DELETE_HOLIDAY_MODAL } from "../../constants/modalIds";
 import { fixedHoliday } from "../../models/fixedHoliday";
-import getIndex from '../commons/getIndex';
 import { HOLIDAYS } from "../../constants/headers";
+import { variableHoliday } from "../../models/variableHoliday";
+import DeleteModal from '../commons/deleteModal';
+import getIndex from '../commons/getIndex';
 import ListItemButtons from '../commons/listItemButtons';
 import NavbarMenuItem from '../commons/navbarMenuItem';
-import { variableHoliday } from "../../models/variableHoliday";
 
 /**
  * Holiday list item.
@@ -15,23 +17,22 @@ import { variableHoliday } from "../../models/variableHoliday";
  * @return {*}
  * @constructor
  */
-const HolidayListRow = (props) =>
-  <tr>
-    <th>
-      {props.date.toLocaleDateString("default", {month: "long", day: "numeric"})}
-      {props.isVariable ? (
-          <span>
-            <span className="is-hidden-touch">&nbsp;</span>
-            <br className="is-hidden-desktop"/>
-            <span className="tag is-info">Variable</span>
-          </span>) : ''}
-    </th>
-    <td>
-      <ListItemButtons editPath={props.isVariable ? Paths.ADD_VARIABLE_HOLIDAY : Paths.ADD_FIXED_HOLIDAY}/>
-    </td>
-  </tr>;
+const HolidayListRow = (props) => <tr>
+  <th>
+    {props.date.toLocaleDateString("default", {month: "long", day: "numeric"})}
+    {props.isVariable ? (
+        <span>
+          <span className="is-hidden-touch">&nbsp;</span>
+          <br className="is-hidden-desktop"/>
+          <span className="tag is-info">Variable</span>
+        </span>) : ''}
+  </th>
+  <td>
+    <ListItemButtons editPath={props.isVariable ? Paths.ADD_VARIABLE_HOLIDAY : Paths.ADD_FIXED_HOLIDAY} deleteModalId={DELETE_HOLIDAY_MODAL}/>
+  </td>
+</tr>;
 
-  //This is only for demo purposes
+//This is only for demo purposes
 const fixedHolidays = [
   fixedHoliday(1, 1), fixedHoliday(5, 1), fixedHoliday(9, 16), fixedHoliday(12, 25)
 ];
@@ -40,6 +41,8 @@ const variableHolidays = [
   variableHoliday(3, 3, 1),
   variableHoliday(11, 3, 1)
 ];
+
+
 
 export default function HolidayList(props) {
   // Gets current and displayed year
@@ -78,6 +81,7 @@ export default function HolidayList(props) {
         }
         </tbody>
       </table>
+    <DeleteModal id={DELETE_HOLIDAY_MODAL}>¿Desea eliminar este día feriado?</DeleteModal>
     </React.Fragment>;
 
   const navbarComponents = <React.Fragment>
