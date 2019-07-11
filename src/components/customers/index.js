@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Paths from '../../constants/paths';
-import CustomerList from '../customers/customerList';
 import { CUSTOMERS } from "../../constants/headers";
+import CustomerList from '../customers/customerList';
 import FeatherIcon from "../commons/featherIcon";
 import getIndex from '../commons/getIndex';
 import NavbarMenuItem from '../commons/navbarMenuItem';
@@ -10,7 +10,7 @@ import Pagination from '../commons/pagination';
 const indexContent = <React.Fragment>
   <CustomerList/>
   <Pagination page={3} pageCount={4}/>
-</React.Fragment>
+</React.Fragment>;
 
 const NavBarItems = <React.Fragment>
   <NavbarMenuItem key="ag-navbar-add"
@@ -28,6 +28,11 @@ const NavBarItems = <React.Fragment>
   </div>
 </React.Fragment>;
 
+/**
+ * Main customers page.
+ * @return {*}
+ * @constructor
+ */
 export default function Customers(){
   const CustomerIndex = getIndex(indexContent, { endItems: NavBarItems });
 

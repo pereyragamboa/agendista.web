@@ -6,7 +6,8 @@ import DeleteModal from '../commons/deleteModal';
 import EditLink from '../commons/editLink';
 
 /**
- * Renders a list item with customer information.
+ * Row element with customer information.
+ *
  * @param props.email Email address of the customer.
  * @param props.firstNames First name(s) of the customer.
  * @param props.lastNames Last name(s) of the customer.
@@ -32,6 +33,12 @@ function CustomerListItem(props) {
   </tr>;
 }
 
+/**
+ * List of customers.
+ *
+ * @return {*}
+ * @constructor
+ */
 export default function CustomerList() {
   return <React.Fragment>
     <table className="table is-fullwidth is-hoverable">
