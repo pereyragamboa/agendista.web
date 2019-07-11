@@ -5,20 +5,34 @@ import DeleteModal from '../commons/deleteModal';
 import EditLink from '../commons/editLink';
 import ListItemButtons from '../commons/listItemButtons';
 
-// Row of an appointment list.
+/**
+ * Row element of an appointment list.
+ *
+ * @param props.clientName Name of the client making the appointment.
+ * @param props.showButtons Shows or hides the list item buttons.
+ * @param props.time Scheduled time of the appointment.
+ * @return {*}
+ * @constructor
+ */
 const AppointmentListElement = (props) =>
   <tr>
     <th><EditLink to={Paths.UPDATE_APPOINTMENT}>{props.time}</EditLink></th>
-    <td>{props.name}</td>
+    <td>{props.clientName}</td>
     {
       props.showButtons ? (
           <td>
             <ListItemButtons editPath={Paths.UPDATE_APPOINTMENT} deleteModalId={MODAL_ID}/>
           </td>) : null
     }
-  </tr>
-;
+  </tr>;
 
+/**
+ * List of appointments.
+ *
+ * @param props.showButtons Shows or hides the list item buttons.
+ * @return {*}
+ * @constructor
+ */
 export default function AppointmentList (props) {
   const { showButtons } = props;
   return (
@@ -27,12 +41,12 @@ export default function AppointmentList (props) {
           <thead>
           <tr>
             <th>Hora</th><th>Cliente</th>
-            {props.showButtons ? <th/> : null}
+            {showButtons ? <th/> : null}
           </tr>
           </thead>
           <tbody>
-            <AppointmentListElement name="Rosa Guadalupe" time="10:00" showButtons={showButtons} />
-            <AppointmentListElement name="Juan Salvador" time="11:00" showButtons={showButtons} />
+            <AppointmentListElement clientName="Rosa Guadalupe Godínez" time="10:00" showButtons={showButtons} />
+            <AppointmentListElement clientName="Sansón Carrasco" time="11:00" showButtons={showButtons} />
           </tbody>
         </table>
         <DeleteModal id={MODAL_ID}>

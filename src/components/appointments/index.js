@@ -20,6 +20,12 @@ const NavbarEndItems = <React.Fragment>
   </NavbarDropdown>
 </React.Fragment>;
 
+/**
+ * Main appointments page.
+ *
+ * @return {*}
+ * @constructor
+ */
 export default function Appointments() {
   const AppointmentIndex = getIndex(indexContent, { endItems: NavbarEndItems });
 

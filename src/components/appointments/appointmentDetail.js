@@ -1,10 +1,17 @@
 import React from 'react';
 import './appointmentDetail.css';
-import * as Paths from '../../constants/paths';
 import * as CalendarInput from '../commons/forms/calendarInput';
+import * as Paths from '../../constants/paths';
 import FeatherInput from "../commons/forms/featherInput";
 import getDetail from '../commons/getDetail';
 
+/**
+ * Detail form for creating or editing appointments.
+ *
+ * @param props
+ * @return {*}
+ * @constructor
+ */
 export default function AppointmentDetail(props) {
   const detailBody = class extends React.Component {
     render() {
