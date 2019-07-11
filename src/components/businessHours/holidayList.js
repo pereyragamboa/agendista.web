@@ -17,20 +17,22 @@ import NavbarMenuItem from '../commons/navbarMenuItem';
  * @return {*}
  * @constructor
  */
-const HolidayListRow = (props) => <tr>
-  <th>
-    {props.date.toLocaleDateString("default", {month: "long", day: "numeric"})}
-    {props.isVariable ? (
-        <span>
-          <span className="is-hidden-touch">&nbsp;</span>
-          <br className="is-hidden-desktop"/>
-          <span className="tag is-info">Variable</span>
-        </span>) : ''}
-  </th>
-  <td>
-    <ListItemButtons editPath={props.isVariable ? Paths.ADD_VARIABLE_HOLIDAY : Paths.ADD_FIXED_HOLIDAY} deleteModalId={DELETE_HOLIDAY_MODAL}/>
-  </td>
-</tr>;
+function HolidayListRow(props) {
+  const editPath = props.isVariable ? Paths.ADD_VARIABLE_HOLIDAY : Paths.ADD_FIXED_HOLIDAY;
+  return <tr>
+    <th>
+      {props.date.toLocaleDateString("default", {month: "long", day: "numeric"})}
+      {props.isVariable ? (<React.Fragment>
+        <span className="is-hidden-touch">&nbsp;</span>
+        <br className="is-hidden-desktop"/>
+        <span className="tag is-info">Variable</span>
+      </React.Fragment>) : ''}
+    </th>
+    <td>
+      <ListItemButtons editPath={editPath} deleteModalId={DELETE_HOLIDAY_MODAL}/>
+    </td>
+  </tr>;
+}
 
 //This is only for demo purposes
 const fixedHolidays = [
