@@ -1,6 +1,6 @@
 import React from 'react';
 import FeatherIcon from '../featherIcon';
-import getClassName from '../getClassName';
+import getClassName from '../../../utilities/getClassName';
 
 /**
  * Wraps a form input element into a Bulma-styled field, decorated with Feather icons.

@@ -2,8 +2,8 @@ import React from 'react';
 import { APPOINTMENTS } from "../../constants/headers";
 import AppointmentList from './appointmentList';
 import getIndex from '../commons/getIndex';
-import NavbarDropdown from '../commons/navbarDropdown';
-import NavbarMenuItem from '../commons/navbarMenuItem';
+import NavbarDropdown from '../commons/navbars/navbarDropdown';
+import NavbarMenuItem from '../commons/navbars/navbarMenuItem';
 import Pagination from '../commons/pagination';
 import * as Paths from '../../constants/paths';
 

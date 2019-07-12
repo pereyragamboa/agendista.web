@@ -1,8 +1,8 @@
 import React from 'react';
 import * as Paths from '../../constants/paths';
 import { DELETE_CUSTOMER_MODAL as MODAL_ID } from "../../constants/modalIds";
-import DeleteButton from '../commons/deleteModalButton';
-import DeleteModal from '../commons/deleteModal';
+import DeleteButton from '../commons/modals/deleteModalButton';
+import DeleteModal from '../commons/modals/deleteModal';
 import EditLink from '../commons/editLink';
 
 /**

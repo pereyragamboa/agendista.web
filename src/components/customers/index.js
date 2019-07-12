@@ -4,7 +4,7 @@ import { CUSTOMERS } from "../../constants/headers";
 import CustomerList from '../customers/customerList';
 import FeatherIcon from "../commons/featherIcon";
 import getIndex from '../commons/getIndex';
-import NavbarMenuItem from '../commons/navbarMenuItem';
+import NavbarMenuItem from '../commons/navbars/navbarMenuItem';
 import Pagination from '../commons/pagination';
 
 const indexContent = <React.Fragment>

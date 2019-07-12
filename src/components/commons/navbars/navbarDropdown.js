@@ -1,5 +1,5 @@
 import React from 'react';
-import getClassName from '../commons/getClassName';
+import getClassName from '../../../utilities/getClassName';
 import NavbarMenuItem from './navbarMenuItem';
 
 /**

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Paths from '../../constants/paths';
 import { DELETE_SERVICE_MODAL as MODAL_ID } from "../../constants/modalIds";
-import DeleteModal from '../commons/deleteModal';
+import DeleteModal from '../commons/modals/deleteModal';
 import ListItemButtons from '../commons/listItemButtons';
 
 /**

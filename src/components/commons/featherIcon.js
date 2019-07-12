@@ -1,6 +1,6 @@
 import React from 'react';
 import feather from 'feather-icons';
-import getClassName from './getClassName';
+import getClassName from '../../utilities/getClassName';
 
 const EMPTY_SPAN = <span/>;
 

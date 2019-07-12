@@ -1,9 +1,9 @@
 import React from 'react';
 import * as Headers from '../constants/headers';
 import * as Paths from '../constants/paths';
-import BurgerMenu from './commons/burgerMenu';
-import NavbarDropdown from './commons/navbarDropdown';
-import NavbarMenuItem from './commons/navbarMenuItem';
+import BurgerMenu from './commons/navbars/burgerMenu';
+import NavbarDropdown from './commons/navbars/navbarDropdown';
+import NavbarMenuItem from './commons/navbars/navbarMenuItem';
 
 export default function Header() {
   const MENU_ID = "ag-header-navbar-menu";

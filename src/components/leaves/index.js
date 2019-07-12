@@ -2,10 +2,10 @@ import React from 'react';
 import { DELETE_LEAVE_MODAL } from "../../constants/modalIds";
 import { LEAVE } from "../../constants/headers";
 import { ADD_LEAVE, UPDATE_LEAVE } from "../../constants/paths";
-import DeleteModal from '../commons/deleteModal';
+import DeleteModal from '../commons/modals/deleteModal';
 import getIndex from '../commons/getIndex';
 import ListItemButtons from '../commons/listItemButtons';
-import NavbarMenuItem from '../commons/navbarMenuItem'
+import NavbarMenuItem from '../commons/navbars/navbarMenuItem'
 
 function LeaveRow (props) {
   let { fromDate, toDate } = props;

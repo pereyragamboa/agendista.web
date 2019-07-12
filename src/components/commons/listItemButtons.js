@@ -1,6 +1,6 @@
 import React from 'react';
 import FeatherButton from './featherButton';
-import { showModal } from './modalFunctions';
+import { showModal } from './modals/modalFunctions';
 
 /**
  * Action buttons for list items.

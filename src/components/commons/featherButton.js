@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FeatherIcon from './featherIcon';
-import getClassName from "./getClassName";
+import getClassName from "../../utilities/getClassName";
 
 /**
  * Creates a button decorated with a Feather icon.

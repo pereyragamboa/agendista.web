@@ -1,6 +1,6 @@
 import React from 'react';
-import FeatherButton from './featherButton';
-import getClassName from './getClassName';
+import FeatherButton from '../featherButton';
+import getClassName from '../../../utilities/getClassName';
 import { showModal } from './modalFunctions';
 
 /**

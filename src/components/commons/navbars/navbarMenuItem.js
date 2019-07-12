@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import FeatherIcon from './featherIcon';
-import getClassName from './getClassName';
+import FeatherIcon from '../featherIcon';
+import getClassName from '../../../utilities/getClassName';
 import './navbarMenuItem.css';
 
 /**

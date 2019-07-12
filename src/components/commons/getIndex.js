@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BurgerMenu from './burgerMenu';
+import BurgerMenu from './navbars/burgerMenu';
 import FeatherIcon from './featherIcon';
 
 // The consts and onBurgerClick() are defined outside the exported class because

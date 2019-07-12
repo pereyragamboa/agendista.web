@@ -5,10 +5,10 @@ import { DELETE_HOLIDAY_MODAL } from "../../constants/modalIds";
 import { fixedHoliday } from "../../models/fixedHoliday";
 import { HOLIDAYS } from "../../constants/headers";
 import { variableHoliday } from "../../models/variableHoliday";
-import DeleteModal from '../commons/deleteModal';
+import DeleteModal from '../commons/modals/deleteModal';
 import getIndex from '../commons/getIndex';
 import ListItemButtons from '../commons/listItemButtons';
-import NavbarMenuItem from '../commons/navbarMenuItem';
+import NavbarMenuItem from '../commons/navbars/navbarMenuItem';
 
 /**
  * Holiday list item.

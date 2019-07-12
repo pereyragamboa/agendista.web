@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Paths from "../../constants/paths";
 import getIndex from '../commons/getIndex';
-import NavbarMenuItem from "../commons/navbarMenuItem";
+import NavbarMenuItem from "../commons/navbars/navbarMenuItem";
 import ServiceList from './serviceList';
 import { SERVICES } from "../../constants/headers";
 
