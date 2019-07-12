@@ -1,5 +1,4 @@
 import React from 'react';
-import './appointmentDetail.css';
 import * as CalendarInput from '../commons/forms/calendarInput';
 import * as Paths from '../../constants/paths';
 import FeatherInput from "../commons/forms/featherInput";
