@@ -1,7 +1,7 @@
 import React from 'react';
 import { LIST_HOLIDAYS } from "../../constants/paths";
-import { getDayNames } from "../../models/daysOfWeek";
-import { getMonthNames } from "../../models/months";
+import { getDayNames } from "../../utilities/daysOfWeek";
+import { getMonthNames } from "../../utilities/months";
 import capitalize from '../../utilities/capitalize';
 import getDetail from '../commons/getDetail';
 import getFormControl from '../commons/forms/getFormControl';

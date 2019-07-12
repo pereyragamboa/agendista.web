@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Paths from '../../constants/paths';
-import * as daysOfWeek from "../../models/daysOfWeek";
+import * as daysOfWeek from "../../utilities/daysOfWeek";
 import capitalize from '../../utilities/capitalize';
 import getIndex from '../commons/getIndex';
 import { WORKING_HOURS} from "../../constants/headers";

@@ -21,6 +21,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * Gets the name of a month in the specified locale.
+ *
  * @param monthIndex Index of a month. 0 is January, 11 is December.
  * @param locale Description of a locale. If none is given the default is used.
  * @return {string}
@@ -32,7 +33,8 @@ export function getMonthName(monthIndex, locale = 'default') {
 }
 
 /**
- * Gets a list of all the names of the months in the
+ * Gets a list of all the names of the months in the specified locale.
+ *
  * @param locale Description of a locale. If none is given the default is used.
  * @return {Array}
  */
@@ -50,7 +52,10 @@ export function getMonthNames(locale = 'default') {
 const __daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 /**
- * Gets the number of days in a month.
+ * Gets the number of days in a month. If the month index is out of range, it returns 0.
+ *
+ * If the month index is a floating-point number, only the integer part is considered.
+ *
  * @param monthIndex Index of a month. 0 is January, 11 is December.
  * @return {number} The maximum number of days for the specified month.
  */
