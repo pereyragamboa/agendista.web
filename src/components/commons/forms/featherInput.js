@@ -4,6 +4,7 @@ import getFormControl from './getFormControl';
 /**
  * Creates a Bulma-styled input, decorated with Feather icons.
  *
+ * @param props.id Identifier of the element.
  * @param props.type Label of the input.
  * @param props.placeholder Placeholder text in the input.
  * @return {*}
