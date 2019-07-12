@@ -5,6 +5,12 @@ import BurgerMenu from './commons/navbars/burgerMenu';
 import NavbarDropdown from './commons/navbars/navbarDropdown';
 import NavbarMenuItem from './commons/navbars/navbarMenuItem';
 
+/**
+ * Application header. It contains a navigation bar.
+ *
+ * @return {*}
+ * @constructor
+ */
 export default function Header() {
   const MENU_ID = "ag-header-navbar-menu";
 

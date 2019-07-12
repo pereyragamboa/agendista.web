@@ -1,19 +1,19 @@
 import React from 'react';
 import { Route } from 'react-router';
-import * as Paths from "./constants/paths";
-import Appointments from "./components/appointments";
-import AppointmentDetail from "./components/appointments/appointmentDetail";
-import Customers from "./components/customers";
-import CustomerDetail from "./components/customers/customerDetail";
-import Home from "./components/home";
-import {FixedHolidayDetail, VariableHolidayDetail} from './components/holidays/holidayDetail';
-import HolidayList from './components/holidays/index';
-import HourList from './components/businessHours/index';
-import LeaveDetail from './components/leaves/leaveDetail';
-import Index from './components/leaves/index';
-import Settings from "./components/settings";
-import Services from "./components/services";
-import ServiceDetail from "./components/services/serviceDetail";
+import * as Paths from "../constants/paths";
+import Appointments from "./appointments/index";
+import AppointmentDetail from "./appointments/appointmentDetail";
+import Customers from "./customers/index";
+import CustomerDetail from "./customers/customerDetail";
+import Home from "./home";
+import {FixedHolidayDetail, VariableHolidayDetail} from './holidays/holidayDetail';
+import HolidayList from './holidays/index';
+import HourList from './businessHours/index';
+import LeaveDetail from './leaves/leaveDetail';
+import Index from './leaves/index';
+import Settings from "./settings/index";
+import Services from "./services/index";
+import ServiceDetail from "./services/serviceDetail";
 
 const NewAppointment = () =>
     <AppointmentDetail title="Nueva cita" okCaption="Agendar" />;

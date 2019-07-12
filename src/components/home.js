@@ -3,6 +3,12 @@ import * as Paths from '../constants/paths';
 import AppointmentList from './appointments/appointmentList';
 import FeatherButton from './commons/featherButton';
 
+/**
+ * Start page. It contains a appointment list with no pagination or edition buttons.
+ *
+ * @return {*}
+ * @constructor
+ */
 function Home()
 {
   return (

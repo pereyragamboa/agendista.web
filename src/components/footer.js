@@ -1,5 +1,11 @@
 import React from 'react';
 
+/**
+ * Application footer. It contains a (very basic) about message.
+ *
+ * @return {*}
+ * @constructor
+ */
 export default function Footer() {
   return <div id="ag-footer" className="hero-foot">
     <div className="container has-text-centered">
