@@ -6,11 +6,11 @@ import AppointmentDetail from "./components/appointments/appointmentDetail";
 import Customers from "./components/customers";
 import CustomerDetail from "./components/customers/customerDetail";
 import Home from "./components/home";
-import {FixedHolidayDetail, VariableHolidayDetail} from './components/businessHours/holidayDetail';
-import HolidayList from './components/businessHours/holidayList';
-import HourList from './components/businessHours/hoursList';
-import LeaveDetail from './components/businessHours/leaveDetail';
-import LeaveList from './components/businessHours/leaveList';
+import {FixedHolidayDetail, VariableHolidayDetail} from './components/holidays/holidayDetail';
+import HolidayList from './components/holidays/index';
+import HourList from './components/businessHours/index';
+import LeaveDetail from './components/leaves/leaveDetail';
+import Index from './components/leaves/index';
 import Settings from "./components/settings";
 import Services from "./components/services";
 import ServiceDetail from "./components/services/serviceDetail";
@@ -40,7 +40,7 @@ export default class AppBody extends React.Component {
     <Route exact path={Paths.ADD_VARIABLE_HOLIDAY} render={NewVariableHoliday}/>
     <Route exact path={`${Paths.LIST_HOLIDAYS}`} component={HolidayList}/>
     <Route exact path={`${Paths.LIST_HOLIDAYS}:year`} component={HolidayList}/>
-    <Route exact path={Paths.LIST_LEAVES} component={LeaveList}/>
+    <Route exact path={Paths.LIST_LEAVES} component={Index}/>
     <Route exact path={Paths.LIST_HOURS} component={HourList}/>
     <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
     <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>

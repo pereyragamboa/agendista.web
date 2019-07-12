@@ -1,40 +1,60 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
 import * as Paths from '../../constants/paths';
-import HourList from './hoursList';
-import HolidayList from './holidayList';
+import * as daysOfWeek from "../../models/daysOfWeek";
+import capitalize from '../../utilities/capitalize';
+import getIndex from '../commons/getIndex';
+import { WORKING_HOURS} from "../../constants/headers";
 
-const TABS_ID = "ag-businessHourTabs";
-const HOLIDAY_TAB_ID = "ag-holidayTab";
-const HOUR_TAB_ID = "ag-hourTab";
+const SATURDAY = 6;
+const SUNDAY = 0;
 
 /**
- * Business hours index page.
+ * Hour list item.
  *
- * Because the layout is so different from other index pages, this component does not use {@see getIndex}.
- *
+ * @param {string} props.day Day of the week.
+ * @return {*}
  * @constructor
- * @return A React component.
- * @author Martín Pereyra <pereyra.gamboa@outlook.com>
  */
-function BusinessHours() {
-  return <div>
-    <h1 className="title">Horarios de atención</h1>
-    <div className="tabs is-boxed is-toggle">
-      <ul id={TABS_ID}>
-        <li id={HOUR_TAB_ID} className="is-active">
-          <Link to={Paths.LIST_HOURS}>Horarios de atención</Link>
-        </li>
-        <li id={HOLIDAY_TAB_ID}>
-          <Link to={Paths.LIST_HOLIDAYS}>Días no laborales</Link>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <Route exact path={Paths.LIST_HOURS} component={HourList}/>
-      <Route exact path={Paths.LIST_HOLIDAYS} component={HolidayList}/>
-    </div>
-  </div>
+function HourListItem(props) {
+  const className = "ag-class-hours-" + props.id;
+
+  return <tr>
+    <th className="control">
+      <label className="checkbox">
+        <input type="checkbox"/>
+        {props.tag}
+      </label>
+    </th>
+    <td className={className}>
+      <div className="field">
+        <input className="input" type="time"/>
+      </div>
+    </td>
+    <td className={className}>
+      <div className="field">
+        <input className="input" type="time"/>
+      </div>
+    </td>
+  </tr>
 }
 
-export default BusinessHours;
+export default function HoursList(props) {
+  const detailBody =
+      <table className="table is-fullwidth">
+        <tbody className="table-container">
+        <tr>
+          <td/>
+          <th>Apertura</th>
+          <th>Cierre</th>
+        </tr>
+        <HourListItem id="ag-workday" tag="Entre semana"/>
+        <HourListItem id="ag-saturday" tag={capitalize(daysOfWeek.getDayName(SATURDAY))}/>
+        <HourListItem id="ag-sunday" tag={capitalize(daysOfWeek.getDayName(SUNDAY))}/>
+        </tbody>
+      </table>;
+
+  const HoursList = getIndex(detailBody);
+
+  return <HoursList {...props} brand={WORKING_HOURS} featherIcon="clock"
+                      okCaption="Guardar" cancelPath={Paths.HOME} />
+}

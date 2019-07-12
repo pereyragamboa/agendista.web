@@ -1,7 +1,7 @@
 import React from 'react';
+import { SETTINGS } from "../../constants/headers";
 import FeatherInput from '../commons/forms/featherInput';
 import getDetail from '../commons/getDetail';
-import { SETTINGS } from "../../constants/headers";
 import * as Paths from '../../constants/paths';
 import * as Placeholders from '../../constants/placeholders';
 
@@ -9,6 +9,11 @@ const emailPlaceholder = Placeholders.getEmailPlaceholder();
 const phonePlaceholder = Placeholders.getTelephonePlaceholder();
 const webPlaceholder = Placeholders.getWebsitePlaceholder();
 
+/**
+ * Main settings page.
+ * @return {*}
+ * @constructor
+ */
 export default function Settings() {
   const settingsBody = () => <div>
     <FeatherInput caption="Nombre" iconName="briefcase" placeholder="Nombre comercial del negocio u organización"/>
