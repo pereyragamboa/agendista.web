@@ -1,4 +1,6 @@
 import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import * as Paths from '../../constants/paths';
 import { DELETE_CUSTOMER_MODAL as MODAL_ID } from "../../constants/modalIds";
 import DeleteButton from '../commons/modals/deleteModalButton';
@@ -40,6 +42,16 @@ function CustomerListItem(props) {
  * @constructor
  */
 export default function CustomerList() {
+  const { loading, error, data } = useQuery(gql`{
+    getAllCustomers {
+        firstName
+        lastName
+        telephone
+        email
+    }}
+  `);
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>Error: {error}</p>;
   return <React.Fragment>
     <table className="table is-fullwidth is-hoverable">
       <thead>
@@ -52,12 +64,14 @@ export default function CustomerList() {
         </tr>
       </thead>
       <tbody>
-        <CustomerListItem firstNames="Sansón" lastNames="Carrasco"
-                          telephone="1609-1616" email="b-sc@example.com"/>
-        <CustomerListItem firstNames="Rosa Guadalupe" lastNames="Godínez"
-                          telephone="1234-5678" email="lupegodinez@example.io"/>
-        <CustomerListItem firstNames="Martín" lastNames="Pereyra Gamboa"
-                          telephone="1123-5813" email="mpereyra@example.com"/>
+      {
+        data.getAllCustomers.map((customer, index) =>
+          <CustomerListItem key={`ag-customer-id${index}`}
+              firstNames={customer.firstName} lastNames={customer.lastName}
+              telephone={customer.telephone} email={customer.email}
+          />
+        )
+      }
       </tbody>
     </table>
     <DeleteModal id={MODAL_ID}>
