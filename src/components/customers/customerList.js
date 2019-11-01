@@ -44,13 +44,13 @@ function CustomerListItem(props) {
 export default function CustomerList() {
   const { loading, error, data } = useQuery(gql`{
     getAllCustomers {
-        firstName
-        lastName
-        telephone
-        email
+      firstName
+      lastName
+      telephone
+      email
     }}
   `);
-  if (loading) return <p>Cargando...</p>;
+  if (loading) return <p>Cargando clientes...</p>;
   if (error) return <p>Error: {error}</p>;
   return <React.Fragment>
     <table className="table is-fullwidth is-hoverable">
