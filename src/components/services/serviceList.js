@@ -1,4 +1,6 @@
 import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import * as Paths from '../../constants/paths';
 import { DELETE_SERVICE_MODAL as MODAL_ID } from "../../constants/modalIds";
 import DeleteModal from '../commons/modals/deleteModal';
@@ -32,6 +34,16 @@ const ServiceListRow = (props) =>
  * @constructor
  */
 export default function ServiceList() {
+  const { loading, error, data } = useQuery(gql`{
+      getServices(profileId: "0x30001") {
+          id
+          name
+          duration
+          price
+      }
+  }`);
+  if (loading) return <p>Cargando servicios...</p>;
+  if (error) return <p>Error: {error}</p>;
   return <React.Fragment>
     <table className="table is-fullwidth is-hoverable">
       <thead>
@@ -44,14 +56,15 @@ export default function ServiceList() {
       </thead>
       <tbody className="table-container">
       {
-        [1, 2, 3].map(item =>
-            <ServiceListRow key={item} serviceName={`Servicio ${item}`}
-                            serviceTime={ new Date(0, 0, 0, 0, 30 * item, 0).toLocaleTimeString("default", {
+        data.getServices.map(service =>
+            <ServiceListRow key={`ag-service-id-${service.id}`} serviceName={service.name}
+                            serviceTime={ new Date(0, 0, 0, 0, service.duration, 0).toLocaleTimeString("default", {
                               hour: "numeric",
                               minute: "2-digit"
                             }) }
-                            servicePrice={`$ ${item * 100}`}
-        /> )
+                            servicePrice={`$ ${service.price}`}
+            />
+        )
       }
       </tbody>
     </table>

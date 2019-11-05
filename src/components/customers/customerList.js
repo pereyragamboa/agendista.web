@@ -44,10 +44,11 @@ function CustomerListItem(props) {
 export default function CustomerList() {
   const { loading, error, data } = useQuery(gql`{
     getAllCustomers {
-      firstName
-      lastName
-      telephone
-      email
+        id
+        firstName
+        lastName
+        telephone
+        email
     }}
   `);
   if (loading) return <p>Cargando clientes...</p>;
@@ -65,8 +66,8 @@ export default function CustomerList() {
       </thead>
       <tbody>
       {
-        data.getAllCustomers.map((customer, index) =>
-          <CustomerListItem key={`ag-customer-id${index}`}
+        data.getAllCustomers.map(customer =>
+          <CustomerListItem key={`ag-customer-id-${customer.id}`}
               firstNames={customer.firstName} lastNames={customer.lastName}
               telephone={customer.telephone} email={customer.email}
           />
