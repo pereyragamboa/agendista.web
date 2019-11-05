@@ -1,11 +1,13 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
+import { CUSTOMERS } from '../../constants/headers';
 import { DELETE_CUSTOMER_MODAL as MODAL_ID } from "../../constants/modalIds";
 import DeleteButton from '../commons/modals/deleteModalButton';
 import DeleteModal from '../commons/modals/deleteModal';
 import EditLink from '../commons/editLink';
+import LoadingPanel from '../commons/loadingPanel';
 
 /**
  * Row element with customer information.
@@ -51,7 +53,7 @@ export default function CustomerList() {
         email
     }}
   `);
-  if (loading) return <p>Cargando clientes...</p>;
+  if (loading) return <LoadingPanel subject={CUSTOMERS}/>;
   if (error) return <p>Error: {error}</p>;
   return <React.Fragment>
     <table className="table is-fullwidth is-hoverable">
