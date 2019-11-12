@@ -1,5 +1,7 @@
 import React from 'react';
+import { gql } from 'apollo-boost';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import { DELETE_HOLIDAY_MODAL } from "../../constants/modalIds";
 import { fixedHoliday } from "../../models/fixedHoliday";
@@ -8,6 +10,7 @@ import { variableHoliday } from "../../models/variableHoliday";
 import DeleteModal from '../commons/modals/deleteModal';
 import getIndex from '../commons/getIndex';
 import ListItemButtons from '../commons/listItemButtons';
+import LoadingPanel from '../commons/loadingPanel';
 import NavbarMenuItem from '../commons/navbars/navbarMenuItem';
 
 /**
@@ -44,9 +47,28 @@ const variableHolidays = [
   variableHoliday(11, 3, 1)
 ];
 
-
-
 export default function HolidayList(props) {
+  // Gets data
+  const { loading, error, data } = useQuery(gql`{
+      getHolidays(profileId: "0x30001") {
+          id
+          month
+          ...on FixedHoliday {
+              day
+          }
+          ...on VariableHoliday {
+              dayOfWeek
+              week
+          }
+      }
+  }`);
+
+  if (loading) return <LoadingPanel subject={HOLIDAYS}/>;
+  if (error) return <p>Error: {error}</p>;
+  if (data) data.getHolidays.forEach(h => {
+    console.log(h);
+  });
+
   // Gets current and displayed year
   const currentYear = new Date().getFullYear();
   const displayYear = Number.parseInt(props.match.params.year) || currentYear;
