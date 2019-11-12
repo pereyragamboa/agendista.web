@@ -1,9 +1,13 @@
 import React from 'react';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
+import { APPOINTMENTS } from "../../constants/headers";
 import { DELETE_APPOINTMENT_MODAL as MODAL_ID } from "../../constants/modalIds";
 import DeleteModal from '../commons/modals/deleteModal';
 import EditLink from '../commons/editLink';
 import ListItemButtons from '../commons/listItemButtons';
+import LoadingPanel from '../commons/loadingPanel';
 
 /**
  * Row element of an appointment list.
@@ -35,6 +39,18 @@ const AppointmentListElement = (props) =>
  */
 export default function AppointmentList (props) {
   const { showButtons } = props;
+  const { loading, error, data } = useQuery(gql`
+    query appointments { getProfileAppointments (profileId: "0x30001") {
+        id
+        date
+        customer {
+            firstName
+            lastName
+        }
+    }}
+  `);
+  if (loading) return <LoadingPanel subject={ APPOINTMENTS }/>;
+  if (error) return <p>Error: {error}</p>;
   return (
       <React.Fragment>
         <table className="table is-fullwidth is-hoverable">
@@ -45,8 +61,15 @@ export default function AppointmentList (props) {
           </tr>
           </thead>
           <tbody>
-            <AppointmentListElement clientName="Rosa Guadalupe Godínez" time="10:00" showButtons={showButtons} />
-            <AppointmentListElement clientName="Sansón Carrasco" time="11:00" showButtons={showButtons} />
+          {
+            data.getProfileAppointments.sort((a, b) => a.date < b.date).map(appointment => {
+              const appointmentTime = new Date(appointment.date * 1000);
+              return <AppointmentListElement
+                key={appointment.id}
+                clientName={appointment.customer.firstName + ' ' + appointment.customer.lastName}
+                time={appointmentTime.toLocaleString()} showButtons={showButtons}
+            />;})
+          }
           </tbody>
         </table>
         <DeleteModal id={MODAL_ID}>
