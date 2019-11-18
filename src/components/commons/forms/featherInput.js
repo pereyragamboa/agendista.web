@@ -7,6 +7,7 @@ import getFormControl from './getFormControl';
  * @param props.id Identifier of the element.
  * @param props.type Label of the input.
  * @param props.placeholder Placeholder text in the input.
+ * @param props.value Value displayed in the input.
  * @return {*}
  * @constructor
  */
@@ -14,7 +15,7 @@ export default function FeatherInput (props) {
   // We don't need to assign input-specific props to the control container
   const {id, type, placeholder, ...baseProps} = props;
   const FeatherInput = getFormControl(
-    <input id={id} className="input" type={type} placeholder={placeholder}/>);
+    <input id={id} className="input" type={type} placeholder={placeholder} defaultValue={props.value}/>);
 
   return <FeatherInput {...baseProps}/>;
 }

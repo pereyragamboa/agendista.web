@@ -1,9 +1,12 @@
 import React from 'react';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 import { SETTINGS } from "../../constants/headers";
 import FeatherInput from '../commons/forms/featherInput';
 import getDetail from '../commons/getDetail';
 import * as Paths from '../../constants/paths';
 import * as Placeholders from '../../constants/placeholders';
+import LoadingPanel from '../commons/loadingPanel';
 
 const emailPlaceholder = Placeholders.getEmailPlaceholder();
 const phonePlaceholder = Placeholders.getTelephonePlaceholder();
@@ -15,15 +18,31 @@ const webPlaceholder = Placeholders.getWebsitePlaceholder();
  * @constructor
  */
 export default function Settings() {
+  const { loading, error, data } = useQuery(gql`
+    query { getProfile(profileId: "0x30001") {
+        businessName
+        email
+        telephone
+        url
+    }}
+  `);
+  if (loading) return <LoadingPanel subject={SETTINGS}/>;
+  if (error) return <p>Error: {error}</p>;
+
   const settingsBody = () => <div>
-    <FeatherInput caption="Nombre" iconName="briefcase" placeholder="Nombre comercial del negocio u organización"/>
-    <FeatherInput caption="Sitio web" iconName="globe" placeholder={webPlaceholder}/>
+    <FeatherInput caption="Nombre" iconName="briefcase"
+                  value={data.getProfile.businessName}
+                  placeholder="Nombre comercial del negocio u organización"/>
+    <FeatherInput caption="Sitio web" iconName="globe"
+                  value={data.getProfile.url} placeholder={webPlaceholder}/>
     <div className="columns">
       <div className="column">
-        <FeatherInput caption="Teléfono" iconName="phone" placeholder={phonePlaceholder}/>
+        <FeatherInput caption="Teléfono" iconName="phone"
+                      value={data.getProfile.telephone} placeholder={phonePlaceholder}/>
       </div>
       <div className="column">
-        <FeatherInput caption="Correo electrónico" iconName="at-sign" placeholder={emailPlaceholder}/>
+        <FeatherInput caption="Correo electrónico" iconName="at-sign"
+                      value={data.getProfile.email} placeholder={emailPlaceholder}/>
       </div>
     </div>
 
