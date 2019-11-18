@@ -46,10 +46,10 @@ export default class AppBody extends React.Component {
     <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>
     <Route exact path={Paths.LIST_SERVICES} component={Services}/>
     <Route exact path={Paths.SETTINGS} component={Settings}/>
-    <Route exact path={Paths.UPDATE_APPOINTMENT} render={EditAppointment}/>
-    <Route exact path={Paths.UPDATE_CUSTOMER} render={EditCustomer}/>
-    <Route exact path={Paths.UPDATE_FIXED_HOLIDAY} render={EditFixedHoliday}/>
-    <Route exact path={Paths.UPDATE_LEAVE} render={EditLeave}/>
-    <Route exact path={Paths.UPDATE_SERVICE} render={EditService}/>
+    <Route exact path={Paths.UPDATE_APPOINTMENT + ":id"} render={EditAppointment}/>
+    <Route exact path={Paths.UPDATE_CUSTOMER + ":id"} render={EditCustomer}/>
+    <Route exact path={Paths.UPDATE_FIXED_HOLIDAY + ":id"} render={EditFixedHoliday}/>
+    <Route exact path={Paths.UPDATE_LEAVE + ":id"} render={EditLeave}/>
+    <Route exact path={Paths.UPDATE_SERVICE + ":id"} render={EditService}/>
   </React.Fragment>;
 }
