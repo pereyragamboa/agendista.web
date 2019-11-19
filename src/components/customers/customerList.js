@@ -21,15 +21,16 @@ import LoadingPanel from '../commons/loadingPanel';
  * @constructor
  */
 function CustomerListItem(props) {
+  const editUrl = Paths.UPDATE_CUSTOMER + props.customerId;
   return <tr>
     <td className="is-hidden-desktop">
-      <EditLink to={Paths.UPDATE_CUSTOMER}>{`${props.firstNames} ${props.lastNames}`}</EditLink>
+      <EditLink to={editUrl}>{`${props.firstNames} ${props.lastNames}`}</EditLink>
     </td>
     <td className="is-hidden-touch">
-      <EditLink to={Paths.UPDATE_CUSTOMER}>{props.firstNames}</EditLink>
+      <EditLink to={editUrl}>{props.firstNames}</EditLink>
     </td>
     <td className="is-hidden-touch">
-      <EditLink to={Paths.UPDATE_CUSTOMER}>{props.lastNames}</EditLink>
+      <EditLink to={editUrl}>{props.lastNames}</EditLink>
     </td>
     <td className="is-hidden-touch">{props.telephone}</td>
     <td className="is-hidden-touch">{props.email}</td>
@@ -70,8 +71,9 @@ export default function CustomerList() {
       {
         data.getAllCustomers.map(customer =>
           <CustomerListItem key={`ag-customer-id-${customer.id}`}
-              firstNames={customer.firstName} lastNames={customer.lastName}
-              telephone={customer.telephone} email={customer.email}
+                            customerId={customer.id}
+                            firstNames={customer.firstName} lastNames={customer.lastName}
+                            telephone={customer.telephone} email={customer.email}
           />
         )
       }

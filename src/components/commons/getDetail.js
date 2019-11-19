@@ -24,7 +24,7 @@ export default function getDetail(FormComponent, okClick = () => {}){
     return <section id={props.id}>
       <h1 className="title is-4">{props.title}</h1>
       <div className="box">
-        <FormComponent />
+        <FormComponent {...props} />
       </div>
       <div className="buttons">
         <button className="button is-primary" onClick={okClick}>

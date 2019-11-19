@@ -4,7 +4,7 @@ import * as Paths from "../constants/paths";
 import Appointments from "./appointments/index";
 import AppointmentDetail from "./appointments/appointmentDetail";
 import Customers from "./customers/index";
-import CustomerDetail from "./customers/customerDetail";
+import { AddCustomerDetail, EditCustomerDetail } from "./customers/customerDetail";
 import Home from "./home";
 import {FixedHolidayDetail, VariableHolidayDetail} from './holidays/holidayDetail';
 import HolidayList from './holidays/index';
@@ -19,8 +19,9 @@ const NewAppointment = () =>
     <AppointmentDetail title="Nueva cita" okCaption="Agendar" />;
 const EditAppointment = () =>
     <AppointmentDetail title="Reagendar cita" okCaption="Reagendar" />;
-const NewCustomer = () => <CustomerDetail title="Nuevo cliente"/>;
-const EditCustomer = () => <CustomerDetail title="Editar cliente" okCaption="Editar"/>;
+const NewCustomer = () => <AddCustomerDetail title="Nuevo cliente"/>;
+const EditCustomer = (props) =>
+    <EditCustomerDetail title="Editar cliente" okCaption="Editar" {...props}/>;
 const NewFixedHoliday = () => <FixedHolidayDetail title="Nuevo día feriado"/>;
 const NewVariableHoliday = () => <VariableHolidayDetail title="Nuevo día feriado"/>;
 const EditFixedHoliday = () => <FixedHolidayDetail title="Editar día feriado"/>;
