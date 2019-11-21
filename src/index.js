@@ -1,12 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient from 'apollo-boost';
+import { ApolloClient } from 'apollo-client';
+import { ApolloLink } from 'apollo-link';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { onError } from 'apollo-link-error';
 import './index.css';
 import App from './components/app';
 import { uri } from './serverData.js';
 import * as serviceWorker from './serviceWorker';
 
-const client = new ApolloClient({ uri });
+const client = new ApolloClient({
+  link: ApolloLink.from([
+    onError(({ graphQLErrors, networkError }) => {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message, location, path}) => {
+          console.log(`GQL error: ${message}; location: ${location}; path: ${path}`);
+        });
+      }
+      if (networkError) {
+        console.log(`Network error: ${networkError}`);
+      }
+    }),
+    new HttpLink({
+      uri: uri,
+      credentials: 'same-origin'
+    }),
+  ]),
+  cache: new InMemoryCache()
+});
 
 ReactDOM.render(<App client={client} />, document.getElementById('root'));
 
