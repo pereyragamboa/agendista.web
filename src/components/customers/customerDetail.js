@@ -1,5 +1,5 @@
 import React from 'react';
-import { gql } from 'apollo-boost';
+import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import * as Placeholders from '../../constants/placeholders';
@@ -43,7 +43,7 @@ export function EditCustomerDetail(props) {
 
   const { loading, error, data } = useQuery(gql`
       query getCustomerInfo($customerId: ID!) {
-          getCustomer(clientId: $customerId) {
+          getCustomer(clientId: $customerId) @client {
               firstName
               lastName
               telephone

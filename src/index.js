@@ -9,6 +9,15 @@ import './index.css';
 import App from './components/app';
 import { uri } from './serverData.js';
 import * as serviceWorker from './serviceWorker';
+// TODO: delete next line
+import gql from 'graphql-tag';
+
+const cache = new InMemoryCache();
+cache.writeData({
+  data: {
+    //getAllCustomers: []
+  }
+});
 
 const client = new ApolloClient({
   link: ApolloLink.from([
@@ -27,7 +36,20 @@ const client = new ApolloClient({
       credentials: 'same-origin'
     }),
   ]),
-  cache: new InMemoryCache()
+  cache,
+  resolvers: {
+    Query: {
+      getCustomer: (root, { clientId }, { cache, getCacheKey }) => {
+        console.log(`clientId = ${clientId}`);
+        const key = getCacheKey({__typename: "Customer", id: clientId });
+        console.log(`key = ${key}`);
+        console.log(cache.data);
+        return cache.data ? cache.data.get(key) : { id: clientId,
+          firstName: "", lastName: "", telephone: "", email: ""
+        };
+      }
+    }
+  }
 });
 
 ReactDOM.render(<App client={client} />, document.getElementById('root'));
