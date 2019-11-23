@@ -1,9 +1,9 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import * as Placeholders from '../../constants/placeholders';
 import FeatherInput from '../commons/forms/featherInput';
+import { GET_CUSTOMER} from "../../data/queries/customerQueries";
 import getDetail from '../commons/getDetail';
 import LoadingPanel from "../commons/loadingPanel";
 
@@ -41,20 +41,15 @@ export function AddCustomerDetail(props) {
 export function EditCustomerDetail(props) {
   const CustomerDetail = getDetail(detailBody);
 
-  const { loading, error, data } = useQuery(gql`
-      query getCustomerInfo($customerId: ID!) {
-          getCustomer(clientId: $customerId) @client {
-              firstName
-              lastName
-              telephone
-              email
-          }}`,
+  const { loading, error, data } = useQuery(
+      GET_CUSTOMER,
       { variables: { customerId: props.match.params.id }});
   if (loading) return <LoadingPanel subject={"datos del cliente"}/>;
   if (error) return <p>Error: {error.toString()}</p>;
+  // Temporary solution; change ASAP
+  if (data === undefined) return <p>Regrese a la página anterior.</p>;
 
   const { firstName, lastName, telephone, email } = data.getCustomer;
-
   return <CustomerDetail {...props}
                          firstName={firstName} lastName={lastName}
                          telephone={telephone} email={email}

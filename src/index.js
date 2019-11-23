@@ -7,10 +7,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 import './index.css';
 import App from './components/app';
+import CustomerResolvers from './data/resolvers/customerResolvers';
 import { uri } from './serverData.js';
 import * as serviceWorker from './serviceWorker';
-// TODO: delete next line
-import gql from 'graphql-tag';
 
 const cache = new InMemoryCache();
 cache.writeData({
@@ -38,17 +37,7 @@ const client = new ApolloClient({
   ]),
   cache,
   resolvers: {
-    Query: {
-      getCustomer: (root, { clientId }, { cache, getCacheKey }) => {
-        console.log(`clientId = ${clientId}`);
-        const key = getCacheKey({__typename: "Customer", id: clientId });
-        console.log(`key = ${key}`);
-        console.log(cache.data);
-        return cache.data ? cache.data.get(key) : { id: clientId,
-          firstName: "", lastName: "", telephone: "", email: ""
-        };
-      }
-    }
+    Query: {...CustomerResolvers.Query}
   }
 });
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import { CUSTOMERS } from '../../constants/headers';
@@ -7,6 +6,7 @@ import { DELETE_CUSTOMER_MODAL as MODAL_ID } from "../../constants/modalIds";
 import DeleteButton from '../commons/modals/deleteModalButton';
 import DeleteModal from '../commons/modals/deleteModal';
 import EditLink from '../commons/editLink';
+import { GET_ALL_CUSTOMERS } from "../../data/queries/customerQueries";
 import LoadingPanel from '../commons/loadingPanel';
 
 /**
@@ -45,15 +45,7 @@ function CustomerListItem(props) {
  * @constructor
  */
 export default function CustomerList() {
-  const { loading, error, data } = useQuery(gql`{
-    getAllCustomers {
-        id
-        firstName
-        lastName
-        telephone
-        email
-    }}
-  `);
+  const { loading, error, data } = useQuery(GET_ALL_CUSTOMERS);
   if (loading) return <LoadingPanel subject={CUSTOMERS}/>;
   if (error) return <p>Error: {error}</p>;
   return <React.Fragment>
