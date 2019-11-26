@@ -4,6 +4,12 @@ import getClassName from '../../utilities/getClassName';
 
 const EMPTY_SPAN = <span/>;
 
+/**
+ * Creates a Feather icon. {https://feathericons.com/}.
+ * @param props.iconName Name of the icon.
+ * @return A <span> tag containing SVG for a Feather icon, or an empty one if the
+ * icon name provided is not valid.
+ */
 export default function FeatherIcon (props) {
   // Gets icon name from props
   const iconName = props.iconName;
