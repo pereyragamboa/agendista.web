@@ -1,7 +1,9 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import { Redirect } from 'react-router';
 import * as Paths from '../../constants/paths';
 import * as Placeholders from '../../constants/placeholders';
+import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
 import { GET_CUSTOMER} from "../../data/queries/customerQueries";
 import getDetail from '../commons/getDetail';
@@ -45,9 +47,8 @@ export function EditCustomerDetail(props) {
       GET_CUSTOMER,
       { variables: { customerId: props.match.params.id }});
   if (loading) return <LoadingPanel subject={"datos del cliente"}/>;
-  if (error) return <p>Error: {error.toString()}</p>;
-  // Temporary solution; change ASAP
-  if (data === undefined) return <p>Regrese a la página anterior.</p>;
+  if (error) return <ErrorPanel errorMessage={error.message}/>;
+  if (data === undefined) return <Redirect to={Paths.LIST_CUSTOMERS} />;
 
   const { firstName, lastName, telephone, email } = data.getCustomer;
   return <CustomerDetail {...props}
