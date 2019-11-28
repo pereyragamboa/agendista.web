@@ -6,7 +6,9 @@ import { APPOINTMENTS } from "../../constants/headers";
 import { DELETE_APPOINTMENT_MODAL as MODAL_ID } from "../../constants/modalIds";
 import DeleteModal from '../commons/modals/deleteModal';
 import EditLink from '../commons/editLink';
+import ErrorPanel from '../commons/errorPanel';
 import ListItemButtons from '../commons/listItemButtons';
+import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 
 /**
@@ -50,7 +52,7 @@ export default function AppointmentList (props) {
     }}
   `);
   if (loading) return <LoadingPanel subject={ APPOINTMENTS }/>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   return (
       <React.Fragment>
         <table className="table is-fullwidth is-hoverable">

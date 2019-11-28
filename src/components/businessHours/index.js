@@ -4,7 +4,9 @@ import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import * as daysOfWeek from "../../utilities/daysOfWeek";
 import capitalize from '../../utilities/capitalize';
+import ErrorPanel from '../commons/errorPanel';
 import getIndex from '../commons/getIndex';
+import listGraplQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import { WORKING_HOURS} from "../../constants/headers";
 
@@ -76,7 +78,7 @@ export default function HoursList(props) {
         }}
       `);
   if (loading) return <LoadingPanel subject={WORKING_HOURS}/>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <ErrorPanel>{listGraplQLErrors(error)}</ErrorPanel>;
   // Add query results to a hash map for easier, cleaner page population
   const hoursMap = new Map(data.getBusinessHours.map(b => {
     const { day, ..._ } = b;

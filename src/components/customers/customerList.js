@@ -6,7 +6,9 @@ import { DELETE_CUSTOMER_MODAL as MODAL_ID } from "../../constants/modalIds";
 import DeleteButton from '../commons/modals/deleteModalButton';
 import DeleteModal from '../commons/modals/deleteModal';
 import EditLink from '../commons/editLink';
+import ErrorPanel from '../commons/errorPanel';
 import { GET_ALL_CUSTOMERS } from "../../data/queries/customerQueries";
+import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 
 /**
@@ -47,7 +49,7 @@ function CustomerListItem(props) {
 export default function CustomerList() {
   const { loading, error, data } = useQuery(GET_ALL_CUSTOMERS);
   if (loading) return <LoadingPanel subject={CUSTOMERS}/>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   return <React.Fragment>
     <table className="table is-fullwidth is-hoverable">
       <thead>

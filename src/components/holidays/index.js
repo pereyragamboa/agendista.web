@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import { DELETE_HOLIDAY_MODAL } from "../../constants/modalIds";
+import ErrorPanel from '../commons/errorPanel';
 import { fixedHoliday } from "../../models/fixedHoliday";
 import { HOLIDAYS } from "../../constants/headers";
 import { variableHoliday } from "../../models/variableHoliday";
 import DeleteModal from '../commons/modals/deleteModal';
 import getIndex from '../commons/getIndex';
+import listGraphQLErrors from '../commons/listGraphQLErrors';
 import ListItemButtons from '../commons/listItemButtons';
 import LoadingPanel from '../commons/loadingPanel';
 import NavbarMenuItem from '../commons/navbars/navbarMenuItem';
@@ -64,7 +66,7 @@ export default function HolidayList(props) {
   }`);
 
   if (loading) return <LoadingPanel subject={HOLIDAYS}/>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   if (data) data.getHolidays.forEach(h => {
     console.log(h);
   });

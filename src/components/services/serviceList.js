@@ -3,8 +3,10 @@ import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import { DELETE_SERVICE_MODAL as MODAL_ID } from "../../constants/modalIds";
+import ErrorPanel from '../commons/errorPanel';
 import DeleteModal from '../commons/modals/deleteModal';
 import ListItemButtons from '../commons/listItemButtons';
+import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import { SERVICES } from '../../constants/headers';
 
@@ -45,7 +47,7 @@ export default function ServiceList() {
       }
   }`);
   if (loading) return <LoadingPanel subject={SERVICES}/>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   return <React.Fragment>
     <table className="table is-fullwidth is-hoverable">
       <thead>

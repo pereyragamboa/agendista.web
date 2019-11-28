@@ -1,12 +1,14 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import { SETTINGS } from "../../constants/headers";
+import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
 import getDetail from '../commons/getDetail';
+import listGraphQLErrors from '../commons/listGraphQLErrors';
+import LoadingPanel from '../commons/loadingPanel';
 import * as Paths from '../../constants/paths';
 import * as Placeholders from '../../constants/placeholders';
-import LoadingPanel from '../commons/loadingPanel';
+import { SETTINGS } from "../../constants/headers";
 
 const emailPlaceholder = Placeholders.getEmailPlaceholder();
 const phonePlaceholder = Placeholders.getTelephonePlaceholder();
@@ -27,7 +29,7 @@ export default function Settings() {
     }}
   `);
   if (loading) return <LoadingPanel subject={SETTINGS}/>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
 
   const settingsBody = () => <div>
     <FeatherInput caption="Nombre" iconName="briefcase"
