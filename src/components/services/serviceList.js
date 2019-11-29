@@ -1,5 +1,5 @@
 import React from 'react';
-import { gql } from 'apollo-boost';
+import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import { DELETE_SERVICE_MODAL as MODAL_ID } from "../../constants/modalIds";
