@@ -3,8 +3,9 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import { DELETE_SERVICE_MODAL as MODAL_ID } from "../../constants/modalIds";
-import ErrorPanel from '../commons/errorPanel';
 import DeleteModal from '../commons/modals/deleteModal';
+import ErrorPanel from '../commons/errorPanel';
+import { getTimeString } from "../../utilities/times";
 import ListItemButtons from '../commons/listItemButtons';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
@@ -63,10 +64,7 @@ export default function ServiceList() {
       {
         data.getServices.map(service =>
             <ServiceListRow key={`ag-service-id-${service.id}`} id={service.id} serviceName={service.name}
-                            serviceTime={ new Date(0, 0, 0, 0, service.duration, 0).toLocaleTimeString("default", {
-                              hour: "numeric",
-                              minute: "2-digit"
-                            }) }
+                            serviceTime={ getTimeString(service.duration * 60 * 1000, false) }
                             servicePrice={`$ ${service.price}`}
             />
         )

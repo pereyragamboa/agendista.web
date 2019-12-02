@@ -6,6 +6,7 @@ import * as daysOfWeek from "../../utilities/daysOfWeek";
 import capitalize from '../../utilities/capitalize';
 import ErrorPanel from '../commons/errorPanel';
 import getIndex from '../commons/getIndex';
+import { getTimeString } from "../../utilities/times";
 import listGraplQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import { WORKING_HOURS} from "../../constants/headers";
@@ -13,10 +14,6 @@ import { WORKING_HOURS} from "../../constants/headers";
 const DAYS = ['WEEKDAYS', 'SATURDAY', 'SUNDAY'];
 const SATURDAY = 6;
 const SUNDAY = 0;
-const DEFAULT_OPTIONS = {
-  minimumIntegerDigits: 2,
-  maximumFractionDigits: 0,
-};
 
 /**
  * Gets the standard HTML time string from an UTC time stamp
@@ -24,13 +21,6 @@ const DEFAULT_OPTIONS = {
  * @param t Number of milliseconds since UNIX epoch.
  * @return {string} A time string in 24-hour format.
  */
-function toHtmlTimeString(t) {
-  const minutes = t / (1000 * 60); // 1000ms/s * 60s/min
-  return `${
-      (Math.ceil(minutes / 60) % 60).toLocaleString('default', DEFAULT_OPTIONS)
-  }:${
-    (minutes % 60).toLocaleString('default', DEFAULT_OPTIONS)}`;
-}
 
 /**
  * Hour list item.
@@ -44,8 +34,8 @@ function toHtmlTimeString(t) {
  */
 function HourListItem(props) {
   const className = "ag-class-hours-" + props.id;
-  const fromTime = props.from ? toHtmlTimeString(props.from) : "09:00";
-  const toTime = props.to ? toHtmlTimeString(props.to) : "18:00";
+  const fromTime = props.from ? getTimeString(props.from) : "09:00";
+  const toTime = props.to ? getTimeString(props.to) : "18:00";
 
   return <tr>
     <th className="control">

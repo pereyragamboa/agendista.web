@@ -15,22 +15,25 @@ import LoadingPanel from '../commons/loadingPanel';
  * Row element of an appointment list.
  *
  * @param props.clientName Name of the client making the appointment.
+ * @param props.id Identifier of the client, for backend purposes.
  * @param props.showButtons Shows or hides the list item buttons.
  * @param props.time Scheduled time of the appointment.
  * @return {*}
  * @constructor
  */
-const AppointmentListElement = (props) =>
-  <tr>
-    <th><EditLink to={Paths.UPDATE_APPOINTMENT}>{props.time}</EditLink></th>
+const AppointmentListElement = (props) => {
+  const editPath = Paths.UPDATE_APPOINTMENT + props.id;
+  return <tr>
+    <th><EditLink to={editPath}>{props.time}</EditLink></th>
     <td>{props.clientName}</td>
     {
       props.showButtons ? (
           <td>
-            <ListItemButtons editPath={Paths.UPDATE_APPOINTMENT} deleteModalId={MODAL_ID}/>
+            <ListItemButtons editPath={editPath} deleteModalId={MODAL_ID}/>
           </td>) : null
     }
   </tr>;
+};
 
 /**
  * List of appointments.
@@ -67,7 +70,7 @@ export default function AppointmentList (props) {
             data.getProfileAppointments.sort((a, b) => a.date < b.date).map(appointment => {
               const appointmentTime = new Date(appointment.date * 1000);
               return <AppointmentListElement
-                key={appointment.id}
+                key={appointment.id} id={appointment.id}
                 clientName={appointment.customer.firstName + ' ' + appointment.customer.lastName}
                 time={appointmentTime.toLocaleString()} showButtons={showButtons}
             />;})

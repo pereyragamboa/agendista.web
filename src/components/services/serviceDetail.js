@@ -8,6 +8,7 @@ import FeatherInput from '../commons/forms/featherInput';
 import { GET_SERVICE } from "../../data/queries/serviceQueries";
 import getDetail from '../commons/getDetail';
 import getFormControl from '../commons/forms/getFormControl';
+import { getTimeString } from "../../utilities/times";
 import LoadingPanel from "../commons/loadingPanel";
 
 const detailBody = function (props) {
@@ -18,7 +19,7 @@ const detailBody = function (props) {
     <FeatherInput caption="Servicio" iconName="shopping-bag" placeholder="Título del servicio" value={props.name}/>
     <DescriptionTextArea caption="Descripción" />
     <div className="columns">
-      <FeatherInput className="column" type="time" caption="Duración" iconName="clock" defaultValue={props.duration}/>
+      <FeatherInput className="column" type="time" caption="Duración" iconName="clock" value={props.duration}/>
       <FeatherInput className="column" type="number" caption="Costo" iconName="tag"
                     placeholder="Costo del servicio" value={props.price}/>
     </div>
@@ -47,6 +48,6 @@ export function EditServiceDetail(props) {
 
   const { name, description, duration, price } = data.getService;
   const ServiceDetail = getDetail(detailBody);
-  return <ServiceDetail name={name} description={description} duration={duration} price={price}
+  return <ServiceDetail name={name} description={description} duration={getTimeString(duration * 60 * 1000)} price={price}
                         {...props} cancelPath={Paths.LIST_SERVICES} title={"Editar servicio"} okCaption={"Editar"}/>;
 }
