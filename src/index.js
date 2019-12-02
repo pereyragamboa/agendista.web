@@ -3,15 +3,19 @@ import ReactDOM from 'react-dom';
 import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 import './index.css';
 import App from './components/app';
 import CustomerResolvers from './data/resolvers/customerResolvers';
 import { uri } from './serverData.js';
 import * as serviceWorker from './serviceWorker';
+import introspectionQueryResultData from './fragmentTypes';
 
-const cache = new InMemoryCache();
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData
+});
+const cache = new InMemoryCache({ fragmentMatcher });
 cache.writeData({
   data: {
     //getAllCustomers: []
