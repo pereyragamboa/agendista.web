@@ -62,3 +62,13 @@ const __daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 export function getDaysInMonth(monthIndex) {
   return __validateMonth(monthIndex) ? __daysInMonth[Math.floor(monthIndex)] : 0;
 }
+
+const __monthNames = [
+  "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY",
+  "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+];
+
+const monthMap = new Map(); let __monthIndex = 1;
+__monthNames.forEach(name => monthMap.set(name, __monthIndex++));
+
+export function getMonthIndex(monthName) { return monthMap.get(monthName); }

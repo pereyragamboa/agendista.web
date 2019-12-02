@@ -14,6 +14,7 @@ import listGraphQLErrors from '../commons/listGraphQLErrors';
 import ListItemButtons from '../commons/listItemButtons';
 import LoadingPanel from '../commons/loadingPanel';
 import NavbarMenuItem from '../commons/navbars/navbarMenuItem';
+import { getMonthIndex } from "../../utilities/months";
 
 /**
  * Holiday list item.
@@ -39,16 +40,6 @@ function HolidayListRow(props) {
   </tr>;
 }
 
-//This is only for demo purposes
-const fixedHolidays = [
-  fixedHoliday(1, 1), fixedHoliday(5, 1), fixedHoliday(9, 16), fixedHoliday(12, 25)
-];
-const variableHolidays = [
-  variableHoliday(2, 1, 1),
-  variableHoliday(3, 3, 1),
-  variableHoliday(11, 3, 1)
-];
-
 export default function HolidayList(props) {
   // Gets data
   const { loading, error, data } = useQuery(gql`{
@@ -67,9 +58,6 @@ export default function HolidayList(props) {
 
   if (loading) return <LoadingPanel subject={HOLIDAYS}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
-  if (data) data.getHolidays.forEach(h => {
-    console.log(h);
-  });
 
   // Gets current and displayed year
   const currentYear = new Date().getFullYear();
@@ -80,14 +68,17 @@ export default function HolidayList(props) {
   }
 
   // Merges fixed and movable holidays
-  const allHolidayData = [
-    ...fixedHolidays.map(
-        (fixed) => ({ date: fixed.getHolidayDate(displayYear), isVariable: false })
-    ),
-    ...variableHolidays.map(
-        (variable) => ({ date: variable.getHolidayDate(displayYear), isVariable: true })
-    )
-  ].sort((holiday1, holiday2) => holiday1.date - holiday2.date);
+  const allHolidayData = data.getHolidays.map(h => {
+    if (h.__typename === 'FixedHoliday') {
+      const fixed = new fixedHoliday(getMonthIndex(h.month), h.day);
+      return {date: fixed.getHolidayDate(displayYear), isVariable: false};
+    }
+    else if (h.__typename === 'VariableHoliday') {
+      const variable = new variableHoliday(getMonthIndex(h.month), h.week, h.dayOfWeek);
+      return {date: variable.getHolidayDate(displayYear), isVariable: false};
+    }
+    else return {}
+  }).sort((holiday1, holiday2) => holiday1.date - holiday2.date);
 
   const indexBody = <React.Fragment>
       <div className="content">
