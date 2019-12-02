@@ -8,9 +8,10 @@ import { onError } from 'apollo-link-error';
 import './index.css';
 import App from './components/app';
 import CustomerResolvers from './data/resolvers/customerResolvers';
+import introspectionQueryResultData from './fragmentTypes'; // generated with graphql-codegen
+import ServiceResolvers from './data/resolvers/serviceResolvers';
 import { uri } from './serverData.js';
 import * as serviceWorker from './serviceWorker';
-import introspectionQueryResultData from './fragmentTypes';
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData
@@ -41,7 +42,7 @@ const client = new ApolloClient({
   ]),
   cache,
   resolvers: {
-    Query: {...CustomerResolvers.Query}
+    Query: {...CustomerResolvers.Query, ...ServiceResolvers.Query }
   }
 });
 

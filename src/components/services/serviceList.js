@@ -26,7 +26,7 @@ const ServiceListRow = (props) =>
     <td className="is-hidden-touch">{ props.servicePrice }</td>
     <td>
       <div className="level-right">
-        <ListItemButtons editPath={Paths.UPDATE_SERVICE} deleteModalId={MODAL_ID}/>
+        <ListItemButtons editPath={Paths.UPDATE_SERVICE + props.id} deleteModalId={MODAL_ID}/>
       </div>
     </td>
   </tr>;
@@ -42,6 +42,7 @@ export default function ServiceList() {
       getServices(profileId: "0x30001") {
           id
           name
+          description
           duration
           price
       }
@@ -61,7 +62,7 @@ export default function ServiceList() {
       <tbody className="table-container">
       {
         data.getServices.map(service =>
-            <ServiceListRow key={`ag-service-id-${service.id}`} serviceName={service.name}
+            <ServiceListRow key={`ag-service-id-${service.id}`} id={service.id} serviceName={service.name}
                             serviceTime={ new Date(0, 0, 0, 0, service.duration, 0).toLocaleTimeString("default", {
                               hour: "numeric",
                               minute: "2-digit"
