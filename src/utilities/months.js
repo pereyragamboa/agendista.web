@@ -68,7 +68,7 @@ const __monthNames = [
   "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
 ];
 
-const monthMap = new Map(); let __monthIndex = 1;
-__monthNames.forEach(name => monthMap.set(name, __monthIndex++));
+const monthMap = new Map();
+__monthNames.forEach((name, index) => monthMap.set(name, index + 1));
 
 export function getMonthIndex(monthName) { return monthMap.get(monthName); }

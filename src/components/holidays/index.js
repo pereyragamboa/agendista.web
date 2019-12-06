@@ -10,11 +10,12 @@ import { HOLIDAYS } from "../../constants/headers";
 import { variableHoliday } from "../../models/variableHoliday";
 import DeleteModal from '../commons/modals/deleteModal';
 import getIndex from '../commons/getIndex';
+import { getDayIndex } from "../../utilities/daysOfWeek";
+import { getMonthIndex } from "../../utilities/months";
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import ListItemButtons from '../commons/listItemButtons';
 import LoadingPanel from '../commons/loadingPanel';
 import NavbarMenuItem from '../commons/navbars/navbarMenuItem';
-import { getMonthIndex } from "../../utilities/months";
 
 /**
  * Holiday list item.
@@ -24,7 +25,7 @@ import { getMonthIndex } from "../../utilities/months";
  * @constructor
  */
 function HolidayListRow(props) {
-  const editPath = props.isVariable ? Paths.ADD_VARIABLE_HOLIDAY : Paths.ADD_FIXED_HOLIDAY;
+  const editPath = props.isVariable ? Paths.UPDATE_VARIABLE_HOLIDAY : Paths.UPDATE_FIXED_HOLIDAY;
   return <tr>
     <th>
       {props.date.toLocaleDateString("default", {month: "long", day: "numeric"})}
@@ -35,7 +36,7 @@ function HolidayListRow(props) {
       </React.Fragment>) : ''}
     </th>
     <td>
-      <ListItemButtons editPath={editPath} deleteModalId={DELETE_HOLIDAY_MODAL}/>
+      <ListItemButtons editPath={`${editPath}${props.id}`} deleteModalId={DELETE_HOLIDAY_MODAL}/>
     </td>
   </tr>;
 }
@@ -71,11 +72,11 @@ export default function HolidayList(props) {
   const allHolidayData = data.getHolidays.map(h => {
     if (h.__typename === 'FixedHoliday') {
       const fixed = new fixedHoliday(getMonthIndex(h.month), h.day);
-      return {date: fixed.getHolidayDate(displayYear), isVariable: false};
+      return {id: h.id, date: fixed.getHolidayDate(displayYear), isVariable: false};
     }
     else if (h.__typename === 'VariableHoliday') {
-      const variable = new variableHoliday(getMonthIndex(h.month), h.week, h.dayOfWeek);
-      return {date: variable.getHolidayDate(displayYear), isVariable: false};
+      const variable = new variableHoliday(getMonthIndex(h.month), h.week, getDayIndex(h.dayOfWeek));
+      return {id: h.id, date: variable.getHolidayDate(displayYear), isVariable: true};
     }
     else return {}
   }).sort((holiday1, holiday2) => holiday1.date - holiday2.date);
@@ -94,7 +95,7 @@ export default function HolidayList(props) {
       <table className="table is-fullwidth">
         <tbody className="table-container">{
           allHolidayData.map((holiday) =>
-              <HolidayListRow key={holiday.date} date={holiday.date} isVariable={holiday.isVariable}/>)
+              <HolidayListRow id={holiday.id} key={holiday.date} date={holiday.date} isVariable={holiday.isVariable}/>)
         }
         </tbody>
       </table>

@@ -29,3 +29,10 @@ function getDayNames(locale = DEFAULT_LOCALE) {
 }
 
 export { getDayName, getDayNames };
+
+const __daysOfWeek = [ 'SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+
+const dayMap = new Map();
+__daysOfWeek.forEach((day, index) => dayMap.set(day, index));
+
+export const getDayIndex = (day) => dayMap.get(day);

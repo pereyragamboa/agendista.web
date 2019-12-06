@@ -17,3 +17,4 @@ export const UPDATE_CUSTOMER = "/customers/edit/";
 export const UPDATE_FIXED_HOLIDAY = "/businessHours/fixed/edit/";
 export const UPDATE_LEAVE = "/leave/edit/";
 export const UPDATE_SERVICE = "/services/edit/";
+export const UPDATE_VARIABLE_HOLIDAY = "/businessHours/variable/edit/";

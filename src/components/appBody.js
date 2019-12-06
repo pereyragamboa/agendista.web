@@ -25,6 +25,7 @@ const EditCustomer = (props) =>
 const NewFixedHoliday = () => <FixedHolidayDetail title="Nuevo día feriado"/>;
 const NewVariableHoliday = () => <VariableHolidayDetail title="Nuevo día feriado"/>;
 const EditFixedHoliday = () => <FixedHolidayDetail title="Editar día feriado"/>;
+const EditVariableHoliday = (props) => <VariableHolidayDetail title="Editar día feriado" {...props}/>;
 const NewLeave = () => <LeaveDetail title="Nuevo periodo vacacional"/>;
 const EditLeave = () => <LeaveDetail title="Editar periodo vacacional" okCaption="Editar"/>;
 const NewService = () => <AddServiceDetail/>;
@@ -50,6 +51,7 @@ export default class AppBody extends React.Component {
     <Route exact path={`${Paths.UPDATE_APPOINTMENT}:id`} render={EditAppointment}/>
     <Route exact path={`${Paths.UPDATE_CUSTOMER}:id`} render={EditCustomer}/>
     <Route exact path={`${Paths.UPDATE_FIXED_HOLIDAY}:id`} render={EditFixedHoliday}/>
+    <Route exact path={`${Paths.UPDATE_VARIABLE_HOLIDAY}:id`} render={EditVariableHoliday}/>
     <Route exact path={`${Paths.UPDATE_LEAVE}:id`} render={EditLeave}/>
     <Route exact path={`${Paths.UPDATE_SERVICE}:id`} render={EditService}/>
   </React.Fragment>;
