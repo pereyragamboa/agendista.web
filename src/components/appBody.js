@@ -22,9 +22,9 @@ const EditAppointment = (props) =>
 const NewCustomer = () => <AddCustomerDetail title="Nuevo cliente"/>;
 const EditCustomer = (props) =>
     <EditCustomerDetail title="Editar cliente" okCaption="Editar" {...props}/>;
-const NewFixedHoliday = () => <FixedHolidayDetail title="Nuevo día feriado"/>;
-const NewVariableHoliday = () => <VariableHolidayDetail title="Nuevo día feriado"/>;
-const EditFixedHoliday = () => <FixedHolidayDetail title="Editar día feriado"/>;
+const NewFixedHoliday = (props) => <FixedHolidayDetail title="Nuevo día feriado" {...props}/>;
+const NewVariableHoliday = (props) => <VariableHolidayDetail title="Nuevo día feriado" {...props}/>;
+const EditFixedHoliday = (props) => <FixedHolidayDetail title="Editar día feriado" {...props}/>;
 const EditVariableHoliday = (props) => <VariableHolidayDetail title="Editar día feriado" {...props}/>;
 const NewLeave = () => <LeaveDetail title="Nuevo periodo vacacional"/>;
 const EditLeave = () => <LeaveDetail title="Editar periodo vacacional" okCaption="Editar"/>;
