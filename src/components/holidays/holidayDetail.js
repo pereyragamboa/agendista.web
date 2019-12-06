@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router';
 import { useQuery } from '@apollo/react-hooks';
-import { getDayNames } from "../../utilities/daysOfWeek";
+import {getDayIndex, getDayNames} from "../../utilities/daysOfWeek";
 import { getMonthNames, getMonthIndex } from "../../utilities/months";
 import { LIST_HOLIDAYS } from "../../constants/paths";
 import { GET_HOLIDAY } from "../../data/queries/holidayQueries";
@@ -19,7 +19,6 @@ import listGraphQLErrors from "../commons/listGraphQLErrors";
  * @constructor
  */
 function MonthInput(props) {
-  console.log(props);
   const { selectedMonth, ...otherProps } = props;
   const Input = getFormControl(<div className="select is-fullwidth">
     <select defaultValue={selectedMonth || 1}>
@@ -34,17 +33,17 @@ function MonthInput(props) {
 }
 
 function WeekdayInput(props) {
-  let d = 0;
+  const { selectedDay, ...otherProps } = props;
   const Input = getFormControl(<div className="select is-fullwidth">
-    <select>
+    <select defaultValue={selectedDay || 0}>
       {
-        getDayNames().map(day => {
-          return <option key={d} value={d++}>{capitalize(day)}</option>;
+        getDayNames().map((day, index) => {
+          return <option key={day} value={index}>{capitalize(day)}</option>;
         })
       })}
     </select>
   </div>);
-  return <Input {...props}/>
+  return <Input {...otherProps}/>
 }
 
 /**
@@ -65,7 +64,6 @@ export function FixedHolidayDetail(props) {
   const { loading, error, data } = useQuery(GET_HOLIDAY, { variables: { id }});
   if (loading) return <LoadingPanel subject="día feriado"/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
-  console.log(data);
   if (data === undefined) return <Redirect to={LIST_HOLIDAYS}/>;
   const detail = () => <form className="columns">
     <NumberInput className="column is-4" caption="Día" maxValue="31" currentValue={data.getHoliday.day}/>
@@ -81,12 +79,11 @@ export function VariableHolidayDetail(props) {
   const { loading, error, data } = useQuery(GET_HOLIDAY, { variables: { id }});
   if (loading) return <LoadingPanel subject="día feriado"/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
-  console.log(data);
   if (data === undefined) return <Redirect to={LIST_HOLIDAYS}/>;
   const detail = () => <form className="columns">
     <NumberInput className="column is-4" caption="#" maxValue="4" currentValue={data.getHoliday.week}/>
-    <WeekdayInput className="column is-4" caption="Día"/>
-    <MonthInput className="column is-4" caption="Mes"/>
+    <WeekdayInput className="column is-4" caption="Día" selectedDay={getDayIndex(data.getHoliday.dayOfWeek)}/>
+    <MonthInput className="column is-4" caption="Mes" selectedMonth={getMonthIndex(data.getHoliday.month)}/>
   </form>;
 
   const HolidayDetail = getDetail(detail);
