@@ -7,10 +7,8 @@ import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemo
 import { onError } from 'apollo-link-error';
 import './index.css';
 import App from './components/app';
-import CustomerResolvers from './data/resolvers/customerResolvers';
-import HolidayResolvers from './data/resolvers/holidayResolvers';
+import Resolvers from './data/resolvers';
 import introspectionQueryResultData from './fragmentTypes'; // generated with graphql-codegen
-import ServiceResolvers from './data/resolvers/serviceResolvers';
 import { uri } from './serverData.js';
 import * as serviceWorker from './serviceWorker';
 
@@ -42,9 +40,7 @@ const client = new ApolloClient({
     }),
   ]),
   cache,
-  resolvers: {
-    Query: {...CustomerResolvers.Query, ...HolidayResolvers.Query, ...ServiceResolvers.Query }
-  }
+  resolvers: Resolvers
 });
 
 ReactDOM.render(<App client={client} />, document.getElementById('root'));
