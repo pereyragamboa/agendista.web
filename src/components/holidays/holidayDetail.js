@@ -14,6 +14,7 @@ import listGraphQLErrors from "../commons/listGraphQLErrors";
 
 /**
  * Month selector.
+ *
  * @param props.selectedMonth Index of selected month. 1 is January.
  * @return {*}
  * @constructor
@@ -32,6 +33,13 @@ function MonthInput(props) {
   return <Input {...otherProps}/>;
 }
 
+/**
+ * Day of week selector.
+ *
+ * @param props.selectedDay Day of the week. Sunday is 0.
+ * @return {*}
+ * @constructor
+ */
 function WeekdayInput(props) {
   const { selectedDay, ...otherProps } = props;
   const Input = getFormControl(<div className="select is-fullwidth">
