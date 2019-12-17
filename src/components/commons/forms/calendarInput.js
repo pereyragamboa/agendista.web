@@ -7,16 +7,22 @@ import getFormControl from './getFormControl';
  *
  * @type {*}
  */
-const CalendarInput = getFormControl(() =>
-    <input className="input" data-display-mode="inline" type="date"/>);
+const CalendarInput = getFormControl((props) =>
+    <input className="input" data-display-mode="inline" type="date" {...props}/>);
 
 /**
  * Date input formatted with Bulma ranged calendar.
  *
  * @type {*}
  */
-const RangedCalendarInput = getFormControl(() =>
-    <input className="input" data-display-mode="inline" data-is-range="true" type="date"/>);
+const RangedCalendarInput = getFormControl((props) =>
+    <input className="input" type="date"
+       data-display-mode="inline"
+       data-is-range="true"
+       data-start-date={new Date(props.from).toUTCString()}
+       data-end-date={new Date(props.to).toUTCString()}
+     />
+);
 
 /**
  * Initializes Bulma calendars.
@@ -25,9 +31,8 @@ function attachCalendars() {
   const now = new Date();
   // Attaches date input to Bulma Calendar and configures it once the
   // component is mounted
-  bulmaCalendar.attach("input[type='date']", {
+  return bulmaCalendar.attach("input[type='date']", {
     minDate: now,
-    maxDate: now.setFullYear(now.getFullYear() + 1)
   });
 }
 

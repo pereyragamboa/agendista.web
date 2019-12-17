@@ -12,14 +12,14 @@ import getClassName from '../../../utilities/getClassName';
 export default function getFormControl(InputElement) {
   return class extends React.Component {
     render() {
-      const {caption, iconName} = this.props;
+      const {caption, iconName, ...otherProps} = this.props;
       const controlClassName = ["control", (iconName ? "has-icons-left" : '')].join(' ');
 
       return <div className={getClassName("field", this.props)}>
         <label className="label">{caption}</label>
         <div className={controlClassName}>
           <FeatherIcon iconName={iconName}/>
-          <InputElement {...this.props}/>
+          <InputElement {...otherProps}/>
         </div>
       </div>;
     }
