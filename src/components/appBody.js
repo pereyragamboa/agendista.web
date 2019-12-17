@@ -27,7 +27,7 @@ const NewVariableHoliday = (props) => <VariableHolidayDetail title="Nuevo día f
 const EditFixedHoliday = (props) => <FixedHolidayDetail title="Editar día feriado" {...props}/>;
 const EditVariableHoliday = (props) => <VariableHolidayDetail title="Editar día feriado" {...props}/>;
 const NewLeave = () => <LeaveDetail title="Nuevo periodo vacacional"/>;
-const EditLeave = () => <LeaveDetail title="Editar periodo vacacional" okCaption="Editar"/>;
+const EditLeave = (props) => <LeaveDetail title="Editar periodo vacacional" okCaption="Editar" {...props}/>;
 const NewService = () => <AddServiceDetail/>;
 const EditService = (props) => <EditServiceDetail {...props}/>;
 

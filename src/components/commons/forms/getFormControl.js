@@ -9,7 +9,7 @@ import getClassName from '../../../utilities/getClassName';
  * @return {*}
  * @constructor
  */
-export default function getFormControl(inputElement) {
+export default function getFormControl(InputElement) {
   return class extends React.Component {
     render() {
       const {caption, iconName} = this.props;
@@ -19,7 +19,7 @@ export default function getFormControl(inputElement) {
         <label className="label">{caption}</label>
         <div className={controlClassName}>
           <FeatherIcon iconName={iconName}/>
-          {inputElement}
+          <InputElement {...this.props}/>
         </div>
       </div>;
     }

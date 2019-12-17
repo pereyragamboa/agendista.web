@@ -7,7 +7,7 @@ import getFormControl from './getFormControl';
  *
  * @type {*}
  */
-const CalendarInput = getFormControl(
+const CalendarInput = getFormControl(() =>
     <input className="input" data-display-mode="inline" type="date"/>);
 
 /**
@@ -15,7 +15,7 @@ const CalendarInput = getFormControl(
  *
  * @type {*}
  */
-const RangedCalendarInput = getFormControl(
+const RangedCalendarInput = getFormControl(() =>
     <input className="input" data-display-mode="inline" data-is-range="true" type="date"/>);
 
 /**

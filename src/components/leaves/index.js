@@ -38,7 +38,7 @@ function LeaveRow (props) {
       ${toDate.toLocaleDateString('default', mobileDateOptions)}`}</td>
     <td className="is-hidden-touch">{fromDate.toLocaleDateString('default', desktopDateOptions)}</td>
     <td className="is-hidden-touch">{toDate.toLocaleDateString('default', desktopDateOptions)}</td>
-    <td><ListItemButtons deleteModalId={DELETE_LEAVE_MODAL} editPath={ UPDATE_LEAVE }/></td>
+    <td><ListItemButtons deleteModalId={DELETE_LEAVE_MODAL} editPath={ UPDATE_LEAVE + props.id }/></td>
   </tr>;
 }
 
@@ -64,7 +64,7 @@ export default function LeaveList (props) {
         </tr>
         {
           data.getLeaves.map(leave =>
-              <LeaveRow key={`key${leave.id}`} fromDate={new Date(leave.from)} toDate={new Date(leave.to)}/>)
+              <LeaveRow id={leave.id} key={`key${leave.id}`} fromDate={new Date(leave.from)} toDate={new Date(leave.to)}/>)
         }
       </tbody>
     </table>

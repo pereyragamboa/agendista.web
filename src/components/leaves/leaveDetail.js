@@ -1,13 +1,20 @@
 import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { Redirect } from 'react-router';
 import { attachCalendars, RangedCalendarInput } from "../commons/forms/calendarInput";
 import * as Paths from "../../constants/paths";
+import ErrorPanel from '../commons/errorPanel';
+import { GET_LEAVE } from '../../data/queries/leaveQueries';
 import getDetail from '../commons/getDetail';
+import listGraphQLErrors from '../commons/listGraphQLErrors';
+import LoadingPanel from '../commons/loadingPanel';
+import { LIST_LEAVES } from "../../constants/paths";
 
-export default class LeaveDetail extends React.Component{
+class DefaultLeaveDetail extends React.Component{
   render() {
-    const detailBody = () => <form className="field">
+    const detailBody = (props) => <form className="field">
       <p>Seleccione el rango del periodo vacacional:</p>
-      <RangedCalendarInput/>
+      <RangedCalendarInput {...props}/>
     </form>;
 
     const LeaveDetail = getDetail(detailBody);
@@ -18,4 +25,14 @@ export default class LeaveDetail extends React.Component{
   componentDidMount(){
     attachCalendars();
   }
+}
+
+export default function LeaveQuery(props) {
+  const { loading, error, data } = useQuery(GET_LEAVE, {
+    variables: { id: props.match.params.id }
+  });
+  if (loading) return <LoadingPanel subject={"Vacaciones"}/>;
+  if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
+  if (data === undefined) return <Redirect to={LIST_LEAVES}/>;
+  return <DefaultLeaveDetail from={data.getLeave.from} to={data.getLeave.to} id={data.getLeave.id} {...props}/>;
 }
