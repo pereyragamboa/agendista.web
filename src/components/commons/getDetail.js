@@ -6,7 +6,7 @@ import FeatherIcon from './featherIcon';
  *
  * Higher order component that creates a detail screen.
  *
- * @param FormComponent contains a group of form controls (inputs, checkboxes, etc)
+ * @param FormComponent Component with form controls (inputs, checkboxes, etc)
  * @param okClick callback of click on OK button
  * @return function
  */

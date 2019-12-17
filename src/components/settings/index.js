@@ -31,7 +31,7 @@ export default function Settings() {
   if (loading) return <LoadingPanel subject={SETTINGS}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
 
-  const settingsBody = () => <div>
+  const settingsBody = () => <React.Fragment>
     <FeatherInput caption="Nombre" iconName="briefcase"
                   value={data.getProfile.businessName}
                   placeholder="Nombre comercial del negocio u organización"/>
@@ -47,8 +47,7 @@ export default function Settings() {
                       value={data.getProfile.email} placeholder={emailPlaceholder}/>
       </div>
     </div>
-
-  </div>;
+  </React.Fragment>;
 
   const SettingsDetail = getDetail(settingsBody);
 
