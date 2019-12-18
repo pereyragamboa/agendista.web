@@ -79,12 +79,12 @@ const FixedDetail = getDetail((props) => <form className="columns">
     <MonthInput className="column is-4" caption="Mes" selectedMonth={getMonthIndex(props.month)}/>
   </form>);
 
-export function AddFixedHoliday(props) {
+export function AddFixedHolidayDetail(props) {
   const { day, month, ...otherProps } = props;
   return <FixedDetail {...otherProps} day={day} month={month} cancelPath={LIST_HOLIDAYS} />
 }
 
-export function EditFixedHoliday(props) {
+export function EditFixedHolidayDetail(props) {
   const { id } = props.match.params;
   const { loading, error, data } = useQuery(GET_HOLIDAY, { variables: { id }});
   if (loading) return <LoadingPanel subject="día feriado"/>;
@@ -109,11 +109,11 @@ const VariableDetail = getDetail((props) => <form className="columns">
   <MonthInput className="column is-4" caption="Mes" selectedMonth={getMonthIndex(props.month)}/>
 </form>);
 
-export function AddVariableHoliday(props) {
+export function AddVariableHolidayDetail(props) {
   return <VariableDetail {...props} cancelPath={LIST_HOLIDAYS}/>;
 }
 
-export function EditVariableHoliday(props) {
+export function EditVariableHolidayDetail(props) {
   const { id } = props.match.params;
   const { loading, error, data } = useQuery(GET_HOLIDAY, { variables: { id }});
   if (loading) return <LoadingPanel subject="día feriado"/>;
