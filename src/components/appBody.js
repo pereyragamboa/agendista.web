@@ -7,7 +7,7 @@ import Customers from "./customers/index";
 import { AddCustomerDetail, EditCustomerDetail } from "./customers/customerDetail";
 import { AddServiceDetail, EditServiceDetail } from "./services/serviceDetail";
 import Home from "./home";
-import {FixedHolidayDetail, VariableHolidayDetail} from './holidays/holidayDetail';
+import { AddFixedHoliday, AddVariableHoliday, EditFixedHoliday, EditVariableHoliday} from './holidays/holidayDetail';
 import HolidayList from './holidays/index';
 import HourList from './businessHours/index';
 import { EditLeaveDetail, AddLeaveDetail } from './leaves/leaveDetail';
@@ -22,10 +22,10 @@ const EditAppointment = (props) =>
 const NewCustomer = () => <AddCustomerDetail title="Nuevo cliente"/>;
 const EditCustomer = (props) =>
     <EditCustomerDetail title="Editar cliente" okCaption="Editar" {...props}/>;
-const NewFixedHoliday = (props) => <FixedHolidayDetail title="Nuevo día feriado" {...props}/>;
-const NewVariableHoliday = (props) => <VariableHolidayDetail title="Nuevo día feriado" {...props}/>;
-const EditFixedHoliday = (props) => <FixedHolidayDetail title="Editar día feriado" {...props}/>;
-const EditVariableHoliday = (props) => <VariableHolidayDetail title="Editar día feriado" {...props}/>;
+const NewFixedHoliday = (props) => <AddFixedHoliday title="Nuevo día feriado" {...props}/>;
+const NewVariableHoliday = (props) => <AddVariableHoliday title="Nuevo día feriado" {...props}/>;
+const EditFixedDetail = (props) => <EditFixedHoliday title="Editar día feriado" {...props}/>;
+const EditVariableDetail = (props) => <EditVariableHoliday title="Editar día feriado" {...props}/>;
 const NewLeave = () => <AddLeaveDetail title="Nuevo periodo vacacional"/>;
 const EditLeave = (props) => <EditLeaveDetail title="Editar periodo vacacional" okCaption="Editar" {...props}/>;
 const NewService = () => <AddServiceDetail/>;
@@ -50,8 +50,8 @@ export default class AppBody extends React.Component {
     <Route exact path={Paths.SETTINGS} component={Settings}/>
     <Route exact path={`${Paths.UPDATE_APPOINTMENT}:id`} render={EditAppointment}/>
     <Route exact path={`${Paths.UPDATE_CUSTOMER}:id`} render={EditCustomer}/>
-    <Route exact path={`${Paths.UPDATE_FIXED_HOLIDAY}:id`} render={EditFixedHoliday}/>
-    <Route exact path={`${Paths.UPDATE_VARIABLE_HOLIDAY}:id`} render={EditVariableHoliday}/>
+    <Route exact path={`${Paths.UPDATE_FIXED_HOLIDAY}:id`} render={EditFixedDetail}/>
+    <Route exact path={`${Paths.UPDATE_VARIABLE_HOLIDAY}:id`} render={EditVariableDetail}/>
     <Route exact path={`${Paths.UPDATE_LEAVE}:id`} render={EditLeave}/>
     <Route exact path={`${Paths.UPDATE_SERVICE}:id`} render={EditService}/>
   </React.Fragment>;

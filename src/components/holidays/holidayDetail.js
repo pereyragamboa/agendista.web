@@ -67,33 +67,59 @@ function NumberInput(props) {
   return <Input {...otherProps}/>
 }
 
-export function FixedHolidayDetail(props) {
-  const { id } = props.match.params;
-  const { loading, error, data } = useQuery(GET_HOLIDAY, { variables: { id }});
-  if (loading) return <LoadingPanel subject="día feriado"/>;
-  if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
-  if (data === undefined) return <Redirect to={LIST_HOLIDAYS}/>;
-  const detail = () => <form className="columns">
-    <NumberInput className="column is-4" caption="Día" maxValue="31" currentValue={data.getHoliday.day}/>
-    <MonthInput className="column is-4" caption="Mes" selectedMonth={getMonthIndex(data.getHoliday.month)}/>
-  </form>;
+/**
+ * Gets the detail form for fixed holidays.
+ * @param props.day Day of the month.
+ * @param props.month Uppercase name of the month.
+ *
+ * @type {Function} A component containing a fixed holiday form.
+ */
+const FixedDetail = getDetail((props) => <form className="columns">
+    <NumberInput className="column is-4" caption="Día" maxValue="31" currentValue={props.day}/>
+    <MonthInput className="column is-4" caption="Mes" selectedMonth={getMonthIndex(props.month)}/>
+  </form>);
 
-  const HolidayDetail = getDetail(detail);
-  return <HolidayDetail {...props} cancelPath={LIST_HOLIDAYS}/>;
+export function AddFixedHoliday(props) {
+  const { day, month, ...otherProps } = props;
+  return <FixedDetail {...otherProps} day={day} month={month} cancelPath={LIST_HOLIDAYS} />
 }
 
-export function VariableHolidayDetail(props) {
+export function EditFixedHoliday(props) {
   const { id } = props.match.params;
   const { loading, error, data } = useQuery(GET_HOLIDAY, { variables: { id }});
   if (loading) return <LoadingPanel subject="día feriado"/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   if (data === undefined) return <Redirect to={LIST_HOLIDAYS}/>;
-  const detail = () => <form className="columns">
-    <NumberInput className="column is-4" caption="#" maxValue="4" currentValue={data.getHoliday.week}/>
-    <WeekdayInput className="column is-4" caption="Día" selectedDay={getDayIndex(data.getHoliday.dayOfWeek)}/>
-    <MonthInput className="column is-4" caption="Mes" selectedMonth={getMonthIndex(data.getHoliday.month)}/>
-  </form>;
 
-  const HolidayDetail = getDetail(detail);
-  return <HolidayDetail {...props} cancelPath={LIST_HOLIDAYS}/>
+  const { day, month } = data.getHoliday;
+  return <FixedDetail {...props} day={day} month={month} cancelPath={LIST_HOLIDAYS}/>;
+}
+
+/**
+ * Gets the detail form for variable holidays.
+ * @param props.dayOfWeek Uppercase name of a day of the week.
+ * @param props.week Index of week.
+ * @param props.month Uppercase name of a month.
+ *
+ * @type {Function} A component containing a variable holiday form.
+ */
+const VariableDetail = getDetail((props) => <form className="columns">
+  <NumberInput className="column is-4" caption="#" maxValue="4" currentValue={props.week}/>
+  <WeekdayInput className="column is-4" caption="Día" selectedDay={getDayIndex(props.dayOfWeek)}/>
+  <MonthInput className="column is-4" caption="Mes" selectedMonth={getMonthIndex(props.month)}/>
+</form>);
+
+export function AddVariableHoliday(props) {
+  return <VariableDetail {...props} cancelPath={LIST_HOLIDAYS}/>;
+}
+
+export function EditVariableHoliday(props) {
+  const { id } = props.match.params;
+  const { loading, error, data } = useQuery(GET_HOLIDAY, { variables: { id }});
+  if (loading) return <LoadingPanel subject="día feriado"/>;
+  if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
+  if (data === undefined) return <Redirect to={LIST_HOLIDAYS}/>;
+
+  const { week, dayOfWeek, month } = data.getHoliday;
+  return <VariableDetail {...props} week={week} dayOfWeek={dayOfWeek} month={month} cancelPath={LIST_HOLIDAYS}/>
 }
