@@ -10,7 +10,7 @@ import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import { LIST_LEAVES } from "../../constants/paths";
 
-class DefaultLeaveDetail extends React.Component{
+export class LeaveDetail extends React.Component{
   render() {
     const detailBody = (props) => <form className="field">
       <p>Seleccione el rango del periodo vacacional:</p>
@@ -27,12 +27,18 @@ class DefaultLeaveDetail extends React.Component{
   }
 }
 
-export default function LeaveQuery(props) {
+export function AddLeaveDetail(props) {
+  const fromDate = new Date();
+  const toDate = new Date().setDate(fromDate.getDate() + 1);
+  return <LeaveDetail from={fromDate} to={toDate} {...props}/>
+}
+
+export function EditLeaveDetail(props) {
   const { loading, error, data } = useQuery(GET_LEAVE, {
     variables: { id: props.match.params.id }
   });
   if (loading) return <LoadingPanel subject={"Vacaciones"}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   if (data === undefined) return <Redirect to={LIST_LEAVES}/>;
-  return <DefaultLeaveDetail from={data.getLeave.from} to={data.getLeave.to} id={data.getLeave.id} {...props}/>;
+  return <LeaveDetail from={data.getLeave.from} to={data.getLeave.to} {...props}/>;
 }

@@ -10,7 +10,7 @@ import Home from "./home";
 import {FixedHolidayDetail, VariableHolidayDetail} from './holidays/holidayDetail';
 import HolidayList from './holidays/index';
 import HourList from './businessHours/index';
-import LeaveDetail from './leaves/leaveDetail';
+import { EditLeaveDetail, AddLeaveDetail } from './leaves/leaveDetail';
 import Index from './leaves/index';
 import Settings from "./settings/index";
 import Services from "./services/index";
@@ -26,8 +26,8 @@ const NewFixedHoliday = (props) => <FixedHolidayDetail title="Nuevo día feriado
 const NewVariableHoliday = (props) => <VariableHolidayDetail title="Nuevo día feriado" {...props}/>;
 const EditFixedHoliday = (props) => <FixedHolidayDetail title="Editar día feriado" {...props}/>;
 const EditVariableHoliday = (props) => <VariableHolidayDetail title="Editar día feriado" {...props}/>;
-const NewLeave = () => <LeaveDetail title="Nuevo periodo vacacional"/>;
-const EditLeave = (props) => <LeaveDetail title="Editar periodo vacacional" okCaption="Editar" {...props}/>;
+const NewLeave = () => <AddLeaveDetail title="Nuevo periodo vacacional"/>;
+const EditLeave = (props) => <EditLeaveDetail title="Editar periodo vacacional" okCaption="Editar" {...props}/>;
 const NewService = () => <AddServiceDetail/>;
 const EditService = (props) => <EditServiceDetail {...props}/>;
 
