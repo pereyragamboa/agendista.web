@@ -12,7 +12,7 @@ import { getTimeString } from "../../utilities/times";
 import LoadingPanel from "../commons/loadingPanel";
 
 const detailBody = function (props) {
-  const DescriptionTextArea = getFormControl(
+  const DescriptionTextArea = getFormControl(() =>
       <textarea className="textarea" rows="3" placeholder="Descripción del servicio" defaultValue={props.description} />
   );
   return <div>

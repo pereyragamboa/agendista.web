@@ -21,7 +21,7 @@ import listGraphQLErrors from "../commons/listGraphQLErrors";
  */
 function MonthInput(props) {
   const { selectedMonth, ...otherProps } = props;
-  const Input = getFormControl(<div className="select is-fullwidth">
+  const Input = getFormControl(() => <div className="select is-fullwidth">
     <select defaultValue={selectedMonth || 1}>
       {
         getMonthNames().map((month, m) => {
@@ -42,7 +42,7 @@ function MonthInput(props) {
  */
 function WeekdayInput(props) {
   const { selectedDay, ...otherProps } = props;
-  const Input = getFormControl(<div className="select is-fullwidth">
+  const Input = getFormControl(() => <div className="select is-fullwidth">
     <select defaultValue={selectedDay || 0}>
       {
         getDayNames().map((day, index) => {
@@ -63,7 +63,7 @@ function WeekdayInput(props) {
  */
 function NumberInput(props) {
   const { currentValue, maxValue, ...otherProps } = props;
-  const Input = getFormControl(<input type="number" className="input" min="1" max={maxValue} defaultValue={currentValue}/>);
+  const Input = getFormControl(() => <input type="number" className="input" min="1" max={maxValue} defaultValue={currentValue}/>);
   return <Input {...otherProps}/>
 }
 
