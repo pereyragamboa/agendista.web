@@ -6,7 +6,6 @@ import * as daysOfWeek from "../../utilities/daysOfWeek";
 import capitalize from '../../utilities/capitalize';
 import ErrorPanel from '../commons/errorPanel';
 import getIndex from '../commons/getIndex';
-import { getTimeString } from "../../utilities/times";
 import listGraplQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import { WORKING_HOURS} from "../../constants/headers";
@@ -34,8 +33,8 @@ const SUNDAY = 0;
  */
 function HourListItem(props) {
   const className = "ag-class-hours-" + props.id;
-  const fromTime = props.from ? getTimeString(props.from) : "09:00";
-  const toTime = props.to ? getTimeString(props.to) : "18:00";
+  const fromTime = props.from ? props.from : "09:00";
+  const toTime = props.to ? props.to : "18:00";
 
   return <tr>
     <th className="control">
