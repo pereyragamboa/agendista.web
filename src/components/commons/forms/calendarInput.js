@@ -16,13 +16,22 @@ const CalendarInput = getFormControl((props) =>
  * @type {*}
  */
 const RangedCalendarInput = getFormControl((props) =>
-    <input className="input" type="date"
-       data-display-mode="inline"
-       data-is-range="true"
-       data-start-date={new Date(props.from).toUTCString()}
-       data-end-date={new Date(props.to).toUTCString()}
-     />
-);
+  <input className="input" type="date"
+         data-display-mode="inline"
+         data-is-range="true"
+         data-start-date={shiftDate(new Date(props.from))}
+         data-end-date={shiftDate(new Date(props.to))}
+  />);
+
+/**
+ * Changes an UTC date to local time
+ * @param utcDate a date string in ISO 8601 / JSON format.
+ * @return {Date} a Date object with year, month and day equal to the original date.
+ */
+const shiftDate = (utcDate) => new Date(
+    utcDate.getUTCFullYear(),
+    utcDate.getUTCMonth(),
+    utcDate.getUTCDate());
 
 /**
  * Initializes Bulma calendars.

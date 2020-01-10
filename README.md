@@ -13,7 +13,11 @@ As of December 2019, the application only retrieves and display data from its ba
 
 Install [the back end](https://github.com/pereyragamboa/agendista.back) before running the application. 
 
-Once installed, change the server path in `serverData.js`.
+Once installed, change the back-end server path in `src/serverData.js` and `codegen.yml`. Run `gql-gen` as detailed in
+[Apollo's documentation on fragments](https://www.apollographql.com/docs/react/v2.6/advanced/fragments/#fragments-on-unions-and-interfaces) 
+for creating `src/fragmentTypes.json`.
+
+After that, use the available scripts in [create-react-app](https://create-react-app.dev/docs/getting-started/#scripts).
 
 ## Frameworks and tools 
 

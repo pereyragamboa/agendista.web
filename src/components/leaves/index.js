@@ -23,13 +23,15 @@ function LeaveRow (props) {
 
   const mobileDateOptions = {
     month: 'numeric',
-    day: 'numeric'
+    day: 'numeric',
+    timeZone: 'UTC'
   };
 
   const desktopDateOptions = {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
+    timeZone: 'UTC'
   };
 
   return <tr>
