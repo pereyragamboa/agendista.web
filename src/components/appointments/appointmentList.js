@@ -68,7 +68,7 @@ export default function AppointmentList (props) {
           <tbody>
           {
             data.getProfileAppointments.sort((a, b) => a.date < b.date).map(appointment => {
-              const appointmentTime = new Date(appointment.date * 1000);
+              const appointmentTime = new Date(appointment.date);
               return <AppointmentListElement
                 key={appointment.id} id={appointment.id}
                 clientName={appointment.customer.firstName + ' ' + appointment.customer.lastName}
