@@ -4,7 +4,8 @@ import FeatherIcon from './featherIcon';
 
 /**
  *
- * Higher order component that creates a detail screen.
+ * Higher order component that creates a detail screen. A detail screen consists of
+ * a form, an OK button and a Cancel button.
  *
  * @param FormComponent Component with form controls (inputs, checkboxes, etc)
  * @param okClick callback of click on OK button
