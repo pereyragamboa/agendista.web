@@ -1,8 +1,14 @@
 import React from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 import * as CalendarInput from '../commons/forms/calendarInput';
 import * as Paths from '../../constants/paths';
+import AppointmentCustomerSelector from './appointmentCustomerSelector';
 import FeatherInput from "../commons/forms/featherInput";
 import getDetail from '../commons/getDetail';
+import ErrorPanel from '../commons/errorPanel'
+import listGraphQLErrors from '../commons/listGraphQLErrors';
+import LoadingPanel from "../commons/loadingPanel";
 
 /**
  * Detail form for creating or editing appointments.
@@ -13,31 +19,58 @@ import getDetail from '../commons/getDetail';
  */
 export default function AppointmentDetail(props) {
   const detailBody = class extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        totalPrice: 0,
+        totalDuration: 0
+      };
+    }
+
+    onServiceChecked(e, price, duration) {
+      let diffPrice, diffDuration;
+      if (e.target.checked) {
+        diffPrice = price;
+        diffDuration = duration;
+      } else {
+        diffPrice = -price;
+        diffDuration = -duration;
+      }
+      this.setState({
+        totalPrice: this.state.totalPrice + diffPrice,
+        totalDuration: this.state.totalDuration + diffDuration
+      });
+    }
+
     render() {
       return <form>
         <h2 className="subtitle">Cliente</h2>
+        <AppointmentCustomerSelector/>
         <FeatherInput caption="Cliente" iconName="user" placeholder="Nombre del cliente"/>
         <h2 className="subtitle">Detalle de la cita</h2>
         <div className="columns">
           <div className="column">
             <fieldset className="field">
               <label className="label">Servicios disponibles</label>
-              <div className="control">
-                <div className="checkbox">
-                  <input type="checkbox"/>Servicio 1
-                </div>
-              </div>
-              <div className="control">
-                <div className="checkbox">
-                  <input type="checkbox"/><span>Servicio 2</span>
-                </div>
-              </div>
-              <div className="control">
-                <div className="checkbox">
-                  <input type="checkbox"/><span>Servicio 3</span>
-                </div>
-              </div>
-              <p className="help is-danger">Seleccione al menos un servicio.</p>
+              {
+                this.props.services.map(service =>
+                    <div key={service.id} className="control">
+                      <div className="checkbox">
+                        <input type="checkbox" value={service.id}
+                               onChange={e => this.onServiceChecked(e, service.price, service.duration)}/>
+                        {service.description}
+                      </div>
+                    </div>
+                )
+              }
+              {
+                this.state.totalPrice === 0 ?
+                  <p className="help is-danger">Seleccione al menos un servicio.</p> :
+                  <React.Fragment>
+                    <p>Costo: ${this.state.totalPrice}</p>
+                    <p>Tiempo: {this.state.totalDuration} min</p>
+                  </React.Fragment>
+              }
             </fieldset>
           </div>
           <div className="column">
@@ -55,7 +88,19 @@ export default function AppointmentDetail(props) {
     }
   };
 
-  const AppointmentDetail = getDetail(detailBody);
+  const { error, loading, data } = useQuery(gql`
+      query { getProfile(profileId: "0x30001") {
+          services {
+              id
+              description
+              duration
+              price
+          }
+      }}
+  `);
+  if (loading) return <LoadingPanel subject="datos de cita"/>;
+  if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
 
-  return <AppointmentDetail {...props} cancelPath={Paths.LIST_APPOINTMENTS} />
+  const AppointmentDetail = getDetail(detailBody);
+  return <AppointmentDetail {...props} cancelPath={Paths.LIST_APPOINTMENTS} services={data.getProfile.services} />
 }
