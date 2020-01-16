@@ -63,15 +63,19 @@ export default function AppointmentDetail(props) {
                     </div>
                 )
               }
-              {
-                this.state.totalPrice === 0 ?
-                  <p className="help is-danger">Seleccione al menos un servicio.</p> :
-                  <React.Fragment>
-                    <p>Costo: ${this.state.totalPrice}</p>
-                    <p>Tiempo: {this.state.totalDuration} min</p>
-                  </React.Fragment>
-              }
             </fieldset>
+            {
+              this.state.totalPrice === 0 ?
+                <section className="message is-danger">
+                  <p className="message-body">Seleccione al menos un servicio.</p>
+                </section> :
+                <section className="message is-info">
+                  <div className="message-body">
+                    <p>Costo: <strong>${this.state.totalPrice}</strong></p>
+                    <p>Tiempo: <strong>{this.state.totalDuration} min</strong></p>
+                  </div>
+                </section>
+            }
           </div>
           <div className="column">
             <CalendarInput.CalendarInput caption="Fecha" iconName="calendar"/>
