@@ -8,7 +8,6 @@ import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import * as Paths from '../../constants/paths';
 
-let timer = null; // Timer reference
 const query = gql`
   query findCustomers($names: [String]) { 
     findCustomersByName(names: $names) {
@@ -22,6 +21,12 @@ function getCustomerRowId(customerId) {
   return `ag-customer-search-result-${customerId}`;
 }
 
+/**
+ * Shows the results of a customer search.
+ * @param props.names Customer information, from a customer query.
+ * @return {*}
+ * @constructor
+ */
 function CustomerSelectionResults(props) {
   const [state, setState] = useState({
     selectedCustomerRowId: "",
@@ -31,14 +36,16 @@ function CustomerSelectionResults(props) {
 
   function onCustomerRowClick(e) {
     const currentId = state.selectedCustomerRowId;
-    const clickedId = e.target.parentElement.id;
-    if (currentId && currentId !== clickedId) {
+    // Because the click() event will be raised from a <td>, we must query the parent of the clicked <td>
+    const newId = e.target.parentElement.id;
+    // Deselect current row, if present
+    if (currentId && currentId !== newId) {
       document.getElementById(currentId).classList.remove(IS_ROW_SELECTED_CLASS);
     }
-    document.getElementById(clickedId).classList.add(IS_ROW_SELECTED_CLASS);
-    setState({ selectedCustomerRowId: clickedId });
+    // Select new row
+    document.getElementById(newId).classList.add(IS_ROW_SELECTED_CLASS);
+    setState({ selectedCustomerRowId: newId });
   }
-
 
   return props.names && props.names.length > 0 ?
       <table className="table is-hoverable">
@@ -57,7 +64,10 @@ function CustomerSelectionResults(props) {
         }
         </tbody>
       </table> :
-      <p>No se encontraron clientes. <a href={Paths.ADD_CUSTOMER}>¿Desea agregar un nuevo cliente?</a>.</p>
+      <div className="message is-warning">
+        <p className="message-header">No se encontraron clientes.</p>
+        <p className="message-body">Intente buscar otro nombre, o <a href={Paths.ADD_CUSTOMER}>agregar un nuevo cliente</a>.</p>
+      </div>
 }
 
 export default function AppointmentCustomerSelector() {
@@ -66,6 +76,8 @@ export default function AppointmentCustomerSelector() {
   });
 
   const [getQuery, { loading, error, data }] = useLazyQuery(query);
+
+  let timer = null; // Timer reference
 
   function onCustomerChange(e) {
     if (timer != null) {
@@ -95,10 +107,13 @@ export default function AppointmentCustomerSelector() {
     { loading && <LoadingPanel subject="Resultados de búsqueda"/> }
     { error && <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel> }
     { data && data.findCustomersByName && <CustomerSelectionResults names={data.findCustomersByName}/> }
-
-    <button className="button is-success">
-      <FeatherIcon iconName="arrow-right"/>
-      <span>Siguiente</span>
-    </button>
+    { data && data.findCustomersByName.length && <div className="field is-grouped is-grouped-right">
+      <div className="control">
+        <button className="button is-success is-right">
+          <FeatherIcon iconName="arrow-right"/>
+          <span>Siguiente</span>
+        </button>
+      </div>
+    </div> }
   </React.Fragment>
 }
