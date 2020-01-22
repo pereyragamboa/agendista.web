@@ -28,27 +28,25 @@ function getCustomerRowId(customerId) {
  * @constructor
  */
 function CustomerSelectionResults(props) {
-  const [state, setState] = useState({
-    selectedCustomerRowId: "",
-  });
+  let selectedCustomerRowId = "";
 
   const IS_ROW_SELECTED_CLASS = "is-selected";
 
   function onCustomerRowClick(e) {
-    const currentId = state.selectedCustomerRowId;
     // Because the click() event will be raised from a <td>, we must query the parent of the clicked <td>
     const newId = e.target.parentElement.id;
     // Deselect current row, if present
-    if (currentId && currentId !== newId) {
-      document.getElementById(currentId).classList.remove(IS_ROW_SELECTED_CLASS);
+    if (selectedCustomerRowId && selectedCustomerRowId !== newId) {
+      document.getElementById(selectedCustomerRowId).classList.remove(IS_ROW_SELECTED_CLASS);
     }
     // Select new row
     document.getElementById(newId).classList.add(IS_ROW_SELECTED_CLASS);
-    setState({ selectedCustomerRowId: newId });
+    selectedCustomerRowId = newId;
   }
 
   return props.names && props.names.length > 0 ?
-      <table className="table is-hoverable">
+      <div className="field">
+      <table className="table is-fullwidth is-hoverable">
         <thead>
         <tr>
           <th>Nombre</th>
@@ -63,7 +61,7 @@ function CustomerSelectionResults(props) {
           </tr>)
         }
         </tbody>
-      </table> :
+      </table></div> :
       <div className="message is-warning">
         <p className="message-header">No se encontraron clientes.</p>
         <p className="message-body">Intente buscar otro nombre, o <a href={Paths.ADD_CUSTOMER}>agregar un nuevo cliente</a>.</p>
