@@ -18,7 +18,28 @@ const query = gql`
     }
   }`;
 
+function getCustomerRowId(customerId) {
+  return `ag-customer-search-result-${customerId}`;
+}
+
 function CustomerSelectionResults(props) {
+  const [state, setState] = useState({
+    selectedCustomerRowId: "",
+  });
+
+  const IS_ROW_SELECTED_CLASS = "is-selected";
+
+  function onCustomerRowClick(e) {
+    const currentId = state.selectedCustomerRowId;
+    const clickedId = e.target.parentElement.id;
+    if (currentId && currentId !== clickedId) {
+      document.getElementById(currentId).classList.remove(IS_ROW_SELECTED_CLASS);
+    }
+    document.getElementById(clickedId).classList.add(IS_ROW_SELECTED_CLASS);
+    setState({ selectedCustomerRowId: clickedId });
+  }
+
+
   return props.names && props.names.length > 0 ?
       <table className="table is-hoverable">
         <thead>
@@ -27,9 +48,9 @@ function CustomerSelectionResults(props) {
           <th>Apellidos</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style={{cursor: "pointer"}}>
         {
-          props.names.map(name => <tr key={name.id}>
+          props.names.map(name => <tr id={getCustomerRowId(name.id)} key={name.id} onClick={onCustomerRowClick}>
             <td>{name.firstName}</td>
             <td>{name.lastName}</td>
           </tr>)
