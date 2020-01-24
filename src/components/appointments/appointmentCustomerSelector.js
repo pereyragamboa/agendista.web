@@ -14,6 +14,7 @@ const query = gql`
       id
       firstName
       lastName
+      email
     }
   }`;
 
@@ -51,6 +52,7 @@ function CustomerSelectionResults(props) {
         <tr>
           <th>Nombre</th>
           <th>Apellidos</th>
+          <th>Correo electrónico</th>
         </tr>
         </thead>
         <tbody style={{cursor: "pointer"}}>
@@ -58,6 +60,7 @@ function CustomerSelectionResults(props) {
           props.names.map(name => <tr id={getCustomerRowId(name.id)} key={name.id} onClick={onCustomerRowClick}>
             <td>{name.firstName}</td>
             <td>{name.lastName}</td>
+            <td>{name.email}</td>
           </tr>)
         }
         </tbody>
@@ -83,7 +86,7 @@ export default function AppointmentCustomerSelector() {
       clearTimeout(timer);
       timer = null;
     }
-    const { value } = e.target;
+    const value = e.target.value.trim();
     // Reassigns timer if value is not an empty string
     if (value) {
       timer = setTimeout(
