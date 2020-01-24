@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
 import ErrorPanel from '../commons/errorPanel';
@@ -79,6 +79,11 @@ export default function AppointmentCustomerSelector() {
     searchCriteria: "" // Content of the customer name input
   });
 
+  useEffect(() => {
+    const searchInput = document.getElementById("ag-search-criteria-input");
+    if (searchInput) searchInput.focus();
+  });
+
   const [getQuery, { loading, error, data }] = useLazyQuery(query);
 
   let timer = null; // Timer reference
@@ -91,17 +96,17 @@ export default function AppointmentCustomerSelector() {
     }
     const value = e.target.value.trim();
     // Reassigns timer if value is not an empty string
-    if (value) {
+    if (value.length >= 3) {
       timer = setTimeout(
           names => {
             getQuery({variables: {names}});
-            setState({searchCriteria: value});
+            setState({ searchCriteria: value });
           }, 1000, value.split(" "));
     }
   }
 
   return <React.Fragment>
-    <FeatherInput iconName="search" placeholder="Nombre(s)" caption="Agendar la cita a:" value={state.searchCriteria}
+    <FeatherInput id="ag-search-criteria-input" iconName="search" placeholder="Nombre(s)" caption="Agendar la cita a:" value={state.searchCriteria}
                   onChange={onCustomerChange}/>
     { loading && <LoadingPanel subject="Clientes"/> }
     { error && <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel> }
