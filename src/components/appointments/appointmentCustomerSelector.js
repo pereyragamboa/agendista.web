@@ -75,12 +75,15 @@ function CustomerSelectionResults(props) {
 }
 
 export default function AppointmentCustomerSelector() {
+  const SEARCH_INPUT_ID = "ag-search-criteria-input";
+
   const [state, setState] = useState({
     searchCriteria: "" // Content of the customer name input
   });
 
   useEffect(() => {
-    const searchInput = document.getElementById("ag-search-criteria-input");
+    // Keeps focus on the search criteria input
+    const searchInput = document.getElementById(SEARCH_INPUT_ID);
     if (searchInput) searchInput.focus();
   });
 
@@ -99,14 +102,14 @@ export default function AppointmentCustomerSelector() {
     if (value.length >= 3) {
       timer = setTimeout(
           names => {
-            getQuery({variables: {names}});
+            getQuery({ variables: {names} });
             setState({ searchCriteria: value });
           }, 1000, value.split(" "));
     }
   }
 
   return <React.Fragment>
-    <FeatherInput id="ag-search-criteria-input" iconName="search" placeholder="Nombre(s)" caption="Agendar la cita a:" value={state.searchCriteria}
+    <FeatherInput id={SEARCH_INPUT_ID} iconName="search" placeholder="Nombre(s)" caption="Agendar la cita a:" value={state.searchCriteria}
                   onChange={onCustomerChange}/>
     { loading && <LoadingPanel subject="Clientes"/> }
     { error && <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel> }
