@@ -101,7 +101,7 @@ export default function AppointmentCustomerSelector() {
   }
 
   return <React.Fragment>
-    <FeatherInput iconName="user" placeholder="Nombre(s)" caption="Agendar la cita a:" value={state.searchCriteria}
+    <FeatherInput iconName="search" placeholder="Nombre(s)" caption="Agendar la cita a:" value={state.searchCriteria}
                   onChange={onCustomerChange}/>
     { loading && <LoadingPanel subject="Clientes"/> }
     { error && <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel> }
