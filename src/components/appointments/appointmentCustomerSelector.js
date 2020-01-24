@@ -18,6 +18,8 @@ const query = gql`
     }
   }`;
 
+const CONFIRM_BUTTON_ID = "ag-confirm-user-selection";
+
 function getCustomerRowId(customerId) {
   return `ag-customer-search-result-${customerId}`;
 }
@@ -29,9 +31,8 @@ function getCustomerRowId(customerId) {
  * @constructor
  */
 function CustomerSelectionResults(props) {
-  let selectedCustomerRowId = "";
-
   const IS_ROW_SELECTED_CLASS = "is-selected";
+  let selectedCustomerRowId = "";
 
   function onCustomerRowClick(e) {
     // Because the click() event will be raised from a <td>, we must query the parent of the clicked <td>
@@ -43,6 +44,8 @@ function CustomerSelectionResults(props) {
     // Select new row
     document.getElementById(newId).classList.add(IS_ROW_SELECTED_CLASS);
     selectedCustomerRowId = newId;
+    // Show confirm button
+    document.getElementById(CONFIRM_BUTTON_ID).classList.remove("is-hidden");
   }
 
   return props.names && props.names.length > 0 ?
@@ -108,13 +111,13 @@ export default function AppointmentCustomerSelector() {
     { loading && <LoadingPanel subject="Resultados de búsqueda"/> }
     { error && <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel> }
     { data && data.findCustomersByName && <CustomerSelectionResults names={data.findCustomersByName}/> }
-    { data && data.findCustomersByName.length && <div className="field is-grouped is-grouped-right">
+    <div className="field is-grouped is-grouped-right">
       <div className="control">
-        <button className="button is-success is-right">
-          <FeatherIcon iconName="arrow-right"/>
-          <span>Siguiente</span>
+        <button id={CONFIRM_BUTTON_ID} className="button is-success is-hidden">
+          <FeatherIcon iconName="user-check"/>
+          <span>Confirmar cliente</span>
         </button>
       </div>
-    </div> }
+    </div>
   </React.Fragment>
 }
