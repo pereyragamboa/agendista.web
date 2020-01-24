@@ -65,6 +65,7 @@ export default function AppointmentDetail(props) {
               }
             </fieldset>
             {
+              // Use total price as proxy for element selection
               this.state.totalPrice === 0 ?
                 <section className="message is-danger">
                   <p className="message-body">Seleccione al menos un servicio.</p>
