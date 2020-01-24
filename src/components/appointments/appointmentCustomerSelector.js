@@ -55,7 +55,7 @@ function CustomerSelectionResults(props) {
         <tr>
           <th>Nombre</th>
           <th>Apellidos</th>
-          <th>Correo electrónico</th>
+          <th className="is-hidden-mobile">Correo electrónico</th>
         </tr>
         </thead>
         <tbody style={{cursor: "pointer"}}>
@@ -63,12 +63,12 @@ function CustomerSelectionResults(props) {
           props.names.map(name => <tr id={getCustomerRowId(name.id)} key={name.id} onClick={onCustomerRowClick}>
             <td>{name.firstName}</td>
             <td>{name.lastName}</td>
-            <td>{name.email}</td>
+            <td className="is-hidden-mobile">{name.email}</td>
           </tr>)
         }
         </tbody>
       </table></div> :
-      <div className="message is-warning">
+      <div className="field message is-warning">
         <p className="message-header">No se encontraron clientes.</p>
         <p className="message-body">Intente buscar otro nombre, o <a href={Paths.ADD_CUSTOMER}>agregar un nuevo cliente</a>.</p>
       </div>
@@ -102,13 +102,8 @@ export default function AppointmentCustomerSelector() {
 
   return <React.Fragment>
     <FeatherInput iconName="user" placeholder="Nombre(s)" caption="Agendar la cita a:" value={state.searchCriteria}
-                  onChange={onCustomerChange}>
-      <button className="button is-primary">
-        <FeatherIcon iconName="user-plus"/>
-        <span>Nuevo usuario...</span>
-      </button>
-    </FeatherInput>
-    { loading && <LoadingPanel subject="Resultados de búsqueda"/> }
+                  onChange={onCustomerChange}/>
+    { loading && <LoadingPanel subject="Clientes"/> }
     { error && <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel> }
     { data && data.findCustomersByName && <CustomerSelectionResults names={data.findCustomersByName}/> }
     <div className="field is-grouped is-grouped-right">
