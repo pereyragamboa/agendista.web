@@ -67,7 +67,7 @@ export default function AppointmentCustomerSelector() {
   // Hooks
   const [state, setState] = useState({
     searchCriteria: "", // Content of the customer name input
-    okButtonClicked: false
+    redirect: false
   });
 
   useEffect(() => {
@@ -113,7 +113,7 @@ export default function AppointmentCustomerSelector() {
 
   // Component proper
   const CustomerSelector = () => state.redirect ?
-      <Redirect to={`${Paths.ADD_CUSTOMER}/${selectedCustomerId}`}/> :
+      <Redirect to={`${Paths.ADD_CUSTOMER}/${selectedCustomerId}`} push/> :
       <React.Fragment>
         <FeatherInput id={SEARCH_INPUT_ID} iconName="search" placeholder="Nombre(s)"
                       caption="Agendar la cita a:" value={state.searchCriteria}
