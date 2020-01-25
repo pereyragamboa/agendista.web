@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import gql from 'graphql-tag';
+import { Link } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/react-hooks';
 import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
@@ -70,7 +71,7 @@ function CustomerSelectionResults(props) {
       </table></div> :
       <div className="field message is-warning">
         <p className="message-header">No se encontraron clientes.</p>
-        <p className="message-body">Intente buscar otro nombre, o <a href={Paths.ADD_CUSTOMER}>agregar un nuevo cliente</a>.</p>
+        <p className="message-body">Intente buscar otro nombre, o <Link to={Paths.ADD_CUSTOMER}>agregar un nuevo cliente</Link>.</p>
       </div>
 }
 
@@ -116,10 +117,10 @@ export default function AppointmentCustomerSelector() {
     { data && data.findCustomersByName && <CustomerSelectionResults names={data.findCustomersByName}/> }
     <div className="field is-grouped is-grouped-right">
       <div className="control">
-        <a id={CONFIRM_BUTTON_ID} className="button is-success is-hidden" href={Paths.ADD_CUSTOMER}>
+        <Link id={CONFIRM_BUTTON_ID} className="button is-success is-hidden" to={Paths.ADD_CUSTOMER}>
           <FeatherIcon iconName="user-check"/>
           <span>Confirmar cliente</span>
-        </a>
+        </Link>
       </div>
     </div>
   </React.Fragment>
