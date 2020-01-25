@@ -13,17 +13,24 @@ import FeatherIcon from './featherIcon';
  */
 export default function getDetail(FormComponent, okClick = () => {}){
   /**
-   @param props.addCaption Text of the Add button
-   @param props.cancelCaption Text of the Cancel button
-   @param props.cancelPath Path of the page to navigate after pressing the Cancel button
-   @param props.featherIcon Name of Feather icon
-   @param props.id: Identifier of the screen
-   @param props.okCaption Text of the OK button
-   @param props.title Displayed title of the screen
+   * @param props.cancelCaption Text of the Cancel button
+   * @param props.cancelPath Path of the page to navigate after pressing the Cancel button
+   * @param props.featherIcon Name of Feather icon
+   * @param props.id: Identifier of the screen
+   * @param props.okCaption Text of the OK button
+   * @param props.title Displayed title of the screen
    */
-  function newDetail (props) {
+  return function (props) {
     return <section id={props.id}>
-      <h1 className="title is-4">{props.title}</h1>
+      <nav className="navbar">
+        <div className="navbar-brand">
+          <div className="navbar-item">
+            { props.featherIcon && <FeatherIcon iconName={props.featherIcon}/> }
+            { props.featherIcon && <span>&nbsp;</span> }
+            <h1 className="title is-4">{props.title}</h1>
+          </div>
+        </div>
+      </nav>
       <div className="box">
         <FormComponent {...props} />
       </div>
@@ -38,7 +45,5 @@ export default function getDetail(FormComponent, okClick = () => {}){
         </Link>
       </div>
     </section>;
-  }
-
-  return newDetail;
+  };
 }
