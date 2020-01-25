@@ -1,6 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import FeatherIcon from './featherIcon';
+
+const DETAIL_OK_BUTTON_ID = "ag-detail-ok-button";
+const DETAIL_CANCEL_BUTTON_ID = "ag-detail-cancel-button";
+
+function enableOkButton() {
+  document.getElementById(DETAIL_OK_BUTTON_ID).classList.remove("is-static");
+}
 
 /**
  *
@@ -35,15 +41,17 @@ export default function getDetail(FormComponent, okClick = () => {}){
         <FormComponent {...props} />
       </div>
       <div className="buttons">
-        <button className="button is-primary" onClick={okClick}>
+        <button id={DETAIL_OK_BUTTON_ID} className="button is-primary is-static" onClick={okClick}>
           <FeatherIcon iconName="check"/>
           <span>{ props.okCaption || "Agregar" }</span>
         </button>
-        <Link className="button is-danger" to={props.cancelPath}>
+        <button id={DETAIL_CANCEL_BUTTON_ID} className="button is-danger" onClick={() => window.history.back()}>
           <FeatherIcon iconName="x"/>
           <span>{ props.cancelCaption || "Cancelar" }</span>
-        </Link>
+        </button>
       </div>
     </section>;
   };
 }
+
+export { enableOkButton };

@@ -1,29 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import { useLazyQuery } from '@apollo/react-hooks';
 import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
-import FeatherIcon from "../commons/featherIcon";
+import getDetail, { enableOkButton } from '../commons/getDetail';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import * as Paths from '../../constants/paths';
 
-const query = gql`
-  query findCustomers($names: [String]) { 
-    findCustomersByName(names: $names) {
-      id
-      firstName
-      lastName
-      email
-    }
-  }`;
-
-const CONFIRM_BUTTON_ID = "ag-confirm-user-selection";
-
-function getCustomerRowId(customerId) {
-  return `ag-customer-search-result-${customerId}`;
-}
+let selectedCustomerId = "";
 
 /**
  * Shows the results of a customer search.
@@ -33,20 +20,19 @@ function getCustomerRowId(customerId) {
  */
 function CustomerSelectionResults(props) {
   const IS_ROW_SELECTED_CLASS = "is-selected";
-  let selectedCustomerRowId = "";
 
   function onCustomerRowClick(e) {
     // Because the click() event will be raised from a <td>, we must query the parent of the clicked <td>
     const newId = e.target.parentElement.id;
     // Deselect current row, if present
-    if (selectedCustomerRowId && selectedCustomerRowId !== newId) {
-      document.getElementById(selectedCustomerRowId).classList.remove(IS_ROW_SELECTED_CLASS);
+    if (selectedCustomerId && selectedCustomerId !== newId) {
+      document.getElementById(selectedCustomerId).classList.remove(IS_ROW_SELECTED_CLASS);
     }
     // Select new row
     document.getElementById(newId).classList.add(IS_ROW_SELECTED_CLASS);
-    selectedCustomerRowId = newId;
+    selectedCustomerId = newId;
     // Show confirm button
-    document.getElementById(CONFIRM_BUTTON_ID).classList.remove("is-hidden");
+    enableOkButton();
   }
 
   return props.names && props.names.length > 0 ?
@@ -61,7 +47,7 @@ function CustomerSelectionResults(props) {
         </thead>
         <tbody style={{cursor: "pointer"}}>
         {
-          props.names.map(name => <tr id={getCustomerRowId(name.id)} key={name.id} onClick={onCustomerRowClick}>
+          props.names.map(name => <tr id={name.id} key={name.id} onClick={onCustomerRowClick}>
             <td>{name.firstName}</td>
             <td>{name.lastName}</td>
             <td className="is-hidden-mobile">{name.email}</td>
@@ -78,8 +64,10 @@ function CustomerSelectionResults(props) {
 export default function AppointmentCustomerSelector() {
   const SEARCH_INPUT_ID = "ag-search-criteria-input";
 
+  // Hooks
   const [state, setState] = useState({
-    searchCriteria: "" // Content of the customer name input
+    searchCriteria: "", // Content of the customer name input
+    okButtonClicked: false
   });
 
   useEffect(() => {
@@ -88,10 +76,19 @@ export default function AppointmentCustomerSelector() {
     if (searchInput) searchInput.focus();
   });
 
-  const [getQuery, { loading, error, data }] = useLazyQuery(query);
+  const [getQuery, { loading, error, data }] = useLazyQuery(gql`
+      query findCustomers($names: [String]) {
+          findCustomersByName(names: $names) {
+              id
+              firstName
+              lastName
+              email
+          }
+      }`);
 
   let timer = null; // Timer reference
 
+  // Event handlers
   function onCustomerChange(e) {
     if (timer != null) {
       // Resets timer
@@ -103,25 +100,29 @@ export default function AppointmentCustomerSelector() {
     if (value.length >= 3) {
       timer = setTimeout(
           names => {
-            getQuery({ variables: {names} });
+            getQuery({ variables: { names } });
             setState({ searchCriteria: value });
           }, 1000, value.split(" "));
     }
   }
 
-  return <React.Fragment>
-    <FeatherInput id={SEARCH_INPUT_ID} iconName="search" placeholder="Nombre(s)" caption="Agendar la cita a:" value={state.searchCriteria}
-                  onChange={onCustomerChange}/>
-    { loading && <LoadingPanel subject="Clientes"/> }
-    { error && <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel> }
-    { data && data.findCustomersByName && <CustomerSelectionResults names={data.findCustomersByName}/> }
-    <div className="field is-grouped is-grouped-right">
-      <div className="control">
-        <Link id={CONFIRM_BUTTON_ID} className="button is-success is-hidden" to={Paths.ADD_CUSTOMER}>
-          <FeatherIcon iconName="user-check"/>
-          <span>Confirmar cliente</span>
-        </Link>
-      </div>
-    </div>
-  </React.Fragment>
+  function onOkClick() {
+    console.log(selectedCustomerId.substring(selectedCustomerId.lastIndexOf("-") + 1));
+    setState({ redirect: true });
+  }
+
+  // Component proper
+  const CustomerSelector = () => state.redirect ?
+      <Redirect to={`${Paths.ADD_CUSTOMER}/${selectedCustomerId}`}/> :
+      <React.Fragment>
+        <FeatherInput id={SEARCH_INPUT_ID} iconName="search" placeholder="Nombre(s)"
+                      caption="Agendar la cita a:" value={state.searchCriteria}
+                      onChange={onCustomerChange}/>
+        { loading && <LoadingPanel subject="Clientes"/> }
+        { error && <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel> }
+        { data && data.findCustomersByName && <CustomerSelectionResults names={data.findCustomersByName}/> }
+      </React.Fragment>;
+
+  const AppointmentCustomerSelector = getDetail(CustomerSelector, onOkClick);
+  return <AppointmentCustomerSelector title="Agendar cita" okCaption="Confirmar" />;
 }
