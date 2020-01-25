@@ -18,9 +18,9 @@ export default function Header() {
     <nav className="navbar">
       <div className="container">
         <div className="navbar-brand">
-          <div className="navbar-item">
-            <h1 className="title is-4">Agendista</h1>
-          </div>
+          <h1 className="navbar-item">
+            <a className="title is-4" href={Paths.HOME}>Agendista</a>
+          </h1>
           <BurgerMenu id="ag-header-burger-menu" target={MENU_ID} />
         </div>
         <div className="navbar-menu" id={MENU_ID}>
