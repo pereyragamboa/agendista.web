@@ -7,6 +7,7 @@ import {
   EditFixedHolidayDetail, EditVariableHolidayDetail } from './holidays/holidayDetail';
 import { AddLeaveDetail, EditLeaveDetail } from './leaves/leaveDetail';
 import { AddServiceDetail, EditServiceDetail } from "./services/serviceDetail";
+import AppointmentCustomerSelector from './appointments/appointmentCustomerSelector';
 import Appointments from "./appointments/index";
 import AppointmentDetail from "./appointments/appointmentDetail";
 import Customers from "./customers/index";
@@ -36,7 +37,7 @@ const EditService = (props) => <EditServiceDetail {...props}/>;
 export default class AppBody extends React.Component {
   render = () => <React.Fragment>
     <Route exact path={Paths.HOME} component={Home}/>
-    <Route exact path={Paths.ADD_APPOINTMENT} render={NewAppointment}/>
+    <Route exact path={`${Paths.ADD_APPOINTMENT}:customerId`} render={NewAppointment}/>
     <Route exact path={Paths.ADD_CUSTOMER} render={NewCustomer}/>
     <Route exact path={Paths.ADD_FIXED_HOLIDAY} render={NewFixedHoliday}/>
     <Route exact path={Paths.ADD_LEAVE} render={NewLeave}/>
@@ -49,6 +50,7 @@ export default class AppBody extends React.Component {
     <Route exact path={Paths.LIST_APPOINTMENTS} component={Appointments}/>
     <Route exact path={Paths.LIST_CUSTOMERS} component={Customers}/>
     <Route exact path={Paths.LIST_SERVICES} component={Services}/>
+    <Route exact path={Paths.SEARCH_CUSTOMER_FOR_APPOINTMENT} component={AppointmentCustomerSelector}/>
     <Route exact path={Paths.SETTINGS} component={Settings}/>
     <Route exact path={`${Paths.UPDATE_APPOINTMENT}:id`} render={EditAppointment}/>
     <Route exact path={`${Paths.UPDATE_CUSTOMER}:id`} render={EditCustomer}/>

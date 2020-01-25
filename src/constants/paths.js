@@ -11,6 +11,7 @@ export const LIST_HOURS = "/businessHours/";
 export const LIST_HOLIDAYS = "/holidays/";
 export const LIST_LEAVES = "/leave";
 export const LIST_SERVICES = "/services/";
+export const SEARCH_CUSTOMER_FOR_APPOINTMENT = "/appointments/searchCustomer";
 export const SETTINGS = "/settings/";
 export const UPDATE_APPOINTMENT = "/appointments/edit/";
 export const UPDATE_CUSTOMER = "/customers/edit/";

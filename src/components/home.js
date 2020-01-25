@@ -22,7 +22,7 @@ function Home()
         <div className="level">
           <FeatherButton className="level-item is-primary"
                          caption="Nueva cita" featherIcon="plus"
-                         to={Paths.ADD_APPOINTMENT} />
+                         to={Paths.SEARCH_CUSTOMER_FOR_APPOINTMENT} />
           <div className="level-item"/>
           <FeatherButton className="level-item is-primary"
                          caption="Todas las citas" featherIcon="calendar"

@@ -116,10 +116,10 @@ export default function AppointmentCustomerSelector() {
     { data && data.findCustomersByName && <CustomerSelectionResults names={data.findCustomersByName}/> }
     <div className="field is-grouped is-grouped-right">
       <div className="control">
-        <button id={CONFIRM_BUTTON_ID} className="button is-success is-hidden">
+        <a id={CONFIRM_BUTTON_ID} className="button is-success is-hidden" href={Paths.ADD_CUSTOMER}>
           <FeatherIcon iconName="user-check"/>
           <span>Confirmar cliente</span>
-        </button>
+        </a>
       </div>
     </div>
   </React.Fragment>
