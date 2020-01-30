@@ -13,7 +13,10 @@ const indexContent = <React.Fragment>
 </React.Fragment>;
 
 const NavbarEndItems = <React.Fragment>
-  <NavbarMenuItem path={Paths.SEARCH_CUSTOMER_FOR_APPOINTMENT} featherIcon="plus" caption="Nueva cita"/>
+  <NavbarDropdown featherIcon="plus" caption="Nueva cita">
+    <NavbarMenuItem path={Paths.SEARCH_CUSTOMER_FOR_APPOINTMENT} featherIcon="user-check" caption="Para cliente previo"/>
+    <NavbarMenuItem path={Paths.ADD_CUSTOMER_FOR_APPOINTMENT} featherIcon="user-plus" caption="Para cliente nuevo"/>
+  </NavbarDropdown>
   <NavbarDropdown featherIcon="filter" caption="Filtrar">
     <NavbarMenuItem className="is-small" featherIcon="user" caption="Por usuario"/>
     <NavbarMenuItem className="is-small" featherIcon="clock" caption="Por fecha y hora"/>

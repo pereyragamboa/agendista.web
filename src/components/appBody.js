@@ -20,9 +20,10 @@ import Services from "./services/index";
 
 const NewAppointment = () =>
     <AppointmentDetail title="Nueva cita" okCaption="Agendar" />;
+const NewCustomerForAppointment = () => <AddCustomerDetail title="Nuevo cliente" forwardUrl={Paths.ADD_APPOINTMENT}/>;
 const EditAppointment = (props) =>
     <AppointmentDetail title="Reagendar cita" okCaption="Reagendar" {...props} />;
-const NewCustomer = () => <AddCustomerDetail title="Nuevo cliente"/>;
+const NewCustomer = () => <AddCustomerDetail title="Nuevo cliente" forwardUrl={Paths.LIST_CUSTOMERS}/>;
 const EditCustomer = (props) =>
     <EditCustomerDetail title="Editar cliente" okCaption="Editar" {...props}/>;
 const NewFixedHoliday = (props) => <AddFixedHolidayDetail title="Nuevo día feriado" {...props}/>;
@@ -38,7 +39,8 @@ export default class AppBody extends React.Component {
   render = () => <React.Fragment>
     <Route exact path={Paths.HOME} component={Home}/>
     <Route exact path={`${Paths.ADD_APPOINTMENT}:customerId`} render={NewAppointment}/>
-    <Route exact path={Paths.ADD_CUSTOMER} render={NewCustomer}/>
+    <Route exact path={Paths.ADD_CUSTOMER} component={NewCustomer}/>
+    <Route exact path={Paths.ADD_CUSTOMER_FOR_APPOINTMENT} render={NewCustomerForAppointment}/>
     <Route exact path={Paths.ADD_FIXED_HOLIDAY} render={NewFixedHoliday}/>
     <Route exact path={Paths.ADD_LEAVE} render={NewLeave}/>
     <Route exact path={Paths.ADD_SERVICE} render={NewService}/>
