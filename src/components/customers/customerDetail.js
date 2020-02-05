@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Redirect } from 'react-router';
 import * as IDs from '../../constants/ids';
 import * as Paths from '../../constants/paths';
 import * as Placeholders from '../../constants/placeholders';
 import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
-import { GET_CUSTOMER} from "../../data/queries/customerQueries";
+import {GET_ALL_CUSTOMERS, GET_CUSTOMER} from "../../data/queries/customerQueries";
 import getDetail, { enableOkButton } from '../commons/getDetail';
 import LoadingPanel from "../commons/loadingPanel";
 
@@ -32,6 +33,15 @@ function DetailBody(props) {
   </div>;
 }
 
+function getCustomerInformation() {
+  return {
+    firstName: (document.getElementById(IDs.CUSTOMER_FIRST_NAME_FIELD)).value,
+    lastName: (document.getElementById(IDs.CUSTOMER_LAST_NAME_FIELD)).value,
+    telephone: (document.getElementById(IDs.CUSTOMER_PHONE_FIELD)).value,
+    email: (document.getElementById(IDs.CUSTOMER_EMAIL_FIELD)).value,   
+  }
+}
+
 /**
  *
  * @param props.forwardUrl URL of screen to be shown after clicking the OK button.
@@ -43,8 +53,21 @@ export function AddCustomerDetail(props) {
   const [ state, setState ] = useState({
     redirect: false
   });
+  const [ addCustomer ] = useMutation(gql`
+    mutation addCustomer($customer: CustomerInput ){
+        addCustomer(client: $customer) { id }
+    }`, {
+    refetchQueries: [
+      { query: GET_ALL_CUSTOMERS }
+    ]
+  });
 
   function okClick() {
+    addCustomer({
+      variables: {
+        customer: getCustomerInformation()
+      }
+    });
     setState({
       redirect: true
     });
@@ -67,11 +90,33 @@ export function AddCustomerDetail(props) {
  * @constructor
  */
 export function EditCustomerDetail(props) {
-  const CustomerDetail = getDetail(DetailBody);
+  const customerId = props.match.params.id;
 
   const { loading, error, data } = useQuery(
       GET_CUSTOMER,
-      { variables: { customerId: props.match.params.id }});
+      { variables: { customerId }});
+  const [ updateCustomer ] = useMutation(gql`
+    mutation updateCustomer(
+    $id: ID!
+    $customer: CustomerInput!) {
+        updateCustomer(
+            clientId: $id
+            client: $customer
+        ) { id }
+    }`, {
+    onCompleted: () => console.log("Ha actualizado los datos del cliente."),
+    refetchQueries: [
+      { query: GET_ALL_CUSTOMERS }
+    ]
+  });
+
+  const CustomerDetail = getDetail(DetailBody, () => {
+    updateCustomer({
+      variables: { id: customerId, customer: getCustomerInformation() },
+    });
+  });
+  useEffect(() => { if (data) enableOkButton() });
+
   if (loading) return <LoadingPanel subject={"datos del cliente"}/>;
   if (error) return <ErrorPanel errorMessage={error.message}/>;
   if (data === undefined) return <Redirect to={Paths.LIST_CUSTOMERS} />;
