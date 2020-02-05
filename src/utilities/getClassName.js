@@ -16,5 +16,5 @@ export default function getClassName(className, props) {
 
   return propsClassName === '' ?
       originalClassName :
-      [originalClassName, propsClassName].join(' ');
+      [originalClassName, propsClassName].join(' ').trim();
 }
