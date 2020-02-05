@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
+import { GET_SETTINGS } from '../../data/queries/settingsQueries';
 import getDetail from '../commons/getDetail';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
@@ -20,14 +21,7 @@ const webPlaceholder = Placeholders.getWebsitePlaceholder();
  * @constructor
  */
 export default function Settings() {
-  const { loading, error, data } = useQuery(gql`
-    query { getProfile(profileId: "0x30001") {
-        businessName
-        email
-        telephone
-        url
-    }}
-  `);
+  const { loading, error, data } = useQuery(GET_SETTINGS);
   if (loading) return <LoadingPanel subject={SETTINGS}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
 
