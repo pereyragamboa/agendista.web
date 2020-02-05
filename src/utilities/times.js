@@ -6,11 +6,12 @@ const DEFAULT_OPTIONS = {
 export function getTimeString(milliseconds, includeSeconds = false) {
   const seconds = milliseconds / 1000;
   const minutes = seconds / 60;
+  const hours = minutes / 60;
 
   const res = `${
-      (Math.floor(minutes / 60) % 60).toLocaleString('default', DEFAULT_OPTIONS)
+      (Math.floor(hours) % 24).toLocaleString('default', DEFAULT_OPTIONS)
       }:${
-      Math.floor(minutes % 60).toLocaleString('default', DEFAULT_OPTIONS)}`;
+      (Math.floor(minutes) % 60).toLocaleString('default', DEFAULT_OPTIONS)}`;
   if (includeSeconds) {
     return `${res}:${Math.floor(seconds % 60).toLocaleString('default', DEFAULT_OPTIONS)}`;
   }
