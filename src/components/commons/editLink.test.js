@@ -1,27 +1,26 @@
 import React from 'react';
 import { MemoryRouter, Route } from 'react-router';
 import { act } from 'react-dom/test-utils';
-import { render, unmountComponentAtNode } from 'react-dom';
+import { render } from 'react-dom';
 import EditLink from './editLink';
+import TestContainer from '../testHelpers/testContainer';
 
 describe("<EditLink> tests", () => {
-  let container = null;
+  let container = TestContainer();
 
-  beforeEach(() => {
-    container = document.createElement("div");
-    document.body.appendChild(container);
-  });
+  beforeEach(container.createContainer);
 
   test("renders edit link", () => {
     const EditLinkTest = () => <EditLink to="/example">Click me</EditLink>;
+    const c = container.getContainer();
     act(() => {
       render(
         <MemoryRouter initialEntries={["/"]} initialIndex={0}>
           <Route path="/" component={EditLinkTest}/>
-        </MemoryRouter>, container);
+        </MemoryRouter>, c);
     });
-    expect(container.textContent).toBe("Click me");
-    const a = container.getElementsByTagName("a");
+    expect(c.textContent).toBe("Click me");
+    const a = c.getElementsByTagName("a");
     expect(a.length).toBe(1);
     expect(a[0].pathname).toBe("/example");
   });
@@ -31,9 +30,9 @@ describe("<EditLink> tests", () => {
       render(
           <MemoryRouter initialEntries={["/"]} initialIndex={0}>
             <Route path="/" component={() => <EditLink to="/x">X</EditLink>}/>
-          </MemoryRouter>, container);
+          </MemoryRouter>, container.getContainer());
     });
-    const svg = container.getElementsByTagName("svg");
+    const svg = container.getContainer().getElementsByTagName("svg");
     expect(svg.length).toBe(1);
     expect(svg[0].classList.contains("feather-edit-2"));
   });
@@ -44,9 +43,9 @@ describe("<EditLink> tests", () => {
       render(
           <MemoryRouter initialEntries={["/"]} initialIndex={0}>
             <Route path="/" component={EditLinkTest}/>
-          </MemoryRouter>, container);
+          </MemoryRouter>, container.getContainer());
     });
-    expect(container.textContent).toBe("");
+    expect(container.getContainer().textContent).toBe("");
   });
 
   test("goes to path", () => {
@@ -55,18 +54,14 @@ describe("<EditLink> tests", () => {
           <MemoryRouter initialEntries={["/"]}>
             <Route path="/" exact={true} component={() => <EditLink to="/x">Next</EditLink>}/>
             <Route path="/x" exact={true} component={() => <p>X</p>}/>
-          </MemoryRouter>, container);
+          </MemoryRouter>, container.getContainer());
     });
-    const a = container.getElementsByTagName("a")[0];
+    const a = container.getContainer().getElementsByTagName("a")[0];
     act(() => {
       a.dispatchEvent(new MouseEvent("click", {bubbles: true}));
     });
-    expect(container.textContent).toBe("X");
+    expect(container.getContainer().textContent).toBe("X");
   });
 
-  afterEach(() => {
-    unmountComponentAtNode(container);
-    container.remove();
-    container = null;
-  });
+  afterEach(container.disposeContainer);
 });
