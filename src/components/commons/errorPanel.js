@@ -3,7 +3,6 @@ import FeatherIcon from "./featherIcon";
 
 /**
  * Displays an error message.
- * @param props.errorMessage Error message to be displayed.
  * @return {*} A <div> with an error message.
  */
 export default (props) => <div>
@@ -11,8 +10,8 @@ export default (props) => <div>
       <FeatherIcon className="is-large" width="48" height="48" iconName="x-circle"/>
     </p>
     <h1 className="title has-text-centered">Algo salió mal.</h1>
-      <div className="content">
-        <h3 className="title is-5">Reporte:</h3>
-        {props.children}
-      </div>
+    { props.children && <div className="content">
+      <h3 className="title is-5">Reporte:</h3>
+      {props.children}
+    </div> }
   </div>;
