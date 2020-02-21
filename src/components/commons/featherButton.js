@@ -22,9 +22,9 @@ const FeatherButton = (props) => {
   const captionElement = typeof caption === 'string' && caption.trim() !== '' ?
         <span>{ caption.trim() }</span> : '';
 
-  if (featherIcon === '' && caption === '') {
-    // if there are no parameters, returns an empty <span>
-    return <span/>;
+  if (!iconElement && !captionElement) {
+    // if there are no parameters, throws an error
+    throw new Error("Empty element. Check props featherIcon and caption.");
   } else {
     const className = getClassName("button", props);
 
