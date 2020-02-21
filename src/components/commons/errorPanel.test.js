@@ -6,7 +6,7 @@ import TestContainer from '../testHelpers/testContainer';
 
 describe("<ErrorPanel> tests", () => {
   describe("Empty <ErrorPanel> tests", () => {
-    const container = TestContainer();
+    const container = new TestContainer();
 
     beforeEach(() => {
       container.createContainer();
