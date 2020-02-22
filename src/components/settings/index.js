@@ -15,6 +15,13 @@ const emailPlaceholder = Placeholders.getEmailPlaceholder();
 const phonePlaceholder = Placeholders.getTelephonePlaceholder();
 const webPlaceholder = Placeholders.getWebsitePlaceholder();
 
+export const FieldIds = {
+  BUSINESS_FIELD: "ag_settings_business_field",
+  WEBSITE_FIELD: "ag_settings_website_field",
+  EMAIL_FIELD: "ag_settings_email_field",
+  PHONE_FIELD: "ag_settings_phone_field"
+};
+
 /**
  * Main settings page.
  * @return {*}
@@ -26,18 +33,19 @@ export default function Settings() {
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
 
   const settingsBody = () => <React.Fragment>
-    <FeatherInput caption="Nombre" iconName="briefcase"
+    <FeatherInput id={FieldIds.BUSINESS_FIELD}
+                  caption="Nombre" iconName="briefcase"
                   value={data.getProfile.businessName}
                   placeholder="Nombre comercial del negocio u organización"/>
-    <FeatherInput caption="Sitio web" iconName="globe"
+    <FeatherInput id={FieldIds.WEBSITE_FIELD} caption="Sitio web" iconName="globe"
                   value={data.getProfile.url} placeholder={webPlaceholder}/>
     <div className="columns">
       <div className="column">
-        <FeatherInput caption="Teléfono" iconName="phone"
+        <FeatherInput id={FieldIds.PHONE_FIELD} caption="Teléfono" iconName="phone"
                       value={data.getProfile.telephone} placeholder={phonePlaceholder}/>
       </div>
       <div className="column">
-        <FeatherInput caption="Correo electrónico" iconName="at-sign"
+        <FeatherInput id={FieldIds.EMAIL_FIELD} caption="Correo electrónico" iconName="at-sign"
                       value={data.getProfile.email} placeholder={emailPlaceholder}/>
       </div>
     </div>
