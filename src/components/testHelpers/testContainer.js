@@ -11,16 +11,18 @@ export default function TestContainer() {
   return {
     /**
      * Gets the container DOM element.
-     * @return {*}
+     * @return {Element} the container element. If createContainer() has not been called, it returns null.
      */
     getContainer: function getContainer() { return container; },
     /**
      * Initializes the container element and adds it to the DOM.
-     * @param elementTag
+     * @param {string} elementTag Tag name for the container element; it defaults to 'div'.
+     * @return {Element} the container element.
      */
     createContainer: function createContainer(elementTag = "div") {
       container = document.createElement(elementTag);
       document.body.appendChild(container);
+      return container;
     },
     /**
      * Removes the container element from the DOM.
