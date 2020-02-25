@@ -4,27 +4,39 @@ import FeatherIcon from './featherIcon';
 const DETAIL_OK_BUTTON_ID = "ag-detail-ok-button";
 const DETAIL_CANCEL_BUTTON_ID = "ag-detail-cancel-button";
 
-function enableOkButton() {
-  document.getElementById(DETAIL_OK_BUTTON_ID).classList.remove("is-static");
+export const Ids = {
+  DETAIL_OK_BUTTON_ID, DETAIL_CANCEL_BUTTON_ID
+};
+/**
+ * Toggles enabling of OK button.
+ * @param {boolean} enable
+ */
+function enableOkButton(enable = true) {
+  const okButton = document.getElementById(DETAIL_OK_BUTTON_ID);
+  if (enable)
+    okButton.classList.remove("is-static");
+  else
+    okButton.classList.add("is-static");
 }
 
 /**
  *
  * Higher order component that creates a detail screen. A detail screen consists of
- * a form, an OK button and a Cancel button.
+ * a form, an OK button and a Cancel button. The cancel button goes to the previous
+ * page in the browser history.
  *
  * @param FormComponent Component with form controls (inputs, checkboxes, etc)
  * @param okClick callback of click on OK button
- * @return function
+ * @return function A function component.
  */
 export default function getDetail(FormComponent, okClick = () => {}){
   /**
    * @param props.cancelCaption Text of the Cancel button
-   * @param props.cancelPath Path of the page to navigate after pressing the Cancel button
-   * @param props.featherIcon Name of Feather icon
+   * @param props.featherIcon Name of Feather icon shown next to title
    * @param props.id: Identifier of the screen
    * @param props.okCaption Text of the OK button
-   * @param props.title Displayed title of the screen
+   * @param props.title Detail title.
+   * @return {Component} A detail component.
    */
   return function (props) {
     return <section id={props.id}>
