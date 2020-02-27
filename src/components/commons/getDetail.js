@@ -4,9 +4,16 @@ import FeatherIcon from './featherIcon';
 const DETAIL_OK_BUTTON_ID = "ag-detail-ok-button";
 const DETAIL_CANCEL_BUTTON_ID = "ag-detail-cancel-button";
 
-export const Ids = {
-  DETAIL_OK_BUTTON_ID, DETAIL_CANCEL_BUTTON_ID
+export const ButtonIds = {
+  OK_BUTTON: DETAIL_OK_BUTTON_ID,
+  CANCEL_BUTTON: DETAIL_CANCEL_BUTTON_ID
 };
+
+export const ElementIds = {
+  TITLE: "ag-detail-title",
+  TITLE_ICON: "ag-detail-title-icon"
+};
+
 /**
  * Toggles enabling of OK button.
  * @param {boolean} enable
@@ -43,9 +50,9 @@ export default function getDetail(FormComponent, okClick = () => {}){
       <nav className="navbar">
         <div className="navbar-brand">
           <div className="navbar-item">
-            { props.featherIcon && <FeatherIcon iconName={props.featherIcon}/> }
+            { props.featherIcon && <FeatherIcon id={ElementIds.TITLE_ICON} iconName={props.featherIcon}/> }
             { props.featherIcon && <span>&nbsp;</span> }
-            <h1 className="title is-4">{props.title}</h1>
+            <h1 id={ElementIds.TITLE} className="title is-4">{props.title}</h1>
           </div>
         </div>
       </nav>
