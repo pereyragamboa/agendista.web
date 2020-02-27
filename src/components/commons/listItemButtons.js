@@ -2,6 +2,11 @@ import React from 'react';
 import FeatherButton from './featherButton';
 import { showModal } from './modals/modalFunctions';
 
+export const ClassNames = {
+  EDIT_LIST_ITEM_BUTTON: "ag-list-item-edit-button",
+  DELETE_LIST_ITEM_BUTTON: "ag-list-item-delete-button"
+};
+
 /**
  * Action buttons for list items.
  *
@@ -13,13 +18,15 @@ import { showModal } from './modals/modalFunctions';
  * @param {string} props.editPath Path of edition page
  * @param {string} props.deleteModalId ID of delete confirmation modal
  * @constructor
- * @return A component with a <div> root element.
+ * @return {Component} A component with a <div> root element.
  */
 export default function ListItemButtons(props) {
   return <div className="level-right">
     <div className="buttons level-item">
-      <FeatherButton className="is-primary" featherIcon="edit-2" to={props.editPath}/>
-      <FeatherButton className="is-danger" featherIcon="trash-2" onClick={() => showModal(props.deleteModalId)}/>
+      <FeatherButton className={`is-primary ${ClassNames.EDIT_LIST_ITEM_BUTTON}`}
+                     featherIcon="edit-2" to={props.editPath}/>
+      <FeatherButton className={`is-danger ${ClassNames.DELETE_LIST_ITEM_BUTTON}`}
+                     featherIcon="trash-2" onClick={() => showModal(props.deleteModalId)}/>
     </div>
   </div>;
 }
