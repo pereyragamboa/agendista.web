@@ -7,13 +7,18 @@ import TestContainer from '../testHelpers/testContainer';
 describe("getDetail() HOC tests", () => {
   let container = null;
 
+  beforeAll(() => {
+    container = new TestContainer();
+  });
+
   describe("Fully specified component", () => {
+    let div = null;
     beforeAll(() => {
-      container = new TestContainer().createContainer("div");
+      div = container.createContainer("div");
       const Detail = getDetail(() => <div id="test-content">Test content</div>);
 
       act(() => {
-        render(<Detail title="Test" featherIcon="feather" okCaption="Yes" cancelCaption="No"/>, container);
+        render(<Detail title="Test" featherIcon="feather" okCaption="Yes" cancelCaption="No"/>, div);
       });
     });
 
@@ -44,16 +49,18 @@ describe("getDetail() HOC tests", () => {
 
     afterAll(() => {
       container.disposeContainer();
-    })
+    });
   });
 
   describe("Component without props", () => {
+    let div = null;
+
     beforeAll(() => {
-      container = new TestContainer().createContainer("div");
+      div = container.createContainer();
       const Detail = getDetail(() => <div id="test-content">No props</div>);
 
       act(() => {
-        render(<Detail/>, container);
+        render(<Detail/>, div);
       });
     });
 
