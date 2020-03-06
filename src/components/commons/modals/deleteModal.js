@@ -5,6 +5,10 @@ export const Ids = {
   NO_BUTTON: "ag-delete-modal-no-button"
 };
 
+export const Captions = {
+  DEFAULT_CAPTION: '¿Desea eliminar este elemento?'
+};
+
 /** Creates a modal for deleting an element.
  *
  * @param props.children Content of the modal; if not specified shows a default message
@@ -35,7 +39,7 @@ export default function DeleteModal(props) {
     }
   }
 
-  const content = props.children || '¿Desea eliminar este elemento?';
+  const content = props.children || Captions.DEFAULT_CAPTION;
 
   return <div id={props.id} className="modal">
     <div className="modal-background"/>
