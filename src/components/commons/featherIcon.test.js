@@ -19,10 +19,15 @@ describe("<FeatherIcon> tests", () => {
         render(<FeatherIcon iconName="feather"/>, testContainer.getContainer());
       });
       expect(testContainer.getContainer().getElementsByTagName("svg").length).toBe(1);
+      testContainer.disposeContainer();
     });
   });
-  test.skip("Throws error at empty component", () => {
-    const render = TestRenderer.create(<FeatherIcon iconName="fnord"/>);
-    expect()
+  test("Throws error at empty component", () => {
+    const testContainer = new TestContainer();
+    testContainer.createContainer();
+    expect(() => {
+      render(<FeatherIcon iconName="fnord"/>, testContainer.getContainer())
+    }).toThrow();
+    testContainer.disposeContainer();
   })
 });
