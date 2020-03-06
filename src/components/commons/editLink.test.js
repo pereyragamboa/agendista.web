@@ -3,6 +3,7 @@ import { MemoryRouter, Route } from 'react-router';
 import { act } from 'react-dom/test-utils';
 import { render } from 'react-dom';
 import EditLink from './editLink';
+import ClickEvent from '../testHelpers/clickEvent';
 import TestContainer from '../testHelpers/testContainer';
 
 describe("<EditLink> tests", () => {
@@ -58,7 +59,7 @@ describe("<EditLink> tests", () => {
     });
     const a = container.getContainer().getElementsByTagName("a")[0];
     act(() => {
-      a.dispatchEvent(new MouseEvent("click", {bubbles: true}));
+      a.dispatchEvent(ClickEvent);
     });
     expect(container.getContainer().textContent).toBe("X");
   });

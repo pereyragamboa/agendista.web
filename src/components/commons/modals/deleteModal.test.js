@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import DeleteModal, { Ids } from './deleteModal';
+import ClickEvent from '../../testHelpers/clickEvent';
 import TestContainer from '../../testHelpers/testContainer';
 
 describe("<DeleteModal> tests", () => {
@@ -22,13 +23,13 @@ describe("<DeleteModal> tests", () => {
 
     test("confirms modal", () => {
       const yesButton = document.getElementById(Ids.YES_BUTTON);
-      yesButton.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      yesButton.dispatchEvent(ClickEvent);
       expect(mockDelete).toHaveBeenCalled();
     });
 
     test("discards modal", () => {
       const noButton = document.getElementById(Ids.NO_BUTTON);
-      noButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
+      noButton.dispatchEvent(ClickEvent);
       expect(document.getElementById(ID).classList.contains("is-active")).toBeFalsy();
     });
   });
