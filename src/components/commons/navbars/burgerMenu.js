@@ -1,6 +1,17 @@
 import React from 'react';
 
+/**
+ * Burger menu button / icon.
+ * @param props.id Identifier of the component.
+ * @param props.target Identifier of the menu to be displayed.
+ * @return {*}
+ * @constructor
+ */
 export default function BurgerMenu(props) {
+  if (!props.id)
+    throw new Error("ID missing from <BurgerMenu>.");
+  if (!props.target)
+    throw new Error("Target menu ID missing from <BurgerMenu>.");
 
   function onBurgerClick() {
     const burgerElement = document.getElementById(props.id);
