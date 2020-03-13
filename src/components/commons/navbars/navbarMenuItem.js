@@ -7,22 +7,32 @@ import './navbarMenuItem.css';
 /**
  * Element of a Bulma navbar menu.
  *
- * @param props.featherIcon name of Feather icon
- * @param props.onClick Click event manager
- * @param props.path Destination path; overrides props.onClick
+ * @param caption Content of the menu item.
+ * @param featherIcon name of Feather icon
+ * @param onClick Click event manager
+ * @param path Destination path; overrides props.onClick
+ * @param otherProps Rest of props passed to the component.
  * @return {*} A <Link> element, if props.path is provided; else, a <div> element
  * @constructor
  */
-export default function NavbarMenuItem(props) {
+export default function NavbarMenuItem({ caption, featherIcon, onClick, path, ...otherProps }) {
+  if (!featherIcon && !caption) {
+    throw new Error("Missing both 'featherIcon' and 'caption' props. Specify at least one.")
+  }
   const content = <React.Fragment>
-    <FeatherIcon className={getClassName("is-hidden-touch", props)} iconName={props.featherIcon}/>
-    &nbsp;
-    <span>{props.caption}</span>
+    {
+      featherIcon ? <FeatherIcon className={getClassName("is-hidden-touch", otherProps)} iconName={featherIcon}/> : ''
+    }
+    {
+      // Shows a space between icon and caption
+      featherIcon && caption ? <>&nbsp;</> : ''
+    }
+    <span>{caption}</span>
   </React.Fragment>;
 
-  const elementClass = getClassName("navbar-item", props);
+  const elementClass = getClassName("navbar-item", otherProps);
 
-  return (props.path ?
-      <NavLink className={elementClass} activeClassName={"has-background-dark has-text-light"} to={props.path}>{content}</NavLink> :
-      <div className={elementClass} onClick={props.onClick}>{content}</div>);
+  return (path ?
+      <NavLink {...otherProps} className={elementClass} activeClassName={"has-background-dark has-text-light"} to={path}>{content}</NavLink> :
+      <div {...otherProps} className={elementClass} onClick={onClick}>{content}</div>);
 }
