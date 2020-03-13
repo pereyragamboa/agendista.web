@@ -2,6 +2,9 @@ import React from 'react';
 import feather from 'feather-icons';
 import getClassName from '../../utilities/getClassName';
 
+const ERR_UNDEFINED_ICON = new Error(
+    "Icon name not defined. Check full list at https://feathericons.com/.");
+
 /**
  * Creates a Feather icon. {https://feathericons.com/}.
  * @param props.iconName Name of the icon.
@@ -15,7 +18,7 @@ export default function FeatherIcon (props) {
     const icon = feather.icons[iconName.trim()];
     if (icon === undefined) {
       // If icon object is undefined, throw error
-      throw new Error("Icon name not defined. Check full list at https://feathericons.com/.");
+      throw ERR_UNDEFINED_ICON;
     }
     else {
       // If icon object is not null, set SVG
@@ -25,5 +28,5 @@ export default function FeatherIcon (props) {
     }
   }
   // If icon name is not a string, return empty span
-  else return EMPTY_SPAN;
+  else throw ERR_UNDEFINED_ICON;
 };
