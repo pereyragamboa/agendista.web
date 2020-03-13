@@ -14,7 +14,7 @@ import NavbarMenuItem from './commons/navbars/navbarMenuItem';
 export default function Header() {
   const MENU_ID = "ag-header-navbar-menu";
 
-  return <div className="hero-head">
+  return <header className="hero-head">
     <nav className="navbar">
       <div className="container">
         <div className="navbar-brand">
@@ -39,5 +39,5 @@ export default function Header() {
         </div>
       </div>
     </nav>
-  </div>
+  </header>
 };

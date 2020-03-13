@@ -7,7 +7,7 @@ import React from 'react';
  * @constructor
  */
 export default function Footer() {
-  return <div id="ag-footer" className="hero-foot">
+  return <footer id="ag-footer" className="hero-foot">
     <div className="container has-text-centered">
       <br/>
       <p>
@@ -18,5 +18,5 @@ export default function Footer() {
       </p>
       <br/>
     </div>
-  </div>
+  </footer>
 };
