@@ -2,8 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { MemoryRouter, Route } from 'react-router';
 import { act } from 'react-dom/test-utils';
-import TestContainer from '../testHelpers/testContainer';
 import ListItemButtons, { ClassNames } from './listItemButtons';
+import TestContainer from '../testHelpers/testContainer';
+import { testIconRender } from "../testHelpers/expectFunctions";
 
 describe("<ListItemButtons> tests", () => {
   const testContainer = new TestContainer();
@@ -26,9 +27,7 @@ describe("<ListItemButtons> tests", () => {
       expect(domContainer.getElementsByClassName(ClassNames.DELETE_LIST_ITEM_BUTTON).length).toBe(1);
     });
 
-    it("renders two icons", () => {
-      expect(domContainer.getElementsByTagName("svg").length).toBe(2);
-    });
+    it("renders two icons", () => testIconRender(2));
   });
 
   describe("Events", () => {

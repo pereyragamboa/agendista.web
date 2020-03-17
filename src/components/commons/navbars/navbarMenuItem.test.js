@@ -5,6 +5,7 @@ import { MemoryRouter, Route } from 'react-router';
 import NavbarMenuItem from './navbarMenuItem';
 import ClickEvent from '../../testHelpers/clickEvent';
 import TestContainer from '../../testHelpers/testContainer';
+import { testIconRender } from "../../testHelpers/expectFunctions";
 
 describe("<NavbarMenuItem> tests", () => {
   const testContainer = new TestContainer();
@@ -23,7 +24,7 @@ describe("<NavbarMenuItem> tests", () => {
             <NavbarMenuItem id={ITEM_ID} featherIcon="feather" caption={TEXT_CONTENT}/>,
             testContainer.getContainer());
       });
-      expect(document.getElementsByTagName("svg").length).toBe(1);
+      testIconRender();
       expect(testContainer.getContainer().textContent.trim()).toBe(TEXT_CONTENT);
     });
 
@@ -33,7 +34,7 @@ describe("<NavbarMenuItem> tests", () => {
             <NavbarMenuItem id={ITEM_ID} featherIcon="feather"/>, testContainer.getContainer()
         );
       });
-      expect(document.getElementsByTagName("svg").length).toBe(1);
+      testIconRender();
       expect(document.textContent).toBeNull();
     });
 
@@ -43,7 +44,7 @@ describe("<NavbarMenuItem> tests", () => {
             <NavbarMenuItem id={ITEM_ID} caption={TEXT_CONTENT}/>, testContainer.getContainer()
         );
       });
-      expect(document.getElementsByTagName("svg").length).toBe(0);
+      testIconRender(0);
       expect(testContainer.getContainer().textContent).toBe(TEXT_CONTENT);
     });
   });
