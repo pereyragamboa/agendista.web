@@ -3,68 +3,67 @@ import { render } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import getFormControl, { ClassNames } from './getFormControl';
 import TestContainer from '../../testHelpers/testContainer';
+import { testIconRender } from "../../testHelpers/expectFunctions";
 
 describe("getFormControl() tests", () => {
   const testContainer = new TestContainer();
   const TEST_CAPTION = "Test control";
 
+  beforeEach(testContainer.createContainer);
+
+  afterEach(testContainer.disposeContainer);
+
   describe("Basic render tests", () => {
-    beforeAll(() => {
-      testContainer.createContainer();
+    function renderFullFormControl() {
       const FormControl = getFormControl(() => <input type="number"/>);
       act(() => {
         render(
             <FormControl caption={TEST_CAPTION} iconName="feather"/>, testContainer.getContainer()
         );
       });
+    }
+
+    test("renders icon", () => {
+      renderFullFormControl();
+      testIconRender(1);
     });
 
-    afterAll(testContainer.disposeContainer);
-
-    test("renders icon", () => testIconRender(true));
-
-    test("renders caption", () => testCaptionRender(TEST_CAPTION));
+    test("renders caption", () => {
+      renderFullFormControl();
+      testCaptionRender(TEST_CAPTION)
+    });
   });
 
   test("renders addons", () => {
-    const container = testContainer.createContainer();
     const FormControl = getFormControl(() => <input type="date"/>);
     act(() => {
       render(<FormControl caption={TEST_CAPTION}>
         <button/>
         <button/>
-      </FormControl>, container);
+      </FormControl>, testContainer.getContainer());
     });
     expect(document.getElementsByClassName(ClassNames.ADD_ON).length).toBe(1);
   });
 
   describe("Partial render tests", () => {
     test("renders only icon", () => {
-      const container = testContainer.createContainer("form");
       act(() => {
         const FormControl = getFormControl(() => <input type="text"/>);
-        render(<FormControl iconName="feather"/>, container);
+        render(<FormControl iconName="feather"/>, testContainer.getContainer());
       });
-      testIconRender(true);
+      testIconRender(1);
       testCaptionRender(null);
-      testContainer.disposeContainer();
     });
 
     test("renders only caption", () => {
-      const container = testContainer.createContainer("form");
       act(() => {
         const FormControl = getFormControl(() => <input type="time"/>);
-        render(<FormControl caption={TEST_CAPTION}/>, container);
+        render(<FormControl caption={TEST_CAPTION}/>, testContainer.getContainer());
       });
-      testIconRender(false);
+      testIconRender(0);
       testCaptionRender(TEST_CAPTION);
-      testContainer.disposeContainer();
     });
   });
-
-  function testIconRender(mustHaveIcon) {
-    expect(document.getElementsByTagName("svg").length).toBe(mustHaveIcon ? 1 : 0);
-  }
 
   function testCaptionRender(captionText) {
     const captionCount = captionText ? 1 : 0;
