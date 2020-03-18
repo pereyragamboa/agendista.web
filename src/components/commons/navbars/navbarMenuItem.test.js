@@ -5,7 +5,7 @@ import { MemoryRouter, Route } from 'react-router';
 import NavbarMenuItem from './navbarMenuItem';
 import ClickEvent from '../../testHelpers/clickEvent';
 import TestContainer from '../../testHelpers/testContainer';
-import { testIconRender } from "../../testHelpers/expectFunctions";
+import { expectIconRender } from "../../testHelpers/expectFunctions";
 
 describe("<NavbarMenuItem> tests", () => {
   const testContainer = new TestContainer();
@@ -24,7 +24,7 @@ describe("<NavbarMenuItem> tests", () => {
             <NavbarMenuItem id={ITEM_ID} featherIcon="feather" caption={TEXT_CONTENT}/>,
             testContainer.getContainer());
       });
-      testIconRender();
+      expectIconRender();
       expect(testContainer.getContainer().textContent.trim()).toBe(TEXT_CONTENT);
     });
 
@@ -34,7 +34,7 @@ describe("<NavbarMenuItem> tests", () => {
             <NavbarMenuItem id={ITEM_ID} featherIcon="feather"/>, testContainer.getContainer()
         );
       });
-      testIconRender();
+      expectIconRender();
       expect(document.textContent).toBeNull();
     });
 
@@ -44,7 +44,7 @@ describe("<NavbarMenuItem> tests", () => {
             <NavbarMenuItem id={ITEM_ID} caption={TEXT_CONTENT}/>, testContainer.getContainer()
         );
       });
-      testIconRender(0);
+      expectIconRender(0);
       expect(testContainer.getContainer().textContent).toBe(TEXT_CONTENT);
     });
   });

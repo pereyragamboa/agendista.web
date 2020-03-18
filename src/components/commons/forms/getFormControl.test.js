@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import getFormControl, { ClassNames } from './getFormControl';
 import TestContainer from '../../testHelpers/testContainer';
-import { testIconRender } from "../../testHelpers/expectFunctions";
+import { expectIconRender } from "../../testHelpers/expectFunctions";
 
 describe("getFormControl() tests", () => {
   const testContainer = new TestContainer();
@@ -25,7 +25,7 @@ describe("getFormControl() tests", () => {
 
     test("renders icon", () => {
       renderFullFormControl();
-      testIconRender(1);
+      expectIconRender(1);
     });
 
     test("renders caption", () => {
@@ -51,7 +51,7 @@ describe("getFormControl() tests", () => {
         const FormControl = getFormControl(() => <input type="text"/>);
         render(<FormControl iconName="feather"/>, testContainer.getContainer());
       });
-      testIconRender(1);
+      expectIconRender(1);
       testCaptionRender(null);
     });
 
@@ -60,7 +60,7 @@ describe("getFormControl() tests", () => {
         const FormControl = getFormControl(() => <input type="time"/>);
         render(<FormControl caption={TEST_CAPTION}/>, testContainer.getContainer());
       });
-      testIconRender(0);
+      expectIconRender(0);
       testCaptionRender(TEST_CAPTION);
     });
   });
