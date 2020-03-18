@@ -2,10 +2,11 @@ import React from 'react';
 import getFormControl from './getFormControl';
 
 /**
- * Creates a Bulma-styled input, decorated with Feather icons.
+ * Creates a Bulma-styled input text, decorated with Feather icons.
  *
  * @param props.id Identifier of the element.
- * @param props.type Label of the input.
+ * @param props.type Data type of the input.
+ * @param props.onChange Event dispatched when the input value changes.
  * @param props.placeholder Placeholder text in the input.
  * @param props.value Value displayed in the input.
  * @return {*}
