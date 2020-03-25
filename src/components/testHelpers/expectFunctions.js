@@ -16,7 +16,7 @@ export function expectIconRender(count = 1) {
  */
 export function expectTextInClass(className, text, node = document) {
   expect(node).not.toBeNull();
-  expect(node.getElementById).not.toBeNull();
+  expect(node.getElementByClassName).not.toBeNull();
   const elements = node.getElementsByClassName(className);
   expect(elements.length).toBe(1);
   expect(elements[0].textContent.trim().includes(text)).toBeTruthy();
