@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import BurgerMenu from './navbars/burgerMenu';
 import FeatherIcon from './featherIcon';
 
-// The consts and onBurgerClick() are defined outside the exported class because
-// we don't need to expose them
+const NAVBAR_BURGER_ID = "index-navbar-burger-menu";
+const NAVBAR_MENU_ID = "index-navbar-menu-id";
 
-const NAVBAR_BURGER_ID = "navbarBurgerMenu";
-const NAVBAR_MENU_ID = "navbarMenuId";
+export const Ids = {
+  NAVBAR_BURGER_ID,
+  NAVBAR_MENU_ID,
+  NAVBAR_BRAND: "index-navbar-brand",
+  NAVBAR_END: "index-navbar-end",
+  NAVBAR_BRAND_ICON: "index-navbar-brand-icon",
+  NAVBAR_BRAND_TITLE: "index-navbar-brand-title"
+};
 
 /**
  *
@@ -22,7 +28,7 @@ const NAVBAR_MENU_ID = "navbarMenuId";
  * @param NavbarComponents.endItems content of navbar-end
  * @return {{new(): Index, prototype: Index}}
  */
-export default function getIndex(ContentComponent, NavbarComponents = []){
+export default function getIndex(ContentComponent, NavbarComponents = {}){
   /**
    * @param props.brand Basic caption for the brand; overriden by NavbarComponents.brandItems
    * @param props.featherIcon Name of the Feather icon; overriden by NavbarComponents.brandItems
@@ -30,21 +36,31 @@ export default function getIndex(ContentComponent, NavbarComponents = []){
    */
   return class Index extends Component {
     render() {
+      const { featherIcon, brand } = this.props;
+      const hasBrandProps = featherIcon && brand;
+
       return <section id={this.props.id}>
         <nav className="navbar" role="navigation">
-            <div className="navbar-brand">
+            <div id={Ids.NAVBAR_BRAND} className="navbar-brand">
               {
-                NavbarComponents.brandItems ||
-                (<div className="navbar-item">
-                  <FeatherIcon iconName={ this.props.featherIcon }/>
-                  &nbsp;
-                  <h1 className="title is-4">{ this.props.brand }</h1>
-                </div>)
+                NavbarComponents.brandItems || (
+                    <div className="navbar-item">
+                    {
+                      featherIcon &&
+                      <FeatherIcon id={Ids.NAVBAR_BRAND_ICON} iconName={ this.props.featherIcon }/>
+                    }
+                    { hasBrandProps && <>&nbsp;</> }
+                    {
+                      brand &&
+                      <h1 id={Ids.NAVBAR_BRAND_TITLE} className="title is-4">{ this.props.brand }</h1>
+                    }
+                    </div>
+                )
               }
               <BurgerMenu id={NAVBAR_BURGER_ID} target={NAVBAR_MENU_ID}/>
             </div>
             <div id={NAVBAR_MENU_ID} className="navbar-menu">
-              <div className="navbar-end">
+              <div id={Ids.NAVBAR_END} className="navbar-end">
                 { NavbarComponents.endItems }
               </div>
             </div>
