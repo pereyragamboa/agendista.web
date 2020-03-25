@@ -12,10 +12,25 @@ export function expectIconRender(count = 1) {
  * and such element contains the specified text.
  * @param className Class name of the elements to be selected.
  * @param text Text to be searched for.
+ * @param node Document node to be searched in. Defaults to document.
  */
-export function expectTextInClass(className, text) {
-  const elements = document.getElementsByClassName(className);
+export function expectTextInClass(className, text, node = document) {
+  expect(node).not.toBeNull();
+  expect(node.getElementById).not.toBeNull();
+  const elements = node.getElementsByClassName(className);
   expect(elements.length).toBe(1);
   expect(elements[0].textContent.trim().includes(text)).toBeTruthy();
+}
+
+/**
+ * Asserts that the rendered document has an element with the specified identifier
+ * and such element contains the specified text.
+ * @param elementId Identifier of the element to be selected.
+ * @param text Text to be searched for.
+ */
+export function expectTextInElement(elementId, text) {
+  const element = document.getElementById(elementId);
+  expect(element).not.toBeNull();
+  expect(element.textContent.trim().includes(text)).toBeTruthy();
 }
 
