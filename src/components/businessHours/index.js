@@ -9,6 +9,7 @@ import getIndex from '../commons/getIndex';
 import listGraplQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import { WORKING_HOURS} from "../../constants/headers";
+import { GET_BUSINESS_HOURS } from "../../data/queries/businessHoursQueries";
 
 const DAYS = ['WEEKDAYS', 'SATURDAY', 'SUNDAY'];
 const SATURDAY = 6;
@@ -57,15 +58,7 @@ function HourListItem(props) {
 }
 
 export default function HoursList(props) {
-  const { loading, error, data } = useQuery(
-      gql`
-        query { getBusinessHours (profileId: "0x30001") {
-            id
-            day
-            startTime
-            endTime
-        }}
-      `);
+  const { loading, error, data } = useQuery(GET_BUSINESS_HOURS);
   if (loading) return <LoadingPanel subject={WORKING_HOURS}/>;
   if (error) return <ErrorPanel>{listGraplQLErrors(error)}</ErrorPanel>;
   // Add query results to a hash map for easier, cleaner page population
