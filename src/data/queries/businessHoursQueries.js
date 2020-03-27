@@ -8,3 +8,9 @@ export const GET_BUSINESS_HOURS = gql`{
         endTime
     }}
 `;
+
+export const BusinessDays = {
+  WEEKDAYS: "WEEKDAYS",
+  SATURDAY: "SATURDAY",
+  SUNDAY: "SUNDAY"
+};

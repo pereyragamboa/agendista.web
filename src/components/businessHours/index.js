@@ -9,9 +9,8 @@ import getIndex from '../commons/getIndex';
 import listGraplQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import { WORKING_HOURS} from "../../constants/headers";
-import { GET_BUSINESS_HOURS } from "../../data/queries/businessHoursQueries";
+import { GET_BUSINESS_HOURS, BusinessDays } from "../../data/queries/businessHoursQueries";
 
-const DAYS = ['WEEKDAYS', 'SATURDAY', 'SUNDAY'];
 const SATURDAY = 6;
 const SUNDAY = 0;
 
@@ -67,12 +66,13 @@ export default function HoursList(props) {
     return [day, _];
   }));
 
-  const dayNamesMap = new Map();
   // todo: Localize this
-  dayNamesMap.set('WEEKDAYS', 'Entre semana');
-  dayNamesMap.set('SATURDAY', capitalize(daysOfWeek.getDayName(SATURDAY)));
-  dayNamesMap.set('SUNDAY', capitalize(daysOfWeek.getDayName(SUNDAY)));
-  const detailItems = DAYS.map(day => {
+  const dayNamesMap = new Map();
+  dayNamesMap.set(BusinessDays.WEEKDAYS, 'Entre semana');
+  dayNamesMap.set(BusinessDays.SATURDAY, capitalize(daysOfWeek.getDayName(SATURDAY)));
+  dayNamesMap.set(BusinessDays.SUNDAY, capitalize(daysOfWeek.getDayName(SUNDAY)));
+
+  const detailItems = BusinessDays.map(day => {
     const b = hoursMap.get(day) || {};
     return <HourListItem key={`ag-${day.toLowerCase()}`}
                          tag={dayNamesMap.get(day)}
