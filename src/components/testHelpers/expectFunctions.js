@@ -1,3 +1,5 @@
+import { LOADING_PANEL_ID } from "../commons/loadingPanel";
+
 /**
  * Asserts that the rendered component has an <svg> component. Used with Feather icons.
  *
@@ -34,3 +36,7 @@ export function expectTextInElement(elementId, text) {
   expect(element.textContent.trim().includes(text)).toBeTruthy();
 }
 
+export function expectLoadingPanel(hasLoadingPanel = true) {
+  const element = document.getElementById(LOADING_PANEL_ID);
+  expect(element !== null).toBe(hasLoadingPanel);
+}

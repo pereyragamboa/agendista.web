@@ -1,8 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { act } from 'react-dom/test-utils';
+import wait from 'waait';
 import { MockedProvider } from '@apollo/react-testing';
 import { GET_SETTINGS } from "../../data/queries/settingsQueries";
+import { expectLoadingPanel } from '../testHelpers/expectFunctions';
 import TestContainer from '../testHelpers/testContainer';
 import Settings, { FieldIds } from './index';
 
@@ -23,24 +25,23 @@ const mock = {
 
 describe("Settings component render tests", () => {
   const container = new TestContainer();
-  let fullRender = null;
 
   beforeAll(() => {
     act(() => {
-      render(fullRender = <MockedProvider mocks={[mock]} addTypename={false}>
+      render(<MockedProvider mocks={[mock]} addTypename={false}>
         <Settings/>
       </MockedProvider>, container.createContainer());
     });
   });
 
   test("Renders loading panel", () => {
-    expect(container.getContainer().textContent).toContain("Buscando");
+    expectLoadingPanel(true);
   });
   test("Renders full component", async () => {
-    await act(async () =>
-      await new Promise(resolve => setTimeout(resolve, 1000))
-    );
+    await act(async () => { await wait(1000) });
     const c = container.getContainer();
+    // Must not contain loading panel
+    expectLoadingPanel(false);
     // Must contain 7 SVG icons: title, 4 fields and 2 buttons
     expect(c.getElementsByTagName("svg").length).toBe(7);
     // Checks content of input fields
