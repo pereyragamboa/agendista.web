@@ -1,5 +1,4 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import * as daysOfWeek from "../../utilities/daysOfWeek";
@@ -14,6 +13,28 @@ import { GET_BUSINESS_HOURS, BusinessDays } from "../../data/queries/businessHou
 const SATURDAY = 6;
 const SUNDAY = 0;
 
+export const ClassNames = {
+  HOUR_LIST_ITEM: "ag-business-hours-list-item",
+  HOUR_LIST_DAY_FIELD: "ag-business-hour-day-field",
+  HOUR_LIST_FROM_FIELD: "ag-business-hour-from-field",
+  HOUR_LIST_TO_FIELD: "ag-business-hour-to-field"
+};
+
+export const DefaultValues = {
+  FROM_TIME: "09:00",
+  TO_TIME: "18:00"
+};
+
+/**
+ * Map of (localized) tags for business day constants.
+ * @type {Map<string, string>}
+ */
+const dayNamesMap = new Map();
+// todo: Localize this
+dayNamesMap.set(BusinessDays.WEEKDAYS, 'Entre semana');
+dayNamesMap.set(BusinessDays.SATURDAY, capitalize(daysOfWeek.getDayName(SATURDAY)));
+dayNamesMap.set(BusinessDays.SUNDAY, capitalize(daysOfWeek.getDayName(SUNDAY)));
+
 /**
  * Gets the standard HTML time string from an UTC time stamp
  *
@@ -26,38 +47,42 @@ const SUNDAY = 0;
  *
  * @param {boolean} props.enabled The business hours are defined for this item.
  * @param {number} props.from Opening hour.
- * @param {string} props.tag Label of the list item, identifying the day.
+ * @param {string} props.businessDay One of the business day constants.
  * @param {number} props.to Closing hour.
  * @return {*}
  * @constructor
  */
 function HourListItem(props) {
-  const className = "ag-class-hours-" + props.id;
-  const fromTime = props.from ? props.from : "09:00";
-  const toTime = props.to ? props.to : "18:00";
+  const fromTime = props.from ? props.from : DefaultValues.FROM_TIME;
+  const toTime = props.to ? props.to : DefaultValues.TO_TIME;
 
-  return <tr>
+  return <tr id={props.id} className={ClassNames.HOUR_LIST_ITEM}>
     <th className="control">
       <label className="checkbox">
-        <input type="checkbox" defaultChecked={props.enabled}/>
-        {props.tag}
+        <input className={ClassNames.HOUR_LIST_DAY_FIELD}
+               type="checkbox" defaultChecked={props.enabled}
+               value={props.businessDay}/>
+        {dayNamesMap.get(props.businessDay)}
       </label>
     </th>
-    <td className={className}>
+    <td>
       <div className="field">
-        <input className="input" type="time" defaultValue={fromTime}/>
+        <input className={`input ${ClassNames.HOUR_LIST_FROM_FIELD}`}
+               type="time" defaultValue={fromTime}/>
       </div>
     </td>
-    <td className={className}>
+    <td>
       <div className="field">
-        <input className="input" type="time" defaultValue={toTime}/>
+        <input className={`input ${ClassNames.HOUR_LIST_TO_FIELD}`}
+               type="time" defaultValue={toTime}/>
       </div>
     </td>
   </tr>
 }
 
 export default function HoursList(props) {
-  const { loading, error, data } = useQuery(GET_BUSINESS_HOURS);
+  const q = useQuery(GET_BUSINESS_HOURS);
+  const { loading, error, data } = q;
   if (loading) return <LoadingPanel subject={WORKING_HOURS}/>;
   if (error) return <ErrorPanel>{listGraplQLErrors(error)}</ErrorPanel>;
   // Add query results to a hash map for easier, cleaner page population
@@ -66,16 +91,12 @@ export default function HoursList(props) {
     return [day, _];
   }));
 
-  // todo: Localize this
-  const dayNamesMap = new Map();
-  dayNamesMap.set(BusinessDays.WEEKDAYS, 'Entre semana');
-  dayNamesMap.set(BusinessDays.SATURDAY, capitalize(daysOfWeek.getDayName(SATURDAY)));
-  dayNamesMap.set(BusinessDays.SUNDAY, capitalize(daysOfWeek.getDayName(SUNDAY)));
-
-  const detailItems = BusinessDays.map(day => {
+  const detailItems = [
+      BusinessDays.WEEKDAYS, BusinessDays.SATURDAY, BusinessDays.SUNDAY
+  ].map(day => {
     const b = hoursMap.get(day) || {};
     return <HourListItem key={`ag-${day.toLowerCase()}`}
-                         tag={dayNamesMap.get(day)}
+                         businessDay={day}
                          enabled={hoursMap.has(day)}
                          from={b.startTime} to={b.endTime}/>;
   });
