@@ -12,11 +12,15 @@ import { SERVICES } from '../../constants/headers';
 import { GET_ALL_SERVICES } from "../../data/queries/serviceQueries";
 
 export const ClassNames = {
-  SERVICE_LIST: "ag-service-list",
   SERVICE_LIST_ITEM: "ag-service-list-item",
   SERVICE_LIST_NAME_LABEL: "ag-service-list-item-name",
   SERVICE_LIST_TIME_LABEL: "ag-service-list-item-time",
   SERVICE_LIST_PRICE_LABEL: "ag-service-list-item-price"
+};
+
+export const Ids = {
+  SERVICE_LIST: "ag-service-list",
+  getListItemId: (id) => `ag-service-list-item-${id}`
 };
 
 /**
@@ -29,7 +33,7 @@ export const ClassNames = {
  * @constructor
  */
 const ServiceListRow = (props) =>
-  <tr className={ClassNames.SERVICE_LIST_ITEM}>
+  <tr className={ClassNames.SERVICE_LIST_ITEM} id={Ids.getListItemId(props.id)}>
     <th className={ClassNames.SERVICE_LIST_NAME_LABEL}>{ props.serviceName }</th>
     <td className={`is-hidden-touch ${ClassNames.SERVICE_LIST_TIME_LABEL}`}>
       { props.serviceTime }</td>
@@ -53,7 +57,7 @@ export default function ServiceList() {
   if (loading) return <LoadingPanel subject={SERVICES}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   return <>
-    <table className={`table is-fullwidth is-hoverable ${ClassNames.SERVICE_LIST}`}>
+    <table className="table is-fullwidth is-hoverable" id={Ids.SERVICE_LIST}>
       <thead>
         <tr>
           <th>Servicio</th>
@@ -65,7 +69,7 @@ export default function ServiceList() {
       <tbody className="table-container">
       {
         data.getServices.map(service =>
-            <ServiceListRow key={`ag-service-id-${service.id}`} id={service.id} serviceName={service.name}
+            <ServiceListRow key={service.id} id={service.id} serviceName={service.name}
                             serviceTime={ getTimeString(service.duration * 60 * 1000, false) }
                             servicePrice={`$ ${service.price}`}
             />
