@@ -8,29 +8,14 @@ import { GET_ALL_SERVICES } from "../../data/queries/serviceQueries";
 import { expectLoadingPanel } from "../testHelpers/expectFunctions";
 import TestContainer from '../testHelpers/testContainer';
 import { getTimeString } from "../../utilities/times";
+import { mockData } from "./mockData";
 import ServiceList, { ClassNames, Ids } from './serviceList';
-
-const mockServices = [
-  {
-    id: 42001,
-    name: "Test service",
-    description: "Performs tests",
-    duration: 45,
-    price: 100
-  }, {
-    id: 42002,
-    name: "Mock service",
-    description: "Does nothing",
-    duration: 15,
-    price: 400
-  }
-];
 
 const mock = {
   request: {query: GET_ALL_SERVICES},
   result: {
     data: {
-      getServices: mockServices
+      getServices: mockData
     }
   }
 };
@@ -50,7 +35,7 @@ describe("Service list component tests", () => {
             </MemoryRouter>
           </MockedProvider>, container.getContainer());
       await wait();
-      mockServices.forEach(({ id }) => {
+      mockData.forEach(({ id }) => {
         const item = document.getElementById(Ids.getListItemId(id));
         if (item) listItems.set(id, item);
       });
@@ -64,7 +49,7 @@ describe("Service list component tests", () => {
     expect(document.getElementById(Ids.SERVICE_LIST)).not.toBeNull();
   });
 
-  describe.each(mockServices)("Display list items", mockService => {
+  describe.each(mockData)("Display list items", mockService => {
     test(`Creates item for service ${mockService.id}`, () => {
       expect(listItems.get(mockService.id)).not.toBeNull();
     });
