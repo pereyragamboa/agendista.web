@@ -1,5 +1,4 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { DELETE_LEAVE_MODAL } from "../../constants/modalIds";
 import { LEAVE } from "../../constants/headers";
@@ -11,6 +10,7 @@ import listGraphQLErros from '../commons/listGraphQLErrors';
 import ListItemButtons from '../commons/listItemButtons';
 import LoadingPanel from '../commons/loadingPanel';
 import NavbarMenuItem from '../commons/navbars/navbarMenuItem'
+import { GET_ALL_LEAVES } from "../../data/queries/leaveQueries";
 
 function LeaveRow (props) {
   let { fromDate, toDate } = props;
@@ -45,13 +45,7 @@ function LeaveRow (props) {
 }
 
 export default function LeaveList (props) {
-  const { loading, error, data } = useQuery(gql`
-    query { getLeaves(profileId: "0x30001") {
-        id
-        from
-        to
-    }}
-  `);
+  const { loading, error, data } = useQuery(GET_ALL_LEAVES);
   if (loading) return <LoadingPanel subject={LEAVE}/>;
   if (error) return <ErrorPanel>{listGraphQLErros(error)}</ErrorPanel>;
   const listBody = <React.Fragment>
