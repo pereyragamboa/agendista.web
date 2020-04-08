@@ -2,23 +2,11 @@ import React from 'react';
 import { render } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import wait from 'waait';
-import { MemoryRouter, Route } from 'react-router';
-import { MockedProvider } from '@apollo/react-testing';
-import { GET_ALL_SERVICES } from "../../data/queries/serviceQueries";
 import { expectLoadingPanel } from "../testHelpers/expectFunctions";
 import TestContainer from '../testHelpers/testContainer';
 import { getTimeString } from "../../utilities/times";
-import { mockData } from "./mockData";
+import { getMockProvider, mockData } from "./mockData";
 import ServiceList, { ClassNames, Ids } from './serviceList';
-
-const mockQuery = {
-  request: {query: GET_ALL_SERVICES},
-  result: {
-    data: {
-      getServices: mockData
-    }
-  }
-};
 
 const container = new TestContainer();
 
@@ -28,12 +16,7 @@ describe("Service list component tests", () => {
   beforeAll(async () => {
     container.createContainer();
     await act(async () => {
-      render(
-          <MockedProvider mocks={[mockQuery]} addTypename={false}>
-            <MemoryRouter initialIndex={0} initialEntries={["/"]}>
-              <Route path={"/"} component={ServiceList}/>
-            </MemoryRouter>
-          </MockedProvider>, container.getContainer());
+      render(getMockProvider(ServiceList), container.getContainer());
       await wait();
       mockData.forEach(({ id }) => {
         const item = document.getElementById(Ids.getListItemId(id));
