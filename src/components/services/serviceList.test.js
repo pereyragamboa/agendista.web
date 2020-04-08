@@ -11,7 +11,7 @@ import { getTimeString } from "../../utilities/times";
 import { mockData } from "./mockData";
 import ServiceList, { ClassNames, Ids } from './serviceList';
 
-const mock = {
+const mockQuery = {
   request: {query: GET_ALL_SERVICES},
   result: {
     data: {
@@ -29,7 +29,7 @@ describe("Service list component tests", () => {
     container.createContainer();
     await act(async () => {
       render(
-          <MockedProvider mocks={[mock]} addTypename={false}>
+          <MockedProvider mocks={[mockQuery]} addTypename={false}>
             <MemoryRouter initialIndex={0} initialEntries={["/"]}>
               <Route path={"/"} component={ServiceList}/>
             </MemoryRouter>
