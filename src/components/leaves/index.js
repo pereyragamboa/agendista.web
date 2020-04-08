@@ -12,6 +12,18 @@ import LoadingPanel from '../commons/loadingPanel';
 import NavbarMenuItem from '../commons/navbars/navbarMenuItem'
 import { GET_ALL_LEAVES } from "../../data/queries/leaveQueries";
 
+export const ClassNames = {
+  LEAVE_LIST_ITEM: "ag-leave-list-item",
+  LEAVE_LIST_ITEM_FROM: "ag-leave-list-item-from",
+  LEAVE_LIST_ITEM_TO: "ag-leave-list-item-to",
+  LEAVE_LIST_ITEM_MOBILE: "ag-leave-list-item-mobile"
+};
+
+export const Ids = {
+  LEAVE_LIST: "ag-leave-list",
+  getListItemId: id => `ag-leave-list-item-${id}`
+};
+
 function LeaveRow (props) {
   let { fromDate, toDate } = props;
 
@@ -34,12 +46,17 @@ function LeaveRow (props) {
     timeZone: 'UTC'
   };
 
-  return <tr>
-    <td className="is-hidden-desktop">{`
+  return <tr id={Ids.getListItemId(props.id)} className={ClassNames.LEAVE_LIST_ITEM}>
+    <td className={`is-hidden-desktop ${ClassNames.LEAVE_LIST_ITEM_MOBILE}`}>{`
       ${fromDate.toLocaleDateString('default', mobileDateOptions)} -
-      ${toDate.toLocaleDateString('default', mobileDateOptions)}`}</td>
-    <td className="is-hidden-touch">{fromDate.toLocaleDateString('default', desktopDateOptions)}</td>
-    <td className="is-hidden-touch">{toDate.toLocaleDateString('default', desktopDateOptions)}</td>
+      ${toDate.toLocaleDateString('default', mobileDateOptions)}`}
+    </td>
+    <td className={`is-hidden-touch ${ClassNames.LEAVE_LIST_ITEM_FROM}`}>
+      {fromDate.toLocaleDateString('default', desktopDateOptions)}
+    </td>
+    <td className={`is-hidden-touch ${ClassNames.LEAVE_LIST_ITEM_TO}`}>
+      {toDate.toLocaleDateString('default', desktopDateOptions)}
+    </td>
     <td><ListItemButtons deleteModalId={DELETE_LEAVE_MODAL} editPath={ UPDATE_LEAVE + props.id }/></td>
   </tr>;
 }
@@ -50,7 +67,7 @@ export default function LeaveList (props) {
   if (error) return <ErrorPanel>{listGraphQLErros(error)}</ErrorPanel>;
   const listBody = <React.Fragment>
     <p>Los clientes no podrán agendar citas durante estos periodos.</p>
-    <table className="table is-fullwidth">
+    <table id={Ids.LEAVE_LIST} className="table is-fullwidth">
       <tbody className="table-container">
         <tr>
           <th className="is-hidden-desktop">Periodo</th>
