@@ -6,7 +6,7 @@ import { ADD_LEAVE, UPDATE_LEAVE } from "../../constants/paths";
 import DeleteModal from '../commons/modals/deleteModal';
 import ErrorPanel from '../commons/errorPanel';
 import getIndex from '../commons/getIndex';
-import listGraphQLErros from '../commons/listGraphQLErrors';
+import listGraphQLErrors from '../commons/listGraphQLErrors';
 import ListItemButtons from '../commons/listItemButtons';
 import LoadingPanel from '../commons/loadingPanel';
 import NavbarMenuItem from '../commons/navbars/navbarMenuItem'
@@ -64,7 +64,7 @@ function LeaveRow (props) {
 export default function LeaveList (props) {
   const { loading, error, data } = useQuery(GET_ALL_LEAVES);
   if (loading) return <LoadingPanel subject={LEAVE}/>;
-  if (error) return <ErrorPanel>{listGraphQLErros(error)}</ErrorPanel>;
+  if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   const listBody = <React.Fragment>
     <p>Los clientes no podrán agendar citas durante estos periodos.</p>
     <table id={Ids.LEAVE_LIST} className="table is-fullwidth">
