@@ -17,6 +17,17 @@ import { variableHoliday } from "../../models/variableHoliday";
 import { getDayIndex } from "../../utilities/daysOfWeek";
 import { getMonthIndex } from "../../utilities/months";
 
+const ClassNames = {
+  HOLIDAY_LIST_ITEM: "ag-holiday-list-item",
+  HOLIDAY_LIST_ITEM_DATE: "ag-holiday-list-item-date",
+  HOLIDAY_VARIABLE_TAG: "ag-holiday-variable-tag"
+};
+
+const Ids = {
+  HOLIDAY_LIST: "ag-holiday-list",
+  getListItemId: (id) => `ag-holiday-list-item-${id}`
+};
+
 /**
  * Holiday list item.
  * @param props.date Holiday date.
@@ -26,14 +37,16 @@ import { getMonthIndex } from "../../utilities/months";
  */
 function HolidayListRow(props) {
   const editPath = props.isVariable ? Paths.UPDATE_VARIABLE_HOLIDAY : Paths.UPDATE_FIXED_HOLIDAY;
-  return <tr>
+  return <tr className={ClassNames.HOLIDAY_LIST_ITEM}>
     <th>
-      {props.date.toLocaleDateString("default", {month: "long", day: "numeric"})}
-      {props.isVariable ? (<React.Fragment>
+      <span className={ClassNames.HOLIDAY_LIST_ITEM_DATE}>
+        {props.date.toLocaleDateString("default", {month: "long", day: "numeric"})}
+      </span>
+      {props.isVariable && <React.Fragment>
         <span className="is-hidden-touch">&nbsp;</span>
         <br className="is-hidden-desktop"/>
-        <span className="tag is-info">Variable</span>
-      </React.Fragment>) : ''}
+        <span className={`tag is-info ${ClassNames.HOLIDAY_VARIABLE_TAG}`}>Variable</span>
+      </React.Fragment>}
     </th>
     <td>
       <ListItemButtons editPath={`${editPath}${props.id}`} deleteModalId={DELETE_HOLIDAY_MODAL}/>
@@ -80,7 +93,7 @@ export default function HolidayList(props) {
           })
         }</p>
       </div>
-      <table className="table is-fullwidth">
+      <table id={Ids.HOLIDAY_LIST} className="table is-fullwidth">
         <tbody className="table-container">{
           allHolidayData.map((holiday) =>
               <HolidayListRow id={holiday.id} key={holiday.date} date={holiday.date} isVariable={holiday.isVariable}/>)
