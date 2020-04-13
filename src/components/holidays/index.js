@@ -1,21 +1,21 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
-import * as Paths from '../../constants/paths';
-import { DELETE_HOLIDAY_MODAL } from "../../constants/modalIds";
-import ErrorPanel from '../commons/errorPanel';
-import { fixedHoliday } from "../../models/fixedHoliday";
 import { HOLIDAYS } from "../../constants/headers";
-import { variableHoliday } from "../../models/variableHoliday";
-import DeleteModal from '../commons/modals/deleteModal';
+import { DELETE_HOLIDAY_MODAL } from "../../constants/modalIds";
+import * as Paths from '../../constants/paths';
+import ErrorPanel from '../commons/errorPanel';
 import getIndex from '../commons/getIndex';
-import { getDayIndex } from "../../utilities/daysOfWeek";
-import { getMonthIndex } from "../../utilities/months";
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import ListItemButtons from '../commons/listItemButtons';
 import LoadingPanel from '../commons/loadingPanel';
+import DeleteModal from '../commons/modals/deleteModal';
 import NavbarMenuItem from '../commons/navbars/navbarMenuItem';
+import { GET_ALL_HOLIDAYS } from "../../data/queries/holidayQueries";
+import { fixedHoliday } from "../../models/fixedHoliday";
+import { variableHoliday } from "../../models/variableHoliday";
+import { getDayIndex } from "../../utilities/daysOfWeek";
+import { getMonthIndex } from "../../utilities/months";
 
 /**
  * Holiday list item.
@@ -43,19 +43,7 @@ function HolidayListRow(props) {
 
 export default function HolidayList(props) {
   // Gets data
-  const { loading, error, data } = useQuery(gql`{
-      getHolidays(profileId: "0x30001") {
-          id
-          month
-          ...on FixedHoliday {
-              day
-          }
-          ...on VariableHoliday {
-              dayOfWeek
-              week
-          }
-      }
-  }`);
+  const { loading, error, data } = useQuery(GET_ALL_HOLIDAYS);
 
   if (loading) return <LoadingPanel subject={HOLIDAYS}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
