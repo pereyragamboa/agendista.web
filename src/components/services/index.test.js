@@ -2,9 +2,10 @@ import { render } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import wait from 'waait';
 import { expectLoadingPanel, expectTextInElement } from "../testHelpers/expectFunctions";
+import { getMockProvider } from "../testHelpers/getMockProvider";
 import TestContainer from '../testHelpers/testContainer';
 import ServiceIndex from './index';
-import { getMockProvider, mockData } from "./mockData";
+import { mockData, mockQuery } from "./mockData";
 import { Ids as ServiceIds } from './serviceList';
 import { Ids as IndexIds } from '../commons/getIndex';
 import { SERVICES } from "../../constants/headers";
@@ -14,7 +15,7 @@ describe("Service index component tests", () => {
 
   beforeAll(async () => {
     await act(async () => {
-      render(getMockProvider(ServiceIndex), testContainer.createContainer());
+      render(getMockProvider(ServiceIndex, { mockQueries: [ mockQuery ] }), testContainer.createContainer());
       await wait();
     });
   });

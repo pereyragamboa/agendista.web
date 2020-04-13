@@ -4,7 +4,8 @@ import wait from 'waait';
 import { expectLoadingPanel } from "../testHelpers/expectFunctions";
 import TestContainer from '../testHelpers/testContainer';
 import { getTimeString } from "../../utilities/times";
-import { getMockProvider, mockData } from "./mockData";
+import { mockData, mockQuery } from "./mockData";
+import { getMockProvider } from "../testHelpers/getMockProvider";
 import ServiceList, { ClassNames, Ids } from './serviceList';
 
 const container = new TestContainer();
@@ -15,7 +16,7 @@ describe("Service list component tests", () => {
   beforeAll(async () => {
     container.createContainer();
     await act(async () => {
-      render(getMockProvider(ServiceList), container.getContainer());
+      render(getMockProvider(ServiceList, { mockQueries: [mockQuery] }), container.getContainer());
       await wait();
       mockData.forEach(({ id }) => {
         const item = document.getElementById(Ids.getListItemId(id));
