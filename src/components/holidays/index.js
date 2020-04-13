@@ -17,13 +17,13 @@ import { variableHoliday } from "../../models/variableHoliday";
 import { getDayIndex } from "../../utilities/daysOfWeek";
 import { getMonthIndex } from "../../utilities/months";
 
-const ClassNames = {
+export const ClassNames = {
   HOLIDAY_LIST_ITEM: "ag-holiday-list-item",
   HOLIDAY_LIST_ITEM_DATE: "ag-holiday-list-item-date",
   HOLIDAY_VARIABLE_TAG: "ag-holiday-variable-tag"
 };
 
-const Ids = {
+export const Ids = {
   HOLIDAY_LIST: "ag-holiday-list",
   getListItemId: (id) => `ag-holiday-list-item-${id}`
 };
