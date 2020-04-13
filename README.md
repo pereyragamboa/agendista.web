@@ -7,15 +7,20 @@ the needs of a business / organization booking client appointments:
 * Defining available services
 * Defining business hours, holidays and vacation time
 
-As of December 2019, the application only retrieves and display data from its back end.
+As of April 2020, the application only retrieves and display data from its back end.
 
 ## Getting started
 
 Install [the back end](https://github.com/pereyragamboa/agendista.back) before running the application. 
 
-Once installed, change the back-end server path in `src/serverData.js` and `codegen.yml`. Run `gql-gen` as detailed in
-[Apollo's documentation on fragments](https://www.apollographql.com/docs/react/v2.6/advanced/fragments/#fragments-on-unions-and-interfaces) 
-for creating `src/fragmentTypes.json`.
+Once installed, add a file `src/serverData.js`, with the following content, replacing the value of `uri` with your local back end:
+
+```javascript
+export const uri = 'https://your-back-end.example.com/';
+``` 
+ 
+Set the same path in `codegen.yml`. This file is used by `gql-gen` for creating `src/fragmentTypes.json`, as detailed in
+[Apollo's documentation on fragments](https://www.apollographql.com/docs/react/advanced/fragments/#fragments-on-unions-and-interfaces).
 
 After that, use the available scripts in [create-react-app](https://create-react-app.dev/docs/getting-started/#scripts).
 
