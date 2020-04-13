@@ -11,6 +11,20 @@ import { GET_ALL_CUSTOMERS } from "../../data/queries/customerQueries";
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 
+export const ClassNames = {
+  CUSTOMER_LIST_ITEM: "ag-customer-list-item",
+  CUSTOMER_LIST_FIRST_NAME: "ag-customer-list-first-name",
+  CUSTOMER_LIST_LAST_NAME: "ag-customer-list-last-name",
+  CUSTOMER_LIST_TELEPHONE: "ag-customer-list-telephone",
+  CUSTOMER_LIST_EMAIL: "ag-customer-list-email",
+  CUSTOMER_LIST_FULL_NAME: "ag-customer-list-full-name"
+};
+
+export const Ids = {
+  CUSTOMER_LIST: "ag-customer-list",
+  getListItemId: (id) => `ag-customer-list-item-${id}`
+};
+
 /**
  * Row element with customer information.
  *
@@ -24,18 +38,26 @@ import LoadingPanel from '../commons/loadingPanel';
  */
 function CustomerListItem(props) {
   const editUrl = Paths.UPDATE_CUSTOMER + props.customerId;
-  return <tr>
+  return <tr className={ClassNames.CUSTOMER_LIST_ITEM} id={Ids.getListItemId(props.customerId)}>
     <td className="is-hidden-desktop">
-      <EditLink to={editUrl}>{`${props.firstNames} ${props.lastNames}`}</EditLink>
+      <EditLink to={editUrl} className={ClassNames.CUSTOMER_LIST_FULL_NAME}>
+        {`${props.firstNames} ${props.lastNames}`}
+      </EditLink>
     </td>
     <td className="is-hidden-touch">
-      <EditLink to={editUrl}>{props.firstNames}</EditLink>
+      <EditLink to={editUrl} className={ClassNames.CUSTOMER_LIST_FIRST_NAME}>
+        {props.firstNames}
+      </EditLink>
     </td>
     <td className="is-hidden-touch">
-      <EditLink to={editUrl}>{props.lastNames}</EditLink>
+      <EditLink to={editUrl} className={ClassNames.CUSTOMER_LIST_LAST_NAME}>
+        {props.lastNames}
+      </EditLink>
     </td>
-    <td className="is-hidden-touch">{props.telephone}</td>
-    <td className="is-hidden-touch">{props.email}</td>
+    <td className={`is-hidden-touch ${ClassNames.CUSTOMER_LIST_TELEPHONE}`}>
+      {props.telephone}</td>
+    <td className={`is-hidden-touch ${ClassNames.CUSTOMER_LIST_EMAIL}`}>
+      {props.email}</td>
     <td><DeleteButton modalId={MODAL_ID} /></td>
   </tr>;
 }
@@ -51,7 +73,7 @@ export default function CustomerList() {
   if (loading) return <LoadingPanel subject={CUSTOMERS}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   return <React.Fragment>
-    <table className="table is-fullwidth is-hoverable">
+    <table id={Ids.CUSTOMER_LIST} className="table is-fullwidth is-hoverable">
       <thead>
         <tr>
           <th>Nombre</th>
