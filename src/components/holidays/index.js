@@ -37,7 +37,7 @@ export const Ids = {
  */
 function HolidayListRow(props) {
   const editPath = props.isVariable ? Paths.UPDATE_VARIABLE_HOLIDAY : Paths.UPDATE_FIXED_HOLIDAY;
-  return <tr className={ClassNames.HOLIDAY_LIST_ITEM}>
+  return <tr className={ClassNames.HOLIDAY_LIST_ITEM} id={Ids.getListItemId(props.id)}>
     <th>
       <span className={ClassNames.HOLIDAY_LIST_ITEM_DATE}>
         {props.date.toLocaleDateString("default", {month: "long", day: "numeric"})}

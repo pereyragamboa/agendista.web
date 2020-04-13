@@ -15,6 +15,7 @@ import HolidayIndex, { ClassNames, Ids } from './index';
 
 describe("Holiday index component tests", () => {
   const testContainer = new TestContainer();
+  const itemsMap = new Map();
 
   const mockData = [
     {
@@ -62,6 +63,11 @@ describe("Holiday index component tests", () => {
         </MemoryRouter>
       </MockedProvider>, testContainer.createContainer());
       await wait();
+
+      mockData.forEach(({ id }) => {
+        const holidayItem = document.getElementById(Ids.getListItemId(id));
+        if (holidayItem) itemsMap.set(id, holidayItem);
+      });
     });
   });
 
@@ -78,5 +84,27 @@ describe("Holiday index component tests", () => {
     expect(document.getElementById(IndexIds.NAVBAR_BRAND_ICON)).not.toBeNull();
   });
 
-  test.todo("Has holiday items");
+  test("Has holiday items", () => {
+    expect(testContainer.getContainer().getElementsByClassName(ClassNames.HOLIDAY_LIST_ITEM)).toHaveLength(mockData.length);
+    expect(mockData).toHaveLength(itemsMap.size);
+  });
+
+  describe.each(mockData)("Display list items", (mockItem) => {
+    test(`Has item for holiday ${mockItem.id}`, () => {
+      expect(itemsMap.has(mockItem.id)).toBeTruthy();
+    });
+
+    test("Shows date", () => {
+      const dateElement = itemsMap.get(mockItem.id).getElementsByClassName(ClassNames.HOLIDAY_LIST_ITEM_DATE);
+      expect(dateElement).toHaveLength(1);
+    });
+
+    test("Is marked as variable holiday", () => {
+      expect(
+          itemsMap.get(mockItem.id).getElementsByClassName(ClassNames.HOLIDAY_VARIABLE_TAG)
+      ).toHaveLength(
+          mockItem.__typename === 'VariableHoliday' ? 1 : 0
+      );
+    });
+  });
 });
