@@ -2,40 +2,13 @@ import React from 'react';
 import { render } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import wait from 'waait';
-import { GET_ALL_CUSTOMERS } from "../../data/queries/customerQueries";
 import { expectLoadingPanel } from "../testHelpers/expectFunctions";
 import { getMockProvider } from "../testHelpers/getMockProvider";
 import TestContainer from '../testHelpers/testContainer';
 import CustomerList, { ClassNames, Ids } from './customerList';
+import { mockData, mockQuery } from "./mockData";
 
 const container = new TestContainer();
-
-const mockData = [
-  {
-    id: 10241,
-    firstName: "Adel",
-    lastName: "Ortega",
-    telephone: "12345321",
-    email: "adel@bunsen.example.com"
-  }, {
-    id: 10242,
-    firstName: "Arturo",
-    lastName: "Navarra",
-    telephone: "543212345",
-    email: "sigurd@example.com"
-  }, {
-    id: 10243,
-    firstName: "Claudia",
-    lastName: "Bernal",
-    telephone: "246808642",
-    email: "mishxa_darksoul2000@hotmail.com"
-  }
-];
-
-const mockQuery = {
-  request: { query: GET_ALL_CUSTOMERS },
-  result: { data: { getAllCustomers: mockData }}
-};
 
 describe("Customer list tests", () => {
   const customerMap = new Map();
