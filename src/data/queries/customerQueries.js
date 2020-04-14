@@ -10,10 +10,10 @@ export const GET_ALL_CUSTOMERS = gql`{
     }}`;
 
 export const GET_CUSTOMER = gql`{
-        getCustomer(clientId: $customerId) @client {
-            firstName
-            lastName
-            telephone
-            email
-        }
-    }`;
+    getCustomer(clientId: $customerId) @client {
+        firstName
+        lastName
+        telephone
+        email
+    }
+}`;
