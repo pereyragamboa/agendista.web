@@ -10,6 +10,20 @@ import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import * as Paths from '../../constants/paths';
 
+export const ClassNames = {
+  CUSTOMER_SELECTOR_ITEM: "ag-customer-selector-item",
+  CUSTOMER_SELECTOR_ITEM_FIRST_NAME: "ag-customer-selector-item-first-name",
+  CUSTOMER_SELECTOR_ITEM_LAST_NAME: "ag-customer-selector-item-last-name",
+  CUSTOMER_SELECTOR_ITEM_EMAIL: "ag-customer-selector-item-email",
+};
+
+export const Ids = {
+  CUSTOMER_SELECTOR: "ag-customer-selector",
+  CUSTOMER_SELECTOR_NO_RESULTS: "ag-customer-selector-no-results",
+  CUSTOMER_SELECTOR_SEARCH_BOX: "ag-customer-selector-search",
+  getListItemId: id => `ag-customer-selector-item-${id}`
+};
+
 let selectedCustomerId = "";
 
 /**
@@ -37,9 +51,9 @@ function CustomerSelectionResults(props) {
 
   return props.names && props.names.length > 0 ?
       <div className="field">
-      <table className="table is-fullwidth is-hoverable">
+      <table id={Ids.CUSTOMER_SELECTOR} className="table is-fullwidth is-hoverable">
         <thead>
-        <tr>
+        <tr className={ClassNames.CUSTOMER_SELECTOR_ITEM}>
           <th>Nombre</th>
           <th>Apellidos</th>
           <th className="is-hidden-mobile">Correo electrónico</th>
@@ -47,23 +61,22 @@ function CustomerSelectionResults(props) {
         </thead>
         <tbody style={{cursor: "pointer"}}>
         {
-          props.names.map(name => <tr id={name.id} key={name.id} onClick={onCustomerRowClick}>
-            <td>{name.firstName}</td>
-            <td>{name.lastName}</td>
-            <td className="is-hidden-mobile">{name.email}</td>
+          props.names.map(name => <tr id={Ids.getListItemId(name.id)} key={name.id} onClick={onCustomerRowClick}>
+            <td className={ClassNames.CUSTOMER_SELECTOR_ITEM_FIRST_NAME}>{name.firstName}</td>
+            <td className={ClassNames.CUSTOMER_SELECTOR_ITEM_LAST_NAME}>{name.lastName}</td>
+            <td className={`is-hidden-mobile ${ClassNames.CUSTOMER_SELECTOR_ITEM_EMAIL}`}>
+              {name.email}</td>
           </tr>)
         }
         </tbody>
       </table></div> :
-      <div className="field message is-warning">
+      <div id={Ids.CUSTOMER_SELECTOR_NO_RESULTS} className="field message is-warning">
         <p className="message-header">No se encontraron clientes.</p>
         <p className="message-body">Intente buscar otro nombre, o <Link to={Paths.ADD_CUSTOMER}>agregar un nuevo cliente</Link>.</p>
       </div>
 }
 
 export default function AppointmentCustomerSelector() {
-  const SEARCH_INPUT_ID = "ag-search-criteria-input";
-
   // Hooks
   const [state, setState] = useState({
     searchCriteria: "", // Content of the customer name input
@@ -72,7 +85,7 @@ export default function AppointmentCustomerSelector() {
 
   useEffect(() => {
     // Keeps focus on the search criteria input
-    const searchInput = document.getElementById(SEARCH_INPUT_ID);
+    const searchInput = document.getElementById(CUSTOMER_SELECTOR_SEARCH_BOX);
     if (searchInput) searchInput.focus();
   });
 
@@ -107,7 +120,7 @@ export default function AppointmentCustomerSelector() {
   }
 
   function onOkClick() {
-    console.log(selectedCustomerId.substring(selectedCustomerId.lastIndexOf("-") + 1));
+    // Redirects application to add customer page
     setState({ redirect: true });
   }
 
@@ -115,7 +128,7 @@ export default function AppointmentCustomerSelector() {
   const CustomerSelector = () => state.redirect ?
       <Redirect to={`${Paths.ADD_CUSTOMER}/${selectedCustomerId}`} push/> :
       <React.Fragment>
-        <FeatherInput id={SEARCH_INPUT_ID} iconName="search" placeholder="Nombre(s)"
+        <FeatherInput id={CUSTOMER_SELECTOR_SEARCH_BOX} iconName="search" placeholder="Nombre(s)"
                       caption="Agendar la cita a:" value={state.searchCriteria}
                       onChange={onCustomerChange}/>
         { loading && <LoadingPanel subject="Clientes"/> }
