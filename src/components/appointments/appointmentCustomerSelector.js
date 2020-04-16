@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import { useLazyQuery } from '@apollo/react-hooks';
@@ -9,6 +8,7 @@ import getDetail, { enableOkButton } from '../commons/getDetail';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import * as Paths from '../../constants/paths';
+import { FIND_CUSTOMERS_BY_NAME } from "../../data/queries/customerQueries";
 
 export const ClassNames = {
   CUSTOMER_SELECTOR_ITEM: "ag-customer-selector-item",
@@ -89,15 +89,7 @@ export default function AppointmentCustomerSelector() {
     if (searchInput) searchInput.focus();
   });
 
-  const [getQuery, { loading, error, data }] = useLazyQuery(gql`
-      query findCustomers($names: [String]) {
-          findCustomersByName(names: $names) {
-              id
-              firstName
-              lastName
-              email
-          }
-      }`);
+  const [getQuery, { loading, error, data }] = useLazyQuery(FIND_CUSTOMERS_BY_NAME);
 
   let timer = null; // Timer reference
 
