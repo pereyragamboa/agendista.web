@@ -15,6 +15,7 @@ export const ClassNames = {
   CUSTOMER_SELECTOR_ITEM_FIRST_NAME: "ag-customer-selector-item-first-name",
   CUSTOMER_SELECTOR_ITEM_LAST_NAME: "ag-customer-selector-item-last-name",
   CUSTOMER_SELECTOR_ITEM_EMAIL: "ag-customer-selector-item-email",
+  CUSTOMER_SELECTOR_ITEM_SELECTED: "is-selected"
 };
 
 export const Ids = {
@@ -33,17 +34,20 @@ let selectedCustomerId = "";
  * @constructor
  */
 function CustomerSelectionResults(props) {
-  const IS_ROW_SELECTED_CLASS = "is-selected";
-
   function onCustomerRowClick(e) {
     // Because the click() event will be raised from a <td>, we must query the parent of the clicked <td>
-    const newId = e.target.parentElement.id;
+    let newId = undefined;
+    if (e.target.tagName === 'TR') {
+      newId = e.target.id;
+    } else if (e.target.tagName === 'TD') {
+      newId = e.target.parentElement.id;
+    }
     // Deselect current row, if present
     if (selectedCustomerId && selectedCustomerId !== newId) {
-      document.getElementById(selectedCustomerId).classList.remove(IS_ROW_SELECTED_CLASS);
+      document.getElementById(selectedCustomerId).classList.remove(ClassNames.CUSTOMER_SELECTOR_ITEM_SELECTED);
     }
     // Select new row
-    document.getElementById(newId).classList.add(IS_ROW_SELECTED_CLASS);
+    document.getElementById(newId).classList.add(ClassNames.CUSTOMER_SELECTOR_ITEM_SELECTED);
     selectedCustomerId = newId;
     // Show confirm button
     enableOkButton();

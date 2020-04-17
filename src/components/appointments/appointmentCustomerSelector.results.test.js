@@ -85,4 +85,25 @@ describe("Tests for customer selector component with results", () => {
       expect(element[0].textContent).toEqual(mockItem.email);
     });
   });
+
+  test("Selects items", () => {
+    const firstItem = listMap.get(mockData[0].id);
+    const secondItem = listMap.get(mockData[1].id);
+    const selectedItems = container.getContainer().getElementsByClassName(ClassNames.CUSTOMER_SELECTOR_ITEM_SELECTED);
+
+    expect(selectedItems).toHaveLength(0);
+    // Selects an item
+    act(() => {
+      Simulate.click(firstItem);
+    });
+    expect(selectedItems).toHaveLength(1);
+    expect(firstItem.classList.contains(ClassNames.CUSTOMER_SELECTOR_ITEM_SELECTED)).toBeTruthy();
+    // Selects other item by "clicking" on one of its children
+    act(() => {
+      Simulate.click(secondItem.children[0]);
+    });
+    expect(selectedItems).toHaveLength(1);
+    expect(firstItem.classList.contains(ClassNames.CUSTOMER_SELECTOR_ITEM_SELECTED)).toBeFalsy();
+    expect(secondItem.classList.contains(ClassNames.CUSTOMER_SELECTOR_ITEM_SELECTED)).toBeTruthy();
+  });
 });
