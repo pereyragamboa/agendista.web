@@ -53,7 +53,7 @@ function CustomerSelectionResults(props) {
       <div className="field">
       <table id={Ids.CUSTOMER_SELECTOR} className="table is-fullwidth is-hoverable">
         <thead>
-        <tr className={ClassNames.CUSTOMER_SELECTOR_ITEM}>
+        <tr>
           <th>Nombre</th>
           <th>Apellidos</th>
           <th className="is-hidden-mobile">Correo electrónico</th>
@@ -61,12 +61,15 @@ function CustomerSelectionResults(props) {
         </thead>
         <tbody style={{cursor: "pointer"}}>
         {
-          props.names.map(name => <tr id={Ids.getListItemId(name.id)} key={name.id} onClick={onCustomerRowClick}>
-            <td className={ClassNames.CUSTOMER_SELECTOR_ITEM_FIRST_NAME}>{name.firstName}</td>
-            <td className={ClassNames.CUSTOMER_SELECTOR_ITEM_LAST_NAME}>{name.lastName}</td>
-            <td className={`is-hidden-mobile ${ClassNames.CUSTOMER_SELECTOR_ITEM_EMAIL}`}>
-              {name.email}</td>
-          </tr>)
+          props.names.map(name =>
+              <tr id={Ids.getListItemId(name.id)} key={name.id}
+                  className={ClassNames.CUSTOMER_SELECTOR_ITEM}
+                  onClick={onCustomerRowClick}>
+                <td className={ClassNames.CUSTOMER_SELECTOR_ITEM_FIRST_NAME}>{name.firstName}</td>
+                <td className={ClassNames.CUSTOMER_SELECTOR_ITEM_LAST_NAME}>{name.lastName}</td>
+                <td className={`is-hidden-mobile ${ClassNames.CUSTOMER_SELECTOR_ITEM_EMAIL}`}>
+                  {name.email}</td>
+              </tr>)
         }
         </tbody>
       </table></div> :
@@ -85,7 +88,7 @@ export default function AppointmentCustomerSelector() {
 
   useEffect(() => {
     // Keeps focus on the search criteria input
-    const searchInput = document.getElementById(CUSTOMER_SELECTOR_SEARCH_BOX);
+    const searchInput = document.getElementById(Ids.CUSTOMER_SELECTOR_SEARCH_BOX);
     if (searchInput) searchInput.focus();
   });
 
@@ -120,7 +123,7 @@ export default function AppointmentCustomerSelector() {
   const CustomerSelector = () => state.redirect ?
       <Redirect to={`${Paths.ADD_CUSTOMER}/${selectedCustomerId}`} push/> :
       <React.Fragment>
-        <FeatherInput id={CUSTOMER_SELECTOR_SEARCH_BOX} iconName="search" placeholder="Nombre(s)"
+        <FeatherInput id={Ids.CUSTOMER_SELECTOR_SEARCH_BOX} iconName="search" placeholder="Nombre(s)"
                       caption="Agendar la cita a:" value={state.searchCriteria}
                       onChange={onCustomerChange}/>
         { loading && <LoadingPanel subject="Clientes"/> }
