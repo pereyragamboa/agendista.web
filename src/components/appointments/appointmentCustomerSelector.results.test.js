@@ -5,7 +5,7 @@ import { mockData } from "../customers/mockData";
 import { FIND_CUSTOMERS_BY_NAME } from "../../data/queries/customerQueries";
 import { getMockProvider } from "../testHelpers/getMockProvider";
 import TestContainer from '../testHelpers/testContainer';
-import AppointmentCustomerSelector, { ClassNames, Ids } from './appointmentCustomerSelector';
+import AppointmentCustomerSelector, { ClassNames, Ids, RUN_QUERY_TIMEOUT } from './appointmentCustomerSelector';
 import { expectLoadingPanel } from "../testHelpers/expectFunctions";
 
 const QUERY_PARAMETER = "123";
@@ -40,7 +40,7 @@ describe("Tests for customer selector component with results", () => {
       if (searchBox) {
         searchBox.value = QUERY_PARAMETER;
         Simulate.change(searchBox);
-        await wait(1100);
+        await wait(RUN_QUERY_TIMEOUT * 1.1); // Wait 10% longer than timeout for firing query
       }
       // Fills map with list items
       for(let mockItem of mockData) {

@@ -25,6 +25,8 @@ export const Ids = {
   getListItemId: id => `ag-customer-selector-item-${id}`
 };
 
+export const RUN_QUERY_TIMEOUT = 1000;
+
 let selectedCustomerId = "";
 
 /**
@@ -114,7 +116,7 @@ export default function AppointmentCustomerSelector() {
           names => {
             getQuery({ variables: { names } });
             setState({ searchCriteria: value });
-          }, 1000, value.split(" "));
+          }, RUN_QUERY_TIMEOUT, value.split(" "));
     }
   }
 
