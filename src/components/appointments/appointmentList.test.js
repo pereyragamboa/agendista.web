@@ -1,45 +1,15 @@
 import { render } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import wait from 'waait';
-import { GET_PROFILE_APPOINTMENTS } from "../../data/queries/appointmentQueries";
+import { expectLoadingPanel } from "../testHelpers/expectFunctions";
 import { getMockProvider } from "../testHelpers/getMockProvider";
 import TestContainer from '../testHelpers/testContainer';
 import AppointmentList, { ClassNames, Ids } from "./appointmentList";
-import { mockData as mockCustomers } from '../customers/mockData';
-import { expectLoadingPanel } from "../testHelpers/expectFunctions";
+import { mockData, mockQuery } from './mockData';
 
 describe("Appointment list component tests", () => {
   const container = new TestContainer();
   const itemMap = new Map();
-
-  function getRandomInteger(ceiling) { return Math.floor(Math.random() * ceiling); }
-
-  function getMockData(count) {
-    if (typeof(count) === 'number' && count > 0) {
-      const res = [];
-      let id = getRandomInteger(1024);
-
-      for(let i = 0; i < count; i++) {
-        res.push({
-          id: id++,
-          date: new Date(
-              2020, getRandomInteger(12), getRandomInteger(30) + 1,
-              getRandomInteger(24), getRandomInteger(60)),
-          customer: mockCustomers[getRandomInteger(mockCustomers.length)]
-        });
-      }
-
-      return res;
-    }
-    else throw new Error("Invalid count.");
-  }
-
-  const mockData = getMockData(5);
-
-  const mockQuery = {
-    request: { query: GET_PROFILE_APPOINTMENTS },
-    result: { data: { getProfileAppointments: mockData }}
-  };
 
   beforeAll(async () => {
     await act(async () => {
