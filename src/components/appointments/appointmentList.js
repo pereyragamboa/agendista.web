@@ -11,6 +11,17 @@ import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import { GET_PROFILE_APPOINTMENTS } from "../../data/queries/appointmentQueries";
 
+export const ClassNames = {
+  APPOINTMENT_LIST: "ag-appointment-list",
+  APPOINTMENT_LIST_ITEM: "ag-appointment-list-item",
+  APPOINTMENT_LIST_ITEM_DATE_TIME: "ag-appointment-list-item-date-time",
+  APPOINTMENT_LIST_ITEM_CUSTOMER: "ag-appointment-list-item-customer"
+};
+
+export const Ids = {
+  getListItemId: (id) => `ag-appointment-list-item-${id}`
+};
+
 /**
  * Row element of an appointment list.
  *
@@ -23,9 +34,9 @@ import { GET_PROFILE_APPOINTMENTS } from "../../data/queries/appointmentQueries"
  */
 const AppointmentListElement = (props) => {
   const editPath = Paths.UPDATE_APPOINTMENT + props.id;
-  return <tr>
-    <th><EditLink to={editPath}>{props.time}</EditLink></th>
-    <td>{props.clientName}</td>
+  return <tr id={Ids.getListItemId(props.id)} className={ClassNames.APPOINTMENT_LIST_ITEM}>
+    <th><EditLink className={ClassNames.APPOINTMENT_LIST_ITEM_DATE_TIME} to={editPath}>{props.time}</EditLink></th>
+    <td className={ClassNames.APPOINTMENT_LIST_ITEM_CUSTOMER}>{props.clientName}</td>
     {
       props.showButtons ? (
           <td>
@@ -49,7 +60,7 @@ export default function AppointmentList (props) {
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   return (
       <React.Fragment>
-        <table className="table is-fullwidth is-hoverable">
+        <table className={`table is-fullwidth is-hoverable ${ClassNames.APPOINTMENT_LIST}`}>
           <thead>
           <tr>
             <th>Hora</th><th>Cliente</th>
