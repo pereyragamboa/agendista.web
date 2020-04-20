@@ -1,5 +1,4 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import { APPOINTMENTS } from "../../constants/headers";
@@ -10,6 +9,7 @@ import ErrorPanel from '../commons/errorPanel';
 import ListItemButtons from '../commons/listItemButtons';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
+import { GET_PROFILE_APPOINTMENTS } from "../../data/queries/appointmentQueries";
 
 /**
  * Row element of an appointment list.
@@ -44,16 +44,7 @@ const AppointmentListElement = (props) => {
  */
 export default function AppointmentList (props) {
   const { showButtons } = props;
-  const { loading, error, data } = useQuery(gql`
-    query appointments { getProfileAppointments (profileId: "0x30001") {
-        id
-        date
-        customer {
-            firstName
-            lastName
-        }
-    }}
-  `);
+  const { loading, error, data } = useQuery(GET_PROFILE_APPOINTMENTS);
   if (loading) return <LoadingPanel subject={ APPOINTMENTS }/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   return (
