@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const GET_ALL_SERVICES = gql`query {
-    getServices(profileId: $id) {
+    getServices(profileId: "0x30001") {
         id
         name
         description
