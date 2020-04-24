@@ -1,13 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import getFormControl, { ClassNames } from './getFormControl';
+import getFormControl, { ClassNames, Ids } from './getFormControl';
 import TestContainer from '../../testHelpers/testContainer';
 import { expectIconRender } from "../../testHelpers/expectFunctions";
 
 describe("getFormControl() tests", () => {
   const testContainer = new TestContainer();
   const TEST_CAPTION = "Test control";
+  const TEST_ID = "form-control-id";
+  const TEST_HELP = "Testing help element";
 
   beforeEach(testContainer.createContainer);
 
@@ -15,10 +17,12 @@ describe("getFormControl() tests", () => {
 
   describe("Basic render tests", () => {
     function renderFullFormControl() {
-      const FormControl = getFormControl(() => <input type="number"/>);
+      const FormControl = getFormControl(
+          () => <input type="number"/>, () => <span>Help</span>
+      );
       act(() => {
         render(
-            <FormControl caption={TEST_CAPTION} iconName="feather"/>, testContainer.getContainer()
+            <FormControl id={TEST_ID} caption={TEST_CAPTION} iconName="feather" showHelp={true}/>, testContainer.getContainer()
         );
       });
     }
@@ -32,6 +36,12 @@ describe("getFormControl() tests", () => {
       renderFullFormControl();
       testCaptionRender(TEST_CAPTION)
     });
+
+    test("renders help", () => {
+      renderFullFormControl();
+      const help = document.getElementById(Ids.getHelpId(TEST_ID));
+      expect(help).not.toBeNull();
+    })
   });
 
   test("renders addons", () => {
@@ -62,6 +72,16 @@ describe("getFormControl() tests", () => {
       });
       expectIconRender(0);
       testCaptionRender(TEST_CAPTION);
+    });
+
+    test("renders help without id", () => {
+      act(() => {
+        const FormControl = getFormControl(() => <input type="text"/>, () => <p>{TEST_HELP}</p>);
+        render(<FormControl caption={TEST_CAPTION} iconName="feather" showHelp={true}/>, testContainer.getContainer());
+      });
+      const helps = testContainer.getContainer().getElementsByClassName(ClassNames.HELP);
+      expect(helps).toHaveLength(1);
+      expect(helps[0].textContent).toBe(TEST_HELP);
     });
   });
 

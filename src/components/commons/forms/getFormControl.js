@@ -4,7 +4,12 @@ import getClassName from '../../../utilities/getClassName';
 
 export const ClassNames = {
   CAPTION: "form-control-caption",
-  ADD_ON: "form-control-addon"
+  ADD_ON: "form-control-addon",
+  HELP: "form-control-help"
+};
+
+export const Ids = {
+  getHelpId: (id) => `${id}-help-element`
 };
 
 /**
@@ -15,7 +20,7 @@ export const ClassNames = {
  *   - A caption element, that might be a static <button> if the control has children, or
  *     a <label> element; both elements contain a string;
  *   - An <input> element, passed as InputElement;
- *   - An <svg> element, created with a <FeatherIcon> icon;
+ *   - A <svg> icon, implemented as a FeatherIcon component
  * - Zero or more children, displayed as addons.
  *
  * The component should be rendered like this:
@@ -29,12 +34,21 @@ export const ClassNames = {
  * the sections 'With icons' and 'Form addons'.
  *
  * @param InputElement <input> element to be embedded.
+ * @param HelpElement Help message to be displayed. Optional.
  * @return {*}
  * @constructor
  */
-export default function getFormControl(InputElement) {
+export default function getFormControl(InputElement, HelpElement) {
+  /**
+   * @param props.caption Control caption.
+   * @param props.iconName Name of the icon shown within the input element.
+   * @param props.children Children of the element, shown as addons.
+   * @param props.showHelp Shows or hides the control help.
+   * @param props Properties of the element. The rest of the properties are passed to the input element.
+   */
   return function (props) {
-    const {caption, iconName, children, ...otherProps} = props;
+    const {caption, iconName, children, showHelp, ...otherProps} = props;
+
     const fieldClassName = [
       "field",
       (children ? "has-addons" : '')
@@ -53,6 +67,7 @@ export default function getFormControl(InputElement) {
         <div className={`control ${ClassNames.ADD_ON}`}>
           { children }
         </div> : "";
+    const helpId = otherProps.id ? Ids.getHelpId(otherProps.id) : "";
 
     return <div className={getClassName(fieldClassName, otherProps)}>
       {captionElement}
@@ -61,6 +76,10 @@ export default function getFormControl(InputElement) {
         <InputElement {...otherProps}/>
       </div>
       {addOns}
+      {
+         HelpElement && showHelp &&
+         <div id={helpId} className={`help ${ClassNames.HELP}`}><HelpElement/></div>
+      }
     </div>;
   }
 };
