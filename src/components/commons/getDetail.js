@@ -33,42 +33,44 @@ function enableOkButton(enable = true) {
  * page in the browser history.
  *
  * @param FormComponent Component with form controls (inputs, checkboxes, etc)
- * @param okClick callback of click on OK button
  * @return function A function component.
  */
-export default function getDetail(FormComponent, okClick = () => {}){
+export default function getDetail(FormComponent){
   /**
    * @param props.cancelCaption Text of the Cancel button
    * @param props.featherIcon Name of Feather icon shown next to title
    * @param props.id: Identifier of the screen
    * @param props.okCaption Text of the OK button
+   * @param onClick callback of click on OK button
    * @param props.title Detail title.
    * @return {Component} A detail component.
    */
-  return function (props) {
-    return <section id={props.id}>
+  return function ({ cancelCaption, featherIcon, id, okCaption, onClick, title, ...props }) {
+    return <section id={id}>
       <nav className="navbar">
         <div className="navbar-brand">
           <div className="navbar-item">
-            { props.featherIcon && <FeatherIcon id={ElementIds.TITLE_ICON} iconName={props.featherIcon}/> }
-            { props.featherIcon && <span>&nbsp;</span> }
-            <h1 id={ElementIds.TITLE} className="title is-4">{props.title}</h1>
+            { featherIcon && <FeatherIcon id={ElementIds.TITLE_ICON} iconName={featherIcon}/> }
+            { featherIcon && <span>&nbsp;</span> }
+            <h1 id={ElementIds.TITLE} className="title is-4">{title}</h1>
           </div>
         </div>
       </nav>
-      <div className="box">
-        <FormComponent {...props} />
-      </div>
-      <div className="buttons">
-        <button id={DETAIL_OK_BUTTON_ID} className="button is-primary is-static" onClick={okClick}>
-          <FeatherIcon iconName="check"/>
-          <span>{ props.okCaption || "Agregar" }</span>
-        </button>
-        <button id={DETAIL_CANCEL_BUTTON_ID} className="button is-danger" onClick={() => window.history.back()}>
-          <FeatherIcon iconName="x"/>
-          <span>{ props.cancelCaption || "Cancelar" }</span>
-        </button>
-      </div>
+      <form onSubmit={onClick}>
+        <div className="box">
+          <FormComponent {...props} />
+        </div>
+        <div className="buttons">
+          <button id={DETAIL_OK_BUTTON_ID} type="submit" className="button is-primary is-static">
+            <FeatherIcon iconName="check"/>
+            <span>{ okCaption || "Agregar" }</span>
+          </button>
+          <button id={DETAIL_CANCEL_BUTTON_ID} className="button is-danger" onClick={() => window.history.back()}>
+            <FeatherIcon iconName="x"/>
+            <span>{ cancelCaption || "Cancelar" }</span>
+          </button>
+        </div>
+      </form>
     </section>;
   };
 }

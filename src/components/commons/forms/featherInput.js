@@ -2,10 +2,11 @@ import React from 'react';
 import getFormControl from './getFormControl';
 
 /**
- * Creates a Bulma-styled input text, decorated with Feather icons.
+ * Creates a Bulma-styled text input element, decorated with Feather icons.
  *
  * @param props.helperComponent Component to be shown as a helper.
- * @param props.id Identifier of the element.
+ * @param props.id Identifier of the input.
+ * @param props.name Name of the input.
  * @param props.type Data type of the input.
  * @param props.onChange Event dispatched when the input value changes.
  * @param props.placeholder Placeholder text in the input.
@@ -17,9 +18,7 @@ export default function FeatherInput (props) {
   // We don't need to assign input-specific props to the control container
   const { helperComponent, ...otherProps} = props;
   const FeatherInput = getFormControl(
-      ({id, type, placeholder, value, onChange}) => <input id={id} className="input" type={type}
-                   placeholder={placeholder} defaultValue={value}
-                   onChange={onChange} />,
+      (props) => <input className="input" {...props} />,
       helperComponent);
 
   return <FeatherInput {...otherProps}/>;
