@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
@@ -31,17 +31,38 @@ export default function Settings() {
   if (loading) return <LoadingPanel subject={SETTINGS}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
 
+  const [ helps, setHelps ] = useState({ });
+
+  function onChange(e) {
+    const id = e.target.id;
+    switch (id) {
+      case FieldIds.BUSINESS_FIELD:
+        setHelps({ ...helps, business: e.target.value === '' });
+        break;
+      case FieldIds.WEBSITE_FIELD:
+        setHelps({ ...helps, website: e.target.value === ''});
+        break;
+      case FieldIds.PHONE_FIELD:
+        setHelps({ ...helps, website: e.target.value === ''});
+        break;
+      case FieldIds.EMAIL_FIELD:
+        setHelps({ ...helps, email: e.target.value === ''});
+    }
+  }
+
   const settingsBody = () => <React.Fragment>
     <FeatherInput id={FieldIds.BUSINESS_FIELD}
                   caption="Nombre" iconName="briefcase"
                   value={data.getProfile.businessName}
-                  placeholder="Nombre comercial del negocio u organización"/>
+                  placeholder="Nombre comercial del negocio u organización"
+                  showHelp={helps.business}/>
     <FeatherInput id={FieldIds.WEBSITE_FIELD} caption="Sitio web" iconName="globe"
-                  value={data.getProfile.url} placeholder={webPlaceholder}/>
+                  value={data.getProfile.url} placeholder={webPlaceholder}
+                  showHelp={helps.website}/>
     <div className="columns">
       <div className="column">
         <FeatherInput id={FieldIds.PHONE_FIELD} caption="Teléfono" iconName="phone"
-                      value={data.getProfile.telephone} placeholder={phonePlaceholder}/>
+                      value={data.getProfile.telephone} placeholder={phonePlaceholder} showHelp={}/>
       </div>
       <div className="column">
         <FeatherInput id={FieldIds.EMAIL_FIELD} caption="Correo electrónico" iconName="at-sign"

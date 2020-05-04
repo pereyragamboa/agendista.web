@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import { act, Simulate } from 'react-dom/test-utils';
 import FeatherInput from './featherInput';
-import { ClassNames } from "./getFormControl";
+import { ClassNames, Ids } from "./getFormControl";
 import TestContainer from '../../testHelpers/testContainer';
 import { expectIconRender, expectTextInClass } from "../../testHelpers/expectFunctions";
 
@@ -10,6 +10,7 @@ const TEST_ID = "feather-input-test-id";
 const TEST_CAPTION = "Caption";
 const TEST_PLACEHOLDER = "Placeholder";
 const TEST_VALUE = "fnord";
+const TEST_HELP = "Help";
 
 describe("<FeatherInput> tests", () => {
   const testContainer = new TestContainer();
@@ -23,7 +24,10 @@ describe("<FeatherInput> tests", () => {
         render(<>
               <FeatherInput id={TEST_ID} caption={TEST_CAPTION}
                             iconName="feather" placeholder={TEST_PLACEHOLDER}
-                            value={TEST_VALUE} onChange={onChangeFunction}/>
+                            value={TEST_VALUE} onChange={onChangeFunction}
+                            helperComponent={() => <p>{TEST_HELP}</p>}
+              >
+              </FeatherInput>
               <input id="next-id"/>
             </>,
             testContainer.getContainer());
@@ -46,12 +50,22 @@ describe("<FeatherInput> tests", () => {
       expect(input.placeholder).toBe(TEST_PLACEHOLDER);
       expect(input.defaultValue).toBe(TEST_VALUE);
     });
-    test.skip("dispatches event onChange", () => {
+    test("dispatches event onChange", () => {
+      renderFullInput();
       const input = document.getElementById(TEST_ID);
       act(() => {
-        input.value = "foobar"
+        input.value = "foobar";
+        Simulate.change(input);
       });
       expect(onChangeFunction).toBeCalledTimes(1);
+    });
+    test("shows help text", () => {
+      renderFullInput();
+      const helpElements = testContainer.getContainer().getElementsByClassName(ClassNames.HELP);
+      expect(helpElements).toHaveLength(1);
+      const helpElement = document.getElementById(Ids.getHelpId(TEST_ID));
+      expect(helpElement).not.toBeNull();
+      expect(helpElement.textContent).toBe(TEST_HELP);
     });
   });
 
