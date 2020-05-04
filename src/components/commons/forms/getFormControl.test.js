@@ -22,7 +22,7 @@ describe("getFormControl() tests", () => {
       );
       act(() => {
         render(
-            <FormControl id={TEST_ID} caption={TEST_CAPTION} iconName="feather" showHelp={true}/>, testContainer.getContainer()
+            <FormControl id={TEST_ID} caption={TEST_CAPTION} iconName="feather"/>, testContainer.getContainer()
         );
       });
     }
@@ -77,7 +77,7 @@ describe("getFormControl() tests", () => {
     test("renders help without id", () => {
       act(() => {
         const FormControl = getFormControl(() => <input type="text"/>, () => <p>{TEST_HELP}</p>);
-        render(<FormControl caption={TEST_CAPTION} iconName="feather" showHelp={true}/>, testContainer.getContainer());
+        render(<FormControl caption={TEST_CAPTION} iconName="feather"/>, testContainer.getContainer());
       });
       const helps = testContainer.getContainer().getElementsByClassName(ClassNames.HELP);
       expect(helps).toHaveLength(1);

@@ -34,20 +34,19 @@ export const Ids = {
  * the sections 'With icons' and 'Form addons'.
  *
  * @param InputElement <input> element to be embedded.
- * @param HelpElement Help message to be displayed. Optional.
+ * @param HelperElement Help message to be displayed. Optional.
  * @return {*}
  * @constructor
  */
-export default function getFormControl(InputElement, HelpElement) {
+export default function getFormControl(InputElement, HelperElement) {
   /**
    * @param props.caption Control caption.
    * @param props.iconName Name of the icon shown within the input element.
    * @param props.children Children of the element, shown as addons.
-   * @param props.showHelp Shows or hides the control help.
    * @param props Properties of the element. The rest of the properties are passed to the input element.
    */
   return function (props) {
-    const {caption, iconName, children, showHelp, ...otherProps} = props;
+    const {caption, iconName, children, ...otherProps} = props;
 
     const fieldClassName = [
       "field",
@@ -77,8 +76,8 @@ export default function getFormControl(InputElement, HelpElement) {
       </div>
       {addOns}
       {
-         HelpElement && showHelp &&
-         <div id={helpId} className={`help ${ClassNames.HELP}`}><HelpElement/></div>
+        HelperElement &&
+         <div id={helpId} className={`help ${ClassNames.HELP}`}><HelperElement/></div>
       }
     </div>;
   }
