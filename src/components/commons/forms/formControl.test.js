@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import FormControl, { ClassNames, Ids } from './formControl';
+import FormControl, { ClassNames } from './formControl';
 import TestContainer from '../../testHelpers/testContainer';
 import { expectIconRender } from "../../testHelpers/expectFunctions";
 

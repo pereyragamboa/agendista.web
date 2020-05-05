@@ -8,10 +8,6 @@ export const ClassNames = {
   HELP: "form-control-help"
 };
 
-export const Ids = {
-  getHelpId: (id) => `${id}-help-element`
-};
-
 /**
  * Wraps a form input element into a Bulma-styled field, decorated with Feather icons.
  * If the component has children, they will be shown as addons to the main input element.
@@ -61,7 +57,6 @@ export default function FormControl(props) {
             <div className="control"><button className={`button is-static ${ClassNames.CAPTION}`}>{caption}</button></div> :
             <label className={`label ${ClassNames.CAPTION}`}>{caption}</label>
     ) : "";
-    const helpId = otherProps.id ? Ids.getHelpId(otherProps.id) : "";
 
     return <div className={getClassName(fieldClassName, otherProps)}>
       {captionElement}
@@ -73,9 +68,6 @@ export default function FormControl(props) {
             { children }
           </div> : ""
       }
-      {
-        helperElement &&
-        <div id={helpId} className={`help ${ClassNames.HELP}`}>{helperElement}</div>
-      }
+      { helperElement }
     </div>;
 };

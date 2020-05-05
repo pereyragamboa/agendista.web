@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { act, Simulate } from 'react-dom/test-utils';
 import FeatherInput from './featherInput';
-import { ClassNames, Ids } from "./getFormControl";
+import { ClassNames } from "./formControl";
 import TestContainer from '../../testHelpers/testContainer';
 import { expectIconRender, expectTextInClass } from "../../testHelpers/expectFunctions";
 
@@ -11,12 +11,13 @@ const TEST_CAPTION = "Caption";
 const TEST_PLACEHOLDER = "Placeholder";
 const TEST_VALUE = "fnord";
 const TEST_HELP = "Help";
+const TEST_HELP_ID = "feather-input-test-help-id";
 
 describe("<FeatherInput> tests", () => {
   const testContainer = new TestContainer();
   const onChangeFunction = jest.fn();
 
-  beforeAll(testContainer.createContainer);
+  beforeEach(() => testContainer.createContainer("form"));
 
   describe("Full input", () => {
     function renderFullInput() {
@@ -25,7 +26,7 @@ describe("<FeatherInput> tests", () => {
               <FeatherInput id={TEST_ID} caption={TEST_CAPTION}
                             iconName="feather" placeholder={TEST_PLACEHOLDER}
                             value={TEST_VALUE} onChange={onChangeFunction}
-                            helperComponent={() => <p>{TEST_HELP}</p>}
+                            helperElement={<p id={TEST_HELP_ID}>{TEST_HELP}</p>}
               >
               </FeatherInput>
               <input id="next-id"/>
@@ -63,7 +64,7 @@ describe("<FeatherInput> tests", () => {
       renderFullInput();
       const helpElements = testContainer.getContainer().getElementsByClassName(ClassNames.HELP);
       expect(helpElements).toHaveLength(1);
-      const helpElement = document.getElementById(Ids.getHelpId(TEST_ID));
+      const helpElement = document.getElementById(TEST_HELP_ID);
       expect(helpElement).not.toBeNull();
       expect(helpElement.textContent).toBe(TEST_HELP);
     });
@@ -98,5 +99,5 @@ describe("<FeatherInput> tests", () => {
     });
   });
 
-  afterAll(testContainer.disposeContainer);
+  afterEach(testContainer.disposeContainer);
 });
