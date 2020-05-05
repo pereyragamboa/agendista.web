@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import { act, Simulate } from 'react-dom/test-utils';
 import wait from 'waait';
 import { GET_SETTINGS } from "../../data/queries/settingsQueries";
 import { expectLoadingPanel } from '../testHelpers/expectFunctions';
@@ -22,6 +22,19 @@ const mock = {
     }
   }
 };
+
+const emails = [
+    ["", false],
+    ["abc", false],
+    ["io@example.io", true]
+];
+
+const urls = [
+    ["", true],
+    ["foo.bar", false],
+    ["www.example.fm", false],
+    ["http://localhost.com", true]
+];
 
 describe("Settings component render tests", () => {
   const container = new TestContainer();
@@ -52,11 +65,34 @@ describe("Settings component render tests", () => {
     expect(document.getElementById(FieldIds.WEBSITE_FIELD).value).toBe(data.url);
   });
 
-  test.todo("Shows error on empty business name field");
+  test("Shows error on empty business name field", async () => {
+    await changeField(FieldIds.BUSINESS_FIELD, "");
+    expect(document.getElementById(FieldIds.BUSINESS_FIELD_HELPER)).not.toBeNull();
+  });
 
-  test.todo("Shows error on empty email field");
+  test.each(emails)("Shows error on invalid email field", async (email, isValid) => {
+    await changeField(FieldIds.EMAIL_FIELD, email);
+    expect(document.getElementById(FieldIds.EMAIL_FIELD_HELPER) === null).toBe(isValid);
+  });
 
-  test.todo("Shows error on empty phone field");
+  test("Shows error on empty phone field", async() => {
+    await changeField(FieldIds.PHONE_FIELD, "");
+    expect(document.getElementById(FieldIds.PHONE_FIELD_HELPER)).not.toBeNull();
+  });
 
-  test.todo("Updates settings")
+  test.each(urls)("Shows error on invalid website field", async (url, isValid) => {
+    await changeField(FieldIds.WEBSITE_FIELD, url);
+    expect(document.getElementById(FieldIds.WEBSITE_FIELD_HELPER) === null).toBe(isValid);
+  });
+
+  test.todo("Updates settings");
+
+  async function changeField(fieldId, value) {
+    const element = document.getElementById(fieldId);
+    await act(async () => {
+      element.value = value;
+      await Simulate.change(element);
+      await Simulate.blur(element);
+    });
+  }
 });

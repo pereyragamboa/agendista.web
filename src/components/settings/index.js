@@ -4,7 +4,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
-import FormControl from '../commons/forms/formControl';
 import { GET_SETTINGS } from '../../data/queries/settingsQueries';
 import Detail from '../commons/detail';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
@@ -21,39 +20,40 @@ export const FieldIds = {
   BUSINESS_FIELD: "ag_settings_business_field",
   WEBSITE_FIELD: "ag_settings_website_field",
   EMAIL_FIELD: "ag_settings_email_field",
-  PHONE_FIELD: "ag_settings_phone_field"
+  PHONE_FIELD: "ag_settings_phone_field",
+  BUSINESS_FIELD_HELPER: "ag_settings_business_field_helper",
+  WEBSITE_FIELD_HELPER: "ag_settings_website_field_helper",
+  EMAIL_FIELD_HELPER: "ag_settings_email_field_helper",
+  PHONE_FIELD_HELPER: "ag_settings_phone_field_helper"
 };
 
 const Settings = ({touched, errors, ...formik}) =>
     <Detail title={SETTINGS} featherIcon="settings" okCaption="Aceptar" cancelPath={Paths.HOME}
-            onClick={formik.handleSubmit}>
-      {console.log("Rendering <Settings> body...")}
-      <FormControl caption="Nombre" iconName="briefcase"
-                   helperElement={(touched.businessName && errors.businessName) ?
-                        <p className="has-text-danger">{errors.businessName}</p> : null}
-                   inputElement={<input id={FieldIds.BUSINESS_FIELD} name="businessName" className="input"
-                                          placeholder="Nombre comercial del negocio u organización"
-                                          onBlur={formik.handleBlur} onChange={formik.handleChange}
-                                          value={formik.values.businessName} />}>
-
-      </FormControl>
+            enableOkButton={formik.dirty && formik.isValid} onClick={formik.handleSubmit}>
+      <FeatherInput id={FieldIds.BUSINESS_FIELD} caption="Nombre" iconName="briefcase"
+                    placeholder="Nombre comercial del negocio u organización"
+                    {...formik.getFieldProps('businessName')}
+                    helperElement={(touched.businessName && errors.businessName) ?
+                        <p id={FieldIds.BUSINESS_FIELD_HELPER} className="has-text-danger">
+                          {errors.businessName}</p> : null}/>
       <FeatherInput id={FieldIds.WEBSITE_FIELD} caption="Sitio web" iconName="globe"
                     placeholder={webPlaceholder} {...formik.getFieldProps('url')}
-                    helperComponent={(touched.url && errors.url) ?
-                        <p className="has-text-danger">{errors.url}</p> : null}/>
+                    helperElement={(touched.url && errors.url) ?
+                        <p id={FieldIds.WEBSITE_FIELD_HELPER} className="has-text-danger">
+                          {errors.url}</p> : null}/>
       <div className="columns">
         <div className="column">
           <FeatherInput id={FieldIds.PHONE_FIELD} caption="Teléfono" iconName="phone"
-                        placeholder={phonePlaceholder}
-                        {...formik.getFieldProps('telephone')}
-                        helperComponent={(touched.telephone && errors.telephone) ?
-                            <p className="has-text-danger">{errors.telephone}</p> : null}/>
+                        placeholder={phonePlaceholder} {...formik.getFieldProps('telephone')}
+                        helperElement={(touched.telephone && errors.telephone) ?
+                            <p id={FieldIds.PHONE_FIELD_HELPER} className="has-text-danger">
+                              {errors.telephone}</p> : null}/>
         </div>
         <div className="column">
           <FeatherInput id={FieldIds.EMAIL_FIELD} caption="Correo electrónico" iconName="at-sign"
                         placeholder={emailPlaceholder} {...formik.getFieldProps('email')}
-                        helperComponent={(touched.email && errors.email) ?
-                            <p className="has-text-danger">{errors.email}</p> : null}/>
+                        helperElement={(touched.email && errors.email) ?
+                            <p id={FieldIds.EMAIL_FIELD_HELPER} className="has-text-danger">{errors.email}</p> : null}/>
         </div>
       </div>
     </Detail>;
@@ -67,8 +67,6 @@ export default function () {
   const { loading, error, data } = useQuery(GET_SETTINGS);
   if (loading) return <LoadingPanel subject={SETTINGS}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
-
-  console.log("Rendering all of <Settings>");
 
   return <Formik initialValues={data.getProfile}
                  validationSchema={Yup.object().shape({
