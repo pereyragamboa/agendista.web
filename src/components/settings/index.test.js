@@ -4,6 +4,7 @@ import { act, Simulate } from 'react-dom/test-utils';
 import wait from 'waait';
 import { GET_SETTINGS } from "../../data/queries/settingsQueries";
 import { expectLoadingPanel } from '../testHelpers/expectFunctions';
+import { changeField } from '../testHelpers/actFunctions';
 import { getMockProvider } from "../testHelpers/getMockProvider";
 import TestContainer from '../testHelpers/testContainer';
 import Settings, { FieldIds } from './index';
@@ -86,13 +87,4 @@ describe("Settings component render tests", () => {
   });
 
   test.todo("Updates settings");
-
-  async function changeField(fieldId, value) {
-    const element = document.getElementById(fieldId);
-    await act(async () => {
-      element.value = value;
-      await Simulate.change(element);
-      await Simulate.blur(element);
-    });
-  }
 });
