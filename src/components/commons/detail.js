@@ -28,6 +28,14 @@ export const Ids = {
  */
 export default function Detail (
     { cancelCaption, children, enableOkButton, featherIcon, id, okCaption, onSubmit, title }) {
+  function submit(e) {
+    e.preventDefault();
+    console.log(onSubmit);
+    onSubmit();
+  }
+
+  const okButtonClassName = `button is-primary${enableOkButton ? "" : " is-static"}`;
+
   return <section id={id}>
     <nav className="navbar">
       <div className="navbar-brand">
@@ -38,12 +46,12 @@ export default function Detail (
         </div>
       </div>
     </nav>
-    <form onSubmit={onSubmit}>
+    <form onSubmit={submit}>
       <div className="box">
         { children }
       </div>
       <div className="buttons">
-        <button id={Ids.OK_BUTTON} type="submit" disabled={!enableOkButton} className="button is-primary">
+        <button id={Ids.OK_BUTTON} type="submit" className={okButtonClassName}>
           <FeatherIcon iconName="check"/>
           <span>{ okCaption || "Agregar" }</span>
         </button>
