@@ -10,11 +10,12 @@ export const Ids = {
 
 /**
  *
- * Detail screen. A detail screen consists of form elements, an OK button and a Cancel button.
+ * Detail screen wrapper.
+ *
+ * A detail screen consists of form elements, an OK button and a Cancel button.
  * The cancel button goes to the previous page in the browser history.
  *
- * The component represents a wrapper around a <form> element, where its children
- * are embedded.
+ * The component embeds its children in a <form> element.
  *
  * @param cancelCaption Text of the Cancel button
  * @param children Content of the detail form. It should not include a <form> element.
@@ -30,7 +31,6 @@ export default function Detail (
     { cancelCaption, children, enableOkButton, featherIcon, id, okCaption, onSubmit, title }) {
   function submit(e) {
     e.preventDefault();
-    console.log(onSubmit);
     onSubmit();
   }
 

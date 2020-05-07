@@ -2,10 +2,10 @@ import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import Detail from '../commons/detail';
 import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
 import { GET_SETTINGS, UPDATE_SETTINGS } from '../../data/queries/settingsQueries';
-import Detail from '../commons/detail';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
 import * as Paths from '../../constants/paths';
@@ -28,8 +28,19 @@ export const FieldIds = {
 };
 
 const Settings = ({touched, errors, ...formik}) => {
+  // status is the status object from getMutation().
+  // If status is present (i. e., !== undefined) the mutation was invoked.
+  // If status.called and status.loading are both false, the mutation is finished;
+  // therefore, form is reset with the current values.
+  // This sets formik.dirty as false, and disables OK button.
+  if (formik.status && !formik.status.called && !formik.status.loading) {
+    formik.resetForm({values: formik.values});
+  }
+
+  const enableOkButton = formik.dirty && formik.isValid && !formik.isSubmitting;
+
   return <Detail title={SETTINGS} featherIcon="settings" okCaption="Aceptar" cancelPath={Paths.HOME}
-          enableOkButton={formik.dirty && formik.isValid} onSubmit={formik.handleSubmit}>
+          enableOkButton={enableOkButton} onSubmit={formik.handleSubmit}>
     <FeatherInput id={FieldIds.BUSINESS_FIELD} caption="Nombre" iconName="briefcase"
                   placeholder="Nombre comercial del negocio u organización"
                   {...formik.getFieldProps('businessName')}
@@ -56,6 +67,7 @@ const Settings = ({touched, errors, ...formik}) => {
                           <p id={FieldIds.EMAIL_FIELD_HELPER} className="has-text-danger">{errors.email}</p> : null}/>
       </div>
     </div>
+
   </Detail>;
 };
 
@@ -71,14 +83,18 @@ export default function () {
   if (loading) return <LoadingPanel subject={SETTINGS}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
 
-  console.log(mutationStatus);
-
   return <Formik initialValues={data.getProfile}
                  validationSchema={Yup.object().shape({
                    businessName: Yup.string().required('Agregue el nombre de su negocio.'),
                    email: Yup.string().required('Agregue un correo electrónico.').email(),
                    telephone: Yup.string().required('Agregue un número de teléfono'),
                    url: Yup.string().url("Agregue una dirección Web válida.") })}
-                 onSubmit = { values => updateProfile({ variables: values }) } component={Settings}>
+                 onSubmit = { (values, formik) => {
+                   console.log("Submitting...");
+                   updateProfile({variables: values});
+                   formik.setSubmitting(false);
+                   formik.setStatus(mutationStatus);
+                   console.log("Submitted.");
+                 }} component={Settings}>
   </Formik>;
 }
