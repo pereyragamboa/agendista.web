@@ -7,7 +7,7 @@ import { expectLoadingPanel } from '../testHelpers/expectFunctions';
 import { changeField } from '../testHelpers/actFunctions';
 import { getMockProvider } from "../testHelpers/getMockProvider";
 import TestContainer from '../testHelpers/testContainer';
-import Settings, { FieldIds } from './index';
+import Settings, { Ids } from './index';
 
 const mock = {
   request: { query: GET_SETTINGS },
@@ -60,31 +60,31 @@ describe("Settings component render tests", () => {
     expect(c.getElementsByTagName("svg").length).toBe(7);
     // Checks content of input fields
     const data = mock.result.data.getProfile;
-    expect(document.getElementById(FieldIds.BUSINESS_FIELD).value).toBe(data.businessName);
-    expect(document.getElementById(FieldIds.EMAIL_FIELD).value).toBe(data.email);
-    expect(document.getElementById(FieldIds.PHONE_FIELD).value).toBe(data.telephone);
-    expect(document.getElementById(FieldIds.WEBSITE_FIELD).value).toBe(data.url);
+    expect(document.getElementById(Ids.BUSINESS_FIELD).value).toBe(data.businessName);
+    expect(document.getElementById(Ids.EMAIL_FIELD).value).toBe(data.email);
+    expect(document.getElementById(Ids.PHONE_FIELD).value).toBe(data.telephone);
+    expect(document.getElementById(Ids.WEBSITE_FIELD).value).toBe(data.url);
   });
 
   test("Shows error on empty business name field", async () => {
-    await changeField(FieldIds.BUSINESS_FIELD, "");
-    expect(document.getElementById(FieldIds.BUSINESS_FIELD_HELPER)).not.toBeNull();
+    await changeField(Ids.BUSINESS_FIELD, "");
+    expect(document.getElementById(Ids.BUSINESS_FIELD_HELPER)).not.toBeNull();
   });
 
   test.each(emails)("Shows error on invalid email field", async (email, isValid) => {
-    await changeField(FieldIds.EMAIL_FIELD, email);
-    expect(document.getElementById(FieldIds.EMAIL_FIELD_HELPER) === null).toBe(isValid);
+    await changeField(Ids.EMAIL_FIELD, email);
+    expect(document.getElementById(Ids.EMAIL_FIELD_HELPER) === null).toBe(isValid);
   });
 
   test("Shows error on empty phone field", async() => {
-    await changeField(FieldIds.PHONE_FIELD, "");
-    expect(document.getElementById(FieldIds.PHONE_FIELD_HELPER)).not.toBeNull();
+    await changeField(Ids.PHONE_FIELD, "");
+    expect(document.getElementById(Ids.PHONE_FIELD_HELPER)).not.toBeNull();
   });
 
   test.each(urls)("Shows error on invalid website field", async (url, isValid) => {
-    await changeField(FieldIds.WEBSITE_FIELD, url);
-    expect(document.getElementById(FieldIds.WEBSITE_FIELD_HELPER) === null).toBe(isValid);
+    await changeField(Ids.WEBSITE_FIELD, url);
+    expect(document.getElementById(Ids.WEBSITE_FIELD_HELPER) === null).toBe(isValid);
   });
 
-  test.todo("Updates settings");
+  test.todo("Updates profile");
 });

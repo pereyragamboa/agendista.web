@@ -8,6 +8,7 @@ import FeatherInput from '../commons/forms/featherInput';
 import { GET_SETTINGS, UPDATE_SETTINGS } from '../../data/queries/settingsQueries';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/loadingPanel';
+import Notification from '../commons/modals/notification';
 import * as Paths from '../../constants/paths';
 import * as Placeholders from '../../constants/placeholders';
 import { SETTINGS } from "../../constants/headers";
@@ -16,7 +17,7 @@ const emailPlaceholder = Placeholders.getEmailPlaceholder();
 const phonePlaceholder = Placeholders.getTelephonePlaceholder();
 const webPlaceholder = Placeholders.getWebsitePlaceholder();
 
-export const FieldIds = {
+export const Ids = {
   BUSINESS_FIELD: "ag_settings_business_field",
   WEBSITE_FIELD: "ag_settings_website_field",
   EMAIL_FIELD: "ag_settings_email_field",
@@ -24,47 +25,51 @@ export const FieldIds = {
   BUSINESS_FIELD_HELPER: "ag_settings_business_field_helper",
   WEBSITE_FIELD_HELPER: "ag_settings_website_field_helper",
   EMAIL_FIELD_HELPER: "ag_settings_email_field_helper",
-  PHONE_FIELD_HELPER: "ag_settings_phone_field_helper"
+  PHONE_FIELD_HELPER: "ag_settings_phone_field_helper",
+  CONFIRMATION_MESSAGE: "ag_settings_profile_changed_message"
 };
 
-const Settings = ({touched, errors, ...formik}) => {
-  // status is the status object from getMutation().
-  // If status is present (i. e., !== undefined) the mutation was invoked.
+const Settings = ({errors, status, touched, ...formik}) => {
   // If status.called and status.loading are both false, the mutation is finished;
   // therefore, form is reset with the current values.
   // This sets formik.dirty as false, and disables OK button.
-  if (formik.status && !formik.status.called && !formik.status.loading) {
-    formik.resetForm({values: formik.values});
-  }
-
+  //if (status.notified && !status.called && !status.loading) {
+  //  formik.resetForm({values: formik.values});
+  //}
+  console.log(`notify: ${status.notify}\ncalled: ${status.called}\nloading: ${status.loading}`);
   const enableOkButton = formik.dirty && formik.isValid && !formik.isSubmitting;
 
   return <Detail title={SETTINGS} featherIcon="settings" okCaption="Aceptar" cancelPath={Paths.HOME}
           enableOkButton={enableOkButton} onSubmit={formik.handleSubmit}>
-    <FeatherInput id={FieldIds.BUSINESS_FIELD} caption="Nombre" iconName="briefcase"
+    <Notification id={Ids.CONFIRMATION_MESSAGE}
+                  show={status.notify}
+                  onClick={() => formik.resetForm({values: formik.values})}>
+      <p>Ha actualizado su perfil.</p>
+    </Notification>
+    <FeatherInput id={Ids.BUSINESS_FIELD} caption="Nombre" iconName="briefcase"
                   placeholder="Nombre comercial del negocio u organización"
                   {...formik.getFieldProps('businessName')}
                   helperElement={(touched.businessName && errors.businessName) ?
-                      <p id={FieldIds.BUSINESS_FIELD_HELPER} className="has-text-danger">
+                      <p id={Ids.BUSINESS_FIELD_HELPER} className="has-text-danger">
                         {errors.businessName}</p> : null}/>
-    <FeatherInput id={FieldIds.WEBSITE_FIELD} caption="Sitio web" iconName="globe"
+    <FeatherInput id={Ids.WEBSITE_FIELD} caption="Sitio web" iconName="globe"
                   placeholder={webPlaceholder} {...formik.getFieldProps('url')}
                   helperElement={(touched.url && errors.url) ?
-                      <p id={FieldIds.WEBSITE_FIELD_HELPER} className="has-text-danger">
+                      <p id={Ids.WEBSITE_FIELD_HELPER} className="has-text-danger">
                         {errors.url}</p> : null}/>
     <div className="columns">
       <div className="column">
-        <FeatherInput id={FieldIds.PHONE_FIELD} caption="Teléfono" iconName="phone"
+        <FeatherInput id={Ids.PHONE_FIELD} caption="Teléfono" iconName="phone"
                       placeholder={phonePlaceholder} {...formik.getFieldProps('telephone')}
                       helperElement={(touched.telephone && errors.telephone) ?
-                          <p id={FieldIds.PHONE_FIELD_HELPER} className="has-text-danger">
+                          <p id={Ids.PHONE_FIELD_HELPER} className="has-text-danger">
                             {errors.telephone}</p> : null}/>
       </div>
       <div className="column">
-        <FeatherInput id={FieldIds.EMAIL_FIELD} caption="Correo electrónico" iconName="at-sign"
+        <FeatherInput id={Ids.EMAIL_FIELD} caption="Correo electrónico" iconName="at-sign"
                       placeholder={emailPlaceholder} {...formik.getFieldProps('email')}
                       helperElement={(touched.email && errors.email) ?
-                          <p id={FieldIds.EMAIL_FIELD_HELPER} className="has-text-danger">{errors.email}</p> : null}/>
+                          <p id={Ids.EMAIL_FIELD_HELPER} className="has-text-danger">{errors.email}</p> : null}/>
       </div>
     </div>
 
@@ -84,6 +89,7 @@ export default function () {
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
 
   return <Formik initialValues={data.getProfile}
+                 initialStatus={{...mutationStatus, notify: false}}
                  validationSchema={Yup.object().shape({
                    businessName: Yup.string().required('Agregue el nombre de su negocio.'),
                    email: Yup.string().required('Agregue un correo electrónico.').email(),
@@ -91,10 +97,11 @@ export default function () {
                    url: Yup.string().url("Agregue una dirección Web válida.") })}
                  onSubmit = { (values, formik) => {
                    console.log("Submitting...");
-                   updateProfile({variables: values});
-                   formik.setSubmitting(false);
-                   formik.setStatus(mutationStatus);
+                   updateProfile({
+                     variables: values,
+                   });
+                   formik.setStatus({...mutationStatus, notify: true});
                    console.log("Submitted.");
-                 }} component={Settings}>
+                 }}>{Settings}
   </Formik>;
 }

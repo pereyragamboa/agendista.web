@@ -55,7 +55,7 @@ export default function Detail (
           <FeatherIcon iconName="check"/>
           <span>{ okCaption || "Agregar" }</span>
         </button>
-        <button id={Ids.CANCEL_BUTTON} className="button is-danger"
+        <button id={Ids.CANCEL_BUTTON} type="button" className="button is-danger"
                 onClick={() => window.history.back()}>
           <FeatherIcon iconName="x"/>
           <span>{ cancelCaption || "Cancelar" }</span>
