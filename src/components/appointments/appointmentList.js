@@ -3,12 +3,12 @@ import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import { APPOINTMENTS } from "../../constants/headers";
 import { DELETE_APPOINTMENT_MODAL as MODAL_ID } from "../../constants/modalIds";
-import DeleteModal from '../commons/modals/deleteModal';
+import DeleteModal from '../commons/alerts/deleteModal';
 import EditLink from '../commons/editLink';
 import ErrorPanel from '../commons/errorPanel';
 import ListItemButtons from '../commons/listItemButtons';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
-import LoadingPanel from '../commons/loadingPanel';
+import LoadingPanel from '../commons/alerts/loadingPanel';
 import { GET_PROFILE_APPOINTMENTS } from "../../data/queries/appointmentQueries";
 
 export const ClassNames = {

@@ -9,7 +9,7 @@ import capitalize from '../../utilities/capitalize';
 import ErrorPanel from '../commons/errorPanel';
 import getDetail from '../commons/getDetail';
 import getFormControl from '../commons/forms/getFormControl';
-import LoadingPanel from "../commons/loadingPanel";
+import LoadingPanel from "../commons/alerts/loadingPanel";
 import listGraphQLErrors from "../commons/listGraphQLErrors";
 
 /**

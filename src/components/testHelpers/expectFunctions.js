@@ -1,4 +1,4 @@
-import { LOADING_PANEL_ID } from "../commons/loadingPanel";
+import { LOADING_PANEL_ID } from "../commons/alerts/loadingPanel";
 
 /**
  * Asserts that the rendered component has an <svg> component. Used with Feather icons.

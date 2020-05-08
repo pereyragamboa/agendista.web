@@ -9,7 +9,7 @@ import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
 import {GET_ALL_CUSTOMERS, GET_CUSTOMER} from "../../data/queries/customerQueries";
 import getDetail, { enableOkButton } from '../commons/getDetail';
-import LoadingPanel from "../commons/loadingPanel";
+import LoadingPanel from "../commons/alerts/loadingPanel";
 
 const emailPlaceholder = Placeholders.getEmailPlaceholder();
 const phonePlaceholder = Placeholders.getTelephonePlaceholder();

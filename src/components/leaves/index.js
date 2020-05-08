@@ -3,12 +3,12 @@ import { useQuery } from '@apollo/react-hooks';
 import { DELETE_LEAVE_MODAL } from "../../constants/modalIds";
 import { LEAVE } from "../../constants/headers";
 import { ADD_LEAVE, UPDATE_LEAVE } from "../../constants/paths";
-import DeleteModal from '../commons/modals/deleteModal';
+import DeleteModal from '../commons/alerts/deleteModal';
 import ErrorPanel from '../commons/errorPanel';
 import getIndex from '../commons/getIndex';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import ListItemButtons from '../commons/listItemButtons';
-import LoadingPanel from '../commons/loadingPanel';
+import LoadingPanel from '../commons/alerts/loadingPanel';
 import NavbarMenuItem from '../commons/navbars/navbarMenuItem'
 import { GET_ALL_LEAVES } from "../../data/queries/leaveQueries";
 

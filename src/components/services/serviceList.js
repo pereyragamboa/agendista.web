@@ -2,12 +2,12 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import { DELETE_SERVICE_MODAL as MODAL_ID } from "../../constants/modalIds";
-import DeleteModal from '../commons/modals/deleteModal';
+import DeleteModal from '../commons/alerts/deleteModal';
 import ErrorPanel from '../commons/errorPanel';
 import { getTimeString } from "../../utilities/times";
 import ListItemButtons from '../commons/listItemButtons';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
-import LoadingPanel from '../commons/loadingPanel';
+import LoadingPanel from '../commons/alerts/loadingPanel';
 import { SERVICES } from '../../constants/headers';
 import { GET_ALL_SERVICES } from "../../data/queries/serviceQueries";
 

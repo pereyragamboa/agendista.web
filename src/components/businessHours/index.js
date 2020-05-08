@@ -6,7 +6,7 @@ import capitalize from '../../utilities/capitalize';
 import ErrorPanel from '../commons/errorPanel';
 import getIndex from '../commons/getIndex';
 import listGraplQLErrors from '../commons/listGraphQLErrors';
-import LoadingPanel from '../commons/loadingPanel';
+import LoadingPanel from '../commons/alerts/loadingPanel';
 import { WORKING_HOURS} from "../../constants/headers";
 import { GET_BUSINESS_HOURS, BusinessDays } from "../../data/queries/businessHoursQueries";
 

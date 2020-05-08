@@ -6,7 +6,7 @@ import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
 import getDetail, { enableOkButton } from '../commons/getDetail';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
-import LoadingPanel from '../commons/loadingPanel';
+import LoadingPanel from '../commons/alerts/loadingPanel';
 import * as Paths from '../../constants/paths';
 import { FIND_CUSTOMERS_BY_NAME } from "../../data/queries/customerQueries";
 

@@ -9,7 +9,7 @@ import { GET_SERVICE } from "../../data/queries/serviceQueries";
 import getDetail from '../commons/getDetail';
 import getFormControl from '../commons/forms/getFormControl';
 import { getTimeString } from "../../utilities/times";
-import LoadingPanel from "../commons/loadingPanel";
+import LoadingPanel from "../commons/alerts/loadingPanel";
 
 const detailBody = function (props) {
   const DescriptionTextArea = getFormControl(() =>

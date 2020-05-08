@@ -7,7 +7,7 @@ import ErrorPanel from '../commons/errorPanel';
 import { GET_LEAVE } from '../../data/queries/leaveQueries';
 import getDetail from '../commons/getDetail';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
-import LoadingPanel from '../commons/loadingPanel';
+import LoadingPanel from '../commons/alerts/loadingPanel';
 import { LIST_LEAVES } from "../../constants/paths";
 
 export class LeaveDetail extends React.Component{

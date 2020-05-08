@@ -1,6 +1,6 @@
 import React from 'react';
 import FeatherButton from './featherButton';
-import { showModal } from './modals/modalFunctions';
+import { showModal } from './alerts/modalFunctions';
 
 export const ClassNames = {
   EDIT_LIST_ITEM_BUTTON: "ag-list-item-edit-button",

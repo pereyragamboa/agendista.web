@@ -3,13 +3,13 @@ import { useQuery } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import { CUSTOMERS } from '../../constants/headers';
 import { DELETE_CUSTOMER_MODAL as MODAL_ID } from "../../constants/modalIds";
-import DeleteButton from '../commons/modals/deleteModalButton';
-import DeleteModal from '../commons/modals/deleteModal';
+import DeleteButton from '../commons/alerts/deleteModalButton';
+import DeleteModal from '../commons/alerts/deleteModal';
 import EditLink from '../commons/editLink';
 import ErrorPanel from '../commons/errorPanel';
 import { GET_ALL_CUSTOMERS } from "../../data/queries/customerQueries";
 import listGraphQLErrors from '../commons/listGraphQLErrors';
-import LoadingPanel from '../commons/loadingPanel';
+import LoadingPanel from '../commons/alerts/loadingPanel';
 
 export const ClassNames = {
   CUSTOMER_LIST_ITEM: "ag-customer-list-item",

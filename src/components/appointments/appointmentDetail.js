@@ -8,7 +8,7 @@ import FeatherInput from "../commons/forms/featherInput";
 import getDetail from '../commons/getDetail';
 import ErrorPanel from '../commons/errorPanel'
 import listGraphQLErrors from '../commons/listGraphQLErrors';
-import LoadingPanel from "../commons/loadingPanel";
+import LoadingPanel from "../commons/alerts/loadingPanel";
 
 /**
  * Detail form for creating or editing appointments.
