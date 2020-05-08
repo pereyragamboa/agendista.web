@@ -1,4 +1,5 @@
 import React from 'react';
+import {SimpleProgressPanel} from './progressPanel';
 
 export const LOADING_PANEL_ID = "ag-loading-panel";
 
@@ -10,8 +11,7 @@ export const LOADING_PANEL_ID = "ag-loading-panel";
  * @constructor
  */
 export default function LoadingPanel(props) {
-  return <div id={LOADING_PANEL_ID}>
-    <h3 className={"title is-4 has-text-centered"}>Buscando{props.subject ? ' ' + props.subject.toLowerCase() : ''}...</h3>
-    <progress className={"progress is-primary"} max={100}/>
-  </div>
+  const caption = `Buscando${props.subject ? ' ' + props.subject.toLowerCase() : ''}...`;
+
+  return <SimpleProgressPanel id={LOADING_PANEL_ID} caption={caption}/>;
 }
