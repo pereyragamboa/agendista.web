@@ -18,3 +18,28 @@ export const GET_SERVICE = gql`query {
         price
     }
 }`;
+
+export const ADD_SERVICE = gql`mutation ($name: String!, $description: String!, $duration: Int!, $price: Float!) {
+    addService(
+        profileId: "0x30001",
+        newService: {
+            name: $name
+            description: $description
+            duration: $duration
+            price: $price
+        }
+    ) { id }
+}`;
+
+export const UPDATE_SERVICE = gql`mutation (
+        $id: ID!, $name: String!, $description: String!, $duration: Int!, $price: Float!) {
+    updateService(
+        serviceId: $id
+        service: {
+            name: $name
+            description: $description
+            duration: $duration
+            price: $price
+        }
+    ) { id }
+}`;
