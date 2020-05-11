@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Paths from "../../constants/paths";
-import getIndex from '../commons/getIndex';
+import Index from '../commons/indexPage';
 import NavbarMenuItem from "../commons/navbars/navbarMenuItem";
 import ServiceList from './serviceList';
 import { SERVICES } from "../../constants/headers";
@@ -19,7 +19,7 @@ const NavbarEndItems =
  * @constructor
  */
 export default function Services () {
-  const ServiceIndex = getIndex(<ServiceList/>, { endItems: NavbarEndItems });
-
-  return <ServiceIndex brand={SERVICES} featherIcon="shopping-bag"/>;
+  return <Index brand={SERVICES} featherIcon="shopping-bag" endItems={NavbarEndItems}>
+    <ServiceList/>
+  </Index>;
 };

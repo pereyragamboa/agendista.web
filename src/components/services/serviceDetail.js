@@ -6,24 +6,36 @@ import ErrorPanel from '../commons/errorPanel';
 import listGraphQlErrors from '../commons/listGraphQLErrors'
 import FeatherInput from '../commons/forms/featherInput';
 import { GET_SERVICE } from "../../data/queries/serviceQueries";
-import getDetail from '../commons/getDetail';
-import getFormControl from '../commons/forms/getFormControl';
+import Detail from '../commons/detail';
+import FormControl from '../commons/forms/formControl';
 import { getTimeString } from "../../utilities/times";
 import LoadingPanel from "../commons/alerts/loadingPanel";
 
-const detailBody = function (props) {
-  const DescriptionTextArea = getFormControl(() =>
+/**
+ * Common service detail body.
+ * @param props.description Description of the service.
+ * @param props.duration Required time of the service, in minutes.
+ * @param props.name Name of the service.
+ * @parma props.price Cost of the service.
+ * @return {*}
+ * @constructor
+ */
+const DetailBody = function (props) {
+  return <>
+    <FeatherInput caption="Servicio" iconName="shopping-bag" placeholder="Título del servicio" defaultValue={props.name}/>
+    <FormControl caption="Descripción" inputElement={
       <textarea className="textarea" rows="3" placeholder="Descripción del servicio" defaultValue={props.description} />
-  );
-  return <div>
-    <FeatherInput caption="Servicio" iconName="shopping-bag" placeholder="Título del servicio" value={props.name}/>
-    <DescriptionTextArea caption="Descripción" />
+    }/>
     <div className="columns">
-      <FeatherInput className="column" type="time" caption="Duración" iconName="clock" value={props.duration}/>
-      <FeatherInput className="column" type="number" caption="Costo" iconName="tag"
-                    placeholder="Costo del servicio" value={props.price}/>
+      <div className="column">
+        <FeatherInput type="time" caption="Duración" iconName="clock" defaultValue={props.duration}/>
+      </div>
+      <div className="column">
+        <FeatherInput type="number" caption="Costo" iconName="tag"
+                      placeholder="Costo del servicio" defaultValue={props.price}/>
+      </div>
     </div>
-  </div>;
+  </>;
 };
 
 /**
@@ -34,8 +46,9 @@ const detailBody = function (props) {
  * @constructor
  */
 export function AddServiceDetail(props) {
-  const Services = getDetail(detailBody);
-  return <Services {...props} cancelPath={Paths.LIST_SERVICES} title={"Nuevo servicio"}/>;
+  return <Detail title={"Nuevo servicio"} cancelPath={Paths.LIST_SERVICES}>
+    <DetailBody {...props}/>
+  </Detail>
 }
 
 export function EditServiceDetail(props) {
@@ -47,7 +60,8 @@ export function EditServiceDetail(props) {
   if (data === undefined) return <Redirect to={Paths.LIST_SERVICES}/>;
 
   const { name, description, duration, price } = data.getService;
-  const ServiceDetail = getDetail(detailBody);
-  return <ServiceDetail name={name} description={description} duration={getTimeString(duration * 60 * 1000)} price={price}
-                        {...props} cancelPath={Paths.LIST_SERVICES} title={"Editar servicio"} okCaption={"Editar"}/>;
+  return <Detail cancelPath={Paths.LIST_SERVICES} title={"Editar servicio"} okCaption={"Editar"}>
+    <DetailBody name={name} description={description}  price={price}
+                duration={getTimeString(duration * 60 * 1000)}/>
+  </Detail>;
 }
