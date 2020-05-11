@@ -13,5 +13,5 @@ export const SAVING_PANEL_ID = "ag-loading-panel";
 export default function SavingPanel(props) {
   const caption = `Guardando${props.subject ? ' ' + props.subject.toLowerCase() : ''}...`;
 
-  return <SimpleProgressPanel id={LOADING_PANEL_ID} caption={caption}/>;
+  return <SimpleProgressPanel id={SAVING_PANEL_ID} caption={caption}/>;
 }

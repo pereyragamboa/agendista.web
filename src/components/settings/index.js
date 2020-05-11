@@ -9,6 +9,7 @@ import { GET_SETTINGS, UPDATE_SETTINGS } from '../../data/queries/settingsQuerie
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/alerts/loadingPanel';
 import Notification from '../commons/alerts/notification';
+import SavingPanel from '../commons/alerts/savingPanel';
 import * as Paths from '../../constants/paths';
 import * as Placeholders from '../../constants/placeholders';
 import { SETTINGS } from "../../constants/headers";
@@ -30,17 +31,13 @@ export const Ids = {
 };
 
 const Settings = ({errors, status, touched, ...formik}) => {
-  // If status.called and status.loading are both false, the mutation is finished;
-  // therefore, form is reset with the current values.
-  // This sets formik.dirty as false, and disables OK button.
-  //if (status.notified && !status.called && !status.loading) {
-  //  formik.resetForm({values: formik.values});
-  //}
-  console.log(`notify: ${status.notify}\ncalled: ${status.called}\nloading: ${status.loading}`);
   const enableOkButton = formik.dirty && formik.isValid && !formik.isSubmitting;
 
   return <Detail title={SETTINGS} featherIcon="settings" okCaption="Aceptar" cancelPath={Paths.HOME}
           enableOkButton={enableOkButton} onSubmit={formik.handleSubmit}>
+
+    { status.loading && <SavingPanel caption="perfil"/> }
+    { /* formik.resetForm also resets formik.status and formik.status.notify */ }
     <Notification id={Ids.CONFIRMATION_MESSAGE}
                   show={status.notify}
                   onClick={() => formik.resetForm({values: formik.values})}>
@@ -89,6 +86,7 @@ export default function () {
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
 
   return <Formik initialValues={data.getProfile}
+                 // notify indicates if the mutation was sent; is used for showing the notification
                  initialStatus={{...mutationStatus, notify: false}}
                  validationSchema={Yup.object().shape({
                    businessName: Yup.string().required('Agregue el nombre de su negocio.'),
@@ -96,12 +94,10 @@ export default function () {
                    telephone: Yup.string().required('Agregue un número de teléfono'),
                    url: Yup.string().url("Agregue una dirección Web válida.") })}
                  onSubmit = { (values, formik) => {
-                   console.log("Submitting...");
                    updateProfile({
                      variables: values,
                    });
                    formik.setStatus({...mutationStatus, notify: true});
-                   console.log("Submitted.");
                  }}>{Settings}
   </Formik>;
 }
