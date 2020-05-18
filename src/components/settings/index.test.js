@@ -2,14 +2,16 @@ import React from 'react';
 import { render } from 'react-dom';
 import { act, Simulate } from 'react-dom/test-utils';
 import wait from 'waait';
-import { GET_SETTINGS } from "../../data/queries/settingsQueries";
+import {GET_SETTINGS, UPDATE_SETTINGS} from "../../data/queries/settingsQueries";
 import { expectLoadingPanel } from '../testHelpers/expectFunctions';
 import { changeField } from '../testHelpers/actFunctions';
 import { getMockProvider } from "../testHelpers/getMockProvider";
 import TestContainer from '../testHelpers/testContainer';
 import Settings, { Ids } from './index';
+import { Ids as DetailIds } from '../commons/detail';
+import { SAVING_PANEL_ID } from "../commons/alerts/savingPanel";
 
-const mock = {
+const mockQuery = {
   request: { query: GET_SETTINGS },
   result: {
     loading: false,
@@ -21,6 +23,19 @@ const mock = {
         url: "https://business.example.com"
       }
     }
+  }
+};
+
+const mockMutation = {
+  request: {
+    query: UPDATE_SETTINGS,
+    variables: {
+      businessName: "New business",
+      url: "",
+      email: "new.business@example.com",
+      telephone: "0987654321"
+    },
+    result: { data: { id: 1 }}
   }
 };
 
@@ -43,7 +58,7 @@ describe("Settings component render tests", () => {
   beforeAll(async () => {
     await act(async () => {
       render(
-          getMockProvider(Settings, { mockQueries: [mock]}),
+          getMockProvider(Settings, { mockQueries: [mockQuery, mockMutation]}),
           container.createContainer());
     await wait();
     });
@@ -59,7 +74,7 @@ describe("Settings component render tests", () => {
     // Must contain 7 SVG icons: title, 4 fields and 2 buttons
     expect(c.getElementsByTagName("svg").length).toBe(7);
     // Checks content of input fields
-    const data = mock.result.data.getProfile;
+    const data = mockQuery.result.data.getProfile;
     expect(document.getElementById(Ids.BUSINESS_FIELD).value).toBe(data.businessName);
     expect(document.getElementById(Ids.EMAIL_FIELD).value).toBe(data.email);
     expect(document.getElementById(Ids.PHONE_FIELD).value).toBe(data.telephone);
@@ -86,5 +101,13 @@ describe("Settings component render tests", () => {
     expect(document.getElementById(Ids.WEBSITE_FIELD_HELPER) === null).toBe(isValid);
   });
 
-  test.todo("Updates profile");
+  test.skip("Updates profile", async () => {
+    const button = document.getElementById(DetailIds.OK_BUTTON);
+    await act(async () => {
+      await changeField(Ids.BUSINESS_FIELD, mockMutation.request.variables.businessName);
+      await Simulate.click(button);
+    });
+    //expect(document.getElementById(SAVING_PANEL_ID)).not.toBeNull();
+    expect(document.getElementById(Ids.CONFIRMATION_MESSAGE)).not.toBeNull();
+  });
 });

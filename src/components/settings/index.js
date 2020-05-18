@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { DangerHelper } from '../commons/forms/helperElement';
 import Detail from '../commons/detail';
 import ErrorPanel from '../commons/errorPanel';
 import FeatherInput from '../commons/forms/featherInput';
@@ -13,6 +14,7 @@ import SavingPanel from '../commons/alerts/savingPanel';
 import * as Paths from '../../constants/paths';
 import * as Placeholders from '../../constants/placeholders';
 import { SETTINGS } from "../../constants/headers";
+import { requiredString } from "../yupSchemas";
 
 const emailPlaceholder = Placeholders.getEmailPlaceholder();
 const phonePlaceholder = Placeholders.getTelephonePlaceholder();
@@ -47,26 +49,26 @@ const Settings = ({errors, status, touched, ...formik}) => {
                   placeholder="Nombre comercial del negocio u organización"
                   {...formik.getFieldProps('businessName')}
                   helperElement={(touched.businessName && errors.businessName) ?
-                      <p id={Ids.BUSINESS_FIELD_HELPER} className="has-text-danger">
-                        {errors.businessName}</p> : null}/>
+                      <DangerHelper id={Ids.BUSINESS_FIELD_HELPER}>
+                        {errors.businessName}</DangerHelper> : null}/>
     <FeatherInput id={Ids.WEBSITE_FIELD} caption="Sitio web" iconName="globe"
                   placeholder={webPlaceholder} {...formik.getFieldProps('url')}
                   helperElement={(touched.url && errors.url) ?
-                      <p id={Ids.WEBSITE_FIELD_HELPER} className="has-text-danger">
-                        {errors.url}</p> : null}/>
+                      <DangerHelper id={Ids.WEBSITE_FIELD_HELPER}>
+                        {errors.url}</DangerHelper> : null}/>
     <div className="columns">
       <div className="column">
         <FeatherInput id={Ids.PHONE_FIELD} caption="Teléfono" iconName="phone"
                       placeholder={phonePlaceholder} {...formik.getFieldProps('telephone')}
                       helperElement={(touched.telephone && errors.telephone) ?
-                          <p id={Ids.PHONE_FIELD_HELPER} className="has-text-danger">
-                            {errors.telephone}</p> : null}/>
+                          <DangerHelper id={Ids.PHONE_FIELD_HELPER}>
+                            {errors.telephone}</DangerHelper> : null}/>
       </div>
       <div className="column">
         <FeatherInput id={Ids.EMAIL_FIELD} caption="Correo electrónico" iconName="at-sign"
                       placeholder={emailPlaceholder} {...formik.getFieldProps('email')}
                       helperElement={(touched.email && errors.email) ?
-                          <p id={Ids.EMAIL_FIELD_HELPER} className="has-text-danger">{errors.email}</p> : null}/>
+                          <DangerHelper id={Ids.EMAIL_FIELD_HELPER}>{errors.email}</DangerHelper> : null}/>
       </div>
     </div>
 
@@ -89,9 +91,9 @@ export default function () {
                  // notify indicates if the mutation was sent; is used for showing the notification
                  initialStatus={{...mutationStatus, notify: false}}
                  validationSchema={Yup.object().shape({
-                   businessName: Yup.string().required('Agregue el nombre de su negocio.'),
-                   email: Yup.string().required('Agregue un correo electrónico.').email(),
-                   telephone: Yup.string().required('Agregue un número de teléfono'),
+                   businessName: requiredString('Agregue el nombre de su negocio.'),
+                   email: requiredString('Agregue un correo electrónico.').email(),
+                   telephone: requiredString('Agregue un número de teléfono'),
                    url: Yup.string().url("Agregue una dirección Web válida.") })}
                  onSubmit = { (values, formik) => {
                    updateProfile({
