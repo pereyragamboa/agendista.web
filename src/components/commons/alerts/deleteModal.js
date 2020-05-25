@@ -40,8 +40,9 @@ export default function DeleteModal(props) {
   }
 
   const content = props.children || Captions.DEFAULT_CAPTION;
+  const modalClass = `modal${props.show ? " is-active" : ""}`;
 
-  return <div id={props.id} className="modal">
+  return <div id={props.id} className={modalClass}>
     <div className="modal-background"/>
     <div className="modal-content box">
       <div className="content">{content}</div>
