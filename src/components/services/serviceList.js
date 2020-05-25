@@ -1,5 +1,5 @@
-import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import React, { useState } from 'react';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import * as Paths from '../../constants/paths';
 import { DELETE_SERVICE_MODAL as MODAL_ID } from "../../constants/modalIds";
 import DeleteModal from '../commons/alerts/deleteModal';
@@ -9,7 +9,8 @@ import ListItemButtons from '../commons/listItemButtons';
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/alerts/loadingPanel';
 import { SERVICES } from '../../constants/headers';
-import { GET_ALL_SERVICES } from "../../data/queries/serviceQueries";
+import { DELETE_SERVICE, GET_ALL_SERVICES } from "../../data/queries/serviceQueries";
+import { updateAfterDelete } from "../../data/resolvers/serviceResolvers";
 
 export const ClassNames = {
   SERVICE_LIST_ITEM: "ag-service-list-item",
@@ -41,7 +42,7 @@ const ServiceListRow = (props) =>
       { props.servicePrice }</td>
     <td>
       <div className="level-right">
-        <ListItemButtons editPath={Paths.UPDATE_SERVICE + props.id} deleteModalId={MODAL_ID}/>
+        <ListItemButtons editPath={Paths.UPDATE_SERVICE + props.id} onDeleteClick={props.handleDelete}/>
       </div>
     </td>
   </tr>;
@@ -53,7 +54,11 @@ const ServiceListRow = (props) =>
  * @constructor
  */
 export default function ServiceList() {
+  const [ deleteId, setDeleteId ] = useState(null);
   const { loading, error, data } = useQuery(GET_ALL_SERVICES);
+  const [ deleteService ] = useMutation(DELETE_SERVICE, {
+    update: updateAfterDelete
+  });
   if (loading) return <LoadingPanel subject={SERVICES}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   return <>
@@ -72,12 +77,17 @@ export default function ServiceList() {
             <ServiceListRow key={service.id} id={service.id} serviceName={service.name}
                             serviceTime={ getTimeString(service.duration * 60 * 1000, false) }
                             servicePrice={`$ ${service.price}`}
+                            handleDelete={() => setDeleteId(service.id)}
             />
         )
       }
       </tbody>
     </table>
-    <DeleteModal id={MODAL_ID}>
+    <DeleteModal id={MODAL_ID} show={deleteId !== null}
+                 delete={() => {
+                   deleteService({ variables: { id: deleteId }});
+                   setDeleteId(null)
+                 }}>
       ¿Desea eliminar este servicio?
     </DeleteModal>
   </>

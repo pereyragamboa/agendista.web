@@ -43,3 +43,10 @@ export const UPDATE_SERVICE = gql`mutation (
         }
     ) { id }
 }`;
+
+export const DELETE_SERVICE = gql`mutation($id: ID!) {
+    deleteService(
+        serviceId: $id
+    )
+}
+`;

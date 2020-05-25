@@ -12,7 +12,7 @@ import FormControl from '../commons/forms/formControl';
 import { DangerHelper } from "../commons/forms/helperElement";
 import listGraphQlErrors from '../commons/listGraphQLErrors'
 import { ADD_SERVICE, GET_SERVICE, UPDATE_SERVICE } from "../../data/queries/serviceQueries";
-import { update } from "../../data/resolvers/serviceResolvers";
+import { updateAfterAdd } from "../../data/resolvers/serviceResolvers";
 import { getMilliseconds, getTimeString } from "../../utilities/times";
 import { requiredString } from "../yupSchemas";
 
@@ -94,7 +94,7 @@ const validationSchema = Yup.object().shape({
  * @constructor
  */
 export function AddServiceDetail(props) {
-  const [ addService, status ] = useMutation(ADD_SERVICE, { update });
+  const [ addService, status ] = useMutation(ADD_SERVICE, { update: updateAfterAdd });
   const formik = useFormik({
     initialValues: {
       name: '',
