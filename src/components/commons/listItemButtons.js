@@ -1,6 +1,5 @@
 import React from 'react';
 import FeatherButton from './featherButton';
-import { showModal } from './alerts/modalFunctions';
 
 export const ClassNames = {
   EDIT_LIST_ITEM_BUTTON: "ag-list-item-edit-button",
@@ -16,7 +15,7 @@ export const ClassNames = {
  *
  * @param {object} props List of properties:
  * @param {string} props.editPath Path of edition page
- * @param {string} props.deleteModalId ID of delete confirmation modal
+ * @param {string} props.onDeleteClick Click event handler for the Delete button.
  * @constructor
  * @return {Component} A component with a <div> root element.
  */
@@ -26,7 +25,7 @@ export default function ListItemButtons(props) {
       <FeatherButton className={`is-primary ${ClassNames.EDIT_LIST_ITEM_BUTTON}`}
                      featherIcon="edit-2" to={props.editPath}/>
       <FeatherButton className={`is-danger ${ClassNames.DELETE_LIST_ITEM_BUTTON}`}
-                     featherIcon="trash-2" onClick={() => showModal(props.deleteModalId)}/>
+                     featherIcon="trash-2" onClick={props.onDeleteClick}/>
     </div>
   </div>;
 }
