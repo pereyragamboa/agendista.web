@@ -149,7 +149,6 @@ export function EditServiceDetail(props) {
               });
             }}>
     { formik => {
-      console.log(formik);
       const enableOkButton = formik.dirty && formik.isValid && !formik.isSubmitting;
       return <Detail cancelPath={Paths.LIST_SERVICES} title={"Editar servicio"}
                      enableOkButton={enableOkButton} onSubmit={formik.handleSubmit} okCaption={"Editar"}>
