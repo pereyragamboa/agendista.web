@@ -9,10 +9,18 @@ export default {
   }
 };
 
-export function update (cache, { data: { addService }}) {
+export function updateAfterAdd (cache, { data: { addService }}) {
   const { getServices } = cache.readQuery({ query: GET_ALL_SERVICES });
   cache.writeQuery({
     query: GET_ALL_SERVICES,
     data: { getServices: getServices.concat([addService]) }
+  });
+}
+
+export function updateAfterDelete(cache, { data: { deleteService} }) {
+  const { getServices } = cache.readQuery({ query: GET_ALL_SERVICES });
+  cache.writeQuery({
+    query: GET_ALL_SERVICES,
+    data: { getServices: getServices.filter(service => service.id !== deleteService) }
   });
 }
