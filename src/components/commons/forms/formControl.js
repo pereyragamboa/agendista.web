@@ -37,8 +37,10 @@ export const ClassNames = {
 export default function FormControl(props) {
   /**
    * @param props.caption Control caption.
-   * @param props.iconName Name of the icon shown within the input element.
    * @param props.children Children of the element, shown as addons.
+   * @param props.helperElement Control helper.
+   * @param props.iconName Name of the icon shown within the input element.
+   * @param props.inputElement Main <input> element.
    * @param props Properties of the element. The rest of the properties are passed to the input element.
    */
     const {caption, children, helperElement, iconName, inputElement, ...otherProps} = props;
