@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router';
 import FeatherIcon from './featherIcon';
 
 export const Ids = {
@@ -18,6 +19,7 @@ export const Ids = {
  * The component embeds its children in a <form> element.
  *
  * @param cancelCaption Text of the Cancel button
+ * @param cancelPath Path to navigate after clicking Cancel button.
  * @param children Content of the detail form. It should not include a <form> element.
  * @param enableOkButton Enables OK button
  * @param featherIcon Name of Feather icon shown next to title
@@ -28,14 +30,16 @@ export const Ids = {
  * @return {Component} A detail component.
  */
 export default function Detail (
-    { cancelCaption, children, enableOkButton, featherIcon, id, okCaption, onSubmit, title }) {
+    { cancelCaption, cancelPath, children, enableOkButton, featherIcon, id, okCaption, onSubmit, title }) {
   function submit(e) {
     e.preventDefault();
     onSubmit();
   }
-
   const okButtonClassName = `button is-primary${enableOkButton ? "" : " is-static"}`;
 
+  const [ redirect, setRedirect ] = useState(false);
+
+  if (redirect && cancelPath !== undefined) return <Redirect to={cancelPath}/>;
   return <section id={id}>
     <nav className="navbar">
       <div className="navbar-brand">
@@ -56,7 +60,8 @@ export default function Detail (
           <span>{ okCaption || "Agregar" }</span>
         </button>
         <button id={Ids.CANCEL_BUTTON} type="button" className="button is-danger"
-                onClick={() => window.history.back()}>
+                onClick={
+                  () => cancelPath === undefined ? window.history.back() : setRedirect(true)}>
           <FeatherIcon iconName="x"/>
           <span>{ cancelCaption || "Cancelar" }</span>
         </button>
