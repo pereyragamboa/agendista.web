@@ -1,36 +1,60 @@
-import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import React, { useState } from 'react';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Redirect } from 'react-router';
-import { attachCalendars, RangedCalendarInput } from "../commons/forms/calendarInput";
-import * as Paths from "../../constants/paths";
+import { RangedCalendarInput } from "../commons/forms/calendarInput";
+import Detail from '../commons/detail';
 import ErrorPanel from '../commons/errorPanel';
-import { GET_LEAVE } from '../../data/queries/leaveQueries';
-import getDetail from '../commons/getDetail';
+import { ADD_LEAVE, GET_LEAVE } from '../../data/queries/leaveQueries';
+import { updateAfterAdd } from "../../data/resolvers/leaveResolvers";
 import listGraphQLErrors from '../commons/listGraphQLErrors';
 import LoadingPanel from '../commons/alerts/loadingPanel';
 import { LIST_LEAVES } from "../../constants/paths";
+import Notification from "../commons/alerts/notification";
 
-export class LeaveDetail extends React.Component{
+export const Ids = {
+  ADD_LEAVE_CALENDAR: "ag-add-leave-calendar-input",
+  EDIT_LEAVE_CALENDAR: "ag-edit-leave-calendar-input",
+  CONFIRMATION_MESSAGE: "ag-leave-confirmation-message"
+};
+
+class LeaveDetail extends React.Component{
   render() {
-    const detailBody = (props) => <form className="field">
+    const { from, id, mutationStatus, notification, onSelect, title, to, ...props } = this.props;
+    const hasData = mutationStatus !== undefined && mutationStatus.data !== undefined;
+    return <Detail title={title} {...props} cancelPath={LIST_LEAVES}>
+      <Notification id={Ids.CONFIRMATION_MESSAGE} show={hasData}>
+        { notification }
+      </Notification>
       <p>Seleccione el rango del periodo vacacional:</p>
-      <RangedCalendarInput {...props}/>
-    </form>;
-
-    const LeaveDetail = getDetail(detailBody);
-
-    return <LeaveDetail {...this.props} cancelPath={Paths.LIST_LEAVES}/>;
-  }
-
-  componentDidMount(){
-    attachCalendars();
+      <RangedCalendarInput from={from} id={id} to={to}
+                           onRangeSelect={(start, end) => onSelect(start, end)}/>
+    </Detail>;
   }
 }
 
 export function AddLeaveDetail(props) {
-  const fromDate = new Date();
-  const toDate = new Date().setDate(fromDate.getDate() + 1);
-  return <LeaveDetail from={fromDate} to={toDate} {...props}/>
+  const [ dateRange, setDateRange ] = useState(() => {
+    const start = new Date();
+    return {
+      start,
+      end: new Date().setDate(start.getDate() + 1),
+      selected: false
+    };
+  });
+  const [ addLeave, addLeaveStatus ] = useMutation(ADD_LEAVE, { update: updateAfterAdd });
+  if (addLeaveStatus.data) return <Redirect to={LIST_LEAVES + '?op=add'}/>;
+  return <LeaveDetail id={Ids.ADD_LEAVE_CALENDAR}
+                      from={dateRange.start} to={dateRange.end}
+                      onSelect={(start, end) => { setDateRange({start, end, selected: true}) }}
+                      enableOkButton={dateRange.selected}
+                      onSubmit={() => {
+                        addLeave({ variables: {
+                            from: dateRange.start,
+                            to: dateRange.end
+                          }});
+                        setDateRange({ ...dateRange, selected: false });
+                      }}
+                      {...props}/>
 }
 
 export function EditLeaveDetail(props) {
@@ -40,5 +64,5 @@ export function EditLeaveDetail(props) {
   if (loading) return <LoadingPanel subject={"Vacaciones"}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   if (data === undefined) return <Redirect to={LIST_LEAVES}/>;
-  return <LeaveDetail from={data.getLeave.from} to={data.getLeave.to} {...props}/>;
+  return <LeaveDetail id={Ids.EDIT_LEAVE_CALENDAR} from={data.getLeave.from} to={data.getLeave.to} {...props}/>;
 }

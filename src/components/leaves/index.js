@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { DELETE_LEAVE_MODAL } from "../../constants/modalIds";
 import { LEAVE } from "../../constants/headers";
@@ -11,16 +11,18 @@ import ListItemButtons from '../commons/listItemButtons';
 import LoadingPanel from '../commons/alerts/loadingPanel';
 import NavbarMenuItem from '../commons/navbars/navbarMenuItem'
 import { GET_ALL_LEAVES } from "../../data/queries/leaveQueries";
+import Notification from "../commons/alerts/notification";
 
 export const ClassNames = {
   LEAVE_LIST_ITEM: "ag-leave-list-item",
   LEAVE_LIST_ITEM_FROM: "ag-leave-list-item-from",
   LEAVE_LIST_ITEM_TO: "ag-leave-list-item-to",
-  LEAVE_LIST_ITEM_MOBILE: "ag-leave-list-item-mobile"
+  LEAVE_LIST_ITEM_MOBILE: "ag-leave-list-item-mobile",
 };
 
 export const Ids = {
   LEAVE_LIST: "ag-leave-list",
+  NOTIFICATION_MESSAGE: "ag-leave-list-notification-message",
   getListItemId: id => `ag-leave-list-item-${id}`
 };
 
@@ -62,10 +64,16 @@ function LeaveRow (props) {
 }
 
 export default function LeaveList (props) {
+  const [ notify, showNotification ] = useState(
+      new URLSearchParams(props.location.search).get('op') === 'add'
+  );
   const { loading, error, data } = useQuery(GET_ALL_LEAVES);
   if (loading) return <LoadingPanel subject={LEAVE}/>;
   if (error) return <ErrorPanel>{listGraphQLErrors(error)}</ErrorPanel>;
   const listBody = <React.Fragment>
+    <Notification id={Ids.NOTIFICATION_MESSAGE} show={notify} onClick={() => showNotification(false)}>
+      <p>Periodo vacacional agregado.</p>
+    </Notification>
     <p>Los clientes no podrán agendar citas durante estos periodos.</p>
     <table id={Ids.LEAVE_LIST} className="table is-fullwidth">
       <tbody className="table-container">

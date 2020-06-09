@@ -1,11 +1,12 @@
 import gql from 'graphql-tag';
 
-export const GET_ALL_LEAVES = gql`
-    query { getLeaves(profileId: "0x30001") {
+export const GET_ALL_LEAVES = gql`query { 
+    getLeaves(profileId: "0x30001") {
         id
         from
         to
-    }}`;
+    }
+}`;
 
 export const GET_LEAVE = gql`{
     getLeave(leaveId: $id) @client {
@@ -15,14 +16,14 @@ export const GET_LEAVE = gql`{
     }
 }`;
 
-export const ADD_LEAVE = gql`
-    mutation ($from: Date!, $to: Date!) { addLeave (
+export const ADD_LEAVE = gql`mutation ($from: Date!, $to: Date!) { 
+    addLeave (
         profileId: "0x30001"
         leave: {
             from: $from,
             to: $to
         }
-    ) { id }
+    ) { id, from, to }
 }`;
 
 export const UPDATE_LEAVE = gql`
@@ -32,5 +33,5 @@ export const UPDATE_LEAVE = gql`
             from: $from,
             to: $to
         }
-    )}
+    ) { id, from, to }}
 `;
