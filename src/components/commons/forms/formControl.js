@@ -29,19 +29,17 @@ export const ClassNames = {
  * Full documentation of Bulma inputs is in https://bulma.io/documentation/form/general/; see especially
  * the sections 'With icons' and 'Form addons'.
  *
- * @param InputElement <input> element to be embedded.
- * @param HelperElement Help message to be displayed. Optional.
+ * @param props.caption Control caption.
+ * @param props.children Children of the element, shown as addons.
+ * @param props.helperElement Control help message. Optional
+ * @param props.iconName Name of the icon shown within the input element.
+ * @param props.inputElement Main <input> element.
+ * @param props Properties of the element. The rest of the properties are passed to the input element.
  * @return {*}
  * @constructor
  */
 export default function FormControl(props) {
   /**
-   * @param props.caption Control caption.
-   * @param props.children Children of the element, shown as addons.
-   * @param props.helperElement Control helper.
-   * @param props.iconName Name of the icon shown within the input element.
-   * @param props.inputElement Main <input> element.
-   * @param props Properties of the element. The rest of the properties are passed to the input element.
    */
     const {caption, children, helperElement, iconName, inputElement, ...otherProps} = props;
 
